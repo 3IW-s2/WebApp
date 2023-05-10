@@ -53,7 +53,7 @@ services:
 
   mail:
       image: namshi/smtp
-      environment:
+      environment:git 
         - MAIL_USER=user
         - MAIL_PASS=pass
       ports:
