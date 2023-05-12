@@ -17,7 +17,7 @@ services:
     container_name: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8888:8080
 
   pgadmin:
     image: dpage/pgadmin4
@@ -29,31 +29,32 @@ services:
     ports:
       - 5050:80
 
-  app_project:
+  app:
     build:
-      build: .
+      context: .
       dockerfile: Dockerfile
     container_name: app_project_iw3
     image: app_project_iw3
     restart: always
     volumes:
-      -  ./:/var/www
+      - ./www:/var/www
 
   app_project_nginx:
     image: nginx:latest
     container_name: app_project_nginx
     restart: always
     ports:
-      - 80:80
+      - 88:80
+      - "447:443"
     volumes:
-      - ./:/var/www
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./www:/var/www
+      - ./config/nginx/app.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - app_project
+      - app
 
   mail:
       image: namshi/smtp
-      environment:git 
+      environment :
         - MAIL_USER=user
         - MAIL_PASS=pass
       ports:

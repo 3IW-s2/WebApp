@@ -1,0 +1,4 @@
+fullchain.pem
+privkey.pem
+//ignore les fichiers de logs
+*.log
