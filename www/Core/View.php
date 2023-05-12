@@ -34,7 +34,7 @@ class View {
      */
     public function setTemplate(string $template): void
     {
-        $this->template = "Views/".$template.".tpl.php";
+        $this->template = "Views/".$template.".fvg.php";
         if(!file_exists($this->template)){
             die("Le template ".$this->template." n'existe pas");
         }
