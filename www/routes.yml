@@ -1,0 +1,27 @@
+default:
+  controller: Main
+  action: home
+
+a-propos:
+  controller: Main
+  action: aboutUs
+
+about-us:
+  controller: Main
+  action: aboutUs
+
+contact:
+  controller: Main
+  action: contact
+
+login:
+  controller: Auth
+  action: login
+
+logout:
+  controller: Auth
+  action: logout
+
+s-inscrire:
+  controller: Auth
+  action: register
