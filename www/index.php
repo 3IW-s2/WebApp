@@ -2,6 +2,8 @@
 
 namespace App;
 
+use PDO;
+
 //require "Core/View.php";
 
 spl_autoload_register(function ($class) {
@@ -70,3 +72,6 @@ if(!method_exists($objController, $action)){
 }
 
 $objController->$action();
+
+
+
