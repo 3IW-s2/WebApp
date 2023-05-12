@@ -21,7 +21,12 @@ RUN pecl install yaml && docker-php-ext-enable yaml
 RUN apk add --no-cache yaml
 
 RUN apk del --purge .build-deps
-####
+####install pgsql driver for php  
+RUN apk add --no-cache postgresql-dev
+RUN docker-php-ext-install pdo_pgsql
+
+RUN apk add --no-cache libzip-dev
+
 
 RUN  addgroup  -g  1000 -S  www  && \
      adduser  -u  1000 -S www  -G www

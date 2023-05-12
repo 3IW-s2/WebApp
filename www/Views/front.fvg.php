@@ -2,10 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Super site</title>
+    <title>S2-IW</title>
     <meta name="description" content="ceci est un super site">
 </head>
 <body>
+    
     <h1>Template Front</h1>
 
     <!-- inclure la vue -->

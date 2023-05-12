@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Core\SQL;
+use App\Core\Database;
+use PDO;
+
 class User extends SQL
 {
     private Int $id = 0;
@@ -162,6 +165,34 @@ class User extends SQL
     {
         $this->date_updated = $date_updated;
     }
+
+    /**
+     * @param String $name
+     * @param String $password
+     * @return bool
+     */
+    public function login(string $name, string $password): bool
+    {
+    $db = Database::getInstance();
+
+    $query = "SELECT * FROM users WHERE name = :name AND password = :password";
+    $params = [
+        'name' => $name,
+        'password' => $password
+    ];
+
+    $statement = $db->query($query, $params);
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $_SESSION["user"] = $user;
+        return true;
+    } else {
+
+        return false;
+    }
+}
+
 
 
 

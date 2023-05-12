@@ -3,12 +3,30 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Core\View;
+use App\Core\Database;
+use PDO;
+
 
 class Auth
 {
+
+
+
     public function login(): void
-    {
-        echo "Page de connexion";
+    {   
+        $view = new View("Auth/login", "front");
+
+       //faire le traitement du formulaire
+        if(!empty($_POST)){
+            $email = $_POST["name"];
+            $pwd = $_POST["password"];
+
+            $user = new User();
+            $user->setEmail($email);
+            $user->setPwd($pwd);
+            $user->login( $email, $pwd);
+        }
     }
 
     public function register(): void
@@ -27,5 +45,6 @@ class Auth
     {
         echo "Page de déconnexion";
     }
+
 
 }
