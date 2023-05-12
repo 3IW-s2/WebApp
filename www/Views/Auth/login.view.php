@@ -9,3 +9,12 @@
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Connect</button>
         </form>
+
+        <?php
+//si l'utilisateur est connecté
+if(isset($_SESSION["user"])){
+    echo "<a href='logout'>Se déconnecter</a>";
+}else{
+    echo "<a href='login'>Se connecter</a>";
+}
+?>        
