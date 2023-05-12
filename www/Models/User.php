@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Core\SQL;
 use App\Core\Database;
+use PDO;
 
 class User extends SQL
 {
@@ -186,6 +187,7 @@ class User extends SQL
     if ($user) {
         
         $_SESSION["user"] = $user;
+        var_dump($_SESSION["user"]);
         return true;
     } else {
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Core;
 use PDO;
+use PDOStatement;
 class Database {
     
         private static $instance = null;
@@ -8,7 +9,7 @@ class Database {
     
         private function __construct()
         {
-            $this->pdo = new PDO("mysql:host=46.226.107.16:5432;dbname=database_tiw;charset=utf8", "postgres", "postgres");
+            $this->pdo = new PDO("pgsql:host=46.226.107.16;port=5432;dbname=database_tiw;", "postgres", "postgres");
         }
     
         public static function getInstance(): Database
