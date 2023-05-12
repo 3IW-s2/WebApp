@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\User;
 use App\Core\View;
+use PDO;
+
 
 class Auth
 {
@@ -27,7 +29,7 @@ class Auth
         $name = $this->getName();
         $password = $this->getPassword();
 
-        $pdo = new PDO('mysql:host=gavinaperano.com;dbname=database_tiw', 'postgres', 'postgres');
+        $pdo = new PDO('mysql:host=46.226.107.16:5432;dbname=database_tiw', 'postgres', 'postgres');
 
         $query = $pdo->prepare('SELECT * FROM users WHERE name = :name AND password = :password');
 
@@ -44,7 +46,6 @@ class Auth
         } else {
             echo "Identifiants incorrects";
         }
-
     }
 
     public function register(): void
@@ -65,6 +66,9 @@ class Auth
     }
     public function getName(): string
     {
+        if ($this->name === null) {
+            return '';
+        }
         return $this->name;
     }
 
@@ -74,7 +78,10 @@ class Auth
     }
 
     public function getPassword(): string
-    {
+    {   
+        if ($this->password === null) {
+            return '';
+        }
         return $this->password;
     }
 
