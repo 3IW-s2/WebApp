@@ -4,47 +4,28 @@ namespace App\Controllers;
 
 use App\Models\User;
 use App\Core\View;
+use App\Core\Database;
 use PDO;
 
 
 class Auth
 {
-    private $name;
-    private $password;
+
 
 
     public function login(): void
     {   
         $view = new View("Auth/login", "front");
 
-        if(isset($_POST['name'])){
-            $this->setName($_POST['name']);
-        }
+       //faire le traitement du formulaire
+        if(!empty($_POST)){
+            $email = $_POST["name"];
+            $pwd = $_POST["password"];
 
-        if(isset($_POST['password'])){
-            $this->setPassword($_POST['password']);
-        }
-
-        // Accédez aux valeurs en utilisant les getters
-        $name = $this->getName();
-        $password = $this->getPassword();
-
-        $pdo = new PDO('mysql:host=46.226.107.16:5432;dbname=database_tiw', 'postgres', 'postgres');
-
-        $query = $pdo->prepare('SELECT * FROM users WHERE name = :name AND password = :password');
-
-        $query->execute([
-            'name' => $name,
-            'password' => $password
-        ]);
-
-        $user = $query->fetch(PDO::FETCH_ASSOC);
-
-        if ($user) {
-            $_SESSION['user'] = $user;
-            header('Location: /');
-        } else {
-            echo "Identifiants incorrects";
+            $user = new User();
+            $user->setEmail($email);
+            $user->setPwd($pwd);
+            $user->login( $email, $pwd);
         }
     }
 
@@ -64,30 +45,6 @@ class Auth
     {
         echo "Page de déconnexion";
     }
-    public function getName(): string
-    {
-        if ($this->name === null) {
-            return '';
-        }
-        return $this->name;
-    }
 
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    public function getPassword(): string
-    {   
-        if ($this->password === null) {
-            return '';
-        }
-        return $this->password;
-    }
-
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
 
 }

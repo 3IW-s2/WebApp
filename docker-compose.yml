@@ -39,7 +39,7 @@ services:
     volumes:
       - ./www:/var/www
     environment:
-      - DB_HOST=database_tiw
+      - DB_HOST=46.226.107.16
       - DB_PORT=5432
       - DB_DATABASE=database_tiw
       - DB_USERNAME=postgres
