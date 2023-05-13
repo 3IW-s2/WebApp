@@ -26,7 +26,7 @@ logout:
   controller: Auth
   action: logout
 
-forgot-password:
+forgotpassword:
   controller: Auth
   action: forgotPassword
 
