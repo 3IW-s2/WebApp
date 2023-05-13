@@ -19,7 +19,7 @@ class Auth
 
        //faire le traitement du formulaire
         if(!empty($_POST)){
-            $email = $_POST["name"];
+            $email = $_POST["email"];
             $pwd = $_POST["password"];
 
             $user = new User();
@@ -31,6 +31,7 @@ class Auth
 
     public function register(): void
     {
+        $view = new View("Auth/register", "front");
         $user = new User();
         $user->setFirstname("yVEs");
         $user->setLastname("SKrzYPczYK");
@@ -43,7 +44,12 @@ class Auth
 
     public function logout(): void
     {
-        echo "Page de déconnexion";
+        if(!empty($_SESSION["user"])){
+            unset($_SESSION["user"]);
+        }
+        
+        header("Location: /");
+        
     }
 
 

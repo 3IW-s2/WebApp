@@ -171,13 +171,13 @@ class User extends SQL
      * @param String $password
      * @return bool
      */
-    public function login(string $name, string $password): bool
+    public function login(string $email, string $password): bool
     {
     $db = Database::getInstance();
 
-    $query = "SELECT * FROM users WHERE name = :name AND password = :password";
+    $query = "SELECT * FROM users WHERE email = :email AND password = :password";
     $params = [
-        'name' => $name,
+        'email' => $email,
         'password' => $password
     ];
 

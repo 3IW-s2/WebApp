@@ -18,6 +18,10 @@ login:
   controller: Auth
   action: login
 
+register:
+  controller: Auth
+  action: register
+
 logout:
   controller: Auth
   action: logout
