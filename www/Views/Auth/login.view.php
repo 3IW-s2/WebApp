@@ -1,7 +1,7 @@
 <form id="connection-form" method="post" action="" >
             <div class="form-group">
-                <label for="name">name</label>
-                <input type="text" name="name" id="name" class="form-control" />
+                <label for="name">email</label>
+                <input type="email" name="email" id="email" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -16,5 +16,7 @@ if(isset($_SESSION["user"])){
     echo "<a href='logout'>Se déconnecter</a>";
 }else{
     echo "<a href='login'>Se connecter</a>";
+    echo "<a href='register'>S'inscrire</a>";
+    echo "<a href='forgot-password'>Mots de passe oublié</a>";
 }
 ?>        

@@ -19,7 +19,7 @@ class Auth
 
        //faire le traitement du formulaire
         if(!empty($_POST)){
-            $email = $_POST["name"];
+            $email = $_POST["email"];
             $pwd = $_POST["password"];
 
             $user = new User();
@@ -31,20 +31,40 @@ class Auth
 
     public function register(): void
     {
-        $user = new User();
-        $user->setFirstname("yVEs");
-        $user->setLastname("SKrzYPczYK");
-        $user->setEmail("y.SKRZypczyk@GMAil.com");
-        $user->setPwd("Test1234");
-        $user->setCountry("FR");
-        $user->save();
+        $view = new View("Auth/register", "front");
+
+        if(!empty($_POST)){
+            $firstname = $_POST["firstname"];
+            $lastname = $_POST["lastname"];
+            $email = $_POST["email"];
+            $pwd = $_POST["password"];
+            
+
+            $user = new User();
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setEmail($email);
+            $user->setPwd($pwd);
+            $user->register();
+        }
+       
 
     }
 
     public function logout(): void
     {
-        echo "Page de déconnexion";
+        if(!empty($_SESSION["user"])){
+            unset($_SESSION["user"]);
+        }
+        
+        header("Location: /");
+        
     }
+
+   public function  forgotPassword(): void
+   {
+       $view = new View("Auth/forgot-password", "front");
+   }
 
 
 }

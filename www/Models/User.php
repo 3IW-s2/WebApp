@@ -19,6 +19,8 @@ class User extends SQL
     private \DateTime $date_updated;
 
     public function __construct(){
+        $this->date_inserted = new \DateTime();
+        $this->date_updated = new \DateTime();
 
     }
 
@@ -171,13 +173,13 @@ class User extends SQL
      * @param String $password
      * @return bool
      */
-    public function login(string $name, string $password): bool
+    public function login(string $email, string $password): bool
     {
     $db = Database::getInstance();
 
-    $query = "SELECT * FROM users WHERE name = :name AND password = :password";
+    $query = "SELECT * FROM users WHERE email = :email AND password = :password";
     $params = [
-        'name' => $name,
+        'email' => $email,
         'password' => $password
     ];
 
@@ -191,7 +193,55 @@ class User extends SQL
 
         return false;
     }
-}
+
+    }
+    
+    /**
+     * return bool
+     */
+    public function register(): bool
+    {
+        $db = Database::getInstance();
+
+        $query = "INSERT INTO users (firstname, lastname, email, password,  date_inserted, date_updated) VALUES (:firstname, :lastname, :email, :password, :country, :status, :date_inserted, :date_updated)";
+        $params = [
+            'firstname' => $this->getFirstname(),
+            'lastname' => $this->getLastname(),
+            'email' => $this->getEmail(),
+            'password' => $this->getPwd(),
+            'date_inserted' => $this->getDateInserted(),
+            'date_updated' => $this->getDateUpdated()
+        ];
+
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $_SESSION["user"] = $user;
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    /**
+     * @param String $email
+     * @return bool
+     */
+    public function forgotPassword(string $email): bool
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE email = :email";
+        $params = [
+            'email' => $email
+        ];
+
+        //ici faut envoyer un mail avec un lien pour réinitialiser le mot de passe
+
+
+    }
 
 
 

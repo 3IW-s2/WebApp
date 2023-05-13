@@ -4,6 +4,7 @@ namespace App;
 
 use PDO;
 session_start();
+require 'vendor/autoload.php';
 //require "Core/View.php";
 
 spl_autoload_register(function ($class) {
