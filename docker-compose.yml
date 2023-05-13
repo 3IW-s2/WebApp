@@ -11,6 +11,7 @@ services:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      
 
   adminer:
     image: adminer
@@ -47,12 +48,14 @@ services:
 
 
   app_project_nginx:
-    image: nginx:latest
+    build:
+      context: .
+      dockerfile: dockerfileNginx.DOCKERFILE
     container_name: app_project_nginx
     restart: always
     ports:
       - 88:80
-      - "447:443"
+      - 447:443
     volumes:
       - ./www:/var/www
       - ./config/nginx/app.conf:/etc/nginx/conf.d/default.conf
@@ -61,7 +64,9 @@ services:
       
 
   postfix:
-    image: ubuntu:latest
+    build:
+      context: .
+      dockerfile: DockerfileMail.DOCKERFILE
     container_name: postfix
     restart: always
     ports:
