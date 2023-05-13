@@ -19,6 +19,8 @@ class User extends SQL
     private \DateTime $date_updated;
 
     public function __construct(){
+        $this->date_inserted = new \DateTime();
+        $this->date_updated = new \DateTime();
 
     }
 
@@ -191,7 +193,38 @@ class User extends SQL
 
         return false;
     }
-}
+
+    }
+    
+    /**
+     * return bool
+     */
+
+    public function register(): bool
+    {
+        $db = Database::getInstance();
+
+        $query = "INSERT INTO users (firstname, lastname, email, password,  date_inserted, date_updated) VALUES (:firstname, :lastname, :email, :password, :country, :status, :date_inserted, :date_updated)";
+        $params = [
+            'firstname' => $this->getFirstname(),
+            'lastname' => $this->getLastname(),
+            'email' => $this->getEmail(),
+            'password' => $this->getPwd(),
+            'date_inserted' => $this->getDateInserted(),
+            'date_updated' => $this->getDateUpdated()
+        ];
+
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $_SESSION["user"] = $user;
+            return true;
+        } else {
+
+            return false;
+        }
+    }
 
 
 

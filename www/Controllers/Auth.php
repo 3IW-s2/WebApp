@@ -32,13 +32,22 @@ class Auth
     public function register(): void
     {
         $view = new View("Auth/register", "front");
-        $user = new User();
-        $user->setFirstname("yVEs");
-        $user->setLastname("SKrzYPczYK");
-        $user->setEmail("y.SKRZypczyk@GMAil.com");
-        $user->setPwd("Test1234");
-        $user->setCountry("FR");
-        $user->save();
+
+        if(!empty($_POST)){
+            $firstname = $_POST["firstname"];
+            $lastname = $_POST["lastname"];
+            $email = $_POST["email"];
+            $pwd = $_POST["password"];
+            
+
+            $user = new User();
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setEmail($email);
+            $user->setPwd($pwd);
+            $user->register();
+        }
+       
 
     }
 
