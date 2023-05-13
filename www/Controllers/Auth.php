@@ -61,5 +61,10 @@ class Auth
         
     }
 
+   public function  forgotPassword(): void
+   {
+       $view = new View("Auth/forgot-password", "front");
+   }
+
 
 }

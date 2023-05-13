@@ -26,6 +26,10 @@ logout:
   controller: Auth
   action: logout
 
+forgot-password:
+  controller: Auth
+  action: forgotPassword
+
 s-inscrire:
   controller: Auth
   action: register

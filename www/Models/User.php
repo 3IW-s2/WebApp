@@ -199,7 +199,6 @@ class User extends SQL
     /**
      * return bool
      */
-
     public function register(): bool
     {
         $db = Database::getInstance();
@@ -224,6 +223,24 @@ class User extends SQL
 
             return false;
         }
+    }
+
+    /**
+     * @param String $email
+     * @return bool
+     */
+    public function forgotPassword(string $email): bool
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE email = :email";
+        $params = [
+            'email' => $email
+        ];
+
+        //ici faut envoyer un mail avec un lien pour réinitialiser le mot de passe
+
+
     }
 
 
