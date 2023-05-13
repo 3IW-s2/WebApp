@@ -60,10 +60,14 @@ services:
       - app
       
 
-  mail:
-      image: namshi/smtp
-      environment :
-        - MAIL_USER=user
-        - MAIL_PASS=pass
-      ports:
-        - "25:25"    
+  postfix:
+    image: ubuntu:latest
+    container_name: postfix
+    restart: always
+    ports:
+       - 25:25
+    volumes:
+      - ./postfix/main.cf:/etc/postfix/main.cf
+      - ./postfix/master.cf:/etc/postfix/master.cf
+    command: postfix start-fg
+
