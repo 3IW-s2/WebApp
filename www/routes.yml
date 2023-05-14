@@ -30,6 +30,10 @@ forgotpassword:
   controller: Auth
   action: forgotPassword
 
+resetpassword:
+  controller: Auth
+  action: resetPassword
+
 s-inscrire:
   controller: Auth
   action: register

@@ -74,5 +74,40 @@ class Auth
          }
    }
 
+   public function resetPassword(): void
+   {
+        if (isset($_GET['token'])) {
+            // L'utilisateur a accès à la page de réinitialisation du mot de passe
+            $token = $_GET['token'];
+
+            // Vérifiez si le jeton est valide et existe dans la base de données
+            // Vous pouvez effectuer une requête pour vérifier si le jeton existe et est associé à un utilisateur
+            $tokenIsValid =  new User();
+            $tokenIsValid->checkToken($token);
+
+            if ($tokenIsValid) {
+                $view = new View("Auth/resetpassword", "front");
+
+                if(!empty($_POST)){
+                    $email = $_POST["email"];
+                    $pwd = $_POST["password"];
+        
+                    $user = new User();
+                    $user->setEmail($email);
+                    $user->setPwd($pwd);
+                    $user->resetPassword($email, $pwd );
+                }
+            } else {
+                echo 'Jeton invalide';
+            }
+        } else {
+            // Le paramètre "token" n'est pas présent dans l'URL
+            // Affichez un message d'erreur ou redirigez l'utilisateur vers une autre page
+            echo 'Accès refusé';
+        }
+
+        
+   }
+
 
 }

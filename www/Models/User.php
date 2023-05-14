@@ -270,7 +270,31 @@ class User extends SQL
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            $_SESSION["user"] = $user;
+           
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    /**
+     * @param String $token
+     * @return bool
+     */
+    public function checkToken(string $token): bool
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE reset_token = :token";
+        $params = [
+            'token' => $token
+        ];
+
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
             return true;
         } else {
 
