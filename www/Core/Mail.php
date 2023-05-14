@@ -38,7 +38,7 @@ class Mail{
 
                 // Content
                 $mail->isHTML(true);                            // Set email format to HTML
-                $mail->Subject = 'Bienvenue !';
+                $mail->Subject = 'Bienvenue ! ';
                 $mail->Body    = 'Bienvenue sur notre site. Nous sommes ravis de vous compter parmi nous ! votre code de confirmation est : 123456';
                 
 
