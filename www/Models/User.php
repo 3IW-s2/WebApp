@@ -295,6 +295,8 @@ class User extends SQL
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
+            $_SESSION["user"] = $user;
+            var_dump($_SESSION["user"]["email"]);
             return true;
         } else {
 

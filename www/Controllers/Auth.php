@@ -11,8 +11,6 @@ use PDO;
 class Auth
 {
 
-
-
     public function login(): void
     {   
         $view = new View("Auth/login", "front");
@@ -56,7 +54,6 @@ class Auth
         if(!empty($_SESSION["user"])){
             unset($_SESSION["user"]);
         }
-        
         header("Location: /");
         
     }
@@ -87,13 +84,13 @@ class Auth
                 $view = new View("Auth/resetpassword", "front");
 
                 if(!empty($_POST)){
-                    $email = $_POST["email"];
+                    $email = $_SESSION["user"]["email"];
                     $pwd = $_POST["password"];
         
                     $user = new User();
                     $user->setEmail($email);
                     $user->setPwd($pwd);
-                    $user->resetPassword($email, $pwd );
+                    $user->resetPassword($email, $pwd);
                 }
             } else {
                 echo 'Jeton invalide';
