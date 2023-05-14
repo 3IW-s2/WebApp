@@ -1,0 +1,3 @@
+# Fichier de configuration des services de Postfix
+
+smtp      inet  n       -       y       -       -       smtpd

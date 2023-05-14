@@ -63,7 +63,15 @@ class Auth
 
    public function  forgotPassword(): void
    {
-       $view = new View("Auth/forgot-password", "front");
+       $view = new View("Auth/forgotpassword", "front");
+
+         if(!empty($_POST)){
+              $email = $_POST["email"];
+    
+              $user = new User();
+              $user->setEmail($email);
+              $user->forgotPassword($email);
+         }
    }
 
 

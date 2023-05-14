@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Core\SQL;
 use App\Core\Database;
 use PDO;
+use App\Core\Mail;
 
 class User extends SQL
 {
@@ -237,6 +238,9 @@ class User extends SQL
         $params = [
             'email' => $email
         ];
+
+        $mail = new Mail($email, "Réinitialisation de votre mot de passe", "Cliquez sur ce lien pour réinitialiser votre mot de passe");
+        $mail->send();
 
         //ici faut envoyer un mail avec un lien pour réinitialiser le mot de passe
 
