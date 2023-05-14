@@ -13,6 +13,7 @@ CREATE TABLE users (
 /* inject un users */
 INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at)
 VALUES ('toto', 'toto', 'audesandrine6@gmail.com', 'toto', 'admin', NOW(), NOW());
+ALTER TABLE users ADD reset_token VARCHAR(255);
 
 
 CREATE TABLE articles (

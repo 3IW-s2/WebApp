@@ -233,21 +233,50 @@ class User extends SQL
     public function forgotPassword(string $email): bool
     {
         $db = Database::getInstance();
+        $resetToken = bin2hex(random_bytes(32));
 
-        $query = "SELECT * FROM users WHERE email = :email";
+        $query = "UPDATE users SET reset_token = :token WHERE email = :email";
         $params = [
-            'email' => $email
+            'email' => $email,
+            'token' => $resetToken
         ];
+        //mettre à jour la valeur du token dans la table users
+        $statement = $db->query($query, $params);
 
-        $mail = new Mail($email, "Réinitialisation de votre mot de passe", "Cliquez sur ce lien pour réinitialiser votre mot de passe");
+
+        $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "http://gavinaperano.com:88/reset?token=" .$resetToken. "");
         $mail->send();
 
-        //ici faut envoyer un mail avec un lien pour réinitialiser le mot de passe
-
+        return true;
 
     }
 
+    /**
+     * @param String $email
+     * @param String $password
+     * @return bool
+     */
+    public function resetPassword(string $email, string $password): bool
+    {
+        $db = Database::getInstance();
 
+        $query = "UPDATE users SET password = :password WHERE email = :email";
+        $params = [
+            'email' => $email,
+            'password' => $password
+        ];
+
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $_SESSION["user"] = $user;
+            return true;
+        } else {
+
+            return false;
+        }
+    }
 
 
 }
