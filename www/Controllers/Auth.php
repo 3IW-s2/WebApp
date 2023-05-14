@@ -77,11 +77,9 @@ class Auth
    public function resetPassword(): void
    {
         if (isset($_GET['token'])) {
-            // L'utilisateur a accès à la page de réinitialisation du mot de passe
+
             $token = $_GET['token'];
 
-            // Vérifiez si le jeton est valide et existe dans la base de données
-            // Vous pouvez effectuer une requête pour vérifier si le jeton existe et est associé à un utilisateur
             $tokenIsValid =  new User();
             $tokenIsValid->checkToken($token);
 
@@ -101,8 +99,6 @@ class Auth
                 echo 'Jeton invalide';
             }
         } else {
-            // Le paramètre "token" n'est pas présent dans l'URL
-            // Affichez un message d'erreur ou redirigez l'utilisateur vers une autre page
             echo 'Accès refusé';
         }
 
