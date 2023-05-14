@@ -50,15 +50,15 @@ services:
   app_project_nginx:
     build:
       context: .
-      dockerfile: dockerfileNginx.DOCKERFILE
+      dockerfile: DockerfileNginx.DOCKERFILE
     container_name: app_project_nginx
     restart: always
     ports:
       - 88:80
-      - "447:443"
+      - "444:443"
     volumes:
       - ./www:/var/www
-      - ./config/nginx/app.conf:/etc/nginx/conf.d/default.conf
+      - ./config/nginx/:/etc/nginx/conf.d/
     depends_on:
       - app
       
