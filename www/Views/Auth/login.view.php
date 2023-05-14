@@ -17,6 +17,6 @@ if(isset($_SESSION["user"])){
 }else{
     echo "<a href='login'>Se connecter</a>";
     echo "<a href='register'>S'inscrire</a>";
-    echo "<a href='forgot-password'>Mots de passe oublié</a>";
+    echo "<a href='forgotpassword'>Mots de passe oublié</a>";
 }
 ?>        

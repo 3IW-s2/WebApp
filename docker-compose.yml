@@ -3,6 +3,7 @@ services:
   database_tiw:
     image: postgres:latest
     container_name: database_tiw
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -61,18 +62,11 @@ services:
       - ./config/nginx/:/etc/nginx/conf.d/
     depends_on:
       - app
-      
 
-  postfix:
-    build:
-      context: .
-      dockerfile: DockerfileMail.DOCKERFILE
-    container_name: postfix
-    restart: always
-    ports:
-       - "25:25"
-    volumes:
-      - ./postfix/main.cf:/etc/postfix/main.cf
-      - ./postfix/master.cf:/etc/postfix/master.cf
-    command: postfix start-fg
-
+  mail_:
+      image: namshi/smtp
+      environment:
+        - MAIL_USER=user
+        - MAIL_PASS=pass
+      ports:
+          - "25:25" 
