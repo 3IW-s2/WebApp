@@ -34,6 +34,10 @@ resetpassword:
   controller: Auth
   action: resetPassword
 
+newpassword:
+  controller: Auth
+  action: newPassword  
+
 s-inscrire:
   controller: Auth
   action: register

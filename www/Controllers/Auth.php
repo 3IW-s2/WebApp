@@ -73,34 +73,52 @@ class Auth
 
    public function resetPassword(): void
    {
-        if (isset($_GET['token'])) {
+            if (isset($_GET['token'])) {
 
-            $token = $_GET['token'];
+                $token = $_GET['token'];
 
-            $tokenIsValid =  new User();
-            $tokenIsValid->checkToken($token);
+                $tokenIsValid =  new User();
+                $tokenIsValid->checkToken($token);
 
-            if ($tokenIsValid) {
-                $view = new View("Auth/resetpassword", "front");
+                if ($tokenIsValid) {
+                    $view = new View("Auth/resetpassword", "front");
+                    header("Location: /newpassword");
 
-                if(!empty($_POST)){
-                    $email = $_SESSION["user"]["email"];
-                    $pwd = $_POST["password"];
-        
-                    $user = new User();
-                    $user->setEmail($email);
-                    $user->setPwd($pwd);
-                    $user->resetPassword($email, $pwd);
+                   /*  if(!empty($_POST)){
+                        $email = $_SESSION["user"]["email"];
+                        $pwd = $_POST["password"];
+            
+                        $user = new User();
+                        $user->setEmail($email);
+                        $user->setPwd($pwd);
+                        $user->resetPassword($email, $pwd);
+                    } */
+                } else {
+                    echo 'Jeton invalide';
                 }
             } else {
-                echo 'Jeton invalide';
+                echo 'Accès refusé';
             }
-        } else {
-            echo 'Accès refusé';
-        }
 
         
    }
+
+    public function newPassword(): void
+    {
+          $view = new View("Auth/newpassword", "front");
+    
+          if(!empty($_POST)){
+                $email = $_SESSION["user"]["email"];
+                $pwd = $_POST["password"];
+    
+                $user = new User();
+                $user->setEmail($email);
+                $user->setPwd($pwd);
+                $user->resetPassword($email, $pwd);
+
+                header("Location: /");
+          }
+    }
 
 
 }

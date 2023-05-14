@@ -296,7 +296,6 @@ class User extends SQL
 
         if ($user) {
             $_SESSION["user"] = $user;
-            var_dump($_SESSION["user"]["email"]);
             return true;
         } else {
 
