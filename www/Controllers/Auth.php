@@ -83,24 +83,12 @@ class Auth
                 if ($tokenIsValid) {
                     $view = new View("Auth/resetpassword", "front");
                     header("Location: /newpassword");
-
-                   /*  if(!empty($_POST)){
-                        $email = $_SESSION["user"]["email"];
-                        $pwd = $_POST["password"];
-            
-                        $user = new User();
-                        $user->setEmail($email);
-                        $user->setPwd($pwd);
-                        $user->resetPassword($email, $pwd);
-                    } */
                 } else {
                     echo 'Jeton invalide';
                 }
             } else {
                 echo 'Accès refusé';
             }
-
-        
    }
 
     public function newPassword(): void

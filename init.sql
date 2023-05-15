@@ -16,6 +16,9 @@ VALUES ('toto', 'toto', 'audesandrine6@gmail.com', 'toto', 'admin', NOW(), NOW()
 ALTER TABLE users ADD reset_token VARCHAR(255);
 
 
+INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at)
+VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
+
 CREATE TABLE articles (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,

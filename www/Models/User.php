@@ -6,6 +6,7 @@ use App\Core\SQL;
 use App\Core\Database;
 use PDO;
 use App\Core\Mail;
+use Exception;
 
 class User extends SQL
 {
@@ -184,46 +185,22 @@ class User extends SQL
         'password' => $password
     ];
 
-    $statement = $db->query($query, $params);
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        $_SESSION["user"] = $user;
-        return true;
-    } else {
-
-        return false;
-    }
-
-    }
-    
-    /**
-     * return bool
-     */
-    public function register(): bool
-    {
-        $db = Database::getInstance();
-
-        $query = "INSERT INTO users (firstname, lastname, email, password,  date_inserted, date_updated) VALUES (:firstname, :lastname, :email, :password, :country, :status, :date_inserted, :date_updated)";
-        $params = [
-            'firstname' => $this->getFirstname(),
-            'lastname' => $this->getLastname(),
-            'email' => $this->getEmail(),
-            'password' => $this->getPwd(),
-            'date_inserted' => $this->getDateInserted(),
-            'date_updated' => $this->getDateUpdated()
-        ];
-
+   try{
         $statement = $db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
-
         if ($user) {
             $_SESSION["user"] = $user;
             return true;
-        } else {
-
+        } else {            
             return false;
         }
+
+    }
+    catch( \Exception $e){
+        echo $e->getMessage();
+        return false;
+    }
+
     }
 
     /**
@@ -240,15 +217,20 @@ class User extends SQL
             'email' => $email,
             'token' => $resetToken
         ];
-        //mettre à jour la valeur du token dans la table users
-        $statement = $db->query($query, $params);
 
-
-        $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "http://gavinaperano.com:88/reset?token=" .$resetToken. "");
-        $mail->send();
-
-        return true;
-
+        try{
+            $statement = $db->query($query, $params);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "http://gavinaperano.com:88/reset?token=" .$resetToken. "");
+            $mail->send();
+    
+            return true;
+        }
+        catch( \Exception $e){
+            echo $e->getMessage();
+            return false;
+        }
+      
     }
 
     /**
@@ -299,6 +281,40 @@ class User extends SQL
             return true;
         } else {
 
+            return false;
+        }
+    }
+
+     /**
+     * return bool
+     */
+    public function register(): bool
+    {
+        $db = Database::getInstance();
+
+        $query = "INSERT INTO users (firstname, lastname, email, password,  date_inserted, date_updated) VALUES (:firstname, :lastname, :email, :password, :country, :status, :date_inserted, :date_updated)";
+        $params = [
+            'firstname' => $this->getFirstname(),
+            'lastname' => $this->getLastname(),
+            'email' => $this->getEmail(),
+            'password' => $this->getPwd(),
+            'date_inserted' => $this->getDateInserted(),
+            'date_updated' => $this->getDateUpdated()
+        ];
+
+        try{
+            $statement = $db->query($query, $params);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if ($user) {
+                $_SESSION["user"] = $user;
+                return true;
+            } /* else {
+
+                return false;
+            } */
+        }catch( \Exception $e){
+            echo $e->getMessage();
             return false;
         }
     }
