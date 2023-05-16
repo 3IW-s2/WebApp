@@ -22,6 +22,10 @@ register:
   controller: Auth
   action: register
 
+activate:
+  controller: Auth
+  action: activate
+
 logout:
   controller: Auth
   action: logout

@@ -10,6 +10,8 @@ use PDO;
 
 class Auth
 {
+    public $message = [];
+
     public function login(): void
     {   
         $view = new View("Auth/login", "front");
@@ -24,43 +26,6 @@ class Auth
             $user->setPwd($pwd);
             $user->login( $email, $pwd);
         }
-    }
-
-    public function register(): void
-    {
-        $view = new View("Auth/register", "front");
-        $errors = [];
-
-        if(!empty($_POST)){
-            $firstname = $_POST["firstname"];
-            $lastname = $_POST["lastname"];
-            $email = $_POST["email"];
-            $pwd = $_POST["password"];
-            
-
-            $user = new User();
-            $user->setFirstname($firstname);
-            $user->setLastname($lastname);
-            $user->setEmail($email);
-            $user->setPwd($pwd);
-            try{
-                $register = $user->register($firstname, $lastname, $email, $pwd);
-                if($register){
-                    header("Location: /");
-                    exit();
-                }else {
-                    $errors[] = "utilisateur déjà existant";
-                }
-            }catch(Exception $e){
-                $errors[] = "utilisateur déjà existant";
-            }
-            
-        }else{
-            $errors[] = "Veuillez remplir tous les champs";
-            var_dump($errors);
-        }
-       
-
     }
 
     public function logout(): void
@@ -120,6 +85,64 @@ class Auth
 
                 header("Location: /");
           }
+    }
+
+    public function register(): void
+    {
+        $view = new View("Auth/register", "front");
+
+        if(!empty($_POST)){
+            $firstname = $_POST["firstname"];
+            $lastname = $_POST["lastname"];
+            $email = $_POST["email"];
+            $pwd = $_POST["password"];
+            
+
+            $user = new User();
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setEmail($email);
+            $user->setPwd($pwd);
+            try{
+                $register = $user->register($firstname, $lastname, $email, $pwd);
+                if($register){
+                    $errors [] = "utilisateur créé veuillez verifier votre boite mail";
+                }else {
+                    $errors[] = "utilisateur déjà existant";
+                }
+            }catch(Exception $e){
+                $errors[] = "utilisateur déjà existant";
+            }
+            
+        }else{
+            $errors[] = "Veuillez remplir tous les champs";
+            var_dump($errors);
+        }
+       //var_dump($errors);
+
+    }
+
+    public function activate(): void
+    {
+        if($_GET["token"]){
+            $token = $_GET["token"];
+            
+            $tokenIsValid =  new User();
+            $tokenIsValid->checkActiveToken($token);
+
+            if ($tokenIsValid) {
+                $view = new View("Auth/activate", "front");
+                header("Location: /");
+            } else {
+                $errors[]= 'Jeton invalide';
+            }
+
+        }else{
+                echo 'Accès refusé';
+
+        }
+
+        
     }
 
 

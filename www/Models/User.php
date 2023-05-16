@@ -282,6 +282,31 @@ class User extends Database
             return false;
         }
     }
+    /**
+     * @param String $token
+     * @return bool
+     */
+    public function checkActiveToken(string $token): bool
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE active_account_token = :token";
+        $params = [
+            'token' => $token
+        ];
+
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+
+        if ($user) {
+            $_SESSION["user"] = $user;
+            return true;
+        } else {
+
+            return false;
+        }
+    }
 
     /**
      * @param string $firstname
@@ -294,6 +319,7 @@ class User extends Database
     public function register(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
     {
         $db = Database::getInstance();
+        $activetoken = bin2hex(random_bytes(32));
 
         $query = "SELECT * FROM users WHERE email = :email";
         $params = [
@@ -307,6 +333,7 @@ class User extends Database
             if ($user) {
                 return false; // L'utilisateur existe déjà
             }
+
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -322,12 +349,27 @@ class User extends Database
 
             $db->query($query, $params);
 
+            // Envoi de l'e-mail avec update du token
+            $db = Database::getInstance();
+            
+            $query = "UPDATE users SET active_account_token = :token WHERE email = :email";
+            $params = [
+                'email' => $email,
+                'token' => $activetoken
+            ];
+
+            $db->query($query, $params);
+
+
+
+            $mail = new mail ($email, "Bienvenue sur notre site", "http://gavinaperano.com:88/activate?token=".$activetoken."");
+            $mail->send();
+
             return true; 
         } catch (\Exception $e) {
             error_log($e->getMessage()); 
             return false; 
         }
     }
-
 
 }

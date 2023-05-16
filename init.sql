@@ -16,7 +16,8 @@ VALUES ('toto', 'toto', 'audesandrine6@gmail.com', 'toto', 'admin', NOW(), NOW()
 ALTER TABLE users ADD reset_token VARCHAR(255);
 ALTER TABLE users ALTER COLUMN password SET VALUES '$2y$10$2YKjHrOKhhG8gPeXxn0X2O3ecxmuT1nDbClzkLIFN5qedDYrE6fwa' WHERE email = 'audesandrine6@gmail.com' ;
 ALTER TABLE users ALTER COLUMN role  SET DEFAULT 'customer';
-
+ALTER TABLE users ADD active_account BOOLEAN DEFAULT FALSE;
+ALTER TABLE users ADD active_account_token VARCHAR(255);
 
 
 
