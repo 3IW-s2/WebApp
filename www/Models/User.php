@@ -19,11 +19,20 @@ class User extends Database
     private Int $status = 0;
     private \DateTime $date_inserted;
     private \DateTime $date_updated;
+    private $baseUrl;
 
     public function __construct(){
         $this->date_inserted = new \DateTime();
         $this->date_updated = new \DateTime();
+        $this->loadConfig();
 
+    }
+
+    private function loadConfig() {
+        $configFile = __DIR__ . '/../config.yml';
+        $config = yaml_parse_file($configFile);
+
+        $this->baseUrl = $config['base_url'];
     }
 
     /**
@@ -209,6 +218,7 @@ class User extends Database
     {
         $db = Database::getInstance();
         $resetToken = bin2hex(random_bytes(32));
+        $url = $this->baseUrl . '/resetpassword?token='.$resetToken;
 
         $query = "UPDATE users SET reset_token = :token WHERE email = :email";
         $params = [
@@ -219,7 +229,7 @@ class User extends Database
         try{
             $statement = $db->query($query, $params);
             $user = $statement->fetch(PDO::FETCH_ASSOC);
-            $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "http://gavinaperano.com:88/reset?token=" .$resetToken. "");
+            $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : " . $url . "");
             $mail->send();
     
             return true;
@@ -320,6 +330,7 @@ class User extends Database
     {
         $db = Database::getInstance();
         $activetoken = bin2hex(random_bytes(32));
+        $url = $this->baseUrl . '/activate?token='.$activetoken;
 
         $query = "SELECT * FROM users WHERE email = :email";
         $params = [
@@ -362,7 +373,7 @@ class User extends Database
 
 
 
-            $mail = new mail ($email, "Bienvenue sur notre site", "http://gavinaperano.com:88/activate?token=".$activetoken."");
+            $mail = new mail ($email, "Bienvenue sur notre site", "Veuillez cliquer sur ce lien pour activer votre compte : " . $url . "");
             $mail->send();
 
             return true; 
