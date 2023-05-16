@@ -28,7 +28,7 @@ class Auth
             $user->setPwd($pwd);
             $user->login( $email, $pwd);
 
-            
+
             $error = $user->getError();
 
             // Transmettre l'ErrorBag à la vue
@@ -122,13 +122,13 @@ class Auth
             }catch(Exception $e){
                 $errors[] = "utilisateur déjà existant";
             }
-            
+            $error = $user->getError();
         }else{
             $errors[] = "Veuillez remplir tous les champs";
             var_dump($errors);
         }
 
-         $error = $user->getError();
+        
 
         // Transmettre l'ErrorBag à la vue
         $view->setVariable("error", $error);
