@@ -48,11 +48,12 @@ class Auth
    public function  forgotPassword(): void
    {
        $view = new View("Auth/forgotpassword", "front");
+       $error = new Error();
 
          if(!empty($_POST)){
               $email = $_POST["email"];
     
-              $user = new User();
+              $user = new User( $error);
               $user->setEmail($email);
               $user->forgotPassword($email);
          }
@@ -63,30 +64,32 @@ class Auth
             if (isset($_GET['token'])) {
 
                 $token = $_GET['token'];
+                $$error = new Error();
 
-                $tokenIsValid =  new User();
+                $tokenIsValid =  new User($error);
                 $tokenIsValid->checkToken($token);
 
                 if ($tokenIsValid) {
                     $view = new View("Auth/resetpassword", "front");
                     header("Location: /newpassword");
                 } else {
-                    echo 'Jeton invalide';
+                    $erros [] = 'Jeton invalide';
                 }
             } else {
-                echo 'Accès refusé';
+                $erros [] = 'Accès refusé';
             }
    }
 
     public function newPassword(): void
     {
           $view = new View("Auth/newpassword", "front");
+          $error = new Error();
     
           if(!empty($_POST)){
                 $email = $_SESSION["user"]["email"];
                 $pwd = $_POST["password"];
     
-                $user = new User();
+                $user = new User( $error);
                 $user->setEmail($email);
                 $user->setPwd($pwd);
                 $user->resetPassword($email, $pwd);
@@ -132,6 +135,7 @@ class Auth
 
         // Transmettre l'ErrorBag à la vue
         $view->setVariable("error", $error);
+        $view->setVariable("errors", $errors);
 
     }
 
@@ -139,8 +143,9 @@ class Auth
     {
         if($_GET["token"]){
             $token = $_GET["token"];
+            $error = new Error();
             
-            $tokenIsValid =  new User();
+            $tokenIsValid =  new User($error);
             $tokenIsValid->checkActiveToken($token);
 
             if ($tokenIsValid) {
