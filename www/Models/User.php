@@ -6,8 +6,9 @@ use App\Core\SQL;
 use App\Core\Database;
 use PDO;
 use App\Core\Mail;
+use Exception;
 
-class User extends SQL
+class User extends Database
 {
     private Int $id = 0;
     private String $firstname;
@@ -176,42 +177,98 @@ class User extends SQL
      */
     public function login(string $email, string $password): bool
     {
-    $db = Database::getInstance();
+        $db = Database::getInstance();
 
-    $query = "SELECT * FROM users WHERE email = :email AND password = :password";
-    $params = [
-        'email' => $email,
-        'password' => $password
-    ];
+        $query = "SELECT * FROM users WHERE email = :email";
+        $params = [
+            'email' => $email,
+        ];
 
-    $statement = $db->query($query, $params);
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
+        try {
+            $statement = $db->query($query, $params);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
-        $_SESSION["user"] = $user;
-        return true;
-    } else {
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION["user"] = $user;
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\Exception $e) {
+            error_log($e->getMessage()); 
+            return false;
+        }
 
-        return false;
     }
 
-    }
-    
     /**
-     * return bool
+     * @param String $email
+     * @return bool
      */
-    public function register(): bool
+    public function forgotPassword(string $email): bool
+    {
+        $db = Database::getInstance();
+        $resetToken = bin2hex(random_bytes(32));
+
+        $query = "UPDATE users SET reset_token = :token WHERE email = :email";
+        $params = [
+            'email' => $email,
+            'token' => $resetToken
+        ];
+
+        try{
+            $statement = $db->query($query, $params);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "http://gavinaperano.com:88/reset?token=" .$resetToken. "");
+            $mail->send();
+    
+            return true;
+        }
+        catch( \Exception $e){
+            echo $e->getMessage();
+            return false;
+        }
+      
+    }
+
+    /**
+     * @param String $email
+     * @param String $password
+     * @return bool
+     */
+    public function resetPassword(string $email, string $password): bool
     {
         $db = Database::getInstance();
 
-        $query = "INSERT INTO users (firstname, lastname, email, password,  date_inserted, date_updated) VALUES (:firstname, :lastname, :email, :password, :country, :status, :date_inserted, :date_updated)";
+        $query = "UPDATE users SET password = :password WHERE email = :email";
         $params = [
-            'firstname' => $this->getFirstname(),
-            'lastname' => $this->getLastname(),
-            'email' => $this->getEmail(),
-            'password' => $this->getPwd(),
-            'date_inserted' => $this->getDateInserted(),
-            'date_updated' => $this->getDateUpdated()
+            'email' => $email,
+            'password' => $password
+        ];
+
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+           
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    /**
+     * @param String $token
+     * @return bool
+     */
+    public function checkToken(string $token): bool
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE reset_token = :token";
+        $params = [
+            'token' => $token
         ];
 
         $statement = $db->query($query, $params);
@@ -225,29 +282,94 @@ class User extends SQL
             return false;
         }
     }
-
     /**
-     * @param String $email
+     * @param String $token
      * @return bool
      */
-    public function forgotPassword(string $email): bool
+    public function checkActiveToken(string $token): bool
     {
         $db = Database::getInstance();
 
-        $query = "SELECT * FROM users WHERE email = :email";
+        $query = "SELECT * FROM users WHERE active_account_token = :token";
         $params = [
-            'email' => $email
+            'token' => $token
         ];
 
-        $mail = new Mail($email, "Réinitialisation de votre mot de passe", "Cliquez sur ce lien pour réinitialiser votre mot de passe");
-        $mail->send();
-
-        //ici faut envoyer un mail avec un lien pour réinitialiser le mot de passe
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
 
 
+        if ($user) {
+            $_SESSION["user"] = $user;
+            return true;
+        } else {
+
+            return false;
+        }
     }
 
+    /**
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $email
+     * @param string $password
+     * @param string|null $role
+     * @return bool
+     */
+    public function register(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
+    {
+        $db = Database::getInstance();
+        $activetoken = bin2hex(random_bytes(32));
+
+        $query = "SELECT * FROM users WHERE email = :email";
+        $params = [
+            'email' => $email,
+        ];
+
+        try {
+            $statement = $db->query($query, $params);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if ($user) {
+                return false; // L'utilisateur existe déjà
+            }
 
 
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            $query = "INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at) 
+                      VALUES (:firstname, :lastname, :email, :password, :role, NOW(), NOW())";
+            $params = [
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'email' => $email,
+                'password' => $hashedPassword,
+                'role' => $role,
+            ];
+
+            $db->query($query, $params);
+
+            // Envoi de l'e-mail avec update du token
+            $db = Database::getInstance();
+            
+            $query = "UPDATE users SET active_account_token = :token WHERE email = :email";
+            $params = [
+                'email' => $email,
+                'token' => $activetoken
+            ];
+
+            $db->query($query, $params);
+
+
+
+            $mail = new mail ($email, "Bienvenue sur notre site", "http://gavinaperano.com:88/activate?token=".$activetoken."");
+            $mail->send();
+
+            return true; 
+        } catch (\Exception $e) {
+            error_log($e->getMessage()); 
+            return false; 
+        }
+    }
 
 }

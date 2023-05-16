@@ -22,6 +22,10 @@ register:
   controller: Auth
   action: register
 
+activate:
+  controller: Auth
+  action: activate
+
 logout:
   controller: Auth
   action: logout
@@ -29,6 +33,14 @@ logout:
 forgotpassword:
   controller: Auth
   action: forgotPassword
+
+resetpassword:
+  controller: Auth
+  action: resetPassword
+
+newpassword:
+  controller: Auth
+  action: newPassword  
 
 s-inscrire:
   controller: Auth

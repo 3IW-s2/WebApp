@@ -22,6 +22,9 @@ class Mail{
         {
             //recupère le constructeur to
             $to = $this->to;
+            $subject = $this->subject;
+            $message = $this->message;
+
             $mail = new PHPMailer(true);
             try {
                 //Server settings
@@ -38,15 +41,17 @@ class Mail{
 
                 // Content
                 $mail->isHTML(true);                            // Set email format to HTML
-                $mail->Subject = 'Bienvenue !';
-                $mail->Body    = 'Bienvenue sur notre site. Nous sommes ravis de vous compter parmi nous ! votre code de confirmation est : 123456';
+                $mail->Subject = $subject;
+                $mail->Body    = $message;
+                //$mail->Subject = 'Bienvenue ! ';
+                //$mail->Body    = 'Bienvenue sur notre site. Nous sommes ravis de vous compter parmi nous ! votre code de confirmation est : 123456';
                 
 
                 // Envoi de l'e-mail
                 $mail->send();
                         
                 // Si l'e-mail est envoyé avec succès
-                        echo 'L\'e-mail  a été envoyé avec succès.';
+                        echo "L'e-mail  a été envoyé avec succès.";
                     } catch (Exception $e) {
                         // En cas d'erreur lors de l'envoi de l'e-mail
                         echo 'Une erreur est survenue lors de l\'envoi de l\'e-mail : ' . $mail->ErrorInfo;

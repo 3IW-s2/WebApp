@@ -10,8 +10,7 @@ use PDO;
 
 class Auth
 {
-
-
+    public $message = [];
 
     public function login(): void
     {   
@@ -27,6 +26,65 @@ class Auth
             $user->setPwd($pwd);
             $user->login( $email, $pwd);
         }
+    }
+
+    public function logout(): void
+    {
+        if(!empty($_SESSION["user"])){
+            unset($_SESSION["user"]);
+        }
+        header("Location: /");
+        
+    }
+
+   public function  forgotPassword(): void
+   {
+       $view = new View("Auth/forgotpassword", "front");
+
+         if(!empty($_POST)){
+              $email = $_POST["email"];
+    
+              $user = new User();
+              $user->setEmail($email);
+              $user->forgotPassword($email);
+         }
+   }
+
+   public function resetPassword(): void
+   {
+            if (isset($_GET['token'])) {
+
+                $token = $_GET['token'];
+
+                $tokenIsValid =  new User();
+                $tokenIsValid->checkToken($token);
+
+                if ($tokenIsValid) {
+                    $view = new View("Auth/resetpassword", "front");
+                    header("Location: /newpassword");
+                } else {
+                    echo 'Jeton invalide';
+                }
+            } else {
+                echo 'Accès refusé';
+            }
+   }
+
+    public function newPassword(): void
+    {
+          $view = new View("Auth/newpassword", "front");
+    
+          if(!empty($_POST)){
+                $email = $_SESSION["user"]["email"];
+                $pwd = $_POST["password"];
+    
+                $user = new User();
+                $user->setEmail($email);
+                $user->setPwd($pwd);
+                $user->resetPassword($email, $pwd);
+
+                header("Location: /");
+          }
     }
 
     public function register(): void
@@ -45,34 +103,47 @@ class Auth
             $user->setLastname($lastname);
             $user->setEmail($email);
             $user->setPwd($pwd);
-            $user->register();
+            try{
+                $register = $user->register($firstname, $lastname, $email, $pwd);
+                if($register){
+                    $errors [] = "utilisateur créé veuillez verifier votre boite mail";
+                }else {
+                    $errors[] = "utilisateur déjà existant";
+                }
+            }catch(Exception $e){
+                $errors[] = "utilisateur déjà existant";
+            }
+            
+        }else{
+            $errors[] = "Veuillez remplir tous les champs";
+            var_dump($errors);
         }
-       
+       //var_dump($errors);
 
     }
 
-    public function logout(): void
+    public function activate(): void
     {
-        if(!empty($_SESSION["user"])){
-            unset($_SESSION["user"]);
+        if($_GET["token"]){
+            $token = $_GET["token"];
+            
+            $tokenIsValid =  new User();
+            $tokenIsValid->checkActiveToken($token);
+
+            if ($tokenIsValid) {
+                $view = new View("Auth/activate", "front");
+                header("Location: /");
+            } else {
+                $errors[]= 'Jeton invalide';
+            }
+
+        }else{
+                echo 'Accès refusé';
+
         }
-        
-        header("Location: /");
+
         
     }
-
-   public function  forgotPassword(): void
-   {
-       $view = new View("Auth/forgotpassword", "front");
-
-         if(!empty($_POST)){
-              $email = $_POST["email"];
-    
-              $user = new User();
-              $user->setEmail($email);
-              $user->forgotPassword($email);
-         }
-   }
 
 
 }
