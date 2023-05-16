@@ -17,23 +17,26 @@ class Auth
     {   
         $view = new View("Auth/login", "front");
         $error = new Error();
+        $user = new User($error);
+
 
        //faire le traitement du formulaire
         if(!empty($_POST)){
             $email = $_POST["email"];
             $pwd = $_POST["password"];
 
-            $user = new User($error);
+            
             $user->setEmail($email);
             $user->setPwd($pwd);
             $user->login( $email, $pwd);
 
 
-            $error = $user->getError();
+            
+        }
+        $error = $user->getError();
 
             // Transmettre l'ErrorBag à la vue
-            $view->setVariable("error", $error);
-        }
+        $view->setVariable("error", $error);
     }
 
     public function logout(): void
@@ -49,11 +52,12 @@ class Auth
    {
        $view = new View("Auth/forgotpassword", "front");
        $error = new Error();
+       $user = new User( $error);
 
          if(!empty($_POST)){
               $email = $_POST["email"];
     
-              $user = new User( $error);
+             
               $user->setEmail($email);
               $user->forgotPassword($email);
          }
@@ -64,7 +68,7 @@ class Auth
             if (isset($_GET['token'])) {
 
                 $token = $_GET['token'];
-                $$error = new Error();
+                $error = new Error();
 
                 $tokenIsValid =  new User($error);
                 $tokenIsValid->checkToken($token);
@@ -84,12 +88,13 @@ class Auth
     {
           $view = new View("Auth/newpassword", "front");
           $error = new Error();
+          $user = new User( $error);
     
           if(!empty($_POST)){
                 $email = $_SESSION["user"]["email"];
                 $pwd = $_POST["password"];
     
-                $user = new User( $error);
+               
                 $user->setEmail($email);
                 $user->setPwd($pwd);
                 $user->resetPassword($email, $pwd);

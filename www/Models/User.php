@@ -204,7 +204,7 @@ class User extends Database
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['password'])) {
-                var_dump($_SESSION["user"] = $user);
+                $_SESSION["user"] = $user;
                 return true;
             } else {
                 $this->error->addError("identifiants incorrects");
@@ -256,11 +256,12 @@ class User extends Database
     public function resetPassword(string $email, string $password): bool
     {
         $db = Database::getInstance();
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $query = "UPDATE users SET password = :password WHERE email = :email";
         $params = [
             'email' => $email,
-            'password' => $password
+            'password' => $hashedPassword
         ];
 
         $statement = $db->query($query, $params);
