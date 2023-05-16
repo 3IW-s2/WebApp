@@ -16,16 +16,23 @@ class Auth
     public function login(): void
     {   
         $view = new View("Auth/login", "front");
+        $error = new Error();
 
        //faire le traitement du formulaire
         if(!empty($_POST)){
             $email = $_POST["email"];
             $pwd = $_POST["password"];
 
-            $user = new User();
+            $user = new User($error);
             $user->setEmail($email);
             $user->setPwd($pwd);
             $user->login( $email, $pwd);
+
+            
+            $error = $user->getError();
+
+            // Transmettre l'ErrorBag à la vue
+            $view->setVariable("error", $error);
         }
     }
 

@@ -204,9 +204,10 @@ class User extends Database
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['password'])) {
-                $_SESSION["user"] = $user;
+                var_dump($_SESSION["user"] = $user);
                 return true;
             } else {
+                $this->error->addError("identifiants incorrects");
                 return false;
             }
         } catch (\Exception $e) {
