@@ -10,7 +10,6 @@ use PDO;
 
 class Auth
 {
-
     public function login(): void
     {   
         $view = new View("Auth/login", "front");
@@ -30,6 +29,7 @@ class Auth
     public function register(): void
     {
         $view = new View("Auth/register", "front");
+        $errors = [];
 
         if(!empty($_POST)){
             $firstname = $_POST["firstname"];
@@ -43,7 +43,21 @@ class Auth
             $user->setLastname($lastname);
             $user->setEmail($email);
             $user->setPwd($pwd);
-            $user->register();
+            try{
+                $register = $user->register($firstname, $lastname, $email, $pwd);
+                if($register){
+                    header("Location: /");
+                    exit();
+                }else {
+                    $errors[] = "utilisateur déjà existant";
+                }
+            }catch(Exception $e){
+                $errors[] = "utilisateur déjà existant";
+            }
+            
+        }else{
+            $errors[] = "Veuillez remplir tous les champs";
+            var_dump($errors);
         }
        
 

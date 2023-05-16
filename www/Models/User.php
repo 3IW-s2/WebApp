@@ -8,7 +8,7 @@ use PDO;
 use App\Core\Mail;
 use Exception;
 
-class User extends SQL
+class User extends Database
 {
     private Int $id = 0;
     private String $firstname;
@@ -177,29 +177,27 @@ class User extends SQL
      */
     public function login(string $email, string $password): bool
     {
-    $db = Database::getInstance();
+        $db = Database::getInstance();
 
-    $query = "SELECT * FROM users WHERE email = :email AND password = :password";
-    $params = [
-        'email' => $email,
-        'password' => $password
-    ];
+        $query = "SELECT * FROM users WHERE email = :email";
+        $params = [
+            'email' => $email,
+        ];
 
-   try{
-        $statement = $db->query($query, $params);
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
-        if ($user) {
-            $_SESSION["user"] = $user;
-            return true;
-        } else {            
+        try {
+            $statement = $db->query($query, $params);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION["user"] = $user;
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\Exception $e) {
+            error_log($e->getMessage()); 
             return false;
         }
-
-    }
-    catch( \Exception $e){
-        echo $e->getMessage();
-        return false;
-    }
 
     }
 
@@ -285,37 +283,49 @@ class User extends SQL
         }
     }
 
-     /**
-     * return bool
+    /**
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $email
+     * @param string $password
+     * @param string|null $role
+     * @return bool
      */
-    public function register(): bool
+    public function register(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
     {
         $db = Database::getInstance();
 
-        $query = "INSERT INTO users (firstname, lastname, email, password,  date_inserted, date_updated) VALUES (:firstname, :lastname, :email, :password, :country, :status, :date_inserted, :date_updated)";
+        $query = "SELECT * FROM users WHERE email = :email";
         $params = [
-            'firstname' => $this->getFirstname(),
-            'lastname' => $this->getLastname(),
-            'email' => $this->getEmail(),
-            'password' => $this->getPwd(),
-            'date_inserted' => $this->getDateInserted(),
-            'date_updated' => $this->getDateUpdated()
+            'email' => $email,
         ];
 
-        try{
+        try {
             $statement = $db->query($query, $params);
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             if ($user) {
-                $_SESSION["user"] = $user;
-                return true;
-            } /* else {
+                return false; // L'utilisateur existe déjà
+            }
 
-                return false;
-            } */
-        }catch( \Exception $e){
-            echo $e->getMessage();
-            return false;
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            $query = "INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at) 
+                      VALUES (:firstname, :lastname, :email, :password, :role, NOW(), NOW())";
+            $params = [
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'email' => $email,
+                'password' => $hashedPassword,
+                'role' => $role,
+            ];
+
+            $db->query($query, $params);
+
+            return true; 
+        } catch (\Exception $e) {
+            error_log($e->getMessage()); 
+            return false; 
         }
     }
 

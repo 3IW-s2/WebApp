@@ -1,5 +1,12 @@
 <!-- un formulaire d'inscription -->
  <form id="register-form" method="post" action="" >
+            <?php if(!empty($errors)): ?>
+            <div class="alert alert-danger">
+                <?php foreach($errors as $error): ?>
+                <p><?php echo $error; ?></p>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
             <div class="form-group">
                 <label for="firstname">Firstname</label>
                 <input type="text" name="firstname" id="firstname" class="form-control" />
