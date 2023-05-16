@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Core\Error;
 use App\Core\SQL;
 use App\Core\Database;
 use PDO;
@@ -20,10 +21,12 @@ class User extends Database
     private \DateTime $date_inserted;
     private \DateTime $date_updated;
     private $baseUrl;
+    private $error;
 
-    public function __construct(){
+    public function __construct( Error $error){
         $this->date_inserted = new \DateTime();
         $this->date_updated = new \DateTime();
+        $this->error = $error;
         $this->loadConfig();
 
     }
@@ -34,6 +37,9 @@ class User extends Database
 
         $this->baseUrl = $config['base_url'];
     }
+
+   
+  
 
     /**
      * @return Int
@@ -342,7 +348,8 @@ class User extends Database
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             if ($user) {
-                return false; // L'utilisateur existe déjà
+                $this->error->addError("L'utilisateur existe déjà");
+                return false; 
             }
 
 
@@ -379,8 +386,14 @@ class User extends Database
             return true; 
         } catch (\Exception $e) {
             error_log($e->getMessage()); 
+            $this->error->addError("Une erreur s'est produite lors de l'enregistrement de l'utilisateur");
             return false; 
         }
+    }
+
+    public function getError(): Error
+    {
+        return $this->error;
     }
 
 }

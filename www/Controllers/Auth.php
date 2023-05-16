@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Core\Error;
 use App\Models\User;
 use App\Core\View;
 use App\Core\Database;
@@ -90,6 +91,7 @@ class Auth
     public function register(): void
     {
         $view = new View("Auth/register", "front");
+        $error = new Error();
 
         if(!empty($_POST)){
             $firstname = $_POST["firstname"];
@@ -98,7 +100,7 @@ class Auth
             $pwd = $_POST["password"];
             
 
-            $user = new User();
+            $user = new User($error);
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setEmail($email);
@@ -118,7 +120,11 @@ class Auth
             $errors[] = "Veuillez remplir tous les champs";
             var_dump($errors);
         }
-       //var_dump($errors);
+
+         $error = $user->getError();
+
+        // Transmettre l'ErrorBag à la vue
+        $view->setVariable("error", $error);
 
     }
 

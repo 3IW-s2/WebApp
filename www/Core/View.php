@@ -29,6 +29,16 @@ class View {
         }
     }
 
+    public function setVariable (string $key, $value): void
+    {
+        $this->data[$key] = $value;
+    }
+
+    public function getVariable (string $key)
+    {
+        return $this->data[$key];
+    }
+
     /**
      * @param String $template
      */
