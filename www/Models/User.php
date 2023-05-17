@@ -199,6 +199,11 @@ class User extends Database
             'email' => $email,
         ];
 
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->error->addError("L'adresse email n'est pas valide");
+            return false; 
+        }
+
         try {
             $statement = $db->query($query, $params);
             $user = $statement->fetch(PDO::FETCH_ASSOC);
@@ -366,6 +371,27 @@ class User extends Database
                 'password' => $hashedPassword,
                 'role' => $role,
             ];
+
+            if($firstname == "" || $lastname == "" || $email == "" || $password == ""){
+                $this->error->addError("Veuillez remplir tous les champs");
+                return false; 
+            }
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $this->error->addError("L'adresse email n'est pas valide");
+                return false; 
+            }
+
+            if (strlen($password) < 8) {
+                $this->error->addError("Le mot de passe doit contenir au moins 8 caractères");
+                return false; 
+            }
+
+            if (!preg_match("#[0-9]+#", $password)) {
+                $this->error->addError("Le mot de passe doit contenir au moins 1 chiffre");
+                return false; 
+            }
+
 
             $db->query($query, $params);
 
