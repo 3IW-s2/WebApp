@@ -237,7 +237,6 @@ class User extends Database
             'email' => $email,
             'token' => $resetToken
         ];
-
         try{
             $statement = $db->query($query, $params);
             $user = $statement->fetch(PDO::FETCH_ASSOC);
