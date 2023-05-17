@@ -1,8 +1,8 @@
 <form id="connection-form" method="post" action="" >
-            <?php if(!empty($errors)): ?>
+            <?php if($error->hasErrors()): ?>
             <div class="alert alert-danger">
-                <?php foreach($errors as $error): ?>
-                <p><?php echo $error; ?></p>
+                <?php foreach($error->getErrors() as $errors): ?>
+                <p><?php echo $errors; ?></p>
                 <?php endforeach; ?>
             </div>
             <?php endif; ?>

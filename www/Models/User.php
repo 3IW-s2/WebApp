@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Core\Error;
 use App\Core\SQL;
 use App\Core\Database;
 use PDO;
@@ -19,12 +20,26 @@ class User extends Database
     private Int $status = 0;
     private \DateTime $date_inserted;
     private \DateTime $date_updated;
+    private $baseUrl;
+    private $error;
 
-    public function __construct(){
+    public function __construct( Error $error){
         $this->date_inserted = new \DateTime();
         $this->date_updated = new \DateTime();
+        $this->error = $error;
+        $this->loadConfig();
 
     }
+
+    private function loadConfig() {
+        $configFile = __DIR__ . '/../config.yml';
+        $config = yaml_parse_file($configFile);
+
+        $this->baseUrl = $config['base_url'];
+    }
+
+   
+  
 
     /**
      * @return Int
@@ -184,6 +199,11 @@ class User extends Database
             'email' => $email,
         ];
 
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->error->addError("L'adresse email n'est pas valide");
+            return false; 
+        }
+
         try {
             $statement = $db->query($query, $params);
             $user = $statement->fetch(PDO::FETCH_ASSOC);
@@ -192,6 +212,7 @@ class User extends Database
                 $_SESSION["user"] = $user;
                 return true;
             } else {
+                $this->error->addError("identifiants incorrects");
                 return false;
             }
         } catch (\Exception $e) {
@@ -209,6 +230,7 @@ class User extends Database
     {
         $db = Database::getInstance();
         $resetToken = bin2hex(random_bytes(32));
+        $url = $this->baseUrl . '/resetpassword?token='.$resetToken;
 
         $query = "UPDATE users SET reset_token = :token WHERE email = :email";
         $params = [
@@ -219,7 +241,7 @@ class User extends Database
         try{
             $statement = $db->query($query, $params);
             $user = $statement->fetch(PDO::FETCH_ASSOC);
-            $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "http://gavinaperano.com:88/reset?token=" .$resetToken. "");
+            $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : " . $url . "");
             $mail->send();
     
             return true;
@@ -239,11 +261,12 @@ class User extends Database
     public function resetPassword(string $email, string $password): bool
     {
         $db = Database::getInstance();
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "UPDATE users SET password = :password WHERE email = :email";
+        $query = "UPDATE users SET password = :password , reset_token = NULL WHERE email = :email";
         $params = [
             'email' => $email,
-            'password' => $password
+            'password' => $hashedPassword
         ];
 
         $statement = $db->query($query, $params);
@@ -320,6 +343,7 @@ class User extends Database
     {
         $db = Database::getInstance();
         $activetoken = bin2hex(random_bytes(32));
+        $url = $this->baseUrl . '/activate?token='.$activetoken;
 
         $query = "SELECT * FROM users WHERE email = :email";
         $params = [
@@ -331,7 +355,8 @@ class User extends Database
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             if ($user) {
-                return false; // L'utilisateur existe déjà
+                $this->error->addError("L'utilisateur existe déjà");
+                return false; 
             }
 
 
@@ -347,12 +372,33 @@ class User extends Database
                 'role' => $role,
             ];
 
+            if($firstname == "" || $lastname == "" || $email == "" || $password == ""){
+                $this->error->addError("Veuillez remplir tous les champs");
+                return false; 
+            }
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $this->error->addError("L'adresse email n'est pas valide");
+                return false; 
+            }
+
+            if (strlen($password) < 8) {
+                $this->error->addError("Le mot de passe doit contenir au moins 8 caractères");
+                return false; 
+            }
+
+            if (!preg_match("#[0-9]+#", $password)) {
+                $this->error->addError("Le mot de passe doit contenir au moins 1 chiffre");
+                return false; 
+            }
+
+
             $db->query($query, $params);
 
             // Envoi de l'e-mail avec update du token
             $db = Database::getInstance();
             
-            $query = "UPDATE users SET active_account_token = :token WHERE email = :email";
+            $query = "UPDATE users SET active_account_token = :token  WHERE email = :email";
             $params = [
                 'email' => $email,
                 'token' => $activetoken
@@ -362,14 +408,20 @@ class User extends Database
 
 
 
-            $mail = new mail ($email, "Bienvenue sur notre site", "http://gavinaperano.com:88/activate?token=".$activetoken."");
+            $mail = new mail ($email, "Bienvenue sur notre site", "Veuillez cliquer sur ce lien pour activer votre compte : " . $url . "");
             $mail->send();
 
             return true; 
         } catch (\Exception $e) {
             error_log($e->getMessage()); 
+            $this->error->addError("Une erreur s'est produite lors de l'enregistrement de l'utilisateur");
             return false; 
         }
+    }
+
+    public function getError(): Error
+    {
+        return $this->error;
     }
 
 }
