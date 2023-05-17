@@ -32,8 +32,6 @@ class Auth
             
         }
         $error = $user->getError();
-
-            // Transmettre l'ErrorBag à la vue
         $view->setVariable("error", $error);
     }
 
@@ -131,7 +129,6 @@ class Auth
             $error = $user->getError();
         }else{
             $errors[] = "Veuillez remplir tous les champs";
-            var_dump($errors);
         }
 
         
@@ -158,10 +155,13 @@ class Auth
                 $errors[]= 'Jeton invalide';
             }
 
+
         }else{
-                echo 'Accès refusé';
+            $errors[]= 'Accès refusé';
 
         }
+
+
 
         
     }
