@@ -258,7 +258,7 @@ class User extends Database
         $db = Database::getInstance();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "UPDATE users SET password = :password WHERE email = :email";
+        $query = "UPDATE users SET password = :password , reset_token = NULL WHERE email = :email";
         $params = [
             'email' => $email,
             'password' => $hashedPassword
@@ -372,7 +372,7 @@ class User extends Database
             // Envoi de l'e-mail avec update du token
             $db = Database::getInstance();
             
-            $query = "UPDATE users SET active_account_token = :token WHERE email = :email";
+            $query = "UPDATE users SET active_account_token = :token  WHERE email = :email";
             $params = [
                 'email' => $email,
                 'token' => $activetoken
