@@ -45,3 +45,7 @@ newpassword:
 s-inscrire:
   controller: Auth
   action: register
+
+usercontroller:
+  controller: userController
+  action: index
