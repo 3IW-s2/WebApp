@@ -10,7 +10,7 @@ use App\Core\Error;
 use PDO;
 use Exception;
 
-class  UserRepository  extends Database
+class  UserRepository  
 {
     public function findById (int $id): User
     {
