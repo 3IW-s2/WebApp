@@ -6,6 +6,7 @@ use App\Core\Error;
 use App\Models\User;
 use App\Core\View;
 use App\Core\Database;
+use App\Services\UserService;
 use PDO;
 
 
@@ -19,8 +20,6 @@ class Auth
         $error = new Error();
         $user = new User($error);
 
-
-       //faire le traitement du formulaire
         if(!empty($_POST)){
             $email = $_POST["email"];
             $pwd = $_POST["password"];
@@ -155,14 +154,10 @@ class Auth
                 $errors[]= 'Jeton invalide';
             }
 
-
         }else{
             $errors[]= 'Accès refusé';
 
         }
-
-
-
         
     }
 

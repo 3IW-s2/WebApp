@@ -17,6 +17,7 @@ class User extends Database
     private String $email;
     private String $pwd;
     private String $country;
+    private String $role;
     private Int $status = 0;
     private \DateTime $date_inserted;
     private \DateTime $date_updated;
@@ -38,8 +39,7 @@ class User extends Database
         $this->baseUrl = $config['base_url'];
     }
 
-   
-  
+
 
     /**
      * @return Int
@@ -55,6 +55,22 @@ class User extends Database
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return String
+     */
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param String $role
+     */
+    public function setRole(string $role): void
+    {
+        $this->role = $role;
     }
 
     /**
