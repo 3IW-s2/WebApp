@@ -46,6 +46,6 @@ s-inscrire:
   controller: Auth
   action: register
 
-usercontroller:
-  controller: userController
-  action: index
+admin/showuser:
+  controller: UserController
+  action: showUser
