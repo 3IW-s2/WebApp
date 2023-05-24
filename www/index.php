@@ -1,10 +1,8 @@
 <?php
 
 namespace App;
-
 use App\Core\Router;
 
-session_start();
 require 'vendor/autoload.php';
 error_reporting(E_ALL);
 ini_set('display_errors', true);
