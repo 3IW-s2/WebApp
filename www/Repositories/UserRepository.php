@@ -47,5 +47,33 @@ class  UserRepository
         }
     }
 
+    public function getUserByEmail (string $email)
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM user WHERE email = :email";
+        $params = [
+            'email' => $email
+        ];
+        $statement = $db->query($query, $params);
+        $data = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($data) {
+            $userObj = new User();
+            $userObj->setEmail($data['email']);
+            $userObj->setPwd($data['password']);
+            $userObj->setFirstname($data['firstname']);
+            $userObj->setLastname($data['lastname']);
+            $userObj->setRole($data['role']);
+
+            // Définir les autres propriétés de l'utilisateur
+    
+            return $userObj;
+        }
+    
+        return null;
+
+    }
+
 
 }

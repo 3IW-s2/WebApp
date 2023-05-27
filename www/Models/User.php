@@ -7,8 +7,9 @@ use App\Core\SQL;
 use App\Core\Database;
 use PDO;
 use App\Core\Mail;
+use App\Repositories\UserRepository;
+use App\Services\UserService;
 use Exception;
-
 class User extends Database
 {
     private Int $id = 0;
@@ -207,24 +208,22 @@ class User extends Database
      * @return bool
      */
     public function login(string $email, string $password): bool
-    {
-        $db = Database::getInstance();
-
-        $query = "SELECT * FROM users WHERE email = :email";
-        $params = [
-            'email' => $email,
-        ];
-
+    {   
+     
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->error->addError("L'adresse email n'est pas valide");
             return false; 
         }
-
-        try {
-            $statement = $db->query($query, $params);
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-            if ($user && password_verify($password, $user['password'])) {
+        if (empty($password)) {
+            $this->error->addError("Le mot de passe est obligatoire");
+            return false;
+        }
+        $userRepo = new UserRepository();
+        $user = $userRepo->getUserByEmail($email);
+        var_dump($user);
+        die;
+        try{
+            if ($user && password_verify($password, $user->getPwd())) {
                 $_SESSION["user"] = $user;
                 return true;
             } else {
@@ -232,7 +231,7 @@ class User extends Database
                 return false;
             }
         } catch (\Exception $e) {
-            error_log($e->getMessage()); 
+            $this->error->addError(" Un problème est survenu lors de la connexion");
             return false;
         }
 
