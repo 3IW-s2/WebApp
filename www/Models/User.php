@@ -224,7 +224,8 @@ class User extends Database
         die;  */
         try{
             if ($user && password_verify($password, $user['password'])) {
-               var_dump( $_SESSION["user"] = $user);
+                //$_SESSION["user"] = $user;
+                $_SESSION["user"] = $user['email'];
                 return true;
             } else {
                 $this->error->addError("identifiants incorrects");
@@ -243,18 +244,24 @@ class User extends Database
      */
     public function forgotPassword(string $email): bool
     {
-        $db = Database::getInstance();
-        $resetToken = bin2hex(random_bytes(32));
-        $url = $this->baseUrl . '/resetpassword?token='.$resetToken;
-
-        $query = "UPDATE users SET reset_token = :token WHERE email = :email";
+       /*  $db = Database::getInstance();
+        $resetToken = bin2hex(random_bytes(32)); */
+        
+       
+       /*  $query = "UPDATE users SET reset_token = :token WHERE email = :email";
         $params = [
             'email' => $email,
             'token' => $resetToken
-        ];
+        ]; */
         try{
-            $statement = $db->query($query, $params);
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            $userRepo = new UserRepository();
+           
+            $user = $userRepo->resetToken($email);
+            $url = $this->baseUrl . '/resetpassword?token='.$user;
+          /*   var_dump($user);
+            die; */
+          /*   $statement = $db->query($query, $params);
+            $user = $statement->fetch(PDO::FETCH_ASSOC); */
             $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : " . $url . "");
             $mail->send();
     
@@ -287,6 +294,7 @@ class User extends Database
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
+            $_SESSION["user"] = $user;
            
             return true;
         } else {

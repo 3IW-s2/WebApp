@@ -59,14 +59,6 @@ class  UserRepository   extends Database
         $data = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($data) {
-            /* $userObj = new User();
-            $userObj->setEmail($data['email']);
-            $userObj->setPwd($data['password']);
-            $userObj->setFirstname($data['firstname']);
-            $userObj->setLastname($data['lastname']);
-            $userObj->setRole($data['role']); */
-
-            // Définir les autres propriétés de l'utilisateur
     
             return $data;
         }
@@ -75,6 +67,25 @@ class  UserRepository   extends Database
         $this->error->setCode(404);
         return false;
 
+    }
+
+    public function resetToken(string $email)
+    {
+        $db = Database::getInstance();
+        $resetToken = bin2hex(random_bytes(32));
+        /* var_dump($resetToken);
+        die; */
+       // $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $query = "UPDATE users SET reset_token = :token WHERE email = :email";
+        $params = [
+            'email' => $email,
+            'token' => $resetToken
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+ 
+        return $resetToken;
     }
 
 
