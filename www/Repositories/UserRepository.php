@@ -88,5 +88,21 @@ class  UserRepository   extends Database
         return $resetToken;
     }
 
+    public function resetPassword (string $email, string $password)
+    {
+        $db = Database::getInstance();
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $query = "UPDATE users SET password = :password , reset_token = NULL WHERE email = :email";
+        $params = [
+            'email' => $email,
+            'password' => $hashedPassword
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
 
 }

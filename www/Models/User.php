@@ -281,7 +281,7 @@ class User extends Database
      */
     public function resetPassword(string $email, string $password): bool
     {
-        $db = Database::getInstance();
+       /*  $db = Database::getInstance();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $query = "UPDATE users SET password = :password , reset_token = NULL WHERE email = :email";
@@ -291,7 +291,10 @@ class User extends Database
         ];
 
         $statement = $db->query($query, $params);
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        $user = $statement->fetch(PDO::FETCH_ASSOC); */
+
+        $userRepo = new UserRepository();
+        $user = $userRepo->resetPassword($email, $password);
 
         if ($user) {
             $_SESSION["user"] = $user;
