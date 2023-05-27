@@ -105,4 +105,33 @@ class  UserRepository   extends Database
     }
 
 
+    public function checkToken (string $token)
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE reset_token = :token";
+        $params = [
+            'token' => $token
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
+    public function checkActiveToken (string $token)
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE reset_token = :token AND reset_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)";
+        $params = [
+            'token' => $token
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
+
 }
