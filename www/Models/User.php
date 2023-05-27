@@ -7,8 +7,8 @@ use App\Core\SQL;
 use App\Core\Database;
 use PDO;
 use App\Core\Mail;
+use App\Repositories\UserRepository;
 use Exception;
-
 class User extends Database
 {
     private Int $id = 0;
@@ -207,32 +207,31 @@ class User extends Database
      * @return bool
      */
     public function login(string $email, string $password): bool
-    {
-        $db = Database::getInstance();
-
-        $query = "SELECT * FROM users WHERE email = :email";
-        $params = [
-            'email' => $email,
-        ];
-
+    {   
+     
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->error->addError("L'adresse email n'est pas valide");
             return false; 
         }
-
-        try {
-            $statement = $db->query($query, $params);
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
-
+        if (empty($password)) {
+            $this->error->addError("Le mot de passe est obligatoire");
+            return false;
+        }
+        
+        $userRepo = new UserRepository();
+        $user = $userRepo->getUserByEmail($email);
+  
+        try{
             if ($user && password_verify($password, $user['password'])) {
-                $_SESSION["user"] = $user;
+                //$_SESSION["user"] = $user;
+                $_SESSION["user"] = $user['email'];
                 return true;
             } else {
                 $this->error->addError("identifiants incorrects");
                 return false;
             }
         } catch (\Exception $e) {
-            error_log($e->getMessage()); 
+            $this->error->addError(" Un problème est survenu lors de la connexion");
             return false;
         }
 
@@ -244,18 +243,13 @@ class User extends Database
      */
     public function forgotPassword(string $email): bool
     {
-        $db = Database::getInstance();
-        $resetToken = bin2hex(random_bytes(32));
-        $url = $this->baseUrl . '/resetpassword?token='.$resetToken;
-
-        $query = "UPDATE users SET reset_token = :token WHERE email = :email";
-        $params = [
-            'email' => $email,
-            'token' => $resetToken
-        ];
+     
         try{
-            $statement = $db->query($query, $params);
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            $userRepo = new UserRepository();
+           
+            $user = $userRepo->resetToken($email);
+            $url = $this->baseUrl . '/resetpassword?token='.$user;
+
             $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : " . $url . "");
             $mail->send();
     
@@ -275,19 +269,12 @@ class User extends Database
      */
     public function resetPassword(string $email, string $password): bool
     {
-        $db = Database::getInstance();
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "UPDATE users SET password = :password , reset_token = NULL WHERE email = :email";
-        $params = [
-            'email' => $email,
-            'password' => $hashedPassword
-        ];
-
-        $statement = $db->query($query, $params);
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        $userRepo = new UserRepository();
+        $user = $userRepo->resetPassword($email, $password);
 
         if ($user) {
+            $_SESSION["user"] = $user;
            
             return true;
         } else {
@@ -302,7 +289,7 @@ class User extends Database
      */
     public function checkToken(string $token): bool
     {
-        $db = Database::getInstance();
+        /* $db = Database::getInstance();
 
         $query = "SELECT * FROM users WHERE reset_token = :token";
         $params = [
@@ -310,7 +297,10 @@ class User extends Database
         ];
 
         $statement = $db->query($query, $params);
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        $user = $statement->fetch(PDO::FETCH_ASSOC); */
+
+        $userRepo = new UserRepository();
+        $user = $userRepo->checkToken($token);
 
         if ($user) {
             $_SESSION["user"] = $user;
@@ -326,7 +316,7 @@ class User extends Database
      */
     public function checkActiveToken(string $token): bool
     {
-        $db = Database::getInstance();
+        /* $db = Database::getInstance();
 
         $query = "SELECT * FROM users WHERE active_account_token = :token";
         $params = [
@@ -334,7 +324,10 @@ class User extends Database
         ];
 
         $statement = $db->query($query, $params);
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        $user = $statement->fetch(PDO::FETCH_ASSOC); */
+
+        $userRepo = new UserRepository();
+        $user = $userRepo->checkActiveToken($token);
 
 
         if ($user) {

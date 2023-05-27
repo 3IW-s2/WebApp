@@ -10,7 +10,7 @@ use App\Core\Error;
 use PDO;
 use Exception;
 
-class  UserRepository  
+class  UserRepository   extends Database 
 {
     public function findById (int $id): User
     {
@@ -45,6 +45,92 @@ class  UserRepository
         catch(Exception $e){
             echo $e->getMessage();
         }
+    }
+
+    public function getUserByEmail (string $email)
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE email = :email";
+        $params = [
+            'email' => $email
+        ];
+        $statement = $db->query($query, $params);
+        $data = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($data) {
+    
+            return $data;
+        }
+    
+        $this->error = new Error();
+        $this->error->setCode(404);
+        return false;
+
+    }
+
+    public function resetToken(string $email)
+    {
+        $db = Database::getInstance();
+        $resetToken = bin2hex(random_bytes(32));
+        /* var_dump($resetToken);
+        die; */
+       // $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $query = "UPDATE users SET reset_token = :token WHERE email = :email";
+        $params = [
+            'email' => $email,
+            'token' => $resetToken
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+ 
+        return $resetToken;
+    }
+
+    public function resetPassword (string $email, string $password)
+    {
+        $db = Database::getInstance();
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $query = "UPDATE users SET password = :password , reset_token = NULL WHERE email = :email";
+        $params = [
+            'email' => $email,
+            'password' => $hashedPassword
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
+
+    public function checkToken (string $token)
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE reset_token = :token";
+        $params = [
+            'token' => $token
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
+    public function checkActiveToken (string $token)
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE reset_token = :token AND reset_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)";
+        $params = [
+            'token' => $token
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
     }
 
 
