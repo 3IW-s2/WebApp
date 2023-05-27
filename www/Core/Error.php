@@ -19,4 +19,9 @@ class Error
     {
         return !empty($this->errors);
     } 
+
+    public function setCode (int $code): void
+    {
+        http_response_code($code);
+    }
 }

@@ -8,7 +8,6 @@ use App\Core\Database;
 use PDO;
 use App\Core\Mail;
 use App\Repositories\UserRepository;
-use App\Services\UserService;
 use Exception;
 class User extends Database
 {
@@ -218,13 +217,14 @@ class User extends Database
             $this->error->addError("Le mot de passe est obligatoire");
             return false;
         }
+        
         $userRepo = new UserRepository();
         $user = $userRepo->getUserByEmail($email);
-        var_dump($user);
-        die;
+      /*   var_dump($user['password']);
+        die;  */
         try{
-            if ($user && password_verify($password, $user->getPwd())) {
-                $_SESSION["user"] = $user;
+            if ($user && password_verify($password, $user['password'])) {
+               var_dump( $_SESSION["user"] = $user);
                 return true;
             } else {
                 $this->error->addError("identifiants incorrects");

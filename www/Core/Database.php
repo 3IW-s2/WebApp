@@ -7,7 +7,7 @@ class Database {
         private static $instance = null;
         private $pdo;
     
-        private function __construct()
+        protected function __construct()
         {
             $this->pdo = new PDO("pgsql:host=46.226.107.16;port=5432;dbname=database_tiw;", "postgres", "postgres");
         }

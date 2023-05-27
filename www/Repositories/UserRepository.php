@@ -10,7 +10,7 @@ use App\Core\Error;
 use PDO;
 use Exception;
 
-class  UserRepository  
+class  UserRepository   extends Database 
 {
     public function findById (int $id): User
     {
@@ -51,7 +51,7 @@ class  UserRepository
     {
         $db = Database::getInstance();
 
-        $query = "SELECT * FROM user WHERE email = :email";
+        $query = "SELECT * FROM users WHERE email = :email";
         $params = [
             'email' => $email
         ];
@@ -59,19 +59,21 @@ class  UserRepository
         $data = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($data) {
-            $userObj = new User();
+            /* $userObj = new User();
             $userObj->setEmail($data['email']);
             $userObj->setPwd($data['password']);
             $userObj->setFirstname($data['firstname']);
             $userObj->setLastname($data['lastname']);
-            $userObj->setRole($data['role']);
+            $userObj->setRole($data['role']); */
 
             // Définir les autres propriétés de l'utilisateur
     
-            return $userObj;
+            return $data;
         }
     
-        return null;
+        $this->error = new Error();
+        $this->error->setCode(404);
+        return false;
 
     }
 
