@@ -11,7 +11,7 @@ class UserController
 {
    public function showUser():void
    {
-        $view = new View("Backend/User/index", "front");
+        $view = new View("Backend/User/index", "back");
         $error = new Error();
         $user = new User($error);
         $userRepository = new UserRepository();
