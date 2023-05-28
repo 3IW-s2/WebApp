@@ -123,10 +123,10 @@ class  UserRepository   extends Database
     {
         $db = Database::getInstance();
 
-        $query = "SELECT * FROM users WHERE reset_token = :token AND reset_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)";
+        $query = "SELECT * FROM users WHERE active_account_token = :token";
         $params = [
             'token' => $token
-        ];
+        ]; 
         $statement = $db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 

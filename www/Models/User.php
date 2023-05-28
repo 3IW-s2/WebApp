@@ -343,7 +343,6 @@ class User extends Database
                 return false; 
             }
 
-
             if($firstname == "" || $lastname == "" || $email == "" || $password == ""){
                 $this->error->addError("Veuillez remplir tous les champs");
                 return false; 
