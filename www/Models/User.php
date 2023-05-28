@@ -289,15 +289,6 @@ class User extends Database
      */
     public function checkToken(string $token): bool
     {
-        /* $db = Database::getInstance();
-
-        $query = "SELECT * FROM users WHERE reset_token = :token";
-        $params = [
-            'token' => $token
-        ];
-
-        $statement = $db->query($query, $params);
-        $user = $statement->fetch(PDO::FETCH_ASSOC); */
 
         $userRepo = new UserRepository();
         $user = $userRepo->checkToken($token);
@@ -316,15 +307,6 @@ class User extends Database
      */
     public function checkActiveToken(string $token): bool
     {
-        /* $db = Database::getInstance();
-
-        $query = "SELECT * FROM users WHERE active_account_token = :token";
-        $params = [
-            'token' => $token
-        ];
-
-        $statement = $db->query($query, $params);
-        $user = $statement->fetch(PDO::FETCH_ASSOC); */
 
         $userRepo = new UserRepository();
         $user = $userRepo->checkActiveToken($token);
@@ -349,36 +331,18 @@ class User extends Database
      */
     public function register(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
     {
-        $db = Database::getInstance();
-        $activetoken = bin2hex(random_bytes(32));
-        $url = $this->baseUrl . '/activate?token='.$activetoken;
 
-        $query = "SELECT * FROM users WHERE email = :email";
-        $params = [
-            'email' => $email,
-        ];
-
+        
         try {
-            $statement = $db->query($query, $params);
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
-
+            $userRepo = new UserRepository();
+            $user = $userRepo->getUserByEmail($email);
+            
+        
             if ($user) {
                 $this->error->addError("L'utilisateur existe déjà");
                 return false; 
             }
 
-
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-            $query = "INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at) 
-                      VALUES (:firstname, :lastname, :email, :password, :role, NOW(), NOW())";
-            $params = [
-                'firstname' => $firstname,
-                'lastname' => $lastname,
-                'email' => $email,
-                'password' => $hashedPassword,
-                'role' => $role,
-            ];
 
             if($firstname == "" || $lastname == "" || $email == "" || $password == ""){
                 $this->error->addError("Veuillez remplir tous les champs");
@@ -400,20 +364,14 @@ class User extends Database
                 return false; 
             }
 
+            $userRepos = new UserRepository();
+            $userRegister = $userRepos->register($firstname, $lastname, $email, $password, $role);
+           
 
-            $db->query($query, $params);
+            $userRepo->updateToken($email);
+            $User =  $userRepo->updateToken($email);
 
-            // Envoi de l'e-mail avec update du token
-            $db = Database::getInstance();
-            
-            $query = "UPDATE users SET active_account_token = :token  WHERE email = :email";
-            $params = [
-                'email' => $email,
-                'token' => $activetoken
-            ];
-
-            $db->query($query, $params);
-
+            $url = $this->baseUrl . '/activate?token='.$User;
 
 
             $mail = new mail ($email, "Bienvenue sur notre site", "Veuillez cliquer sur ce lien pour activer votre compte : " . $url . "");

@@ -5,10 +5,9 @@ use App\Core\Error;
 use App\Models\User;
 use App\Core\View;
 use App\Repositories\UserRepository;
-use App\Services\UserService;
+use App\Core\Database;
 
-
-class UserController
+class UserController 
 {
    public function showUser():void
    {
@@ -16,9 +15,6 @@ class UserController
         $error = new Error();
         $user = new User($error);
         $userRepository = new UserRepository();
-        $userService = new UserService($userRepository);
-        $user_ = $userService->getUserById("695");
-        var_dump($user_);
-        die;
+       
    }
 }

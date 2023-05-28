@@ -133,5 +133,41 @@ class  UserRepository   extends Database
         return $user;
     }
 
+    public function register(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
+    {
+        $db = Database::getInstance();
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $query = "INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at) 
+                VALUES (:firstname, :lastname, :email, :password, :role, NOW(), NOW())";
+
+        $params = [
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'email' => $email,
+            'password' => $hashedPassword,
+            'role' => $role,
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return true;
+    }
+
+    public function updateToken( string $email){
+        $db = Database::getInstance();
+        $activetoken = bin2hex(random_bytes(32));
+
+
+        $query = "UPDATE users SET active_account_token = :token  WHERE email = :email";
+            $params = [
+                'email' => $email,
+                'token' => $activetoken
+            ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $activetoken;
+    }
 
 }
