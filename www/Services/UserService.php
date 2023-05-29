@@ -6,15 +6,22 @@ use App\Repositories\UserRepository;
 
 class UserService
 {
-    private $userRepository;
-
-    public function __construct(UserRepository $userRepository)
+    private $userRepo;
+    
+    public function __construct()
     {
-        $this->userRepository = $userRepository;
+        $this->userRepo = new UserRepository();
     }
 
-    public function getUserById(int $id): User
+    public function registerUser(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
     {
-        return $this->userRepository->findById($id);
+    $userCreated = $this->userRepo->register($firstname, $lastname, $email, $password, $role);
+
+    if ($userCreated) {
+        return true;
+    } else {
+        return false;
     }
+}
+
 }

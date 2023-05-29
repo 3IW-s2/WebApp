@@ -26,7 +26,7 @@ class  UserRepository   extends Database
         return $user;
     }
 
-    public function createUser (User $user): void
+   /*  public function createUser (User $user): void
     {
         $db = Database::getInstance();
 
@@ -45,7 +45,7 @@ class  UserRepository   extends Database
         catch(Exception $e){
             echo $e->getMessage();
         }
-    }
+    } */
 
     public function getUserByEmail (string $email)
     {
