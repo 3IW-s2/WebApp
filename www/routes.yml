@@ -49,3 +49,7 @@ s-inscrire:
 admin/showuser:
   controller: UserController
   action: showUser
+
+admin/user/delete:
+  controller: UserController
+  action: deleteUser

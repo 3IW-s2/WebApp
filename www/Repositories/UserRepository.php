@@ -26,26 +26,7 @@ class  UserRepository   extends Database
         return $user;
     }
 
-    public function createUser (User $user): void
-    {
-        $db = Database::getInstance();
 
-        $query = "INSERT INTO user (email, password, firstname, lastname, role) VALUES (:email, :password, :firstname, :lastname, :role)";
-        $params = [
-            'email' => $user->getEmail(),
-            'password' => $user->getPwd(),
-            'firstname' => $user->getFirstname(),
-            'lastname' => $user->getLastname(),
-            'role' => $user->getRole()
-        ];
-        
-        try{
-            $statement = $db->query($query, $params);
-        }
-        catch(Exception $e){
-            echo $e->getMessage();
-        }
-    }
 
     public function getUserByEmail (string $email)
     {
@@ -168,6 +149,56 @@ class  UserRepository   extends Database
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $activetoken;
+    }
+
+    public function deleteUserById(int $id): void
+    {
+        $db = Database::getInstance();
+
+        $query = "DELETE FROM user WHERE id = :id";
+        $params = [
+            'id' => $id
+        ];
+        $statement = $db->query($query, $params);
+    }
+
+    public function deleteUserByEmail( User $user): void
+    {
+        $db = Database::getInstance();
+
+        $query = "DELETE FROM user WHERE email = :email";
+        $params = [
+            'email' => $user->getEmail()
+        ];
+        $statement = $db->query($query, $params);
+    }
+
+
+    public function allUser (): array
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users";
+        $statement = $db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
+    public function updateUser ( User $user): void
+    {
+        $db = Database::getInstance();
+
+        $query = "UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, role = :role, updated_at = NOW() WHERE id = :id";
+        $params = [
+            'id' => $user->getId(),
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+            'email' => $user->getEmail(),
+            'password' => $user->getPassword(),
+            'role' => $user->getRole(),
+        ];
+        $statement = $db->query($query, $params);
     }
 
 }
