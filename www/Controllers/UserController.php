@@ -49,7 +49,6 @@ class UserController
          $user = new User();
          $user->setId($id);
          $userService = new UserService();
-         //$userService->deleteUserById($id);
             if( $userService->deleteUserById($user)){
                header('Location: /index');
             }else{
