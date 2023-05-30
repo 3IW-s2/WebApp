@@ -23,37 +23,46 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <h1>Register</h1>
-                <form action="" method="post">
-                    <div class="mb-3">
-                        <label for="firstname" class="form-label">Firstname</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname" value="<?= $firstname ?>">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id.</th>
+                                    <th scope="col">Firstname</th>
+                                    <th scope="col">Lastname</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                   <!--  <th scope="col">pasword</th> -->
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($users as $user) : ?>
+                                    <tr>
+                                        <th scope="row"><?= $user["id"] ?></th>
+                                        <td><?= $user["firstname"]?></td>
+                                        <td><?= $user["lastname"] ?></td>
+                                        <td><?= $user["email"]?></td>
+                                        <td><?= $user["role"] ?></td>
+                                       <!--  <td></td> -->
+                                        <td>
+                                            <a href="/user/edit/<?= $user["id"] ?>" class="btn btn-primary">Edit</a>
+                                            <a href="/user/delete/<?= $user["id"] ?>" class="btn btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                        </table>
                     </div>
-                    <div class="mb-3">
-                        <label for="lastname" class="form-label">Lastname</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" value="<?= $lastname ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="text" class="form-control" id="email" name="email" value="<?= $email ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="text" class="form-control" id="password" name="password" value="<?= $password ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="role" class="form-label">Role</label>
-                        <select class="form-select" aria-label="Default select example" id="role" name="role">
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
-                </form>
+                    <div class="col-md-2"></div>
+
+                </div>
             </div>
         </div>
+    </div>
   </body>
 </html>
