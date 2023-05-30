@@ -7,8 +7,10 @@ use App\Core\SQL;
 use App\Core\Database;
 use PDO;
 use App\Core\Mail;
+use App\Core\Security;
 use App\Repositories\UserRepository;
 use Exception;
+
 class User extends Database
 {
     private Int $id = 0;
