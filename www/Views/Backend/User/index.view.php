@@ -51,8 +51,8 @@
                                         <td><?= $user["role"] ?></td>
                                        <!--  <td></td> -->
                                         <td>
-                                            <a href="/user/edit/<?= $user["id"] ?>" class="btn btn-primary">Edit</a>
-                                            <a href="/user/delete/<?= $user["id"] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="user/edit?<?= $user["id"] ?>" class="btn btn-primary">Edit</a>
+                                            <a href="user/delete?<?= $user["id"] ?>" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

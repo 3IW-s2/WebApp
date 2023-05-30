@@ -162,13 +162,13 @@ class  UserRepository   extends Database
         $statement = $db->query($query, $params);
     }
 
-    public function deleteUserByEmail(string $email): void
+    public function deleteUserByEmail( User $user): void
     {
         $db = Database::getInstance();
 
         $query = "DELETE FROM user WHERE email = :email";
         $params = [
-            'email' => $email
+            'email' => $user->getEmail()
         ];
         $statement = $db->query($query, $params);
     }

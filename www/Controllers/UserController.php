@@ -41,4 +41,21 @@ class UserController
       $userService = new UserService();
       $userService->updateUser($user);
    }
+
+   public function deleteUser()
+   {
+      if(isset($_GET['id'])){
+         $id = $_GET['id'];
+         $user = new User();
+         $user->setId($id);
+         $userService = new UserService();
+         //$userService->deleteUserById($id);
+            if( $userService->deleteUserById($user)){
+               header('Location: /index');
+            }else{
+               echo "Une erreur s'est produite lors de la suppression de l'utilisateur";
+            }
+      }
+     
+   }
 }
