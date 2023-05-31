@@ -53,3 +53,11 @@ admin/showuser:
 admin/user/delete:
   controller: UserController
   action: deleteUser
+
+admin/user/edit:
+  controller: UserController
+  action: editUser
+
+admin/user/add:
+  controller: UserController
+  action: addUser  

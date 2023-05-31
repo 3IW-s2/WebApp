@@ -23,6 +23,14 @@ class Security
         return $token;
     }
 
+/*     public function checkId(string $id): bool
+    {
+        if (isset($_SESSION['id']) && $_SESSION['id'] === $id) {
+            return true;
+        }
+        return false;
+    } */
+
     public function checkToken(string $token): bool
     {
         if (isset($_SESSION['token']) && $_SESSION['token'] === $token) {
@@ -113,13 +121,7 @@ class Security
         return false;
     }
 
-    public function checkId(int $id): bool
-    {
-        if ($id > 0) {
-            return true;
-        }
-        return false;
-    }
+ 
 
     public function checkString(string $string): bool
     {

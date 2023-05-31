@@ -51,7 +51,6 @@ class UserController
          $user = new User($error);
          $user->setId($id);
 
-
          $userService = new UserService();
             if( $userService){
                $userService->deleteUserById($user);
@@ -62,4 +61,18 @@ class UserController
       }
      
    }
+
+    public function editUser()
+   {
+      $error = new Error();
+      $view = new View("Backend/User/edit", "back");
+      if(isset($_GET['id'])){
+         $id = $_GET['id'];
+         $user = new User($error);
+         $user->setId($id);
+         $userService = new UserService();
+         $user = $userService->getUserById($user);
+         $view->assign('usr', $user);
+      }
+   } 
 }

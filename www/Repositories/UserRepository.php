@@ -201,4 +201,18 @@ class  UserRepository   extends Database
         $statement = $db->query($query, $params);
     }
 
+    public function getUserById (User $user)
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE id = :id";
+        $params = [
+            'id' => $user->getId()
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
 }
