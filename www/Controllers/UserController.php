@@ -44,13 +44,18 @@ class UserController
 
    public function deleteUser()
    {
+      $error = new Error();
+    
       if(isset($_GET['id'])){
          $id = $_GET['id'];
-         $user = new User();
+         $user = new User($error);
          $user->setId($id);
+
+
          $userService = new UserService();
-            if( $userService->deleteUserById($user)){
-               header('Location: /index');
+            if( $userService){
+               $userService->deleteUserById($user);
+               header('Location: /admin/showuser');
             }else{
                echo "Une erreur s'est produite lors de la suppression de l'utilisateur";
             }

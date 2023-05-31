@@ -151,13 +151,13 @@ class  UserRepository   extends Database
         return $activetoken;
     }
 
-    public function deleteUserById(int $id): void
+    public function deleteUserById(User $user): void
     {
         $db = Database::getInstance();
 
-        $query = "DELETE FROM user WHERE id = :id";
+        $query = "DELETE FROM users WHERE id = :id";
         $params = [
-            'id' => $id
+            'id' => $user->getId()
         ];
         $statement = $db->query($query, $params);
     }
@@ -166,7 +166,7 @@ class  UserRepository   extends Database
     {
         $db = Database::getInstance();
 
-        $query = "DELETE FROM user WHERE email = :email";
+        $query = "DELETE FROM users WHERE email = :email";
         $params = [
             'email' => $user->getEmail()
         ];

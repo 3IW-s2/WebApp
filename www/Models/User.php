@@ -53,10 +53,12 @@ class User extends Database
 
     /**
      * @param Int $id
+     * @return User
      */
-    public function setId(int $id): void
+    public function setId(int $id): User
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
