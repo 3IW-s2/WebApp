@@ -71,10 +71,11 @@ class User extends Database
 
     /**
      * @param String $role
-     */
-    public function setRole(string $role): void
+    */
+    public function setRole(string $role): User
     {
         $this->role = $role;
+        return $this;
     }
 
     /**
@@ -119,10 +120,12 @@ class User extends Database
 
     /**
      * @param String $email
+     * @return User
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): User
     {
         $this->email = strtolower(trim($email));
+        return $this;
     }
 
     /**
