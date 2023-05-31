@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>S2-IW</title>
+    <title>Frontend</title>
     <meta name="description" content="ceci est un super site">
 </head>
 <body>

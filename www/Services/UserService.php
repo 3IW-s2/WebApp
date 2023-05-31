@@ -50,9 +50,9 @@ class UserService extends Database
      
     }
 
-    public function updateUser ( User $user)
+    public function updateUser ( User $user):void
     {
-        return $this->userRepo->updateUser($user);
+         $this->userRepo->updateUser($user);
     }
     
     public function deleteUserById( User $user): void

@@ -1,5 +1,5 @@
 <!-- un formulaire d'inscription -->
-<form id="register-form" method="post" action="" >
+<form id="update-register-form" method="post" action="" >
             <div class="form-group">
                 <label for="firstname">Firstname</label>
                 <input type="text" name="firstname" id="firstname" class="form-control" value="<?= $usr["firstname"]?>" />
@@ -14,7 +14,7 @@
             </div>
             <div class="form-group">
                 <label for="pwd">Password</label>
-                <input type="password" name="password" id="password" class="form-control"  value="<?= $usr["password"]?>" />
+                <input type="password" name="password" id="password" class="form-control"  />
             </div>
            
             <button type="submit" name="submit" class="btn btn-primary">Register</button>

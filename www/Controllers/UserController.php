@@ -73,6 +73,24 @@ class UserController
          $userService = new UserService();
          $user = $userService->getUserById($user);
          $view->assign('usr', $user);
+
+            if(isset($_POST['submit'])){
+               $users = new User($error);
+
+               $users->setEmail($_POST['email']);
+               $users->setFirstname($_POST['firstname']);
+               $users->setLastname($_POST['lastname']);  
+               $users->setPwd($_POST['password']);
+
+             /*   var_dump($users);
+               die; */
+               $uppdateService = new UserService();
+               $updateUser = $uppdateService->updateUser($users);
+
+               header('Location: /admin/showuser');
+            }
       }
+
+      
    } 
 }

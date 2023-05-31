@@ -189,14 +189,13 @@ class  UserRepository   extends Database
     {
         $db = Database::getInstance();
 
-        $query = "UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, role = :role, updated_at = NOW() WHERE id = :id";
+        $query = "UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password,  updated_at = NOW() WHERE id = :id";
         $params = [
             'id' => $user->getId(),
             'firstname' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
             'email' => $user->getEmail(),
-            'password' => $user->getPassword(),
-            'role' => $user->getRole(),
+            'password' => $user->getPwd(),
         ];
         $statement = $db->query($query, $params);
     }
@@ -214,5 +213,6 @@ class  UserRepository   extends Database
 
         return $user;
     }
+
 
 }
