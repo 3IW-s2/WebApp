@@ -7,8 +7,10 @@ use App\Core\SQL;
 use App\Core\Database;
 use PDO;
 use App\Core\Mail;
+use App\Core\Security;
 use App\Repositories\UserRepository;
 use Exception;
+
 class User extends Database
 {
     private Int $id = 0;
@@ -51,10 +53,12 @@ class User extends Database
 
     /**
      * @param Int $id
+     * @return User
      */
-    public function setId(int $id): void
+    public function setId(int $id): User
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -67,10 +71,11 @@ class User extends Database
 
     /**
      * @param String $role
-     */
-    public function setRole(string $role): void
+    */
+    public function setRole(string $role): User
     {
         $this->role = $role;
+        return $this;
     }
 
     /**
@@ -115,10 +120,12 @@ class User extends Database
 
     /**
      * @param String $email
+     * @return User
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): User
     {
         $this->email = strtolower(trim($email));
+        return $this;
     }
 
     /**

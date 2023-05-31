@@ -44,18 +44,35 @@ class UserController
 
    public function deleteUser()
    {
+      $error = new Error();
+    
       if(isset($_GET['id'])){
          $id = $_GET['id'];
-         $user = new User();
+         $user = new User($error);
          $user->setId($id);
+
          $userService = new UserService();
-         //$userService->deleteUserById($id);
-            if( $userService->deleteUserById($user)){
-               header('Location: /index');
+            if( $userService){
+               $userService->deleteUserById($user);
+               header('Location: /admin/showuser');
             }else{
                echo "Une erreur s'est produite lors de la suppression de l'utilisateur";
             }
       }
      
    }
+
+    public function editUser()
+   {
+      $error = new Error();
+      $view = new View("Backend/User/edit", "back");
+      if(isset($_GET['id'])){
+         $id = $_GET['id'];
+         $user = new User($error);
+         $user->setId($id);
+         $userService = new UserService();
+         $user = $userService->getUserById($user);
+         $view->assign('usr', $user);
+      }
+   } 
 }

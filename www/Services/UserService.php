@@ -5,17 +5,20 @@ use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Core\Database;
 use App\Core\Error;
+use App\Core\Security;
 
 class UserService extends Database 
 {
     private $userRepo;
     private $error;
+    protected $checkConnexion;
     
     public function __construct()
     {
         $this->userRepo = new UserRepository();
         $this->error = new Error();
-    }
+/*         $this->checkConnexion = new Security();
+ */    }
 
     public function registerUser(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
     {
@@ -40,9 +43,11 @@ class UserService extends Database
         return $this->userRepo->allUser();
     }
 
-    public function getUserById(int $id): ?User
+    public function getUserById( User $user)
     {
-        return $this->userRepo->getUserById($id);
+    
+       return  $this->userRepo->getUserById($user);
+     
     }
 
     public function updateUser ( User $user)
@@ -54,5 +59,6 @@ class UserService extends Database
     {
         $this->userRepo->deleteUserById($user);
     }
+
 
 }
