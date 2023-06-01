@@ -1,0 +1,18 @@
+.back-menu {
+  @include flexbox();
+  @include flex-direction(column);
+
+  .menu-link {
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    &:hover {
+      border-left: 2px solid $primary-color;
+    }
+
+  }
+}
