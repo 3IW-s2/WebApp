@@ -131,5 +131,21 @@ class Security
         return false;
     }
 
+    public function checkEmailAndPassword(string $email, string $password): bool
+    {
+        if ($this->checkEmail($email) && $this->checkPassword($password)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function checkBool (bool $bool): bool
+    {
+        if ($bool === true) {
+            return true;
+        }
+        return false;
+    }
+
     
 }

@@ -50,9 +50,14 @@ class UserService extends Database
      
     }
 
-    public function updateUser ( User $user)
+    public function updateUser ( User $user): bool
     {
-        return $this->userRepo->updateUser($user);
+         if ($this->userRepo->updateUser($user)) {
+            return true;
+        } else {
+            $this->error->addError("Une erreur s'est produite lors de la mise à jour de l'utilisateur");
+            return false;
+        }
     }
     
     public function deleteUserById( User $user): void
@@ -60,5 +65,14 @@ class UserService extends Database
         $this->userRepo->deleteUserById($user);
     }
 
+    public function addUser(User $user): bool
+    {
+        if ($this->userRepo->addUser($user)) {
+            return true;
+        } else {
+            $this->error->addError("Une erreur s'est produite lors de l'ajout de l'utilisateur");
+            return false;
+        }
+    }
 
 }

@@ -138,10 +138,7 @@ class Auth
             $errors[] = "Veuillez remplir tous les champs";
         }
 
-        
-
-        // Transmettre l'ErrorBag à la vue
-        $view->setVariable("error", $error);
+                $view->setVariable("error", $error);
         $view->setVariable("errors", $errors);
 
     }

@@ -10,7 +10,7 @@ use App\Core\Error;
 use PDO;
 use Exception;
 
-class  UserRepository   extends Database 
+class  UserRepository  extends Database 
 {
     public function findById (int $id): User
     {
@@ -189,16 +189,17 @@ class  UserRepository   extends Database
     {
         $db = Database::getInstance();
 
-        $query = "UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, role = :role, updated_at = NOW() WHERE id = :id";
+        $query = "UPDATE users SET firstname = :firstname , lastname = :lastname , email = :email , password = :password ,  updated_at = NOW() WHERE id = :id";
         $params = [
             'id' => $user->getId(),
             'firstname' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
             'email' => $user->getEmail(),
-            'password' => $user->getPassword(),
-            'role' => $user->getRole(),
+            'password' => $user->getPwd(),
         ];
         $statement = $db->query($query, $params);
+     
+        
     }
 
     public function getUserById (User $user)
@@ -213,6 +214,24 @@ class  UserRepository   extends Database
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
+    }
+
+    public function addUser (User $user)
+    {
+        $db = Database::getInstance();
+
+        $query = "INSERT INTO users (firstname, lastname, email, password,  created_at, updated_at) 
+                VALUES (:firstname, :lastname, :email, :password,  NOW(), NOW())";
+        $params = [
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+            'email' => $user->getEmail(),
+            'password' => $user->getPwd(),
+          
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+       
     }
 
 }

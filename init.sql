@@ -76,3 +76,5 @@ CREATE TABLE comments (
     article_id INTEGER NOT NULL
 );
 
+
+
