@@ -30,7 +30,7 @@ ALTER TABLE users ADD active_account BOOLEAN DEFAULT FALSE;
 ALTER TABLE users ADD active_account_token VARCHAR(255);
 /* ALTER TABLE users ADD role_id INT
  */
- 
+ALTER TABLE users ADD tokenID VARCHAR(255) DEFAULT NULL;
  change le type de la colonne role en int
 ALTER TABLE users ALTER COLUMN role TYPE INT USING role::integer;
 ALTER TABLE users ALTER COLUMN role SET DEFAULT 3;

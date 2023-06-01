@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-
+use App\Core\Security;
 
 class Router
 {
@@ -32,6 +32,14 @@ class Router
 
         $controller = $this->routes[$uri]["controller"];
         $action = $this->routes[$uri]["action"];
+        $security = $this->routes[$uri]["security"] ?? null;
+         
+        if ($security !== null && !Security::checkSecurity($security)) {
+            header("Location: /login");
+            exit();
+        }
+
+
 
         $controllerFilePath = "Controllers/" . $controller . ".php";
         if (!file_exists($controllerFilePath)) {

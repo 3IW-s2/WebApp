@@ -75,4 +75,9 @@ class UserService extends Database
         }
     }
 
+    public function getUserByEmail(User $user): void
+    {
+         $this->userRepo->getUserByEmail($user);
+    }
+
 }

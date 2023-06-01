@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Backend</title>
-    <meta name="description" content="ceci est un super site">
+    <meta name="description" content="TIW">
 </head>
 <body>
     <h1>Template Back</h1>

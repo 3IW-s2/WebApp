@@ -49,6 +49,7 @@ s-inscrire:
 admin/showuser:
   controller: UserController
   action: showUser
+  security: ROLE:ADMIN 
 
 admin/user/delete:
   controller: UserController

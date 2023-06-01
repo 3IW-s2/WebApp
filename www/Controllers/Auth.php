@@ -138,7 +138,8 @@ class Auth
             $errors[] = "Veuillez remplir tous les champs";
         }
 
-                $view->setVariable("error", $error);
+        
+        $view->setVariable("error", $error);
         $view->setVariable("errors", $errors);
 
     }
