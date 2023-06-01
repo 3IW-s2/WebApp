@@ -25,8 +25,6 @@ class Security extends Database
         $securityType = $security[0];
         $securityValue = $security[1];
 
-       
-
         switch ($securityType) {
             case "ROLE":
                 return self::checkRole($securityValue);
