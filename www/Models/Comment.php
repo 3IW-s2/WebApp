@@ -10,12 +10,10 @@ use App\Core\Mail;
 use App\Repositories\UserRepository;
 use Exception;
 
-class Article extends Database
+class Comment extends Database
 {
     private Int $id = 0;
-    private String $title;
-    private String $content;
-    private String $image;
+    private String $comment;
     private Int $status = 0;
     private \DateTime $date_inserted;
     private \DateTime $date_updated;
@@ -37,7 +35,7 @@ class Article extends Database
         $this->baseUrl = $config['base_url'];
     }
 
-        /**
+    /**
      * @return Int
      */
     public function getId(): int
@@ -52,5 +50,4 @@ class Article extends Database
     {
         $this->id = $id;
     }
-
 }
