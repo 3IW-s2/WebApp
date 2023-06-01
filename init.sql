@@ -77,4 +77,14 @@ CREATE TABLE comments (
 );
 
 
+CREATE TABLE posts(
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    comment TEXT NOT NULL,
+);
+
 

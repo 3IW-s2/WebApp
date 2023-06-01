@@ -54,11 +54,19 @@ admin/showuser:
 admin/user/delete:
   controller: UserController
   action: deleteUser
+  security: ROLE:ADMIN 
 
 admin/user/edit:
   controller: UserController
   action: editUser
+  security: ROLE:ADMIN 
 
 admin/user/add:
   controller: UserController
-  action: addUser  
+  action: addUser 
+  security: ROLE:ADMIN  
+
+asmin/page/index:
+  controller: PageController
+  action: index
+  security: ROLE:ADMIN

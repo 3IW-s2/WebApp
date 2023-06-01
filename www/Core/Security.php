@@ -60,8 +60,18 @@ class Security extends Database
 
     public static function checkToken(string $token): bool
     {
-        if (isset($_SESSION['token']) && $_SESSION['token'] === $token) {
-            unset($_SESSION['token']);
+        $userRepo = new UserRepository();
+   
+        $checkSession = self::checkSession();
+
+        if(!$checkSession) {
+           return false;
+        }
+        $email = $_SESSION["user"];
+        $user = $userRepo->getUserByEmail($email);
+        $userToken = $user["tokenid"];
+
+        if ($userToken === $token) {
             return true;
         }
         return false;
@@ -85,7 +95,7 @@ class Security extends Database
 
     public function checkLogged(): bool
     {
-        if (isset($_SESSION['email'])) {
+        if (isset($_SESSION['user'])) {
             return true;
         }
         return false;
@@ -141,14 +151,29 @@ class Security extends Database
     }
 
     public static function checkRole(string $role): bool
-    {   $userRepo = new UserRepository();
+    {  
+        $userRepo = new UserRepository();
+   
+        $checkSession = self::checkSession();
+
+        if(!$checkSession) {
+           return false;
+        }
         $email = $_SESSION["user"];
         $user = $userRepo->getUserByEmail($email);
-     
+
         if ($role === 'ADMIN' && $user['role'] === 1 ) {
             return true;
         }
         return false;
+    }
+
+    public static function checkSession (): bool
+    {
+         if (empty($_SESSION)) {
+              return false;
+            }
+        return true;
     }
 
  
