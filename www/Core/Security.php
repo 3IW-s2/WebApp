@@ -139,5 +139,13 @@ class Security
         return false;
     }
 
+    public function checkBool (bool $bool): bool
+    {
+        if ($bool === true) {
+            return true;
+        }
+        return false;
+    }
+
     
 }

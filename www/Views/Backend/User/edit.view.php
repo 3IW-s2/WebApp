@@ -1,4 +1,5 @@
 <!-- un formulaire d'inscription -->
+<h1>Modifier un utilisateur</h1>
 <form id="update-register-form" method="post" action="" >
             <div class="form-group">
                 <label for="firstname">Firstname</label>

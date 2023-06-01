@@ -10,7 +10,7 @@ use App\Core\Error;
 use PDO;
 use Exception;
 
-class  UserRepository   extends Database 
+class  UserRepository  extends Database 
 {
     public function findById (int $id): User
     {
@@ -189,7 +189,7 @@ class  UserRepository   extends Database
     {
         $db = Database::getInstance();
 
-        $query = "UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password,  updated_at = NOW() WHERE id = :id";
+        $query = "UPDATE users SET firstname = :firstname , lastname = :lastname , email = :email , password = :password ,  updated_at = NOW() WHERE id = :id";
         $params = [
             'id' => $user->getId(),
             'firstname' => $user->getFirstname(),
@@ -198,6 +198,8 @@ class  UserRepository   extends Database
             'password' => $user->getPwd(),
         ];
         $statement = $db->query($query, $params);
+     
+        
     }
 
     public function getUserById (User $user)
