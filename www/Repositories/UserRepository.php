@@ -216,5 +216,22 @@ class  UserRepository  extends Database
         return $user;
     }
 
+    public function addUser (User $user)
+    {
+        $db = Database::getInstance();
+
+        $query = "INSERT INTO users (firstname, lastname, email, password,  created_at, updated_at) 
+                VALUES (:firstname, :lastname, :email, :password,  NOW(), NOW())";
+        $params = [
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+            'email' => $user->getEmail(),
+            'password' => $user->getPwd(),
+          
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+       
+    }
 
 }

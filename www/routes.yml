@@ -36,9 +36,7 @@ forgotpassword:
 
 resetpassword:
   controller: Auth
-  action: resetPassword
-  security: true
-  roles: [admin, user]
+  action: resetPassword 
 
 newpassword:
   controller: Auth

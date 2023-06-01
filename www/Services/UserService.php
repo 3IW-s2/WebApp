@@ -65,5 +65,14 @@ class UserService extends Database
         $this->userRepo->deleteUserById($user);
     }
 
+    public function addUser(User $user): bool
+    {
+        if ($this->userRepo->addUser($user)) {
+            return true;
+        } else {
+            $this->error->addError("Une erreur s'est produite lors de l'ajout de l'utilisateur");
+            return false;
+        }
+    }
 
 }

@@ -56,9 +56,9 @@ class UserController
             if( $userService){
                $userService->deleteUserById($user);
                header('Location: /admin/showuser');
-            }else{
+            }/* else{
                echo "Une erreur s'est produite lors de la suppression de l'utilisateur";
-            }
+            } */
       }
      
    }
@@ -91,14 +91,30 @@ class UserController
 
       
             header('Location: /admin/showuser');
-         
-
-   
             
          }
    
       }
      
       
-   } 
+   }
+   
+    public function addUser()
+    {
+      $view = new View("Backend/User/add", "back");
+      $error = new Error();
+      if(isset($_POST['submit'])){
+         $users = new User($error);
+         $users->setEmail($_POST['email']);
+         $users->setFirstname($_POST['firstname']);
+         $users->setLastname($_POST['lastname']);  
+         $users->setPwd($_POST['password']);
+        // $users->setRole($_POST['role']);
+
+         $addUserService = new UserService();
+         $addUser = $addUserService->addUser($users);
+         header('Location: /admin/showuser');
+
+      }
+    }
 }
