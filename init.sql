@@ -52,6 +52,8 @@ CREATE TABLE RolePermissions (
 
 
 
+
+
 /* inject un users */
 INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at)
 VALUES ('toto', 'toto', 'audesandrine6@gmail.com', 'toto', 'admin', NOW(), NOW());
@@ -86,5 +88,9 @@ CREATE TABLE posts(
     name VARCHAR(255) NOT NULL,
     comment TEXT NOT NULL,
 );
+
+/* rajoute une colonne slug */
+
+ALTER TABLE articles ADD slug VARCHAR(255)  NULL;
 
 

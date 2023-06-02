@@ -65,5 +65,19 @@
             </div>
         </div>
     </div>
+
+   <!--  <dialog id="dialog">
+        <form method="post" action="user/add">
+            <input type="text" name="firstname" placeholder="firstname">
+            <input type="text" name="lastname" placeholder="lastname">
+            <input type="email" name="email" placeholder="email">
+            <input type="password" name="password" placeholder="password">
+            <input type="text" name="role" placeholder="role">
+            <input type="submit" value="Add">
+        </form>
+        <button  onclick="document.getElementById('dialog').close()">Close</button>
+    </dialog>
+
+    <button onclick="document.getElementById('dialog').showModal()">Add</button> -->
   </body>
 </html>

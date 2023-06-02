@@ -18,12 +18,38 @@ class Router
         $uriExploded = explode("?", $uri);
         $uri = strtolower(trim($uriExploded[0], "/"));
 
+        $explodedUri = explode("/", $uri);
+        $slug = isset($explodedUri[1]) ? $explodedUri[1] : null;
+        
+   
+
         if (empty($uri)) {
             $uri = "default";
         }
-
+    
+       /*  if (empty($this->routes[$uri])) {
+            die("Cette route n'existe pas dans le fichier de routing");
+        } */
         if (empty($this->routes[$uri])) {
-            die("Page 404");
+            // Vérification du slug
+            $foundRoute = false;
+        
+            foreach ($this->routes as $route => $params) {
+                if (strpos($route, '{slug}') !== false) {
+                    $pattern = str_replace('{slug}', '(.+)', $route);
+                    if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
+                        $uri = $route;
+                        $_POST['slug'] = $matches[1]; 
+                        $foundRoute = true;
+                        break;
+                    }
+                }
+            }
+
+        
+            if (!$foundRoute) {
+                die("Cette route n'existe pas dans le fichier de routing");
+            }
         }
 
         if (empty($this->routes[$uri]["controller"]) || empty($this->routes[$uri]["action"])) {
@@ -38,8 +64,7 @@ class Router
             header("Location: /login");
             exit();
         }
-
-
+        
 
         $controllerFilePath = "Controllers/" . $controller . ".php";
         if (!file_exists($controllerFilePath)) {

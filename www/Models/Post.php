@@ -16,6 +16,7 @@ class Post
     private String $status;
     private Text $comment;
     private Text $content;
+    private String $slug;
 
 
      /**
@@ -133,6 +134,26 @@ class Post
     public function setContent(Text $content): self
     {
         $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * Get the value of slug
+     * @return String
+     */
+    public function getSlug(): String
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     * @param String $slug
+     * @return  self
+     */
+    public function setSlug(String $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 

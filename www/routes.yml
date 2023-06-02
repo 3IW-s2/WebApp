@@ -66,7 +66,11 @@ admin/user/add:
   action: addUser 
   security: ROLE:ADMIN  
 
-asmin/page/index:
+admin/page/index:
   controller: PageController
-  action: index
-  security: ROLE:ADMIN
+  action: showPost
+  #security: ROLE:ADMIN
+
+post/{slug}:
+  controller: PostController
+  action: showPost
