@@ -12,7 +12,7 @@ class PostController
 {
     public function showPost()
     {   $post = new Post();
-        $post->setSlug($_POST['slug']);
+        $post->setSlug($_GET['slug']);
 
         $postService = new PostService();
         //var_dump($postService);

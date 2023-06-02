@@ -7,6 +7,7 @@ use App\Core\Database;
 use App\Models\Post;
 use App\Core\Mail;
 use App\Core\Error;
+use App\Core\Security;
 use PDO;
 use Exception;
 
@@ -32,9 +33,10 @@ class  PostRepository  extends Database
             'slug' => $post->getSlug()
         ];
         $statement = $db->query($query, $params);
-        var_dump($statement);
         $post = $statement->fetch(PDO::FETCH_ASSOC);
-        var_dump($post);
+    
+        $security = new Security();
+        $security->check404($post);
         return $post;
     } 
    

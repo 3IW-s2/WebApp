@@ -202,5 +202,14 @@ class Security extends Database
         return false;
     }
 
+
+    public function check404(string $arg)
+    {
+        if (empty($arg)){
+            header("Location: /404");
+            exit();
+        }
+    }
+
     
 }

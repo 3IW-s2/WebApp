@@ -39,13 +39,14 @@ class Router
                     $pattern = str_replace('{slug}', '(.+)', $route);
                     if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
                         $uri = $route;
-                        $_POST['slug'] = $matches[1]; 
+                        $_GET['slug'] = $matches[1]; 
                         $foundRoute = true;
                         break;
                     }
                 }
             }
 
+      
         
             if (!$foundRoute) {
                 die("Cette route n'existe pas dans le fichier de routing");
