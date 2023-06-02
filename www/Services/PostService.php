@@ -32,4 +32,19 @@ class PostService  extends Database
     {   
         return $this->postRepo->DetetePostById($post);
     }
+
+    public function AddPost(Post $post)
+    {   
+        return $this->postRepo->AddPost($post);
+    }
+
+    public function updatePost(Post $post)
+    {   
+        return $this->postRepo->updatePost($post);
+    }
+
+    public function getPostById(Post $post)
+    {   
+        return $this->postRepo->getPostById($post);
+    }
 }

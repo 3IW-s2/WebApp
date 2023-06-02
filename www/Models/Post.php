@@ -15,7 +15,7 @@ class Post
     private String $author;
     private String $status;
     private Text $comment;
-    private Text $content;
+    private String $content;
     private String $slug;
 
 
@@ -29,9 +29,9 @@ class Post
 
     /**
      * @param Int $id
-     * @return User
+     * @return self
      */
-    public function setId(int $id): User
+    public function setId(int $id): self
     {
         $this->id = $id;
         return $this;
@@ -119,19 +119,19 @@ class Post
 
     /**
      * Get the value of content
-     * @return Text
+     * @return String
      */
-    public function getContent(): Text
+    public function getContent(): String
     {
         return $this->content;
     }
 
     /**
      * Set the value of content
-     * @param Text $content
+     * @param String $content
      * @return  self
      */
-    public function setContent(Text $content): self
+    public function setContent(String $content): self
     {
         $this->content = $content;
         return $this;
