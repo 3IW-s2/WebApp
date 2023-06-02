@@ -85,12 +85,15 @@ CREATE TABLE posts(
     author VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     status VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    comment TEXT NOT NULL,
 );
 
 /* rajoute une colonne slug */
 
-ALTER TABLE articles ADD slug VARCHAR(255)  NULL;
+ALTER TABLE posts ADD slug VARCHAR(255)  NULL;
+ALTER TABLE posts ADD image VARCHAR(255)  NULL;
+
+supprime la colonne name et comment
+
+ALTER TABLE posts DROP COLUMN name;
 
 
