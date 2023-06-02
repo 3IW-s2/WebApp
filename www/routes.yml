@@ -18,6 +18,10 @@ login:
   controller: Auth
   action: login
 
+error:
+  controller: Auth
+  action: notFound  
+
 register:
   controller: Auth
   action: register
@@ -49,15 +53,43 @@ s-inscrire:
 admin/showuser:
   controller: UserController
   action: showUser
+  security: ROLE:ADMIN 
 
 admin/user/delete:
   controller: UserController
   action: deleteUser
+  security: ROLE:ADMIN 
 
 admin/user/edit:
   controller: UserController
   action: editUser
+  security: ROLE:ADMIN 
 
 admin/user/add:
   controller: UserController
-  action: addUser  
+  action: addUser 
+  security: ROLE:ADMIN  
+
+admin/page/index:
+  controller: PageController
+  action: showPost
+  #security: ROLE:ADMIN
+
+admin/page/edit:
+  controller: PageController
+  action: editPost
+  security: ROLE:ADMIN
+
+admin/page/delete:
+  controller: PageController
+  action: deletePost
+  security: ROLE:ADMIN  
+
+admin/page/add:
+  controller: PageController
+  action: addPost
+  security: ROLE:ADMIN
+
+post/{slug}:
+  controller: PostController
+  action: showPost

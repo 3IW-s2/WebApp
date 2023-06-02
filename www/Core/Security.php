@@ -2,9 +2,12 @@
 namespace App\Core;
 
 use App\Core\Error;
+use App\Services\UserService;
+use App\Repositories\UserRepository;
+use App\Core\Database;
 use Exception;
-
-class Security
+ 
+class Security extends Database
 {
     protected $error;
 
@@ -14,6 +17,30 @@ class Security
             session_start();
         };
         $this->error = $error;
+    }
+
+    public static function checkSecurity(string $security): bool
+    {
+        $security = explode(":", $security);
+        $securityType = $security[0];
+        $securityValue = $security[1];
+
+        switch ($securityType) {
+            case "ROLE":
+                return self::checkRole($securityValue);
+                break;
+            case "CSRF":
+                return self::checkToken($securityValue);
+                break;
+            case "IS_AUTHENTICATED":
+                return self::checkLogged();
+                break;
+            case "IS_ANONYMOUS":
+                return !self::checkLogged();
+                break;
+            default:
+                throw new Exception("Le type de sécurité " . $securityType . " n'existe pas");
+        }
     }
 
     public function generateToken(): string
@@ -31,10 +58,20 @@ class Security
         return false;
     } */
 
-    public function checkToken(string $token): bool
+    public static function checkToken(string $token): bool
     {
-        if (isset($_SESSION['token']) && $_SESSION['token'] === $token) {
-            unset($_SESSION['token']);
+        $userRepo = new UserRepository();
+   
+        $checkSession = self::checkSession();
+
+        if(!$checkSession) {
+           return false;
+        }
+        $email = $_SESSION["user"];
+        $user = $userRepo->getUserByEmail($email);
+        $userToken = $user["tokenid"];
+
+        if ($userToken === $token) {
             return true;
         }
         return false;
@@ -58,7 +95,7 @@ class Security
 
     public function checkLogged(): bool
     {
-        if (isset($_SESSION['role'])) {
+        if (isset($_SESSION['user'])) {
             return true;
         }
         return false;
@@ -113,12 +150,30 @@ class Security
         return false;
     }
 
-    public function checkRole(string $role): bool
-    {
-        if ($role === 'admin' || $role === 'user') {
+    public static function checkRole(string $role): bool
+    {  
+        $userRepo = new UserRepository();
+   
+        $checkSession = self::checkSession();
+
+        if(!$checkSession) {
+           return false;
+        }
+        $email = $_SESSION["user"];
+        $user = $userRepo->getUserByEmail($email);
+
+        if ($role === 'ADMIN' && $user['role'] === 1 ) {
             return true;
         }
         return false;
+    }
+
+    public static function checkSession (): bool
+    {
+         if (empty($_SESSION)) {
+              return false;
+            }
+        return true;
     }
 
  
@@ -145,6 +200,16 @@ class Security
             return true;
         }
         return false;
+    }
+
+
+    public function check404( $arg)
+    {
+        if (empty($arg)){
+            header("Location: /error");
+            exit();
+        }
+        return true;
     }
 
     

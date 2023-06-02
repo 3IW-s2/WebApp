@@ -28,7 +28,7 @@ class  UserRepository  extends Database
 
 
 
-    public function getUserByEmail (string $email)
+     public function getUserByEmail (string $email)
     {
         $db = Database::getInstance();
 
@@ -48,7 +48,7 @@ class  UserRepository  extends Database
         $this->error->setCode(404);
         return false;
 
-    }
+    } 
 
     public function resetToken(string $email)
     {

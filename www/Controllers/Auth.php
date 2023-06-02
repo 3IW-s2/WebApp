@@ -138,7 +138,8 @@ class Auth
             $errors[] = "Veuillez remplir tous les champs";
         }
 
-                $view->setVariable("error", $error);
+        
+        $view->setVariable("error", $error);
         $view->setVariable("errors", $errors);
 
     }
@@ -164,6 +165,11 @@ class Auth
 
         }
         
+    }
+
+    public function notFound(): void
+    {
+        $view = new View("Auth/404", "front");
     }
 
     

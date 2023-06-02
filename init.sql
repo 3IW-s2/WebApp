@@ -30,7 +30,7 @@ ALTER TABLE users ADD active_account BOOLEAN DEFAULT FALSE;
 ALTER TABLE users ADD active_account_token VARCHAR(255);
 /* ALTER TABLE users ADD role_id INT
  */
- 
+ALTER TABLE users ADD tokenID VARCHAR(255) DEFAULT NULL;
  change le type de la colonne role en int
 ALTER TABLE users ALTER COLUMN role TYPE INT USING role::integer;
 ALTER TABLE users ALTER COLUMN role SET DEFAULT 3;
@@ -49,6 +49,8 @@ CREATE TABLE RolePermissions (
   FOREIGN KEY (role_id) REFERENCES Roles(role_id),
   FOREIGN KEY (permission_id) REFERENCES Permissions(permission_id)
 );
+
+
 
 
 
@@ -76,5 +78,19 @@ CREATE TABLE comments (
     article_id INTEGER NOT NULL
 );
 
+
+CREATE TABLE posts(
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    comment TEXT NOT NULL,
+);
+
+/* rajoute une colonne slug */
+
+ALTER TABLE articles ADD slug VARCHAR(255)  NULL;
 
 
