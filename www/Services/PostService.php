@@ -24,7 +24,12 @@ class PostService  extends Database
     }
 
     public function getPostBySlug(Post $post)
-    {
+    {   
         return $this->postRepo->getPostBySlug($post);
+    }
+
+    public function DetetePostById(Post $post)
+    {   
+        return $this->postRepo->DetetePostById($post);
     }
 }

@@ -19,4 +19,13 @@ class PageController
         $view->assign('posts', $posts);
     }
 
+    public function DetetePostById()
+    {
+        $view = new View("Backend/Page/index", "back");
+        $postService = new PostService();
+        $posts = $postService->getAllsposts();
+        $view->assign('posts', $posts);
+    }
+    
+
 }

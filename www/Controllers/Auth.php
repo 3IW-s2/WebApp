@@ -167,6 +167,11 @@ class Auth
         
     }
 
+    public function notFound(): void
+    {
+        $view = new View("Auth/404", "front");
+    }
+
     
 
 }

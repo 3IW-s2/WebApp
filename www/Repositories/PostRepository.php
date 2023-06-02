@@ -13,6 +13,8 @@ use Exception;
 
 class  PostRepository  extends Database 
 {
+
+
     public function getAllPosts(): array
     {
         $db = Database::getInstance();
@@ -34,10 +36,29 @@ class  PostRepository  extends Database
         ];
         $statement = $db->query($query, $params);
         $post = $statement->fetch(PDO::FETCH_ASSOC);
-    
-        $security = new Security();
+        
+        $error = new Error();
+        $security = new Security($error);
         $security->check404($post);
         return $post;
     } 
+
+
+    public function DetetePostById(Post $post)
+    {
+        $db = Database::getInstance();
+
+        $query = "DELETE FROM posts WHERE id = :id";
+        $params = [
+            'id' => $post->getId()
+        ];
+        $statement = $db->query($query, $params);
+        $post = $statement->fetch(PDO::FETCH_ASSOC);
+        
+       /*  $error = new Error();
+        $security = new Security($error);
+        $security->check404($post); */
+        return $post;
+    }
    
 }

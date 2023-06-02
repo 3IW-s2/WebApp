@@ -203,12 +203,13 @@ class Security extends Database
     }
 
 
-    public function check404(string $arg)
+    public function check404( $arg)
     {
         if (empty($arg)){
-            header("Location: /404");
+            header("Location: /error");
             exit();
         }
+        return true;
     }
 
     
