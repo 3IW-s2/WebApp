@@ -98,3 +98,27 @@ admin/page/add:
 post/{slug}:
   controller: PostController
   action: showPost
+
+admin/article/index:
+  controller: ArticleController
+  action: showArticle
+  security: ROLE:ADMIN
+
+admin/article/edit:
+  controller: ArticleController
+  action: editArticle
+  security: ROLE:ADMIN
+
+admin/article/delete:
+  controller: ArticleController
+  action: deleteArticle
+  security: ROLE:ADMIN
+
+admin/article/add:
+  controller: ArticleController
+  action: addArticle
+  security: ROLE:ADMIN
+
+articel/{slug}:
+  controller: ArticleController
+  action: previewArticle

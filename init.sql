@@ -60,23 +60,25 @@ VALUES ('toto', 'toto', 'audesandrine6@gmail.com', 'toto', 'admin', NOW(), NOW()
 INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at)
 VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
 
-CREATE TABLE articles (
+ CREATE TABLE articles (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    user_id INTEGER NOT NULL
-);
+    user_id INTEGER NOT NULL,
+    slug VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL,
+); 
 
-CREATE TABLE comments (
+/* CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     content TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    user_id INTEGER NOT NULL,
+    author VARCHAR(255) NOT NULL,
     article_id INTEGER NOT NULL
-);
+); */
 
 
 CREATE TABLE posts(
@@ -89,11 +91,12 @@ CREATE TABLE posts(
 
 /* rajoute une colonne slug */
 
-ALTER TABLE posts ADD slug VARCHAR(255)  NULL;
-ALTER TABLE posts ADD image VARCHAR(255)  NULL;
+ALTER TABLE posts ADD COLUMN slug VARCHAR(255)  NULL;
+ALTER TABLE posts ADD COLUMN image VARCHAR(255)  NULL;
 
-supprime la colonne name et comment
 
 ALTER TABLE posts DROP COLUMN name;
+
+ALTER TABLE posts ADD COLUMN date_created TIMESTAMP  NULL DEFAULT CURRENT_TIMESTAMP;
 
 
