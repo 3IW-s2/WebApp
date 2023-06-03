@@ -50,6 +50,11 @@ s-inscrire:
   controller: Auth
   action: register
 
+admin:
+  controller: AdminController
+  action: index
+  security: ROLE:ADMIN
+
 admin/showuser:
   controller: UserController
   action: showUser
@@ -73,7 +78,7 @@ admin/user/add:
 admin/page/index:
   controller: PageController
   action: showPost
-  #security: ROLE:ADMIN
+  security: ROLE:ADMIN
 
 admin/page/edit:
   controller: PageController
@@ -89,7 +94,31 @@ admin/page/add:
   controller: PageController
   action: addPost
   security: ROLE:ADMIN
-
+  
 post/{slug}:
   controller: PostController
   action: showPost
+
+admin/article/index:
+  controller: ArticleController
+  action: showArticle
+  security: ROLE:ADMIN
+
+admin/article/edit:
+  controller: ArticleController
+  action: editArticle
+  security: ROLE:ADMIN
+
+admin/article/delete:
+  controller: ArticleController
+  action: deleteArticle
+  security: ROLE:ADMIN
+
+admin/article/add:
+  controller: ArticleController
+  action: addArticle
+  security: ROLE:ADMIN
+
+articel/{slug}:
+  controller: ArticleController
+  action: previewArticle

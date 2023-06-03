@@ -1,34 +1,35 @@
 <?php 
-namespace App\Models;
+namespace App\Models ;
 
 use App\Core\Error;
 use App\Core\SQL;
 use PDO;
 use App\Core\Security;
-use App\Repositories\UserRepository;
+use App\Repositories\ArticleRepository;
 use Exception;
 
-class Post 
+class Article 
 {
+
     private Int $id = 0;
     private String $title;
     private String $author;
     private String $status;
-    private Text $comment;
     private String $content;
     private String $slug;
-    private \DateTime $date_created;
+    private \DateTime $created_at;
+    private \DateTime $update_at;
     
 
     public function __construct()
     {
-        $this->date_created = new \DateTime();
+        $this->created_at = new \DateTime();
+        $this->update_at = new \DateTime();
     }
-    
 
-     /**
-     * @return Int
-     */
+        /**
+        * @return Int
+        */
     public function getId(): int
     {
         return $this->id;
@@ -43,6 +44,7 @@ class Post
         $this->id = $id;
         return $this;
     }
+
 
     /**
      * Get the value of title
@@ -165,24 +167,45 @@ class Post
     }
 
     /**
-     * Get the value of date_created
+     * Get the value of created_at
      * @return \DateTime
      */
-    public function getDate_created(): \DateTime
+    public function getcreated_at(): \DateTime
     {
-        return $this->date_created;
+        return $this->created_at;
     }
 
     /**
-     * Set the value of date_created
-     * @param \DateTime $date_created
+     * Set the value of created_at
+     * @param \DateTime $created_at
      * @return  self
      */
-    public function setDate_created(\DateTime $date_created): self
+    public function setcreated_at(\DateTime $created_at): self
     {
-        $this->date_created = $date_created;
+        $this->created_at = $created_at;
         return $this;
     }
     
+    /**
+     * Get the value of update_at
+     * @return \DateTime
+     */
+    public function getupdate_at(): \DateTime
+    {
+        return $this->update_at;
+    }
 
+    /**
+     * Set the value of update_at
+     * @param \DateTime $update_at
+     * @return  self
+     */
+    public function setupdate_at(\DateTime $update_at): self
+    {
+        $this->update_at = $update_at;
+        return $this;
+    }
 }
+
+    
+
