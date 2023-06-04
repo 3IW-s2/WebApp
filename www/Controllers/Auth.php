@@ -14,6 +14,7 @@ use PDO;
 
 class Auth
 {
+   
     public $message = [];
 
     public function __construct(){
@@ -23,7 +24,7 @@ class Auth
     }
 
     public function login(): void
-    {   
+    {    
         $view = new View("Auth/login", "front");
         $error = new Error();
         $user = new User($error);

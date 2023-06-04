@@ -327,7 +327,7 @@ class User extends Database
 
         if ($user) {
             $setStatus = $userRepo->setStatus($user['email']);
-            $_SESSION["user"] = $user;
+            $_SESSION["user"] = $user['email'];
             return true;
         } else {
 
