@@ -158,7 +158,7 @@ class Auth
 
             if ($tokenIsValid) {
                 $view = new View("Auth/activate", "front");
-                header("Location: /");
+                header("Location: /login");
             } else {
                 $errors[]= 'Jeton invalide';
             }

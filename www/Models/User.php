@@ -294,7 +294,6 @@ class User extends Database
         $resetToken = $userRepo->resetTokenNull($email);
 
         if ($user) {
-            //$_SESSION["user"] = $user['email'];
             $_SESSION["expire_token"] = $user["expirate_token"];
            
             return true;
@@ -331,11 +330,15 @@ class User extends Database
 
         $userRepo = new UserRepository();
         $user = $userRepo->checkActiveToken($token);
-
-
-        if ($user) {
+       
+  
+        if ($user) {   
             $setStatus = $userRepo->setStatus($user['email']);
-            $_SESSION["user"] = $user['email'];
+            $resetToken = $userRepo->resetActiveTokenNull($user['email']);
+            $userExpire = $userRepo->expirateToken($user['email']);
+
+            //$_SESSION["user"] = $user['email'];
+
             return true;
         } else {
 

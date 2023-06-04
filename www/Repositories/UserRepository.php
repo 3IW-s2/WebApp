@@ -29,17 +29,31 @@ class  UserRepository  extends Database
     public function expirateToken (string $email): bool
     {
         $db = Database::getInstance();
-        $expirate_Token =  date('Y-m-d H:i:s', time() + (70 * 120));
-        $query = "UPDATE users SET expirate_Token = :expirate_Token WHERE email = :email";
+        $expirate_token =  date('Y-m-d H:i:s', time() + (70 * 120));
+        $query = "UPDATE users SET expirate_token = :expirate_token WHERE email = :email";
         $params = [
             'email' => $email,
-            'expirate_Token' => $expirate_Token
+            'expirate_token' => $expirate_token
         ];
         $statement = $db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return true ;
 
+    }
+
+    public function getExpireTokenByEmail (string $email)
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT expirate_token FROM users WHERE email = :email";
+        $params = [
+            'email' => $email
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
     }
 
 
@@ -106,6 +120,20 @@ class  UserRepository  extends Database
         $db = Database::getInstance();
 
         $query = "UPDATE users SET reset_token = NULL WHERE email = :email";
+        $params = [
+            'email' => $email
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
+    public function resetActiveTokenNull (string $email)
+    {
+        $db = Database::getInstance();
+
+        $query = "UPDATE users SET active_account_token = NULL WHERE email = :email";
         $params = [
             'email' => $email
         ];
@@ -275,6 +303,20 @@ class  UserRepository  extends Database
         $statement = $db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
        
+    }
+
+    public function getExpirateTokenByEmail (string $email)
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM users WHERE email = :email";
+        $params = [
+            'email' => $email
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user['expirate_token'];
     }
 
 
