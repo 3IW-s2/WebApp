@@ -78,6 +78,11 @@ admin/user/add:
   security: ROLE:ADMIN  
   verifConnexion: true
 
+admin/user/role:
+  controller: UserController
+  action: editRole
+  security: ROLE:ADMIN  
+
 admin/page/index:
   controller: PageController
   action: showPost

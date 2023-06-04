@@ -80,6 +80,16 @@ class UserService extends Database
          $this->userRepo->getUserByEmail($user);
     }
 
+    public function updateRole(User $user): bool
+    {
+        if ($this->userRepo->updateRole($user)) {
+            return true;
+        } else {
+            $this->error->addError("Une erreur s'est produite lors de la mise à jour du rôle de l'utilisateur");
+            return false;
+        }
+    }
+
     
 
 }

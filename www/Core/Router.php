@@ -68,7 +68,7 @@ class Router
         }
 
         if ($verifConnexion !== null && $verifConnexion === true && !Security::checkToken()) {
-            header("Location: /logout");
+            header("Location: /login");
             exit();
         }
        

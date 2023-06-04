@@ -69,21 +69,20 @@ class Security extends Database
         $expirationTimestamp = strtotime($token);
 
 
-       // $tokenUpdateTime =  $_SESSION["token_update_time"];
         $timestamp = time();
         $newTimestamp = strtotime('+2 hours', $timestamp);
         $date_now = date('Y-m-d H:i:s', $newTimestamp);
 
-        if($_SESSION["token_update_time"] === $date_now) {
-            
-            $userUpdateToken = $userRepo->expirateToken($_SESSION['user']);
-            $_SESSION["expire_token"] = date('Y-m-d H:i:s', time() + (70 * 120));
-
-            return true;
-        }
-
 
         if($expirationTimestamp > time()) {
+
+            if($_SESSION["token_update_time"] === $date_now) {
+            
+                $userUpdateToken = $userRepo->expirateToken($_SESSION['user']);
+                $_SESSION["expire_token"] = date('Y-m-d H:i:s', time() + (70 * 120));
+    
+                return true;
+            }
        
             return true;
         } 
@@ -184,7 +183,7 @@ class Security extends Database
 
     public static function checkSession (): bool
     {
-         if (empty($_SESSION)) {
+         if (empty($_SESSION['user'])) {
               return false;
             }
         return true;
