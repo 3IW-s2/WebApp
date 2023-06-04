@@ -180,3 +180,11 @@ admin/menu/publish:
   controller: MenuController
   action: publishMenu
   security: ROLE:ADMIN
+
+admin/comment/edit:
+  controller: CommentController
+  action: editComments
+
+addcomment:
+  controller: CommentController
+  action: addComment
