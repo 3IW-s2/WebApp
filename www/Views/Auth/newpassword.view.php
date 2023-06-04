@@ -1,4 +1,4 @@
-Reset ton mots de passe <?php echo $_SESSION['user']['email'] ?>
+Reset ton mots de passe <?php echo $_SESSION['user'] ?>
 <form id="connection-form" method="post" action="" >
             <div class="form-group">
                 <label for="password">Password</label>

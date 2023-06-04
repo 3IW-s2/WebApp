@@ -30,4 +30,18 @@ class ArticleRepository
         return $articles;
     }
 
+    public function createArticle(Article $article){
+       
+        $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at) VALUES (:title, :content, :created_at, :updated_at)";
+        $params = [
+            'title' => $article->getTitle(),
+            'content' => $article->getContent(),
+            'created_at' => $article->getCreatedAt(),
+            'updated_at' => $article->getUpdatedAt(),
+            'author' => $article->getAuthor(),
+
+        ];
+        $stmt = $this->db->query($query);
+    }
+
 }

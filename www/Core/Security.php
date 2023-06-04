@@ -29,9 +29,9 @@ class Security extends Database
             case "ROLE":
                 return self::checkRole($securityValue);
                 break;
-            case "CSRF":
+          /*   case "CSRF":
                 return self::checkToken($securityValue);
-                break;
+                break; */
             case "IS_AUTHENTICATED":
                 return self::checkLogged();
                 break;
@@ -43,6 +43,8 @@ class Security extends Database
         }
     }
 
+ 
+    
     public function generateToken(): string
     {
         $token = bin2hex(random_bytes(32));
@@ -50,15 +52,9 @@ class Security extends Database
         return $token;
     }
 
-/*     public function checkId(string $id): bool
-    {
-        if (isset($_SESSION['id']) && $_SESSION['id'] === $id) {
-            return true;
-        }
-        return false;
-    } */
 
-    public static function checkToken(string $token): bool
+
+    public static function checkToken(): bool
     {
         $userRepo = new UserRepository();
    
@@ -67,15 +63,33 @@ class Security extends Database
         if(!$checkSession) {
            return false;
         }
-        $email = $_SESSION["user"];
-        $user = $userRepo->getUserByEmail($email);
-        $userToken = $user["tokenid"];
+        
 
-        if ($userToken === $token) {
+        $token = $_SESSION["expire_token"];
+        $expirationTimestamp = strtotime($token);
+
+
+       // $tokenUpdateTime =  $_SESSION["token_update_time"];
+        $timestamp = time();
+        $newTimestamp = strtotime('+2 hours', $timestamp);
+        $date_now = date('Y-m-d H:i:s', $newTimestamp);
+
+        if($_SESSION["token_update_time"] === $date_now) {
+            
+            $userUpdateToken = $userRepo->expirateToken($_SESSION['user']);
+            $_SESSION["expire_token"] = date('Y-m-d H:i:s', time() + (70 * 120));
+
             return true;
         }
+
+
+        if($expirationTimestamp > time()) {
+       
+            return true;
+        } 
         return false;
     }
+
 
     public function checkAdmin(): bool
     {
@@ -211,6 +225,4 @@ class Security extends Database
         }
         return true;
     }
-
-    
 }

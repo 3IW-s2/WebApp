@@ -226,12 +226,23 @@ class User extends Database
         }
         
         $userRepo = new UserRepository();
+        
         $user = $userRepo->getUserByEmail($email);
-  
+        
+
+
+
+        if(!$user){
+            $this->error->addError("Veuillez activez votre compte pour pouvoir vous connecter");
+            return false;
+        }
+        $expirateToken = $userRepo->expirateToken($email);
+
+
         try{
             if ($user && password_verify($password, $user['password'])) {
-                //$_SESSION["user"] = $user;
                 $_SESSION["user"] = $user['email'];
+                $_SESSION["expire_token"] = $user["expirate_token"];
                 return true;
             } else {
                 $this->error->addError("identifiants incorrects");
@@ -257,7 +268,7 @@ class User extends Database
             $user = $userRepo->resetToken($email);
             $url = $this->baseUrl . '/resetpassword?token='.$user;
 
-            $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : " . $url . "");
+            $mail = new Mail($email, "Reinitialisation de votre mot de passe ici", "Veuillez cliquer sur ce lien pour reinitialiser votre mot de passe : " . $url . "");
             $mail->send();
     
             return true;
@@ -279,9 +290,11 @@ class User extends Database
 
         $userRepo = new UserRepository();
         $user = $userRepo->resetPassword($email, $password);
+        $expirateToken = $userRepo->expirateToken($email);
+        $resetToken = $userRepo->resetTokenNull($email);
 
         if ($user) {
-            $_SESSION["user"] = $user;
+            $_SESSION["expire_token"] = $user["expirate_token"];
            
             return true;
         } else {
@@ -301,7 +314,7 @@ class User extends Database
         $user = $userRepo->checkToken($token);
 
         if ($user) {
-            $_SESSION["user"] = $user;
+            $_SESSION["user"] = $user['email'];
             return true;
         } else {
 
@@ -317,10 +330,15 @@ class User extends Database
 
         $userRepo = new UserRepository();
         $user = $userRepo->checkActiveToken($token);
+       
+  
+        if ($user) {   
+            $setStatus = $userRepo->setStatus($user['email']);
+            $resetToken = $userRepo->resetActiveTokenNull($user['email']);
+            $userExpire = $userRepo->expirateToken($user['email']);
 
+            //$_SESSION["user"] = $user['email'];
 
-        if ($user) {
-            $_SESSION["user"] = $user;
             return true;
         } else {
 

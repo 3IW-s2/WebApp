@@ -1,6 +1,7 @@
 default:
   controller: Main
   action: home
+  verifConnexion: true
 
 a-propos:
   controller: Main
@@ -17,6 +18,7 @@ contact:
 login:
   controller: Auth
   action: login
+  
 
 error:
   controller: Auth
@@ -74,6 +76,7 @@ admin/user/add:
   controller: UserController
   action: addUser 
   security: ROLE:ADMIN  
+  verifConnexion: true
 
 admin/page/index:
   controller: PageController
