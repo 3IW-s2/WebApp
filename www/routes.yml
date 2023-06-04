@@ -1,6 +1,7 @@
 default:
   controller: Main
   action: home
+  verifConnexion: true
 
 a-propos:
   controller: Main

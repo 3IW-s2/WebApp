@@ -25,7 +25,6 @@ class Auth
 
     public function login(): void
     {    
-        var_dump($_SESSION);
 
         $view = new View("Auth/login", "front");
         $error = new Error();

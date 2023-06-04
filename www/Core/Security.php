@@ -63,15 +63,33 @@ class Security extends Database
         if(!$checkSession) {
            return false;
         }
+        
+
         $token = $_SESSION["expire_token"];
         $expirationTimestamp = strtotime($token);
-   
 
-        if($expirationTimestamp > time()) {
+
+       // $tokenUpdateTime =  $_SESSION["token_update_time"];
+        $timestamp = time();
+        $newTimestamp = strtotime('+2 hours', $timestamp);
+        $date_now = date('Y-m-d H:i:s', $newTimestamp);
+
+        if($_SESSION["token_update_time"] === $date_now) {
+            
+            $userUpdateToken = $userRepo->expirateToken($_SESSION['user']);
+            $_SESSION["expire_token"] = date('Y-m-d H:i:s', time() + (70 * 120));
+
             return true;
         }
+
+
+        if($expirationTimestamp > time()) {
+       
+            return true;
+        } 
         return false;
     }
+
 
     public function checkAdmin(): bool
     {
