@@ -130,3 +130,12 @@ admin/article/add:
 articel/{slug}:
   controller: ArticleController
   action: previewArticle
+  action: addUser  
+
+admin/comment/edit:
+  controller: CommentController
+  action: editComments
+
+addcomment:
+  controller: CommentController
+  action: addComment

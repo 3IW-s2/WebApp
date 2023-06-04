@@ -15,6 +15,8 @@ class Comment extends Database
     private Int $id = 0;
     private String $comment;
     private Int $status = 0;
+    private Int $article_id = 0;
+    private Int $user_id = 0;
     private \DateTime $date_inserted;
     private \DateTime $date_updated;
     private $baseUrl;
@@ -50,4 +52,46 @@ class Comment extends Database
     {
         $this->id = $id;
     }
+
+    public function getComment():String
+    {
+        return $this->comment;
+    }
+
+    public function setComment(String $comment):void
+    {
+        $this->comment = $comment;
+    }
+
+    public function getStatus():Int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Int $status):void
+    {
+        $this->status = $status;
+    }
+
+    public function getArticleId():Int
+    {
+        return $this->article_id;
+    }
+
+    public function setArticleId(Int $article_id):void
+    {
+        $this->article_id = $article_id;
+    }
+
+    public function getUserId():Int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(Int $user_id):void
+    {
+        $this->user_id = $user_id;
+    }
+    
+
 }
