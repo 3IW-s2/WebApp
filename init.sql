@@ -9,6 +9,31 @@ CREATE TABLE users (
     updated_at TIMESTAMP NOT NULL
 );
 
+CREATE TABLE posts(
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    status VARCHAR(255) NOT NULL,
+);
+
+/* rajoute une colonne slug */
+
+ALTER TABLE posts ADD COLUMN slug VARCHAR(255)  NULL;
+ALTER TABLE posts ADD COLUMN image VARCHAR(255)  NULL;
+
+
+ALTER TABLE posts DROP COLUMN name;
+
+ALTER TABLE posts ADD COLUMN date_created TIMESTAMP  NULL DEFAULT CURRENT_TIMESTAMP;
+
+
+ALTER TABLE users ADD COLUMN status VARCHAR(255)  NULL;
+
+SELECT * FROM users WHERE email = 'audesandrine6@gmail' AND  status IS NULL;
+
+
+
 CREATE TABLE Roles (
   role_id INT PRIMARY KEY,
   role_name VARCHAR(255)
@@ -32,8 +57,7 @@ ALTER TABLE users ADD active_account_token VARCHAR(255);
  */
 ALTER TABLE users ADD tokenID VARCHAR(255) DEFAULT NULL;
  change le type de la colonne role en int
-ALTER TABLE users ALTER COLUMN role TYPE INT USING role::integer;
-ALTER TABLE users ALTER COLUMN role SET DEFAULT 3;
+ALTER TABLE users ALTER COLUMN role TYPE INT ;
 /* les 3 ceux sont les customers 1 pour admin et 2 pour éditeurs */
 
 
@@ -51,7 +75,7 @@ CREATE TABLE RolePermissions (
 );
 
 
-
+ALTER TABLE users ADD COLUMN expirate_token TIMESTAMP  NULL;
 
 
 /* inject un users */
@@ -81,28 +105,3 @@ VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
 ); */
 
 
-CREATE TABLE posts(
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    author VARCHAR(255) NOT NULL,
-    content TEXT NOT NULL,
-    status VARCHAR(255) NOT NULL,
-);
-
-/* rajoute une colonne slug */
-
-ALTER TABLE posts ADD COLUMN slug VARCHAR(255)  NULL;
-ALTER TABLE posts ADD COLUMN image VARCHAR(255)  NULL;
-
-
-ALTER TABLE posts DROP COLUMN name;
-
-ALTER TABLE posts ADD COLUMN date_created TIMESTAMP  NULL DEFAULT CURRENT_TIMESTAMP;
-
-
-ALTER TABLE users ADD COLUMN status VARCHAR(255)  NULL;
-
-SELECT * FROM users WHERE email = 'audesandrine6@gmail' AND  status IS NULL;
-
-
-ALTER TABLE users ADD COLUMN expirate_token TIMESTAMP  NULL;

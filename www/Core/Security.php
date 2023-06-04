@@ -69,7 +69,6 @@ class Security extends Database
         $expirationTimestamp = strtotime($token);
 
 
-       // $tokenUpdateTime =  $_SESSION["token_update_time"];
         $timestamp = time();
         $newTimestamp = strtotime('+2 hours', $timestamp);
         $date_now = date('Y-m-d H:i:s', $newTimestamp);

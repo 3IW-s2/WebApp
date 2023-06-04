@@ -12,15 +12,23 @@ use Exception;
 
 class  UserRepository  extends Database 
 {
+    private $db;
+    private $table = 'users';
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
+
     public function findById (int $id): User
     {
-        $db = Database::getInstance();
 
-        $query = "SELECT * FROM user WHERE id = :id";
+        $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $params = [
             'id' => $id
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
@@ -28,14 +36,13 @@ class  UserRepository  extends Database
 
     public function expirateToken (string $email): bool
     {
-        $db = Database::getInstance();
         $expirate_token =  date('Y-m-d H:i:s', time() + (70 * 120));
-        $query = "UPDATE users SET expirate_token = :expirate_token WHERE email = :email";
+        $query = "UPDATE {$this->table} SET expirate_token = :expirate_token WHERE email = :email";
         $params = [
             'email' => $email,
             'expirate_token' => $expirate_token
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return true ;
@@ -45,13 +52,12 @@ class  UserRepository  extends Database
 
     public function getExpireTokenByEmail (string $email)
     {
-        $db = Database::getInstance();
 
-        $query = "SELECT expirate_token FROM users WHERE email = :email";
+        $query = "SELECT expirate_token FROM {$this->table} WHERE email = :email";
         $params = [
             'email' => $email
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
@@ -59,16 +65,15 @@ class  UserRepository  extends Database
 
 
      public function getUserByEmail (string $email)
-    {
-        $db = Database::getInstance();
+    {   
 
-        //$query = "SELECT * FROM users WHERE email = :email";
-        $query = "SELECT * FROM users WHERE email = :email AND status IS NOT NULL ";
+        //$query = "SELECT * FROM {$this->table} WHERE email = :email";
+        $query = "SELECT * FROM {$this->table} WHERE email = :email AND status IS NOT NULL ";
 
         $params = [
             'email' => $email
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $data = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($data) {
@@ -84,18 +89,17 @@ class  UserRepository  extends Database
 
     public function resetToken(string $email)
     {
-        $db = Database::getInstance();
         $resetToken = bin2hex(random_bytes(32));
         /* var_dump($resetToken);
         die; */
        // $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $query = "UPDATE users SET reset_token = :token , status = NULL  WHERE email = :email";
+        $query = "UPDATE {$this->table} SET reset_token = :token , status = NULL  WHERE email = :email";
         $params = [
             'email' => $email,
             'token' => $resetToken
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
  
         return $resetToken;
@@ -103,28 +107,25 @@ class  UserRepository  extends Database
 
     public function resetPassword (string $email, string $password)
     {
-        $db = Database::getInstance();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "UPDATE users SET password = :password , reset_token = NULL , status = 1 WHERE email = :email";
+        $query = "UPDATE {$this->table} SET password = :password , reset_token = NULL , status = 1 WHERE email = :email";
         $params = [
             'email' => $email,
             'password' => $hashedPassword
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
     }
     public function resetTokenNull (string $email)
     {
-        $db = Database::getInstance();
-
-        $query = "UPDATE users SET reset_token = NULL WHERE email = :email";
+        $query = "UPDATE {$this->table} SET reset_token = NULL WHERE email = :email";
         $params = [
             'email' => $email
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
@@ -132,13 +133,12 @@ class  UserRepository  extends Database
 
     public function resetActiveTokenNull (string $email)
     {
-        $db = Database::getInstance();
 
-        $query = "UPDATE users SET active_account_token = NULL WHERE email = :email";
+        $query = "UPDATE {$this->table} SET active_account_token = NULL WHERE email = :email";
         $params = [
             'email' => $email
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
@@ -147,26 +147,22 @@ class  UserRepository  extends Database
 
     public function checkToken (string $token)
     {
-        $db = Database::getInstance();
-
-        $query = "SELECT * FROM users WHERE reset_token = :token";
+        $query = "SELECT * FROM {$this->table} WHERE reset_token = :token";
         $params = [
             'token' => $token
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
     }
     public function setStatus(string $email)
     {
-        $db = Database::getInstance();
-
-        $query = "UPDATE users SET status = 1 WHERE email = :email";
+        $query = "UPDATE {$this->table} SET status = 1 WHERE email = :email";
         $params = [
             'email' => $email
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
@@ -174,13 +170,11 @@ class  UserRepository  extends Database
 
     public function checkActiveToken (string $token)
     {
-        $db = Database::getInstance();
-
-        $query = "SELECT * FROM users WHERE active_account_token = :token";
+        $query = "SELECT * FROM {$this->table} WHERE active_account_token = :token";
         $params = [
             'token' => $token
         ]; 
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
@@ -188,10 +182,8 @@ class  UserRepository  extends Database
 
     public function register(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
     {
-        $db = Database::getInstance();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $query = "INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at) 
+        $query = "INSERT INTO {$this->table} (firstname, lastname, email, password, role, created_at, updated_at) 
                 VALUES (:firstname, :lastname, :email, :password, :role, NOW(), NOW())";
 
         $params = [
@@ -201,23 +193,22 @@ class  UserRepository  extends Database
             'password' => $hashedPassword,
             'role' =>  5
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return true;
     }
 
     public function updateToken( string $email){
-        $db = Database::getInstance();
         $activetoken = bin2hex(random_bytes(32));
 
 
-        $query = "UPDATE users SET active_account_token = :token  WHERE email = :email";
+        $query = "UPDATE {$this->table} SET active_account_token = :token  WHERE email = :email";
             $params = [
                 'email' => $email,
                 'token' => $activetoken
             ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $activetoken;
@@ -225,33 +216,31 @@ class  UserRepository  extends Database
 
     public function deleteUserById(User $user): void
     {
-        $db = Database::getInstance();
 
-        $query = "DELETE FROM users WHERE id = :id";
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
         $params = [
             'id' => $user->getId()
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
+
     }
 
     public function deleteUserByEmail( User $user): void
     {
-        $db = Database::getInstance();
-
-        $query = "DELETE FROM users WHERE email = :email";
+        $query = "DELETE FROM {$this->table} WHERE email = :email";
         $params = [
             'email' => $user->getEmail()
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
+
     }
 
 
     public function allUser (): array
     {
-        $db = Database::getInstance();
-
         $query = "SELECT * FROM users";
-        $statement = $db->query($query);
+        $statement = $this->db->query($query);
+
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $users;
@@ -259,9 +248,8 @@ class  UserRepository  extends Database
 
     public function updateUser ( User $user): void
     {
-        $db = Database::getInstance();
 
-        $query = "UPDATE users SET firstname = :firstname , lastname = :lastname , email = :email , password = :password ,  updated_at = NOW() WHERE id = :id";
+        $query = "UPDATE {$this->table} SET firstname = :firstname , lastname = :lastname , email = :email , password = :password ,  updated_at = NOW() WHERE id = :id";
         $params = [
             'id' => $user->getId(),
             'firstname' => $user->getFirstname(),
@@ -269,20 +257,19 @@ class  UserRepository  extends Database
             'email' => $user->getEmail(),
             'password' => $user->getPwd(),
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
      
         
     }
 
     public function getUserById (User $user)
     {
-        $db = Database::getInstance();
 
-        $query = "SELECT * FROM users WHERE id = :id";
+        $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $params = [
             'id' => $user->getId()
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user;
@@ -290,9 +277,8 @@ class  UserRepository  extends Database
 
     public function addUser (User $user)
     {
-        $db = Database::getInstance();
 
-        $query = "INSERT INTO users (firstname, lastname, email, password,  created_at, updated_at) 
+        $query = "INSERT INTO {$this->table} (firstname, lastname, email, password,  created_at, updated_at) 
                 VALUES (:firstname, :lastname, :email, :password,  NOW(), NOW())";
         $params = [
             'firstname' => $user->getFirstname(),
@@ -301,20 +287,20 @@ class  UserRepository  extends Database
             'password' => $user->getPwd(),
           
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
        
     }
 
     public function getExpirateTokenByEmail (string $email)
     {
-        $db = Database::getInstance();
 
-        $query = "SELECT * FROM users WHERE email = :email";
+        $query = "SELECT * FROM {$this->table} WHERE email = :email";
         $params = [
             'email' => $email
         ];
-        $statement = $db->query($query, $params);
+               $statement = $this->db->query($query, $params);
+
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user['expirate_token'];
