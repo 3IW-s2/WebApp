@@ -26,6 +26,21 @@ class  UserRepository  extends Database
         return $user;
     }
 
+    public function expirateToken (string $email): bool
+    {
+        $db = Database::getInstance();
+        $expirate_Token =  date('Y-m-d H:i:s', time() + (20 * 60));
+        $query = "UPDATE users SET expirate_Token = :expirate_Token WHERE email = :email";
+        $params = [
+            'email' => $email,
+            'expirate_Token' => $expirate_Token
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return true ;
+
+    }
 
 
      public function getUserByEmail (string $email)
@@ -248,5 +263,8 @@ class  UserRepository  extends Database
         $user = $statement->fetch(PDO::FETCH_ASSOC);
        
     }
+
+
+    
 
 }

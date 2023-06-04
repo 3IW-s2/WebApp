@@ -60,12 +60,18 @@ class Router
         $controller = $this->routes[$uri]["controller"];
         $action = $this->routes[$uri]["action"];
         $security = $this->routes[$uri]["security"] ?? null;
+        $verifConnexion = $this->routes[$uri]["verifConnexion"] ?? null;
          
         if ($security !== null && !Security::checkSecurity($security)) {
             header("Location: /login");
             exit();
         }
-        
+
+        if ($verifConnexion !== null && $verifConnexion === true && !Security::checkToken()) {
+            header("Location: /login");
+            exit();
+        }
+       
 
         $controllerFilePath = "Controllers/" . $controller . ".php";
         if (!file_exists($controllerFilePath)) {

@@ -17,6 +17,7 @@ contact:
 login:
   controller: Auth
   action: login
+  
 
 error:
   controller: Auth
@@ -74,6 +75,7 @@ admin/user/add:
   controller: UserController
   action: addUser 
   security: ROLE:ADMIN  
+  verifConnexion: true
 
 admin/page/index:
   controller: PageController

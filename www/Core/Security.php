@@ -29,9 +29,9 @@ class Security extends Database
             case "ROLE":
                 return self::checkRole($securityValue);
                 break;
-            case "CSRF":
+          /*   case "CSRF":
                 return self::checkToken($securityValue);
-                break;
+                break; */
             case "IS_AUTHENTICATED":
                 return self::checkLogged();
                 break;
@@ -43,6 +43,8 @@ class Security extends Database
         }
     }
 
+ 
+    
     public function generateToken(): string
     {
         $token = bin2hex(random_bytes(32));
@@ -50,15 +52,9 @@ class Security extends Database
         return $token;
     }
 
-/*     public function checkId(string $id): bool
-    {
-        if (isset($_SESSION['id']) && $_SESSION['id'] === $id) {
-            return true;
-        }
-        return false;
-    } */
 
-    public static function checkToken(string $token): bool
+
+    public static function checkToken(): bool
     {
         $userRepo = new UserRepository();
    
@@ -67,11 +63,11 @@ class Security extends Database
         if(!$checkSession) {
            return false;
         }
-        $email = $_SESSION["user"];
-        $user = $userRepo->getUserByEmail($email);
-        $userToken = $user["tokenid"];
+        $token = $_SESSION["expire_token"];
+        $expirationTimestamp = strtotime($token);
+   
 
-        if ($userToken === $token) {
+        if($expirationTimestamp > time()) {
             return true;
         }
         return false;
@@ -211,6 +207,4 @@ class Security extends Database
         }
         return true;
     }
-
-    
 }
