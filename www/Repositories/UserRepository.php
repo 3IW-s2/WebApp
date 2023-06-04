@@ -303,6 +303,16 @@ class  UserRepository  extends Database
         return $user['expirate_token'];
     }
 
+    public function updateRole(User $user)
+    {
+        $query = "UPDATE {$this->table} SET role = :role WHERE id = :id";
+        $params = [
+            'id' => $user->getId(),
+            'role' => $user->getRole()
+        ];
+        $statement = $this->db->query($query, $params);
+    }
+
 
     
 

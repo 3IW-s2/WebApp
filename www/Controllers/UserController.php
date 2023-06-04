@@ -117,4 +117,36 @@ class UserController
 
       }
     }
+
+
+    public function editRole()
+    {
+      $view = new View("Backend/User/editRole", "back");
+      $error = new Error();
+      if(isset($_GET['id'])){
+         $id = $_GET['id'];
+         $user = new User($error);
+         $user->setId($id);
+         $userService = new UserService();
+         $user = $userService->getUserById($user);
+
+      
+         $view->assign('usr', $user);
+
+         if(isset($_POST['submit'])){
+            $users = new User($error);
+            $users->setId($id);
+            $role = isset($_POST['role']) ? intval($_POST['role']) : 5;
+            $users->setRole($role);
+
+            $uppdateService = new UserService();
+            $updateUser = $uppdateService->updateRole($users);
+
+      
+            header('Location: /admin/showuser');
+            
+         }
+   
+      }
+    }
 }
