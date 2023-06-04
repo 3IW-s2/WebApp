@@ -61,3 +61,11 @@ admin/user/edit:
 admin/user/add:
   controller: UserController
   action: addUser  
+
+admin/comment/edit:
+  controller: CommentController
+  action: editComments
+
+addcomment:
+  controller: CommentController
+  action: addComment
