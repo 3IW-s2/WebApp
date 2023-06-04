@@ -100,4 +100,6 @@ ALTER TABLE posts DROP COLUMN name;
 ALTER TABLE posts ADD COLUMN date_created TIMESTAMP  NULL DEFAULT CURRENT_TIMESTAMP;
 
 
-ALTER TABLE articles ALTER COLUMN context TYPE VARCHAR(255) USING context::varchar(255);
+ALTER TABLE users ADD COLUMN status VARCHAR(255)  NULL;
+
+SELECT * FROM users WHERE email = 'audesandrine6@gmail' AND  status IS NULL;

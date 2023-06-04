@@ -227,6 +227,12 @@ class User extends Database
         
         $userRepo = new UserRepository();
         $user = $userRepo->getUserByEmail($email);
+
+        if(!$user){
+            $this->error->addError("Veuillez activez votre compte pour pouvoir vous connecter");
+            return false;
+        }
+        
   
         try{
             if ($user && password_verify($password, $user['password'])) {
@@ -257,7 +263,7 @@ class User extends Database
             $user = $userRepo->resetToken($email);
             $url = $this->baseUrl . '/resetpassword?token='.$user;
 
-            $mail = new Mail($email, "Réinitialisation de votre mot de passe ici", "Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : " . $url . "");
+            $mail = new Mail($email, "Reinitialisation de votre mot de passe ici", "Veuillez cliquer sur ce lien pour reinitialiser votre mot de passe : " . $url . "");
             $mail->send();
     
             return true;
@@ -320,6 +326,7 @@ class User extends Database
 
 
         if ($user) {
+            $setStatus = $userRepo->setStatus($user['email']);
             $_SESSION["user"] = $user;
             return true;
         } else {

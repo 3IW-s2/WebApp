@@ -32,7 +32,9 @@ class  UserRepository  extends Database
     {
         $db = Database::getInstance();
 
-        $query = "SELECT * FROM users WHERE email = :email";
+        //$query = "SELECT * FROM users WHERE email = :email";
+        $query = "SELECT * FROM users WHERE email = :email AND status IS NOT NULL ";
+
         $params = [
             'email' => $email
         ];
@@ -58,7 +60,7 @@ class  UserRepository  extends Database
         die; */
        // $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $query = "UPDATE users SET reset_token = :token WHERE email = :email";
+        $query = "UPDATE users SET reset_token = :token , status = NULL  WHERE email = :email";
         $params = [
             'email' => $email,
             'token' => $resetToken
@@ -74,7 +76,7 @@ class  UserRepository  extends Database
         $db = Database::getInstance();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "UPDATE users SET password = :password , reset_token = NULL WHERE email = :email";
+        $query = "UPDATE users SET password = :password , reset_token = NULL , status = 1 WHERE email = :email";
         $params = [
             'email' => $email,
             'password' => $hashedPassword
@@ -93,6 +95,19 @@ class  UserRepository  extends Database
         $query = "SELECT * FROM users WHERE reset_token = :token";
         $params = [
             'token' => $token
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+    public function setStatus(string $email)
+    {
+        $db = Database::getInstance();
+
+        $query = "UPDATE users SET status = 1 WHERE email = :email";
+        $params = [
+            'email' => $email
         ];
         $statement = $db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
@@ -127,7 +142,7 @@ class  UserRepository  extends Database
             'lastname' => $lastname,
             'email' => $email,
             'password' => $hashedPassword,
-            'role' => $role,
+            'role' =>  5
         ];
         $statement = $db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
