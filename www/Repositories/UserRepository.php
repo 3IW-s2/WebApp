@@ -67,7 +67,6 @@ class  UserRepository  extends Database
      public function getUserByEmail (string $email)
     {   
 
-        //$query = "SELECT * FROM {$this->table} WHERE email = :email";
         $query = "SELECT * FROM {$this->table} WHERE email = :email AND status IS NOT NULL ";
 
         $params = [
@@ -90,9 +89,7 @@ class  UserRepository  extends Database
     public function resetToken(string $email)
     {
         $resetToken = bin2hex(random_bytes(32));
-        /* var_dump($resetToken);
-        die; */
-       // $user = $statement->fetch(PDO::FETCH_ASSOC);
+  
 
         $query = "UPDATE {$this->table} SET reset_token = :token , status = NULL  WHERE email = :email";
         $params = [

@@ -70,10 +70,6 @@ class  PostRepository  extends Database
             'id' => $post->getId()
         ];
         $statement = $this->db->query($query, $params);
-        
-       /*  $error = new Error();
-        $security = new Security($error);
-        $security->check404($post); */
 
     }
 
