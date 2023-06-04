@@ -101,6 +101,19 @@ class  UserRepository  extends Database
 
         return $user;
     }
+    public function resetTokenNull (string $email)
+    {
+        $db = Database::getInstance();
+
+        $query = "UPDATE users SET reset_token = NULL WHERE email = :email";
+        $params = [
+            'email' => $email
+        ];
+        $statement = $db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
 
 
     public function checkToken (string $token)

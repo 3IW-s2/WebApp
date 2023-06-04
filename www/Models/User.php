@@ -238,8 +238,6 @@ class User extends Database
         }
         $expirateToken = $userRepo->expirateToken($email);
 
-       
-        
 
         try{
             if ($user && password_verify($password, $user['password'])) {
@@ -292,9 +290,12 @@ class User extends Database
 
         $userRepo = new UserRepository();
         $user = $userRepo->resetPassword($email, $password);
+        $expirateToken = $userRepo->expirateToken($email);
+        $resetToken = $userRepo->resetTokenNull($email);
 
         if ($user) {
-            $_SESSION["user"] = $user;
+            //$_SESSION["user"] = $user['email'];
+            $_SESSION["expire_token"] = $user["expirate_token"];
            
             return true;
         } else {
@@ -314,7 +315,7 @@ class User extends Database
         $user = $userRepo->checkToken($token);
 
         if ($user) {
-            $_SESSION["user"] = $user;
+            $_SESSION["user"] = $user['email'];
             return true;
         } else {
 

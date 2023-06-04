@@ -25,7 +25,8 @@ class Auth
 
     public function login(): void
     {    
- 
+        var_dump($_SESSION);
+
         $view = new View("Auth/login", "front");
         $error = new Error();
         $user = new User($error);
@@ -96,7 +97,7 @@ class Auth
           $user = new User( $error);
     
           if(!empty($_POST)){
-                $email = $_SESSION["user"]["email"];
+                $email = $_SESSION["user"];
                 $pwd = $_POST["password"];
     
                
