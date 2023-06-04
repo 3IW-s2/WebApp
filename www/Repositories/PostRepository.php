@@ -14,27 +14,33 @@ use Exception;
 class  PostRepository  extends Database 
 {
 
+    private $db;
+    private $table = 'posts';
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
 
     public function getAllPosts(): array
-    {
-        $db = Database::getInstance();
+    {    
 
         $query = "SELECT * FROM posts";
-        $statement = $db->query($query);
+        $statement = $this->db->query($query);
         $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $posts;
     }
 
     public function getPostBySlug(Post $post)
-    {
-        $db = Database::getInstance();
+    {  
 
         $query = "SELECT * FROM posts WHERE slug LIKE :slug";
         $params = [
             'slug' => $post->getSlug()
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $post = $statement->fetch(PDO::FETCH_ASSOC);
         
         $error = new Error();
@@ -45,13 +51,12 @@ class  PostRepository  extends Database
 
     public function getPostById(Post $post)
     {
-        $db = Database::getInstance();
 
         $query = "SELECT * FROM posts WHERE id = :id";
         $params = [
             'id' => $post->getId()
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $post = $statement->fetch(PDO::FETCH_ASSOC);
         
         return $post;
@@ -60,13 +65,11 @@ class  PostRepository  extends Database
 
     public function DetetePostById(Post $post)
     {
-        $db = Database::getInstance();
-
         $query = "DELETE FROM posts WHERE id = :id";
         $params = [
             'id' => $post->getId()
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         
        /*  $error = new Error();
         $security = new Security($error);
@@ -76,7 +79,6 @@ class  PostRepository  extends Database
 
     public function AddPost(Post $post)
     {
-        $db = Database::getInstance();
 
         $query = "INSERT INTO posts (title, author ,content, status, slug) VALUES (:title, :author , :content, :status, :slug)";
         $params = [
@@ -86,12 +88,11 @@ class  PostRepository  extends Database
             'status' => $post->getStatus(),
             'slug' => $post->getSlug()
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
     }
 
     public function updatePost(Post $post)
     {
-        $db = Database::getInstance();
 
         $query = "UPDATE posts SET title = :title, author = :author, content = :content, status = :status, slug = :slug WHERE id = :id";
         $params = [
@@ -102,7 +103,7 @@ class  PostRepository  extends Database
             'slug' => $post->getSlug(),
             'id' => $post->getId()
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
     }
    
 }
