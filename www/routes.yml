@@ -139,3 +139,4 @@ admin/comment/edit:
 addcomment:
   controller: CommentController
   action: addComment
+
