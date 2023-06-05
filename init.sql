@@ -17,6 +17,7 @@ CREATE TABLE posts(
     status VARCHAR(255) NOT NULL,
 );
 
+ALTER TABLE posts ADD COLUMN image_path VARCHAR(255)  NULL;
 /* rajoute une colonne slug */
 
 ALTER TABLE posts ADD COLUMN slug VARCHAR(255)  NULL;

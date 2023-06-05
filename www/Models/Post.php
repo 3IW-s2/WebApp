@@ -18,6 +18,7 @@ class Post
     private String $content;
     private String $slug;
     private \DateTime $date_created;
+    private String $image_path;
     
 
     public function __construct()
@@ -184,5 +185,25 @@ class Post
         return $this;
     }
     
+
+    /**
+     * Get the value of image_path
+     * @return String
+     */
+    public function getImage_path(): String
+    {
+        return $this->image_path;
+    }
+
+    /**
+     * Set the value of image_path
+     * @param String $image_path
+     * @return  self
+     */
+    public function setImage_path(String $image_path): self
+    {
+        $this->image_path = $image_path;
+        return $this;
+    }
 
 }
