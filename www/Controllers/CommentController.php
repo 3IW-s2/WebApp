@@ -12,11 +12,11 @@ class CommentController
 {
     public function showComments():void
     {
-         $view = new View("Backend/Comment/comment", "back");
+         $view = new View("Backend/Comment/index", "back");
          $error = new Error();
          $commentService = new CommentService($error);
          $comments = $commentService->getAllComment();
-         $view->assign('comments', $coments);
+         $view->assign('comments', $comments);
         
     }
 
@@ -41,15 +41,31 @@ class CommentController
     public function updateComment()
     {
 
-       $status = $_POST['status'];
-       $id = $_POST['id'];
+       $error = new Error();
+       $view = new View("Backend/Comment/edit", "back");
 
-       $comment = new Comment();
+       if(isset($_GET['id'])){
+          $id = $_GET['id'];
+       
+
+       if(isset($_POST['submit'])){
+           $status = $_POST['status'] == 'true' ? true : false;
+        
+
+       $comment = new Comment($error);
        $comment->setStatus($status);
        $comment->setId($id);
 
-       $commentService = new CommentService($error);
+       $commentService = new CommentService();
        $comments = $commentService->updateComment($comment);
 
+
+       header('Location: /admin/comment/index');
+
+       }
+     }
+
+
+    }
 
 }

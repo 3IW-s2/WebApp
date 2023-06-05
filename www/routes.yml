@@ -132,9 +132,13 @@ articel/{slug}:
   action: previewArticle
   action: addUser  
 
+admin/comment/index:
+  controller: CommentController
+  action: showComments
+
 admin/comment/edit:
   controller: CommentController
-  action: editComments
+  action: updateComment
 
 addcomment:
   controller: CommentController

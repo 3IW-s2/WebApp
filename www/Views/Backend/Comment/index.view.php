@@ -6,24 +6,22 @@
         <th scope="col">Commentaire</th>
         <th scope="col">Date de création</th>
         <th scope="col">Statut</th>
+        <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
 <?php foreach ($comments as $comment) : ?>
         <tr>
-            <th scope="row"><?= $comment["user_id"] ?></th>
+            <td><?= $comment["user_id"] ?></th>
             <td><?= $comment["content"]?></td>
             <td><?= $comment["created_at"] ?></td>
-            <td><?= $comment["status"]?></td>
+            <td><?php echo !$comment["status"]  ? "Non autorisé" : "Autorisé"; ?></td>
+            <td><a href="edit?id=<?= $comment['id'] ?>" class="btn btn-primary">Edit</a> </td>
         </tr>
+<?php endforeach; ?>
     </tbody>
 </table>
 
-<label for="status">Autorisation du commentaire</label>
 
-<select name="status" id="status">
-    <option value="">--Please choose an option--</option>
-    <option value="true">Autorisé</option>
-    <option value="false">Non autorisé</option>
-</select>
-<?php endforeach; ?>
+
+

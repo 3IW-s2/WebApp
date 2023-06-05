@@ -2,7 +2,7 @@
 namespace App\Services;
 
 use App\Models\Comment;
-use App\Repositories\UserRepository;
+use App\Repositories\CommentRepository;
 use App\Core\Database;
 use App\Core\Error;
 use App\Core\Security;
@@ -38,7 +38,7 @@ class CommentService extends Database
 
     public function getAllComment(): array
     {
-        return $this->commentRepo->allComment();
+        return $this->commentRepo->GetAllComments();
     }
 
     public function getCommentsByPostId(int $post_id)
@@ -57,4 +57,6 @@ class CommentService extends Database
     {
         $this->commentRepo->delete($id);
     }
+
+}
 

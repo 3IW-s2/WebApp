@@ -14,8 +14,8 @@ class Comment extends Database
 {
     private Int $id = 0;
     private String $comment;
-    private Int $status = 0;
-    private Int $article_id = 0;
+    private Bool $status;
+    private Int $post_id = 0;
     private Int $user_id = 0;
     private \DateTime $date_inserted;
     private \DateTime $date_updated;
@@ -63,24 +63,24 @@ class Comment extends Database
         $this->comment = $comment;
     }
 
-    public function getStatus():Int
+    public function getStatus():Bool
     {
         return $this->status;
     }
 
-    public function setStatus(Int $status):void
+    public function setStatus(Bool $status):void
     {
         $this->status = $status;
     }
 
     public function getArticleId():Int
     {
-        return $this->article_id;
+        return $this->post_id;
     }
 
-    public function setArticleId(Int $article_id):void
+    public function setArticleId(Int $post_id):void
     {
-        $this->article_id = $article_id;
+        $this->post_id = $post_id;
     }
 
     public function getUserId():Int
