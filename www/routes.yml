@@ -140,7 +140,7 @@ admin/comment/edit:
   controller: CommentController
   action: updateComment
 
-addcomment:
+article/addcomment:
   controller: CommentController
   action: addComment
 
