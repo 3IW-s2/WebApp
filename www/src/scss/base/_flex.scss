@@ -39,3 +39,17 @@
   }
 }
 
+.flex {
+  @include flexbox();
+}
+
+.flex-row {
+  @include flexbox();
+  @include flex-direction(row);
+}
+
+.flex-column {
+  @include flexbox();
+  @include flex-direction(column);
+}
+
