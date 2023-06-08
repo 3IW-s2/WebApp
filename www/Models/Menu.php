@@ -30,12 +30,12 @@ class Menu
 
 
     /**
-     * @param Int $id
-     * @return self
+     * @param Int $id 
+     * @return self 
      */
-    public function setId(int $id): self
+    public function setId(int $id): self 
     {
-        $this->menu_id = $id;
+        $this->menu_id = $id; 
         return $this;
     }
 
@@ -43,7 +43,7 @@ class Menu
      * Get the value of parent_id
      * @return Int
      */
-    public function getParentId(): int
+    public function getParentId(): int 
     {
         return $this->parent_id;
     }

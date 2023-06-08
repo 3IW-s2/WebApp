@@ -17,10 +17,27 @@ class MenuController
     public function showMenu()
     {
         $view = new View("Backend/Menu/index", "back");
-        $ArtcileService = new MenuService();
-        $menus = $ArtcileService->findAll();
+        $MenuService = new MenuService();
+        $menus = $MenuService->findAll();
         $view->assign('menus', $menus);
     }
 
+    public function addMenu()
+    {
+        $view = new View("Backend/Menu/add", "back");
+        $MenuService = new MenuService();
+        $menus = $MenuService->findAllParent();
+        $view->assign('menus', $menus);
+
+        if (isset($_POST['submit'])) {
+            $menu = new Menu();
+            $menu->setTitre($_POST['title']);
+            $menu->setUrl($_POST['url']);
+            $MenuService->createMenu($menu);
+            header('Location: /admin/menu');
+        }
+
+       
+    }
 
 }
