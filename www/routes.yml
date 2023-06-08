@@ -130,3 +130,23 @@ admin/article/add:
 article/{slug}:
   controller: ArticleController
   action: previewArticle
+
+admin/menu/index:
+  controller: MenuController
+  action: showMenu
+  security: ROLE:ADMIN
+
+admin/menu/edit:
+  controller: MenuController
+  action: editMenu
+  security: ROLE:ADMIN
+
+admin/menu/delete:
+  controller: MenuController
+  action: deleteMenu
+  security: ROLE:ADMIN
+
+admin/menu/add:
+  controller: MenuController
+  action: addMenu
+  security: ROLE:ADMIN
