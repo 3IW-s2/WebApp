@@ -106,3 +106,12 @@
     margin-bottom: 8px;
   }
 }
+
+.layout-container{
+  @include flexbox();
+  @include flex-direction(row);
+
+  main{
+    flex-grow: 1;
+  }
+}
