@@ -106,3 +106,10 @@ VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
 ); */
 
 
+CREATE TABLE menu (
+  menu_id INT PRIMARY KEY,
+  parent_id INT,
+  titre VARCHAR(255),
+  url VARCHAR(255)
+);
+

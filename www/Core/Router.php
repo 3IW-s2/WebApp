@@ -46,8 +46,6 @@ class Router
                 }
             }
 
-      
-        
             if (!$foundRoute) {
                 die("Cette route n'existe pas dans le fichier de routing");
             }
