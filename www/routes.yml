@@ -1,6 +1,7 @@
 default:
   controller: Main
   action: home
+  verifConnexion: true
 
 a-propos:
   controller: Main
@@ -17,6 +18,11 @@ contact:
 login:
   controller: Auth
   action: login
+  
+
+error:
+  controller: Auth
+  action: notFound  
 
 register:
   controller: Auth
@@ -36,7 +42,7 @@ forgotpassword:
 
 resetpassword:
   controller: Auth
-  action: resetPassword
+  action: resetPassword 
 
 newpassword:
   controller: Auth
@@ -46,10 +52,81 @@ s-inscrire:
   controller: Auth
   action: register
 
+admin:
+  controller: AdminController
+  action: index
+  security: ROLE:ADMIN
+
 admin/showuser:
   controller: UserController
   action: showUser
+  security: ROLE:ADMIN 
 
 admin/user/delete:
   controller: UserController
   action: deleteUser
+  security: ROLE:ADMIN 
+
+admin/user/edit:
+  controller: UserController
+  action: editUser
+  security: ROLE:ADMIN 
+
+admin/user/add:
+  controller: UserController
+  action: addUser 
+  security: ROLE:ADMIN  
+  verifConnexion: true
+
+admin/user/role:
+  controller: UserController
+  action: editRole
+  security: ROLE:ADMIN  
+
+admin/page/index:
+  controller: PageController
+  action: showPost
+  security: ROLE:ADMIN
+
+admin/page/edit:
+  controller: PageController
+  action: editPost
+  security: ROLE:ADMIN
+
+admin/page/delete:
+  controller: PageController
+  action: deletePost
+  security: ROLE:ADMIN  
+
+admin/page/add:
+  controller: PageController
+  action: addPost
+  security: ROLE:ADMIN
+  
+post/{slug}:
+  controller: PostController
+  action: showPost
+
+admin/article/index:
+  controller: ArticleController
+  action: showArticle
+  security: ROLE:ADMIN
+
+admin/article/edit:
+  controller: ArticleController
+  action: editArticle
+  security: ROLE:ADMIN
+
+admin/article/delete:
+  controller: ArticleController
+  action: deleteArticle
+  security: ROLE:ADMIN
+
+admin/article/add:
+  controller: ArticleController
+  action: addArticle
+  security: ROLE:ADMIN
+
+article/{slug}:
+  controller: ArticleController
+  action: previewArticle

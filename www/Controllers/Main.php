@@ -3,16 +3,30 @@
 namespace App\Controllers;
 
 use App\Core\View;
+use App\Services\MenuService;
+use App\Services\ArticleService;
+use App\Services\CommentaireService;
+
 
 class Main
 {
     public function home(): void
     {
+        var_dump($_SESSION);
+        $timestamp = time();
+        $newTimestamp = strtotime('+2 hours', $timestamp);
+        $date = date('Y-m-d H:i:s', $newTimestamp);
+        echo $date;
+        $menuService = new MenuService();
+        $menus = $menuService->findAll();
+      
+
         $pseudo = "Prof";
         $view = new View("Main/home", "front");
         $view->assign("pseudo", $pseudo);
         $view->assign("age", 30);
         $view->assign("titleseo", "supernouvellepage");
+        $view->assign("menus", $menus);
     }
 
     public function contact(): void

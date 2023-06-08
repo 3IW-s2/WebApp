@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-
+use App\Core\Security;
 
 class Router
 {
@@ -18,12 +18,37 @@ class Router
         $uriExploded = explode("?", $uri);
         $uri = strtolower(trim($uriExploded[0], "/"));
 
+        $explodedUri = explode("/", $uri);
+        $slug = isset($explodedUri[1]) ? $explodedUri[1] : null;
+        
+   
+
         if (empty($uri)) {
             $uri = "default";
         }
-
+    
+       /*  if (empty($this->routes[$uri])) {
+            die("Cette route n'existe pas dans le fichier de routing");
+        } */
         if (empty($this->routes[$uri])) {
-            die("Page 404");
+            // Vérification du slug
+            $foundRoute = false;
+        
+            foreach ($this->routes as $route => $params) {
+                if (strpos($route, '{slug}') !== false) {
+                    $pattern = str_replace('{slug}', '(.+)', $route);
+                    if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
+                        $uri = $route;
+                        $_GET['slug'] = $matches[1]; 
+                        $foundRoute = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!$foundRoute) {
+                die("Cette route n'existe pas dans le fichier de routing");
+            }
         }
 
         if (empty($this->routes[$uri]["controller"]) || empty($this->routes[$uri]["action"])) {
@@ -32,6 +57,19 @@ class Router
 
         $controller = $this->routes[$uri]["controller"];
         $action = $this->routes[$uri]["action"];
+        $security = $this->routes[$uri]["security"] ?? null;
+        $verifConnexion = $this->routes[$uri]["verifConnexion"] ?? null;
+         
+        if ($security !== null && !Security::checkSecurity($security)) {
+            header("Location: /login");
+            exit();
+        }
+
+        if ($verifConnexion !== null && $verifConnexion === true && !Security::checkToken()) {
+            header("Location: /login");
+            exit();
+        }
+       
 
         $controllerFilePath = "Controllers/" . $controller . ".php";
         if (!file_exists($controllerFilePath)) {

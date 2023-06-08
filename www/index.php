@@ -4,6 +4,13 @@ namespace App;
 use App\Core\Router;
 
 session_start();
+$timestamp = time();
+$newTimestamp = strtotime('+2 hours', $timestamp);
+$date = date('Y-m-d H:i:s', $newTimestamp);
+$_SESSION["token_update_time"] = $date;
+
+
+
 require 'vendor/autoload.php';
 error_reporting(E_ALL);
 ini_set('display_errors', true);

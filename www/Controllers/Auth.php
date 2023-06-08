@@ -14,6 +14,7 @@ use PDO;
 
 class Auth
 {
+   
     public $message = [];
 
     public function __construct(){
@@ -23,7 +24,8 @@ class Auth
     }
 
     public function login(): void
-    {   
+    {    
+
         $view = new View("Auth/login", "front");
         $error = new Error();
         $user = new User($error);
@@ -94,7 +96,7 @@ class Auth
           $user = new User( $error);
     
           if(!empty($_POST)){
-                $email = $_SESSION["user"]["email"];
+                $email = $_SESSION["user"];
                 $pwd = $_POST["password"];
     
                
@@ -139,8 +141,6 @@ class Auth
         }
 
         
-
-        // Transmettre l'ErrorBag à la vue
         $view->setVariable("error", $error);
         $view->setVariable("errors", $errors);
 
@@ -157,7 +157,7 @@ class Auth
 
             if ($tokenIsValid) {
                 $view = new View("Auth/activate", "front");
-                header("Location: /");
+                header("Location: /login");
             } else {
                 $errors[]= 'Jeton invalide';
             }
@@ -167,6 +167,11 @@ class Auth
 
         }
         
+    }
+
+    public function notFound(): void
+    {
+        $view = new View("Auth/404", "front");
     }
 
     

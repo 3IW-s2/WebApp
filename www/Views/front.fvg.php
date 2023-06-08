@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>S2-IW</title>
-    <meta name="description" content="ceci est un super site">
+    <title>Frontend</title>
+    <meta name="description" content="TIW">
 </head>
 <body>
     
