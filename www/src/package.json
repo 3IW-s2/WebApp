@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "watch-blog": "sass --no-source-map --no-charset --watch scss/style-blog.scss ../public/css/style.css --style compressed",
+    "watch-back": "sass --no-source-map --no-charset --watch scss/style-back.scss ../public/css/back.css --style compressed"
+  }
+}
