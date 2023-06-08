@@ -17,6 +17,7 @@ CREATE TABLE posts(
     status VARCHAR(255) NOT NULL,
 );
 
+ALTER TABLE posts ADD COLUMN image_path VARCHAR(255)  NULL;
 /* rajoute une colonne slug */
 
 ALTER TABLE posts ADD COLUMN slug VARCHAR(255)  NULL;
@@ -104,4 +105,11 @@ VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
     article_id INTEGER NOT NULL
 ); */
 
+
+CREATE TABLE menu (
+  menu_id INT PRIMARY KEY,
+  parent_id INT,
+  titre VARCHAR(255),
+  url VARCHAR(255)
+);
 

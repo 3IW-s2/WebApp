@@ -127,6 +127,6 @@ admin/article/add:
   action: addArticle
   security: ROLE:ADMIN
 
-articel/{slug}:
+article/{slug}:
   controller: ArticleController
   action: previewArticle
