@@ -41,7 +41,29 @@ class ArticleRepository
             'author' => $article->getAuthor(),
 
         ];
-        $stmt = $this->db->query($query);
+        $stmt = $this->db->query($query , $params);
+    }
+
+    public function updateArticle(Article $article){
+       
+        $query = "UPDATE {$this->table} SET title = :title, content = :content, updated_at = :updated_at WHERE id = :id";
+        $params = [
+            'id' => $article->getId(),
+            'title' => $article->getTitle(),
+            'content' => $article->getContent(),
+            'updated_at' => $article->getUpdatedAt(),
+            'author' => $article->getAuthor(),
+        ];
+        $stmt = $this->db->query($query , $params);
+    }
+
+    public function deleteArticle(Article $article){
+       
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
+        $params = [
+            'id' => $article->getId(),
+        ];
+        $stmt = $this->db->query($query , $params);
     }
 
 }

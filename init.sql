@@ -113,3 +113,6 @@ CREATE TABLE menu (
   url VARCHAR(255)
 );
 
+/* alter la colomn parent_id pour qu'elle puisse etre null */
+
+ALTER TABLE menu ALTER COLUMN parent_id DROP NOT NULL;
