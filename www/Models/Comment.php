@@ -13,14 +13,49 @@ use Exception;
 class Comment extends Database
 {
     private Int $id = 0;
-    private String $comment;
+    private String $content;
     private Bool $status;
     private Int $post_id = 0;
     private Int $user_id = 0;
+    private Int $signaled = 0;
     private \DateTime $date_inserted;
     private \DateTime $date_updated;
     private $baseUrl;
     private $error;
+
+    /**
+     * @return String
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param String $content
+     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
+    }
+
+
+    /**
+     * @return Int
+     */
+    public function getPostId(): int
+    {
+        return $this->post_id;
+    }
+
+    /**
+     * @param Int $post_id
+     */
+    public function setPostId(int $post_id): void
+    {
+        $this->post_id = $post_id;
+    }
+
 
     public function __construct( Error $error){
         $this->date_inserted = new \DateTime();
@@ -91,6 +126,22 @@ class Comment extends Database
     public function setUserId(Int $user_id):void
     {
         $this->user_id = $user_id;
+    }
+
+    /**
+     * @return Int
+     */
+    public function getSignaled(): int
+    {
+        return $this->signaled;
+    }
+
+    /**
+     * @param Int $signaled
+     */
+    public function setSignaled(int $signaled): void
+    {
+        $this->signaled = $signaled;
     }
     
 

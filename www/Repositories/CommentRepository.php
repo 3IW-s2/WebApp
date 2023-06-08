@@ -12,6 +12,19 @@ use Exception;
 
 class CommentRepository extends Database 
 {
+    public function getCommentById(int $id): Comment
+    {
+        $db = Database::getInstance();
+
+        $query = "SELECT * FROM comments WHERE id = :id";
+        $params = [
+            'id' => $id
+        ];
+        $statement = $db->query($query, $params);
+        $comment = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $comment;
+    }
     public function getCommentsByArticleId(int $post_id ): array
     {
         $db = Database::getInstance($post_id);
@@ -67,6 +80,18 @@ class CommentRepository extends Database
         $params = [
             'id' => $comment->getId(),
             'status' => $comment->getStatus() == true ? 1 : 0
+        ];
+        $statement = $db->query($query, $params);
+    }
+
+    public function signalComment(Comment  $comment): void
+    {
+        $db = Database::getInstance();
+
+        $query = "UPDATE comments SET signaled = :signaled, updated_at = NOW() WHERE id = :id";
+        $params = [
+            'id' => $comment->getId(),
+            'status' => $comment->getSignaled() + 1
         ];
         $statement = $db->query($query, $params);
     }

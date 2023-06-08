@@ -130,7 +130,6 @@ admin/article/add:
 articel/{slug}:
   controller: ArticleController
   action: previewArticle
-  action: addUser  
 
 admin/comment/index:
   controller: CommentController
@@ -144,3 +143,6 @@ article/addcomment:
   controller: CommentController
   action: addComment
 
+article/signalComment:
+    controller: CommentController
+    action: signalComment
