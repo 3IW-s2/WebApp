@@ -36,6 +36,11 @@ class CommentService extends Database
         }
     }
 
+    public function getCommentById(int $id): Comment
+    {
+        return $this->commentRepo->getCommentById($id);
+    }
+
     public function getAllComment(): array
     {
         return $this->commentRepo->GetAllComments();
@@ -56,6 +61,11 @@ class CommentService extends Database
     public function deleteCommentById(int $id): void
     {
         $this->commentRepo->delete($id);
+    }
+
+    public function signalComment(Comment $comment): void
+    {
+        $this->commentRepo->signalComment($comment);
     }
 
 }

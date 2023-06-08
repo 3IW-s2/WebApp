@@ -21,6 +21,7 @@ CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     content TEXT NOT NULL,
     status BOOLEAN NOT NULL DEFAULT FALSE,
+    signaled INTEGER NOT NULL DEFAULT 0,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
     user_id INTEGER NOT NULL,

@@ -20,8 +20,23 @@ class CommentController
         
     }
 
+    public function showCommentsByPostId()
+    {
+        $view = new View("Main/post", "front");
+        $error = new Error();
+        $commentService = new CommentService($error);
+
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+        }
+
+        $comments = $commentService->getCommentsByPostId($id);
+        $view->assign('comments', $comments);
+    }
+
     public function addComment()
     {
+        $error = new Error();
          $content = $_POST['content'];
          $post_id = $_POST['post_id'];
          $user_id = $_POST['user_id'];
@@ -41,31 +56,48 @@ class CommentController
     public function updateComment()
     {
 
-       $error = new Error();
-       $view = new View("Backend/Comment/edit", "back");
+        $error = new Error();
+        $view = new View("Backend/Comment/edit", "back");
 
-       if(isset($_GET['id'])){
-          $id = $_GET['id'];
-       
-
-       if(isset($_POST['submit'])){
-           $status = $_POST['status'] == 'true' ? true : false;
-        
-
-       $comment = new Comment($error);
-       $comment->setStatus($status);
-       $comment->setId($id);
-
-       $commentService = new CommentService();
-       $comments = $commentService->updateComment($comment);
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
 
 
-       header('Location: /admin/comment/index');
-
-       }
-     }
+            if (isset($_POST['submit'])) {
+                $status = $_POST['status'] == 'true' ? true : false;
 
 
+                $comment = new Comment($error);
+                $comment->setStatus($status);
+                $comment->setId($id);
+
+                $commentService = new CommentService();
+                $comments = $commentService->updateComment($comment);
+
+
+                header('Location: /admin/comment/index');
+
+            }
+        }
     }
+
+       public function signalComment()
+       {
+           $error = new Error();
+           $view = new View("Main/editComment", "front");
+
+           if (isset($_GET['id'])) {
+               $id = $_GET['id'];
+              }
+
+           $commentService = new CommentService($error);
+           $comment = $commentService->getCommentById($id);
+           $commentService->signalComment($comment);
+           $errors[] = "Le commentaire a bien été signalé, il passera en revu par l'administrateur";
+           $view->assign('errors', $errors);
+
+           //header("Location:".$_SERVER[HTTP_REFERER]);
+       }
+
 
 }

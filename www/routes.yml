@@ -193,3 +193,7 @@ admin/comment/edit:
 article/addcomment:
   controller: CommentController
   action: addComment
+
+article/signalComment:
+    controller: CommentController
+    action: signalComment
