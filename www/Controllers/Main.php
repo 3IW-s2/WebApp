@@ -19,7 +19,6 @@ class Main
         echo $date;
         $menuService = new MenuService();
         $menus = $menuService->findAll();
-        $sousmenus = $menuService->findAllParent();
       
 
         $pseudo = "Prof";
@@ -28,7 +27,6 @@ class Main
         $view->assign("age", 30);
         $view->assign("titleseo", "supernouvellepage");
         $view->assign("menus", $menus);
-        $view->assign("sousmenus", $sousmenus);
     }
 
     public function contact(): void

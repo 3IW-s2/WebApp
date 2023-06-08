@@ -24,34 +24,4 @@ class ArticleService
         return $this->articleRepository->findAll();
     }
 
-    public function findAllByCategorie($id)
-    {
-        return $this->articleRepository->findAllByCategorie($id);
-    }
-
-    public function findAllByUser($id)
-    {
-        return $this->articleRepository->findAllByUser($id);
-    }
-
-    public function findOne($id)
-    {
-        return $this->articleRepository->findOne($id);
-    }
-
-    public function createArticle(Article $article)
-    {
-        $this->articleRepository->createArticle($article);
-    }
-    
-    public function updateArticle(Article $article)
-    {
-        $this->articleRepository->updateArticle($article);
-    }
-
-    public function deleteArticle(Article $article)
-    {
-        $this->articleRepository->deleteArticle($article);
-    }
-
 }
