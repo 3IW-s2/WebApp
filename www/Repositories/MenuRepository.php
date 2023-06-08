@@ -32,14 +32,25 @@ class MenuRepository
     
         public function createMenu(Menu $menu){
         
-            $query = "INSERT INTO {$this->table} (parent_id, titre, url) VALUES (:parent_id, :titre, :url)";
+            $query = "INSERT INTO {$this->table} (titre, url) VALUES (:titre, :url)";
+            $params = [
+                'titre' => $menu->getTitre(),
+                'url' => $menu->getUrl(),
+            ];
+            $stmt = $this->db->query($query ,$params);
+        }
+
+        public function createSubMenu(Menu $menu){
+        
+            $query = "INSERT INTO {$this->table} ( parent_id, titre, url) VALUES ( :parent_id, :titre, :url)";
             $params = [
                 'parent_id' => $menu->getParentId(),
                 'titre' => $menu->getTitre(),
                 'url' => $menu->getUrl(),
             ];
-            $stmt = $this->db->query($query);
+            $stmt = $this->db->query($query ,$params);
         }
+
     
         public function updateMenu(Menu $menu){
         
@@ -50,7 +61,7 @@ class MenuRepository
                 'titre' => $menu->getTitre(),
                 'url' => $menu->getUrl(),
             ];
-            $stmt = $this->db->query($query);
+            $stmt = $this->db->query($query , $params);
         }
     
         public function deleteMenu(Menu $menu){
@@ -59,7 +70,16 @@ class MenuRepository
             $params = [
                 'menu_id' => $menu->getId(),
             ];
+            $stmt = $this->db->query($query , $params);
+        }
+
+        public function findAllParent()
+        {
+            $query = "SELECT * FROM {$this->table} WHERE parent_id IS NOT  NULL ORDER BY menu_id ASC";
             $stmt = $this->db->query($query);
+            $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $menus;
         }
     
 }

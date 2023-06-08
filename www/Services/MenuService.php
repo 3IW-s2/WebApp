@@ -29,6 +29,11 @@ class MenuService
         $this->menuRepository->createMenu($menu);
     }
 
+    public function createSubMenu(Menu $menu){
+    
+        $this->menuRepository->createSubMenu($menu);
+    }
+
     public function updateMenu(Menu $menu){
     
         $this->menuRepository->updateMenu($menu);
@@ -37,6 +42,11 @@ class MenuService
     public function deleteMenu(Menu $menu){
     
         $this->menuRepository->deleteMenu($menu);
+    }
+
+    public function findAllParent()
+    {
+        return $this->menuRepository->findAllParent();
     }
 
 }
