@@ -67,6 +67,7 @@ class Security extends Database
 
         $token = $_SESSION["expire_token"];
         $expirationTimestamp = strtotime($token);
+     
 
 
         $timestamp = time();

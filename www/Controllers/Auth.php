@@ -25,6 +25,8 @@ class Auth
 
     public function login(): void
     {    
+        var_dump($_SESSION);
+     
 
         $view = new View("Auth/login", "front");
         $error = new Error();
@@ -47,6 +49,7 @@ class Auth
     public function logout(): void
     {
         if(!empty($_SESSION["user"])){
+            session_destroy();
             unset($_SESSION["user"]);
         }
         header("Location: /");
