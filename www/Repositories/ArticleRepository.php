@@ -86,5 +86,13 @@ class ArticleRepository
         return $article;
     }
 
+    public function pendingArticle( Article $article){
+        $query = "UPDATE {$this->table} SET status = :status WHERE id = :id";
+        $params = [
+            'id' => $article->getId(),
+            'status' => 5,
+        ];
+        $stmt = $this->db->query($query , $params);
+    }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Error;
+use App\Core\Security;
 use App\Models\Article;
 use App\Core\View;
 use App\Core\Database;
@@ -15,13 +16,30 @@ use PDO;
 class ArticleController
 {
     public function previewArticle(){
-        //$view = new View("Frontend/Article/preview", "front");
+        $error = new Error();
+        $security = new Security($error);
+       
 
         $article = new Article();
         $article->setSlug($_GET['slug']);
         $ArtcileService = new ArticleService();
         $articles = $ArtcileService->getArticleBySlug($article);
+        if ($articles == false){
+            $error->setCode(404);
+            $error->addError("Article introuvable");
+            header('Location: /');
+        }
         var_dump($articles);
+    }
+
+    public function pendingArticle(){
+        if (isset($_GET['id'])){
+            $article = new Article();
+            $article->setId($_GET['id']);
+            $ArtcileService = new ArticleService();
+            $articles = $ArtcileService->pendingArticle($article);
+            header('Location: /admin/article/index');
+        }
     }
     public function showArticle()
     {

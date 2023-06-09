@@ -132,6 +132,11 @@ admin/article/add:
   action: addArticle
   security: ROLE:ADMIN
 
+admin/article/pending:
+  controller: ArticleController
+  action: pendingArticle
+  security: ROLE:ADMIN
+
 article/{slug}:
   controller: ArticleController
   action: previewArticle

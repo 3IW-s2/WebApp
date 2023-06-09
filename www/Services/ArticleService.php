@@ -61,11 +61,13 @@ class ArticleService
 
     public function getArticleBySlug( Article $article)
     {   
-        $error = new Error();
-        $security = new Security($error);
-        $security->checkId404($article->getId());
-        
+     
         return $this->articleRepository->getArticleBySlug($article);
+    }
+
+    public function pendingArticle(Article $article)
+    {
+        return $this->articleRepository->pendingArticle($article);
     }
 
 }
