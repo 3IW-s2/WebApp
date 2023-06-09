@@ -122,6 +122,11 @@ admin/article/delete:
   action: deleteArticle
   security: ROLE:ADMIN
 
+admin/article/publish:
+  controller: ArticleController
+  action: publishArticle
+  security: ROLE:ADMIN
+
 admin/article/add:
   controller: ArticleController
   action: addArticle

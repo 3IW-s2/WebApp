@@ -225,4 +225,13 @@ class Security extends Database
         }
         return true;
     }
+
+    public function checkId404(int $id)
+    {
+        if ($id > 0) {
+            return true;
+        }
+        header("Location: /error");
+        return false;
+    }
 }

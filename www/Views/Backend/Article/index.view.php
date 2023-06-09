@@ -54,6 +54,7 @@
                                         <td>
                                             <a href="edit?id=<?= $article['id'] ?>" class="btn btn-primary">Edit</a>
                                             <a href="delete?id=<?= $article['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="publish?id=<?= $article['id'] ?>" class="btn btn-success">Publish</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

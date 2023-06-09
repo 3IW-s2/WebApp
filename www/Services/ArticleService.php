@@ -54,4 +54,18 @@ class ArticleService
         $this->articleRepository->deleteArticle($article);
     }
 
+    public function publishArticle(Article $article)
+    {
+        $this->articleRepository->publishArticle($article);
+    }
+
+    public function getArticleBySlug( Article $article)
+    {   
+        $error = new Error();
+        $security = new Security($error);
+        $security->checkId404($article->getId());
+        
+        return $this->articleRepository->getArticleBySlug($article);
+    }
+
 }
