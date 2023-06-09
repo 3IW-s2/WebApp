@@ -11,7 +11,6 @@ use App\Core\Session;
 use PDO;
 
 
-
 class MenuController
 {
     public function showMenu()
