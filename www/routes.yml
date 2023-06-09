@@ -102,6 +102,16 @@ admin/page/add:
   controller: PageController
   action: addPost
   security: ROLE:ADMIN
+
+admin/page/pending:
+  controller: PageController
+  action: pendingPost
+  security: ROLE:ADMIN
+
+admin/page/publish:
+  controller: PageController
+  action: publishPost
+  security: ROLE:ADMIN 
   
 post/{slug}:
   controller: PostController
@@ -122,9 +132,19 @@ admin/article/delete:
   action: deleteArticle
   security: ROLE:ADMIN
 
+admin/article/publish:
+  controller: ArticleController
+  action: publishArticle
+  security: ROLE:ADMIN
+
 admin/article/add:
   controller: ArticleController
   action: addArticle
+  security: ROLE:ADMIN
+
+admin/article/pending:
+  controller: ArticleController
+  action: pendingArticle
   security: ROLE:ADMIN
 
 article/{slug}:
@@ -149,4 +169,14 @@ admin/menu/delete:
 admin/menu/add:
   controller: MenuController
   action: addMenu
+  security: ROLE:ADMIN
+
+admin/menu/pending:
+  controller: MenuController
+  action: pendingMenu
+  security: ROLE:ADMIN
+
+admin/menu/publish:
+  controller: MenuController
+  action: publishMenu
   security: ROLE:ADMIN

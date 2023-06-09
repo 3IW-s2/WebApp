@@ -47,4 +47,14 @@ class PostService  extends Database
     {   
         return $this->postRepo->getPostById($post);
     }
+
+    public function pendingPost(Post $post)
+    {
+        return $this->postRepo->pendingPost($post);
+    }
+
+    public function publishPost(Post $post)
+    {
+        return $this->postRepo->publishPost($post);
+    }
 }

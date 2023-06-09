@@ -1,5 +1,5 @@
 <H1> ajouter un article </H1>
-<form id="add-page-form" method="post" action="">
+<form id="add-article-form" method="post" action="">
     <div class="form-group">
                 <label for="firstname">Title</label>
                 <input type="text" name="title" id="title" class="form-control"  />

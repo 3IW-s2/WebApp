@@ -54,4 +54,20 @@ class ArticleService
         $this->articleRepository->deleteArticle($article);
     }
 
+    public function publishArticle(Article $article)
+    {
+        $this->articleRepository->publishArticle($article);
+    }
+
+    public function getArticleBySlug( Article $article)
+    {   
+     
+        return $this->articleRepository->getArticleBySlug($article);
+    }
+
+    public function pendingArticle(Article $article)
+    {
+        return $this->articleRepository->pendingArticle($article);
+    }
+
 }

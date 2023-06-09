@@ -82,6 +82,29 @@ class PageController
             header('Location: /admin/page/index');
         }
     }
+
+
+    public function pendingPost()
+    {
+        if (isset($_GET['id'])){
+            $post = new Post();
+            $post->setId($_GET['id']);
+            $postService = new PostService();
+            $posts = $postService->pendingPost($post);
+            header('Location: /admin/page/index');
+        }
+    }
+
+    public function publishPost()
+    {
+        if (isset($_GET['id'])) {
+            $post = new Post();
+            $post->setId($_GET['id']);
+            $postService = new PostService();
+            $posts = $postService->publishPost($post);
+            header('Location: /admin/page/index');
+        }
+    }
     
 
 }

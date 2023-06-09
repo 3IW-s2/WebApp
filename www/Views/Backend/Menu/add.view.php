@@ -14,7 +14,7 @@
 <H1> ajouter un sous menu </H1>
 <!-- y'a plusieur valeurs dans $menus recupère les et mets les dans une liste dans mon form pour pouvoir les envoyers  -->
 
-<form id="add-menu-form" method="post" action="">
+<form id="add-sous-menu-form" method="post" action="">
     <div class="form-group">
                 <label for="firstname">Title</label>
                 <input type="text" name="title" id="title" class="form-control"  />

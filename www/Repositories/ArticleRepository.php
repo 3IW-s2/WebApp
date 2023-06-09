@@ -32,13 +32,12 @@ class ArticleRepository
 
     public function createArticle(Article $article){
        
-        $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at) VALUES (:title, :content, :created_at, :updated_at)";
+        $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at , author , status) VALUES (:title, :content, NOW(), NOW() , :author , :status )";
         $params = [
             'title' => $article->getTitle(),
             'content' => $article->getContent(),
-            'created_at' => $article->getCreatedAt(),
-            'updated_at' => $article->getUpdatedAt(),
             'author' => $article->getAuthor(),
+            'status' => 5,
 
         ];
         $stmt = $this->db->query($query , $params);
@@ -62,6 +61,36 @@ class ArticleRepository
         $query = "DELETE FROM {$this->table} WHERE id = :id";
         $params = [
             'id' => $article->getId(),
+        ];
+        $stmt = $this->db->query($query , $params);
+    }
+
+
+    public function publishArticle (Article $article){
+        $query = "UPDATE {$this->table} SET status = :status WHERE id = :id";
+        $params = [
+            'id' => $article->getId(),
+            'status' => 1,
+        ];
+        $stmt = $this->db->query($query , $params);
+    }
+
+    public function getArticleBySlug(Article $article){
+        $query = "SELECT * FROM {$this->table} WHERE slug = :slug AND status = '1' ";
+        $params = [
+            'slug' => $article->getSlug(),
+        ];
+        $stmt = $this->db->query($query , $params);
+        $article = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $article;
+    }
+
+    public function pendingArticle( Article $article){
+        $query = "UPDATE {$this->table} SET status = :status WHERE id = :id";
+        $params = [
+            'id' => $article->getId(),
+            'status' => 5,
         ];
         $stmt = $this->db->query($query , $params);
     }

@@ -36,7 +36,7 @@ class  PostRepository  extends Database
     public function getPostBySlug(Post $post)
     {  
 
-        $query = "SELECT * FROM posts WHERE slug LIKE :slug";
+        $query = "SELECT * FROM posts WHERE slug = :slug AND status = '1'";
         $params = [
             'slug' => $post->getSlug()
         ];
@@ -44,6 +44,7 @@ class  PostRepository  extends Database
         $post = $statement->fetch(PDO::FETCH_ASSOC);
         
         $error = new Error();
+        $error->addError("Article introuvable");
         $security = new Security($error);
         $security->check404($post);
         return $post;
@@ -97,6 +98,27 @@ class  PostRepository  extends Database
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
             'slug' => $post->getSlug(),
+            'id' => $post->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+    }
+
+
+    public function pendingPost(Post $post)
+    {
+
+        $query = "UPDATE posts SET status = '5' WHERE id = :id";
+        $params = [
+            'id' => $post->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+    }
+
+    public function publishPost(Post $post)
+    {
+
+        $query = "UPDATE posts SET status = '1' WHERE id = :id";
+        $params = [
             'id' => $post->getId()
         ];
         $statement = $this->db->query($query, $params);
