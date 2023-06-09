@@ -14,6 +14,7 @@ class Menu
     private ?Int $parent_id;
     private String $titre;
     private String $url ;
+    private ?String $status;
 
     public function __construct()
     {
@@ -97,6 +98,26 @@ class Menu
     public function setUrl(String $url): self
     {
         $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     * @return String
+     */
+    public function getStatus(): ?String
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     * @param String $status
+     * @return  self
+     */
+    public  function setStatus(?string $status): self
+    {
+        $this->status = $status;
         return $this;
     }
 }

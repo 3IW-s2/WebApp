@@ -220,7 +220,7 @@ class Security extends Database
     public function check404( $arg)
     {
         if (empty($arg)){
-            header("Location: /error");
+            header("Location: /");
             exit();
         }
         return true;

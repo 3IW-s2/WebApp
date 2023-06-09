@@ -44,6 +44,7 @@ class  PostRepository  extends Database
         $post = $statement->fetch(PDO::FETCH_ASSOC);
         
         $error = new Error();
+        $error->addError("Article introuvable");
         $security = new Security($error);
         $security->check404($post);
         return $post;

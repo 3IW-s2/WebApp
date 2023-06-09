@@ -170,3 +170,13 @@ admin/menu/add:
   controller: MenuController
   action: addMenu
   security: ROLE:ADMIN
+
+admin/menu/pending:
+  controller: MenuController
+  action: pendingMenu
+  security: ROLE:ADMIN
+
+admin/menu/publish:
+  controller: MenuController
+  action: publishMenu
+  security: ROLE:ADMIN

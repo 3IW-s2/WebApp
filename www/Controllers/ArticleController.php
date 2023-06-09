@@ -77,4 +77,15 @@ class ArticleController
             header('Location: /admin/article/index');
         }
     }
+
+    public function deleteArticle()
+    {
+        if (isset($_GET['id'])) {
+            $ArtcileService = new ArticleService();
+            $article = new Article();
+            $article->setId($_GET['id']);
+            $ArtcileService->deleteArticle($article);
+            header('Location: /admin/article/index');
+        }
+    }
 }

@@ -37,6 +37,7 @@
                                     <th scope="col">parent_id</th>
                                     <th scope="col">titre</th>
                                     <th scope="col">url</th>
+                                    <th scope="col">status</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -48,10 +49,13 @@
                                         <td><?= $menu["parent_id"]?></td>
                                         <td><?= $menu["titre"] ?></td>
                                         <td><?= $menu["url"]?></td>
+                                        <td><?= $menu["status"]?></td>
                                        <!--  <td></td> -->
                                         <td>
                                             <a href="edit?id=<?= $menu['menu_id'] ?>" class="btn btn-primary">Edit</a>
                                             <a href="delete?id=<?= $menu['menu_id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="publish?id=<?= $menu['menu_id'] ?>" class="btn btn-success">Publish</a>
+                                            <a href="pending?id=<?= $menu['menu_id'] ?>" class="btn btn-warning">Pending</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

@@ -87,4 +87,26 @@ class MenuController
         }
     }
 
+    public function pendingMenu()
+    {
+        if (isset($_GET['id'])) {
+            $MenuService = new MenuService();
+            $menu = new Menu();
+            $menu->setId($_GET['id']);
+            $MenuService->pendingMenu($menu);
+            header('Location: /admin/menu/index');
+        }
+    }
+
+    public function publishMenu()
+    {
+        if (isset($_GET['id'])) {
+            $MenuService = new MenuService();
+            $menu = new Menu();
+            $menu->setId($_GET['id']);
+            $MenuService->publishMenu($menu);
+            header('Location: /admin/menu/index');
+        }
+    }
+
 }
