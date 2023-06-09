@@ -107,12 +107,12 @@ VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
 
 
 CREATE TABLE menu (
-  menu_id INT PRIMARY KEY,
+  menu_id SERIAL PRIMARY KEY,
   parent_id INT,
   titre VARCHAR(255),
   url VARCHAR(255)
 );
 
-/* alter la colomn parent_id pour qu'elle puisse etre null */
+
 
 ALTER TABLE menu ALTER COLUMN parent_id DROP NOT NULL;

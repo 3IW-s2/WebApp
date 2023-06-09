@@ -81,5 +81,17 @@ class MenuRepository
     
             return $menus;
         }
+
+        public function findOneById(Menu $menu)
+        {
+            $query = "SELECT * FROM {$this->table} WHERE menu_id = :menu_id";
+            $params = [
+                'menu_id' => $menu->getId(),
+            ];
+            $stmt = $this->db->query($query, $params);
+            $menu = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            return $menu;
+        }
     
 }

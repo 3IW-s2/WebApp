@@ -17,33 +17,70 @@ class MenuController
     public function showMenu()
     {
         $view = new View("Backend/Menu/index", "back");
-        $ArtcileService = new MenuService();
-        $menus = $ArtcileService->findAll();
+        $MenuService = new MenuService();
+        $menus = $MenuService->findAll();
         $view->assign('menus', $menus);
     }
 
     public function addMenu()
     {
         $view = new View("Backend/Menu/add", "back");
-        $ArtcileService = new MenuService();
-        $menus = $ArtcileService->findAllParent();
+        $MenuService = new MenuService();
+        $menus = $MenuService->findAllParent();
         $view->assign('menus', $menus);
 
         if (isset($_POST['submit'])) {
             $menu = new Menu();
             $menu->setTitre($_POST['title']);
             $menu->setUrl($_POST['url']);
-            $ArtcileService->createMenu($menu);
-            header('Location: /admin/menu');
+            $MenuService->createMenu($menu);
+            header('Location: /admin/menu/index');
         }
+     
 
         if (isset($_POST['submit-submenu'])) {
             $menu = new Menu();
             $menu->setTitre($_POST['title']);
             $menu->setUrl($_POST['url']);
-            $menu->setParentId($_POST['parent']);
-            $ArtcileService->createSubMenu($menu);
-            header('Location: /admin/menu');
+            $menu->setParentId($_POST['parent_id']);
+            $MenuService->createSubMenu($menu);
+            header('Location: /admin/menu/index');
+        }
+    }
+
+    public function deleteMenu()
+    {
+        if (isset($_GET['id'])) {
+            $MenuService = new MenuService();
+            $menu = new Menu();
+            $menu->setId($_GET['id']);
+            $MenuService->deleteMenu($menu);
+            header('Location: /admin/menu/index');
+        }
+    }
+
+    public function editMenu()
+    {
+        $view = new View("Backend/Menu/edit", "back");
+        $MenuService = new MenuService();
+        $menus = $MenuService->findAllParent();
+        $view->assign('menus', $menus);
+
+        if (isset($_GET['id'])) {
+            $menu = new Menu();
+            $menu->setId($_GET['id']);
+            $menu = $MenuService->findOneById($menu);
+            $view->assign('menu', $menu);
+        }
+
+        if (isset($_POST['submit'])) {
+            $menu = new Menu();
+            $menu->setId($_GET['id']);
+            $menu->setTitre($_POST['titre']);
+            $menu->setUrl($_POST['url']);
+            $menu->setParentId($_POST['parent_id']);
+            $MenuService->updateMenu($menu);
+            header('Location: /admin/menu/index');
         }
     }
 
