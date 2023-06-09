@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label for="lastname">Parent</label>
-                <select name="parent" id="parent">
+                <select name="parent_id" id="parent_id">
                     <?php foreach($menus as $menu): ?>
                         <option value="<?= $menu['menu_id'] ?>"><?= $menu['titre'] ?></option>
                     <?php endforeach; ?>

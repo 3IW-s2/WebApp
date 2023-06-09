@@ -49,4 +49,9 @@ class MenuService
         return $this->menuRepository->findAllParent();
     }
 
+    public function findOneById(Menu $menu)
+    {
+        return $this->menuRepository->findOneById($menu);
+    }
+
 }

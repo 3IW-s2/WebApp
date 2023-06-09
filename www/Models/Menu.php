@@ -11,7 +11,7 @@ use Exception;
 class Menu 
 {
     private Int $menu_id = 0;
-    private Int $parent_id;
+    private ?Int $parent_id;
     private String $titre;
     private String $url ;
 
@@ -43,7 +43,7 @@ class Menu
      * Get the value of parent_id
      * @return Int
      */
-    public function getParentId(): int 
+    public function getParentId(): ?int 
     {
         return $this->parent_id;
     }
@@ -53,7 +53,7 @@ class Menu
      * @param Int $parent_id
      * @return  self
      */
-    public function setParentId(int $parent_id): self
+    public function setParentId(?int $parent_id): self
     {
         $this->parent_id = $parent_id;
         return $this;
