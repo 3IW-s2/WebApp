@@ -78,7 +78,10 @@ class MenuController
             $menu->setId($_GET['id']);
             $menu->setTitre($_POST['titre']);
             $menu->setUrl($_POST['url']);
-            $menu->setParentId($_POST['parent_id']);
+            $menu->setParentId((int)$_POST['parent_id']);
+            if((int)$_POST['parent_id'] == 0) {
+                $menu->setParentId(null);
+            }
             $MenuService->updateMenu($menu);
             header('Location: /admin/menu/index');
         }
