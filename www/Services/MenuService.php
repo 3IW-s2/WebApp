@@ -38,5 +38,30 @@ class MenuService
     
         $this->menuRepository->deleteMenu($menu);
     }
+    
+    public function findAllParent()
+    {
+        return $this->menuRepository->findAllParent();
+    }
+
+    public function findOneById(Menu $menu)
+    {
+        return $this->menuRepository->findOneById($menu);
+    }
+
+    public function pendingMenu(Menu $menu)
+    {
+        $this->menuRepository->pendingMenu($menu);
+    }
+
+    public function publishMenu(Menu $menu){
+
+        $this->menuRepository->publishMenu($menu);
+    }
+
+    public function activeLink(){
+        
+       return  $this->menuRepository->activeLink();
+    }
 
 }

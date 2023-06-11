@@ -67,6 +67,7 @@ class Security extends Database
 
         $token = $_SESSION["expire_token"];
         $expirationTimestamp = strtotime($token);
+     
 
 
         $timestamp = time();
@@ -219,9 +220,18 @@ class Security extends Database
     public function check404( $arg)
     {
         if (empty($arg)){
-            header("Location: /error");
+            header("Location: /");
             exit();
         }
         return true;
+    }
+
+    public function checkId404(int $id)
+    {
+        if ($id > 0) {
+            return true;
+        }
+        header("Location: /error");
+        return false;
     }
 }

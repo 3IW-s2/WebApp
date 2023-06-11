@@ -37,7 +37,8 @@
                                     <th scope="col">title</th>
                                     <th scope="col">author</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">slug</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -50,10 +51,13 @@
                                         <td><?= $post["author"] ?></td>
                                         <td><?= $post["content"]?></td>
                                         <td><?= $post["status"] ?></td>
+                                        <td><?= $post["slug"]?></td>
                                        <!--  <td></td> -->
                                         <td>
                                             <a href="edit?id=<?= $post['id'] ?>" class="btn btn-primary">Edit</a>
                                             <a href="delete?id=<?= $post['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="publish?id=<?= $post['id'] ?>" class="btn btn-success">Publish</a>
+                                            <a href="pending?id=<?= $post['id'] ?>" class="btn btn-warning">Pending</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

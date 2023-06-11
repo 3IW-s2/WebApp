@@ -24,4 +24,50 @@ class ArticleService
         return $this->articleRepository->findAll();
     }
 
+    public function findAllByCategorie($id)
+    {
+        return $this->articleRepository->findAllByCategorie($id);
+    }
+
+    public function findAllByUser($id)
+    {
+        return $this->articleRepository->findAllByUser($id);
+    }
+
+    public function findOne($id)
+    {
+        return $this->articleRepository->findOne($id);
+    }
+
+    public function createArticle(Article $article)
+    {
+        $this->articleRepository->createArticle($article);
+    }
+    
+    public function updateArticle(Article $article)
+    {
+        $this->articleRepository->updateArticle($article);
+    }
+
+    public function deleteArticle(Article $article)
+    {
+        $this->articleRepository->deleteArticle($article);
+    }
+
+    public function publishArticle(Article $article)
+    {
+        $this->articleRepository->publishArticle($article);
+    }
+
+    public function getArticleBySlug( Article $article)
+    {   
+     
+        return $this->articleRepository->getArticleBySlug($article);
+    }
+
+    public function pendingArticle(Article $article)
+    {
+        return $this->articleRepository->pendingArticle($article);
+    }
+
 }

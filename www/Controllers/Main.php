@@ -18,7 +18,8 @@ class Main
         $date = date('Y-m-d H:i:s', $newTimestamp);
         echo $date;
         $menuService = new MenuService();
-        $menus = $menuService->findAll();
+        $menus = $menuService->activeLink();
+        $sousmenus = $menuService->findAllParent();
       
 
         $pseudo = "Prof";

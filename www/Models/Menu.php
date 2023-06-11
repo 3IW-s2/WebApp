@@ -11,9 +11,10 @@ use Exception;
 class Menu 
 {
     private Int $menu_id = 0;
-    private Int $parent_id;
+    private ?Int $parent_id;
     private String $titre;
     private String $url ;
+    private ?String $status;
 
     public function __construct()
     {
@@ -43,7 +44,7 @@ class Menu
      * Get the value of parent_id
      * @return Int
      */
-    public function getParentId(): int
+    public function getParentId(): ?int
     {
         return $this->parent_id;
     }
@@ -53,7 +54,7 @@ class Menu
      * @param Int $parent_id
      * @return  self
      */
-    public function setParentId(int $parent_id): self
+    public function setParentId(?int $parent_id): self
     {
         $this->parent_id = $parent_id;
         return $this;
@@ -97,6 +98,26 @@ class Menu
     public function setUrl(String $url): self
     {
         $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     * @return String
+     */
+    public function getStatus(): ?String
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     * @param String $status
+     * @return  self
+     */
+    public  function setStatus(?string $status): self
+    {
+        $this->status = $status;
         return $this;
     }
 }
