@@ -31,8 +31,9 @@
   @include flex-direction(column);
 
   justify-content: space-between;
-  height: 620px;
   gap: 30px;
+  height: 100%;
+  margin-bottom: 20px;
 }
 
 .back-menu-navigation {

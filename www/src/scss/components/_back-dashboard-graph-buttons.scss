@@ -3,16 +3,29 @@
   justify-content: flex-start;
 }
 
+
+.tab-buttons button:first-of-type{
+  border-radius: 8px 0 0 8px;
+}
+
+.tab-buttons button:last-of-type{
+  border-radius: 0 8px 8px 0;
+  border-right-color: var(--primary-color);
+}
+
 .tab-buttons button {
+  font-weight: 550;
   flex: 1;
   padding: 10px;
-  border: none;
-  background-color: #f2f2f2;
-  color: #333;
+  height: 50px;
   font-family: Arial, sans-serif;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  border-right-color: transparent;
+  color: var(--primary-color);
 }
 
 .tab-buttons button.active {

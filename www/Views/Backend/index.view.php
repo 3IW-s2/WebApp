@@ -3,11 +3,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div id="chart-container">
     <div id="bar-chart-buttons" class="tab-buttons">
-        <button onclick="updateChart('day', this)" class="active">Par jour</button>
-        <button onclick="updateChart('week', this)">Par semaine</button>
-        <button onclick="updateChart('month', this)">Par mois</button>
-        <button onclick="updateChart('year', this)">Par an</button>
-        <button onclick="updateChart('years', this)">Par années</button>
+        <button onclick="updateChart('day', this)" class="active">Journée</button>
+        <button onclick="updateChart('week', this)">Semaine</button>
+        <button onclick="updateChart('month', this)">Mois</button>
+        <button onclick="updateChart('year', this)">Année</button>
+        <button onclick="updateChart('years', this)">Tout (par années)</button>
     </div>
     <canvas id="bar-chart"></canvas>
 </div>
