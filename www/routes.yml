@@ -57,6 +57,11 @@ admin:
   action: index
   security: ROLE:ADMIN
 
+admin/dashboard:
+  controller: AdminController
+  action: index
+  security: ROLE:ADMIN
+
 admin/showuser:
   controller: UserController
   action: showUser
@@ -180,3 +185,4 @@ admin/menu/publish:
   controller: MenuController
   action: publishMenu
   security: ROLE:ADMIN
+
