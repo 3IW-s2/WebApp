@@ -3,3 +3,4 @@ privkey.pem
 //ignore les fichiers de logs
 *.log
 cheatsheet.md
+.idea
