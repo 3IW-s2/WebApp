@@ -91,7 +91,7 @@ class CommentRepository extends Database
         $query = "UPDATE comments SET signaled = :signaled, updated_at = NOW() WHERE id = :id";
         $params = [
             'id' => $comment->getId(),
-            'status' => $comment->getSignaled() + 1
+            'signaled' => $comment->getSignaled() + 1
         ];
         $statement = $db->query($query, $params);
     }
