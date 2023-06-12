@@ -1,0 +1,21 @@
+.tab-buttons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.tab-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: #f2f2f2;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tab-buttons button.active {
+  background-color: #0D298C;
+  color: #fff;
+}
