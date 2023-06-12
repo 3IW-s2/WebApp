@@ -43,14 +43,12 @@ class UserService extends Database
         return $this->userRepo->allUser();
     }
 
-    public function getUserById( User $user)
+    public function getUserById(int $id)
     {
-    
-       return  $this->userRepo->getUserById($user);
-     
+       return  $this->userRepo->getUserById($id);
     }
 
-    public function updateUser ( User $user): bool
+    public function updateUser (User $user): bool
     {
          if ($this->userRepo->updateUser($user)) {
             return true;

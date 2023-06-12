@@ -6,6 +6,8 @@ use App\Models\Comment;
 use App\Core\View;
 use App\Repositories\CommentRepository;
 use App\Services\CommentService;
+use App\Core\Mail;
+use App\Services\UserService;
 use App\Core\Database;
 
 class CommentController 
@@ -84,15 +86,26 @@ class CommentController
        public function signalComment()
        {
            $error = new Error();
-           $view = new View("Main/editComment", "front");
+           $view = new View("Main/post", "front");
 
            if (isset($_GET['id'])) {
                $id = $_GET['id'];
               }
 
            $commentService = new CommentService($error);
+           $userService = new UserService($error);
            $comment = $commentService->getCommentById($id);
            $commentService->signalComment($comment);
+           $newComment = $commentService->getCommentById($id);
+
+           if($newComment->getSignaled() >= 10){
+               $newComment->setStatus(false);
+               $commentService->updateComment($newComment);
+               $userId = $newComment->getUserId();
+               $user = $userService->getUserById($userId);
+               $mail = new mail($user->getEmail(), "Votre commentaire a été supprimé", "Votre commentaire a été supprimé car il a été signalé plus de 10 fois");
+           }
+
            $errors[] = "Le commentaire a bien été signalé, il passera en revu par l'administrateur";
            $view->assign('errors', $errors);
 
