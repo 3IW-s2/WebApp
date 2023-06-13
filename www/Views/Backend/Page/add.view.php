@@ -12,6 +12,10 @@
                 <label for="email">slug</label>
                 <input type="text" name="slug" id="slug" class="form-control"  />
             </div>
+            <div class="form-group">
+                <label for="password">image_path</label>
+                <input type="file" name="image_path" id="image_path" class="form-control" accept="image/*"  />
+            </div>
            
             <button type="submit" name="submit" class="btn btn-primary">Register</button>
    </form>
