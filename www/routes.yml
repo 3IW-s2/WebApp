@@ -189,10 +189,10 @@ admin/comment/edit:
   controller: CommentController
   action: updateComment
 
-article/addcomment:
+article/{slug}/addcomment:
   controller: CommentController
   action: addComment
 
-article/signalComment:
+article/{slug}/signalComment:
     controller: CommentController
     action: signalComment
