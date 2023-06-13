@@ -180,7 +180,6 @@ admin/menu/publish:
   controller: MenuController
   action: publishMenu
   security: ROLE:ADMIN
-  action: addUser  
 
 admin/comment/index:
   controller: CommentController
