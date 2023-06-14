@@ -7,8 +7,9 @@ use App\Core\View;
 use App\Repositories\CommentRepository;
 use App\Services\CommentService;
 use App\Core\Mail;
-use App\Services\UserService;
+use App\Core\Session;
 use App\Core\Database;
+use App\Services\UserService;
 
 class CommentController 
 {
@@ -39,8 +40,12 @@ class CommentController
     public function addComment()
     {
         $error = new Error();
+
+        if (isset($_GET['id'])) {
+            $post_id = $_GET['id'];
+        }
+
          $content = $_POST['content'];
-         $post_id = $_POST['post_id'];
          $user_id = $_POST['user_id'];
          $status = false;
     
@@ -51,7 +56,13 @@ class CommentController
          $comment->setStatus($status);
     
          $commentService = new CommentService($error);
-         $comments = $commentService->registerComment($comment);
+        try {
+            $comments = $commentService->registerComment($comment);
+            $errors[] = "Votre commentaire a bien été envoyé, il passera en revu par l'administrateur";
+        }
+        catch (\Exception $e) {
+            $errors[] = "Il y a eu un problème lors de l'envoi de votre commentaire, veuillez réessayer plus tard";
+        }
 
     }
 
@@ -86,7 +97,6 @@ class CommentController
        public function signalComment()
        {
            $error = new Error();
-           $view = new View("Main/post", "front");
 
            if (isset($_GET['id'])) {
                $id = $_GET['id'];
@@ -98,7 +108,7 @@ class CommentController
            $commentService->signalComment($comment);
            $newComment = $commentService->getCommentById($id);
 
-           if($newComment->getSignaled() >= 10){
+           if($newComment['signaled'] >= 10){
                $newComment->setStatus(false);
                $commentService->updateComment($newComment);
                $userId = $newComment->getUserId();
@@ -107,9 +117,8 @@ class CommentController
            }
 
            $errors[] = "Le commentaire a bien été signalé, il passera en revu par l'administrateur";
-           $view->assign('errors', $errors);
 
-           //header("Location:".$_SERVER[HTTP_REFERER]);
+           //header("Location:/");
        }
 
 

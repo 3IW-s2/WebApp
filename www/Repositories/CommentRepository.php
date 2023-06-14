@@ -12,7 +12,7 @@ use Exception;
 
 class CommentRepository extends Database 
 {
-    public function getCommentById(int $id): Comment
+    public function getCommentById(int $id): array
     {
         $db = Database::getInstance();
 
@@ -84,14 +84,14 @@ class CommentRepository extends Database
         $statement = $db->query($query, $params);
     }
 
-    public function signalComment(Comment  $comment): void
+    public function signalComment(array  $comment): void
     {
         $db = Database::getInstance();
 
         $query = "UPDATE comments SET signaled = :signaled, updated_at = NOW() WHERE id = :id";
         $params = [
-            'id' => $comment->getId(),
-            'signaled' => $comment->getSignaled() + 1
+            'id' => $comment['id'],
+            'signaled' => $comment['signaled'] + 1
         ];
         $statement = $db->query($query, $params);
     }

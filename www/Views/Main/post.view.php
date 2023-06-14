@@ -1,10 +1,9 @@
 <article>
-    <h1></h1>
-    <p></p>
-    <p></p>
-    <p></p>
+    <h1><?= $article['title'] ?></h1>
+    <p><?= $article['content'] ?></p>
+    <p><?= $article['created_at'] ?></p>
 </article>
-<form action="">
+<form action="article/{<?= $article["slug"] ?>}/addcomment?id="<?= $article["id"] ?>">
     <input type="text" name="content" id="content">
     <input type="submit" value="Envoyer" name="submit>
 </form>

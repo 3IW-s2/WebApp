@@ -20,7 +20,7 @@ class ArticleController
         $security = new Security($error);
        
 
-        $article = new Article();
+        $article = new Article($error);
         $article->setSlug($_GET['slug']);
         $ArtcileService = new ArticleService();
         $articles = $ArtcileService->getArticleBySlug($article);
