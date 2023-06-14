@@ -39,6 +39,7 @@
                                     <th scope="col">Content</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Slug</th>
+                                    <th scope="col">Image</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -52,12 +53,15 @@
                                         <td><?= $article["content"]?></td>
                                         <td><?= $article["status"] ?></td>
                                         <td><?= $article["slug"]?></td>
+                                        <td><?= $article["image_path"]?></td>
+
                                        <!--  <td></td> -->
                                         <td>
                                             <a href="edit?id=<?= $article['id'] ?>" class="btn btn-primary">Edit</a>
                                             <a href="delete?id=<?= $article['id'] ?>" class="btn btn-danger">Delete</a>
                                             <a href="publish?id=<?= $article['id'] ?>" class="btn btn-success">Publish</a>
                                             <a href="pending?id=<?= $article['id'] ?>" class="btn btn-warning">Pending</a>
+
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

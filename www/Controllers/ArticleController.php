@@ -66,8 +66,10 @@ class ArticleController
         $ArtcileService = new ArticleService();
         $articles = $ArtcileService->findAll();
         $view->assign('articles', $articles);
+ 
 
         if (isset($_POST['submit'])) {
+
             $article = new Article();
             $article->setTitle($_POST['title']);
             $article->setContent($_POST['content']);

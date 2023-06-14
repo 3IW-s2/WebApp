@@ -36,7 +36,7 @@ class Mail{
                 $mail->Port       = 25;                      // TCP port to connect to
 
                 // Recipients
-                $mail->setFrom('donotreply@gmail.com', 'Gavin');
+                $mail->setFrom('audesandrine6@gmail.com', 'Gavin');
                 $mail->addAddress($to);     // Add a recipient
 
                 // Content
