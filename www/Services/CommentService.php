@@ -21,7 +21,7 @@ class CommentService extends Database
 
     public function registerComment(Comment $comment): bool
     {
-        $commentCreated = $this->commentRepo->register($comment);
+        $commentCreated = $this->commentRepo->insertComment($comment);
 
         try {
             if ($commentCreated) {
@@ -46,10 +46,10 @@ class CommentService extends Database
         return $this->commentRepo->GetAllComments();
     }
 
-    public function getCommentsByPostId(int $post_id)
+    public function getCommentsByArticleId(int $article_id)
     {
     
-       return  $this->commentRepo->getCommentsByPostId($post_id);
+       return  $this->commentRepo->getCommentsByArticleId($article_id);
      
     }
 
@@ -63,9 +63,9 @@ class CommentService extends Database
         $this->commentRepo->delete($id);
     }
 
-    public function signalComment(array $comment): void
+    public function signalComment(array $comment): bool
     {
-        $this->commentRepo->signalComment($comment);
+        return $this->commentRepo->signalComment($comment);
     }
 
 }

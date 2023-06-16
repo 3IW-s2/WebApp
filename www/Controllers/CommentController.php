@@ -5,6 +5,7 @@ use App\Core\Error;
 use App\Models\Comment;
 use App\Core\View;
 use App\Repositories\CommentRepository;
+use App\Services\ArticleService;
 use App\Services\CommentService;
 use App\Core\Mail;
 use App\Core\Session;
@@ -23,46 +24,52 @@ class CommentController
         
     }
 
-    public function showCommentsByPostId()
+    public function showCommentsByPostId($id)
     {
         $view = new View("Main/post", "front");
         $error = new Error();
         $commentService = new CommentService($error);
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-        }
-
-        $comments = $commentService->getCommentsByPostId($id);
+        $comments = $commentService->getCommentsByArticleId($id);
         $view->assign('comments', $comments);
     }
 
     public function addComment()
     {
         $error = new Error();
+        $error2 = new Error();
+        $error3 = new Error();
 
-        if (isset($_GET['id'])) {
-            $post_id = $_GET['id'];
+
+        if (isset($_GET['slug']) && isset($_GET['user_email'])) {
+            $article_slug = $_GET['slug'];
+            $user_email = $_GET['user_email'];
         }
+
+        $userService = new UserService($error2);
+        $articleService = new ArticleService($error3);
+        $user = $userService->getUserByEmail($user_email);
+        $article = $articleService->getArticleBySlug($article_slug);
 
          $content = $_POST['content'];
-         $user_id = $_POST['user_id'];
-         $status = false;
+         $user_id = $user['id'];
     
-         $comment = new Comment();
+         $comment = new Comment($error);
          $comment->setContent($content);
-         $comment->setPostId($post_id);
+         $comment->setArticleId($article['id']);
          $comment->setUserId($user_id);
-         $comment->setStatus($status);
+         $comment->setStatus(false);
     
          $commentService = new CommentService($error);
-        try {
-            $comments = $commentService->registerComment($comment);
-            $errors[] = "Votre commentaire a bien été envoyé, il passera en revu par l'administrateur";
-        }
-        catch (\Exception $e) {
-            $errors[] = "Il y a eu un problème lors de l'envoi de votre commentaire, veuillez réessayer plus tard";
-        }
+
+         $comments = $commentService->registerComment($comment);
+
+         if(!$comments){
+             $_SESSION['comment'] = false;
+         }else{
+             $_SESSION['comment'] = true;
+         }
+        header('Location: /article/'.$article_slug);
 
     }
 
@@ -98,27 +105,43 @@ class CommentController
        {
            $error = new Error();
 
-           if (isset($_GET['id'])) {
-               $id = $_GET['id'];
+           if (isset($_GET['id']) && isset($_GET['article_slug'])) {
+               $id = (int)$_GET['id'];
+               $article_slug = $_GET['article_slug'];
               }
 
            $commentService = new CommentService($error);
            $userService = new UserService($error);
            $comment = $commentService->getCommentById($id);
-           $commentService->signalComment($comment);
-           $newComment = $commentService->getCommentById($id);
+           $comments = $commentService->signalComment($comment);
 
-           if($newComment['signaled'] >= 10){
-               $newComment->setStatus(false);
-               $commentService->updateComment($newComment);
-               $userId = $newComment->getUserId();
-               $user = $userService->getUserById($userId);
-               $mail = new mail($user->getEmail(), "Votre commentaire a été supprimé", "Votre commentaire a été supprimé car il a été signalé plus de 10 fois");
+           if(!$comments){
+               header("Location:/article/".$article_slug."?signal=false");
            }
 
-           $errors[] = "Le commentaire a bien été signalé, il passera en revu par l'administrateur";
+           $error2 = new Error();
+           $newComment = new Comment($error2);
 
-           //header("Location:/");
+           $comment = $commentService->getCommentById($id);
+
+
+           if($comment['signaled'] >= 10){
+               $newComment->setStatus(false);
+               $newComment->setId($id);
+               $commentService->updateComment($newComment);
+               $userId = $comment['user_id'];
+               $user = $userService->getUserById($userId);
+               $mail = new mail($user['email'], "Votre commentaire a été supprimé", "Votre commentaire a été supprimé car il a été signalé plus de 10 fois");
+               $mail->send();
+           }
+
+           if(!$comments){
+               $_SESSION['signal'] = false;
+           }else{
+               $_SESSION['signal'] = true;
+           }
+
+           header('Location: /article/'.$article_slug);
        }
 
 

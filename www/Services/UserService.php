@@ -73,9 +73,9 @@ class UserService extends Database
         }
     }
 
-    public function getUserByEmail(User $user): void
+    public function getUserByEmail(String $email): array
     {
-         $this->userRepo->getUserByEmail($user);
+         return $this->userRepo->getUserByEmail($email);
     }
 
     public function updateRole(User $user): bool

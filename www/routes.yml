@@ -189,7 +189,7 @@ admin/comment/edit:
   controller: CommentController
   action: updateComment
 
-article/{slug}/addcomment:
+addcomment:
   controller: CommentController
   action: addComment
 

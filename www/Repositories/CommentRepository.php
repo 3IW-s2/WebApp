@@ -25,12 +25,15 @@ class CommentRepository extends Database
 
         return $comment;
     }
-    public function getCommentsByArticleId(int $post_id ): array
+    public function getCommentsByArticleId(int $article_id): array
     {
-        $db = Database::getInstance($post_id);
+        $db = Database::getInstance();
 
-        $query = "SELECT * FROM comments WHERE post_id = :post_id AND status = true";
-        $statement = $db->query($query);
+        $query = "SELECT * FROM comments WHERE article_id = :article_id AND status = true";
+        $params = [
+            'article_id' => $article_id
+        ];
+        $statement = $db->query($query, $params);
         $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $comments;
@@ -47,18 +50,20 @@ class CommentRepository extends Database
         return $comments;
     }
 
-    public function insertComment(Comment $comment):void
+    public function insertComment(Comment $comment): bool
     {
         $db = Database::getInstance();
 
-        $query = "INSERT INTO comments (comment, status, post_id, user_id, created_at, updated_at) VALUES (:comment, :status, :post_id, :user_id, NOW(), NOW())";
+        $query = "INSERT INTO comments (content, status, article_id, user_id, created_at, updated_at) VALUES (:content, :status, :article_id, :user_id, NOW(), NOW())";
         $params = [
-            'comment' => $comment->getComment(),
-            'status' => $comment->getStatus(),
-            'post_id' => $comment->getArticleId(),
+            'content' => $comment->getComment(),
+            'status' => $comment->getStatus() == true ? 1 : 0,
+            'article_id' => $comment->getArticleId(),
             'user_id' => $comment->getUserId()
         ];
         $statement = $db->query($query, $params);
+
+        return true;
     }
 
     public function delete(int $id)
@@ -84,7 +89,7 @@ class CommentRepository extends Database
         $statement = $db->query($query, $params);
     }
 
-    public function signalComment(array  $comment): void
+    public function signalComment(array  $comment): bool
     {
         $db = Database::getInstance();
 
@@ -94,6 +99,8 @@ class CommentRepository extends Database
             'signaled' => $comment['signaled'] + 1
         ];
         $statement = $db->query($query, $params);
+
+        return true;
     }
 
 }

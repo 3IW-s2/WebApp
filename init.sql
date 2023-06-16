@@ -25,8 +25,8 @@ CREATE TABLE comments (
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
     user_id INTEGER NOT NULL,
-    post_id INTEGER NOT NULL,
-    FOREIGN KEY (post_id) REFERENCES posts(id),
+    article_id INTEGER NOT NULL,
+    FOREIGN KEY (article_id) REFERENCES articles(id),
     FOREIGN KEY (user_id) REFERENCES users(id),
 ); 
 
