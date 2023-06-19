@@ -31,7 +31,7 @@ class MenuRepository
         }
     
         public function createMenu(Menu $menu){
-        
+
             $query = "INSERT INTO {$this->table} (titre, url , status) VALUES (:titre, :url , :status)";
             $params = [
                 'titre' => $menu->getTitre(),
@@ -50,9 +50,8 @@ class MenuRepository
                 'url' => $menu->getUrl(),
                 'status' => '5',
             ];
-            $stmt = $this->db->query($query ,$params);
+            $stmt = $this->db->query($query);
         }
-
     
         public function updateMenu(Menu $menu){
         
@@ -63,7 +62,7 @@ class MenuRepository
                 'titre' => $menu->getTitre(),
                 'url' => $menu->getUrl(),
             ];
-            $stmt = $this->db->query($query , $params);
+            $stmt = $this->db->query($query);
         }
     
         public function deleteMenu(Menu $menu){
@@ -79,9 +78,6 @@ class MenuRepository
         {
             $query = "SELECT * FROM {$this->table} WHERE parent_id IS NOT  NULL  ORDER BY menu_id ASC";
             $stmt = $this->db->query($query);
-            $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-            return $menus;
         }
 
         public function findOneById(Menu $menu)

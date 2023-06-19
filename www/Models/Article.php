@@ -19,8 +19,7 @@ class Article
     private String $slug;
     private \DateTime $created_at;
     private \DateTime $update_at;
-    private ?String $image_path;
-
+    private String $image_path;
     
 
     public function __construct()
@@ -207,7 +206,6 @@ class Article
         $this->update_at = $update_at;
         return $this;
     }
-
     /**
      * Get the value of image_path
      * @return String

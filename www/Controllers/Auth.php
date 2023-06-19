@@ -121,7 +121,6 @@ class Auth
             $lastname = $_POST["lastname"];
             $email = $_POST["email"];
             $pwd = $_POST["password"];
-            
 
             $user = new User($error);
             $user->setFirstname($firstname);

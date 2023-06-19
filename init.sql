@@ -17,7 +17,19 @@ CREATE TABLE posts(
     status VARCHAR(255) NOT NULL,
 );
 
-ALTER TABLE posts ADD COLUMN image_path VARCHAR(255)  NULL;
+CREATE TABLE comments (
+    id SERIAL PRIMARY KEY,
+    content TEXT NOT NULL,
+    status BOOLEAN NOT NULL DEFAULT FALSE,
+    signaled INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    user_id INTEGER NOT NULL,
+    article_id INTEGER NOT NULL,
+    FOREIGN KEY (article_id) REFERENCES articles(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+); 
+
 /* rajoute une colonne slug */
 
 ALTER TABLE posts ADD COLUMN slug VARCHAR(255)  NULL;
@@ -96,14 +108,6 @@ VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
     status VARCHAR(255) NOT NULL,
 ); 
 
-/* CREATE TABLE comments (
-    id SERIAL PRIMARY KEY,
-    content TEXT NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
-    author VARCHAR(255) NOT NULL,
-    article_id INTEGER NOT NULL
-); */
 
 
 CREATE TABLE menu (
@@ -112,7 +116,6 @@ CREATE TABLE menu (
   titre VARCHAR(255),
   url VARCHAR(255)
 );
-
 
 
 ALTER TABLE menu ALTER COLUMN parent_id DROP NOT NULL;

@@ -43,14 +43,12 @@ class UserService extends Database
         return $this->userRepo->allUser();
     }
 
-    public function getUserById( User $user)
+    public function getUserById(int $id)
     {
-    
-       return  $this->userRepo->getUserById($user);
-     
+       return  $this->userRepo->getUserById($id);
     }
 
-    public function updateUser ( User $user): bool
+    public function updateUser (User $user): bool
     {
          if ($this->userRepo->updateUser($user)) {
             return true;
@@ -75,9 +73,9 @@ class UserService extends Database
         }
     }
 
-    public function getUserByEmail(User $user): void
+    public function getUserByEmail(String $email): array
     {
-         $this->userRepo->getUserByEmail($user);
+         return $this->userRepo->getUserByEmail($email);
     }
 
     public function updateRole(User $user): bool
