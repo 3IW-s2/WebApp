@@ -33,6 +33,10 @@ spl_autoload_register(function ($class) {
 
 
 $uri = $_SERVER["REQUEST_URI"];
+if ($_SERVER['REQUEST_URI'] === '/sitemap.xml') {
+    include './sitemap.php';
+    exit();
+}
 
 if (!file_exists("routes.yml")) {
     die("Le fichier routes.yml n'existe pas");
