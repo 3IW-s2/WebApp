@@ -19,7 +19,7 @@ class Article
     private String $slug;
     private \DateTime $created_at;
     private \DateTime $update_at;
-    private String $image_path;
+    private ?String $image_path;
     
 
     public function __construct()
