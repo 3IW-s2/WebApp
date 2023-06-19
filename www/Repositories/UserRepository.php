@@ -259,12 +259,12 @@ class  UserRepository  extends Database
         
     }
 
-    public function getUserById (int $id)
+    public function getUserById (User $user)
     {
 
         $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $params = [
-            'id' => $id
+            'id' => $user->getId()
         ];
         $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);

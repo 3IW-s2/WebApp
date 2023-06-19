@@ -59,10 +59,10 @@ class ArticleService
         $this->articleRepository->publishArticle($article);
     }
 
-    public function getArticleBySlug(String $slug)
+    public function getArticleBySlug( Article $article)
     {   
      
-        return $this->articleRepository->getArticleBySlug($slug);
+        return $this->articleRepository->getArticleBySlug($article);
     }
 
     public function pendingArticle(Article $article)
