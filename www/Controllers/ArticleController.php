@@ -9,7 +9,6 @@ use App\Core\View;
 use App\Core\Database;
 use App\Services\ArticleService;
 use App\Core\Session;
-use App\Services\CommentService;
 use PDO;
 
 
@@ -19,50 +18,18 @@ class ArticleController
     public function previewArticle(){
         $error = new Error();
         $security = new Security($error);
+       
 
+        $article = new Article();
+        $article->setSlug($_GET['slug']);
         $ArtcileService = new ArticleService();
-        $article = $ArtcileService->getArticleBySlug($_GET['slug']);
-        if ($article == false){
+        $articles = $ArtcileService->getArticleBySlug($article);
+        if ($articles == false){
             $error->setCode(404);
             $error->addError("Article introuvable");
             header('Location: /');
         }
-        $error2 = new Error();
-        $commentService = new CommentService($error2);
-
-        $comments = $commentService->getCommentsByArticleId($article['id']);
-
-        if(isset($_SESSION['signal'])){
-            if (!$_SESSION['signal']){
-                $errors[] = "Il y a eu un problème avec le signalement du commentaire, veuillez réessayez plus tard.";
-            }
-            else{
-                $errors[] = "Le commentaire a été signalé.";
-            }
-
-
-            unset($_SESSION["signal"]);
-        }
-
-        if (isset($_SESSION['comment']) ){
-            if(!$_SESSION['comment']){
-                $errors[] = "Il y a eu un problème avec l'ajout du commentaire, veuillez réessayer plus tard.";
-            }
-            else{
-                $errors[] = "Votre commentaire a été ajouté, il passera en revu par l'administrateur du site";
-            }
-
-
-            unset($_SESSION["comment"]);
-        }
-
-
-        $view = new View("Main/post", "front");
-        $view->assign('comments', $comments);
-        $view->assign('article', $article);
-        if(isset($errors)){
-            $view->assign('errors', $errors);
-        }
+        var_dump($articles);
     }
 
     public function pendingArticle(){

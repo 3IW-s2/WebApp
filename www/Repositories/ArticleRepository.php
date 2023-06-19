@@ -53,10 +53,10 @@ class ArticleRepository
         $stmt = $this->db->query($query , $params);
     }
 
-    public function getArticleBySlug(String $slug){
+    public function getArticleBySlug(Article $article){
         $query = "SELECT * FROM {$this->table} WHERE slug = :slug AND status = '1' ";
         $params = [
-            'slug' => $slug
+            'slug' => $article->getSlug(),
         ];
         $stmt = $this->db->query($query , $params);
         $article = $stmt->fetch(PDO::FETCH_ASSOC);
