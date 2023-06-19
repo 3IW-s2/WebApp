@@ -315,6 +315,7 @@ class User extends Database
 
         if ($user) {
             $_SESSION["user"] = $user['email'];
+            $_SESSION["expire_token"] = $user["expirate_token"];
             return true;
         } else {
 
