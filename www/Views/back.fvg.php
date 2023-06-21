@@ -20,7 +20,6 @@
     
 
     <link rel="stylesheet" href="assets/css/pricing-plan.css">
-    <link rel = "stylesheet" href = "/public/css/main.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721551398549890"
      crossorigin="anonymous"></script>
 </head>
