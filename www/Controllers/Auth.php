@@ -67,9 +67,6 @@ class Auth
         $menuss =$this->getAllLink($menuService);
         $view->assign("menus", $menuss[0]);
         $view->assign("sousmenus", $menuss[1]);
-
-
-
         $error = $user->getError();
         $view->assign("error", $error);
       
