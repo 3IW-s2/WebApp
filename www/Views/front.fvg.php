@@ -58,6 +58,7 @@
                 <ul class = "navbar-nav mx-auto text-center">
 
                          <?php 
+                               
                                 foreach($menus as $menu){
                                 ?>
                                    <li class = "nav-item px-2 py-2">                                    

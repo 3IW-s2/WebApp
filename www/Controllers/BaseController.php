@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Services\MenuService;
 use App\Core\View;
+use App\Core\Error;
+use App\Models\User;
 
 class BaseController
 {
@@ -12,16 +14,26 @@ class BaseController
         $this->assignMenuVariables();
     }
 
-    protected function assignMenuVariables(): void
+    protected function assignMenuVariables(/* array $options = null */): void
     {
         $menuService = new MenuService();
         $menus = $menuService->activeLink();
         $sousmenus = $menuService->findAllParent();
 
-        $view = new View();
+        $error = new Error();
+        $user = new User($error);
+
+        $view = new View("Auth/login", "front");
+        $error = $user->getError();
+        $view->assign("error", $error);
+
         $view->assign("menus", $menus);
         $view->assign("sousmenus", $sousmenus);
- 
+
+       /*  if($options !== null){
+            $view->assign("options", $options);
+        } */
     }
 
+    
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
 use App\Core\Error;
 use App\Models\User;
 use App\Core\View;
@@ -16,19 +17,23 @@ use PDO;
 class Auth  extends BaseController
 {
    
+   
     public $message = [];
+    protected $base ;
+    
 
     public function __construct(){
         $this->handle = [
             Session::class
         ];
+        $this->base = new BaseController();
     }
 
     public function login(): void
-    {    
+    {  
        
 
-        $view = new View("Auth/login", "front");
+       // $view = new View("Auth/login", "front");
         $error = new Error();
         $user = new User($error);
 
@@ -44,8 +49,12 @@ class Auth  extends BaseController
             
         }
         $error = $user->getError();
-        $view->setVariable("error", $error);
-        $this->assignMenuVariables($view);
+       // $view->assign("error", $error);
+    
+
+        //depuis le constructeur de BaseController rajoute la variable $error dans la vue
+       
+
       
     }
 

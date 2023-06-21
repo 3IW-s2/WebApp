@@ -8,7 +8,8 @@
                 <div class="row">
                     <div class="course-col-4">
                     <form id="connection-form" method="post" action="" class="form1">
-                            <?php if($error->hasErrors()): ?>
+                            <?php   var_dump($error);die;
+                            if($error->hasErrors()): ?>
                             <div class="alert alert-danger">
                                 <?php foreach($error->getErrors() as $errors): ?>
                                 <p><?php echo $errors; ?></p>
