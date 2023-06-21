@@ -9,33 +9,49 @@ use App\Core\View;
 use App\Core\Dump;
 use App\Core\Database;
 use App\Services\UserService;
+use App\Services\MenuService;
+
 use App\Core\Session;
 use PDO;
 
 
 
-class Auth  extends BaseController
+class Auth  
 {
    
    
     public $message = [];
-    protected $base ;
+    protected $menuService ;
+   
     
 
     public function __construct(){
         $this->handle = [
             Session::class
         ];
-        $this->base = new BaseController();
+        $this->menuService = new MenuService();
+       
     }
+
+    public function getAllLink( MenuService $menuService): array
+    {
+        $menus = $menuService->activeLink();
+        $sousmenus = $menuService->findAllParent();
+        return [$menus, $sousmenus];
+    }
+
 
     public function login(): void
     {  
        
 
-       // $view = new View("Auth/login", "front");
+        $view = new View("Auth/login", "front");
         $error = new Error();
         $user = new User($error);
+
+        $menuService = new MenuService();
+        $menus = $menuService->activeLink();
+        $sousmenus = $menuService->findAllParent();
 
 
         if(!empty($_POST)){
@@ -48,8 +64,17 @@ class Auth  extends BaseController
             $user->login( $email, $pwd);
             
         }
+        $menuss =$this->getAllLink($menuService);
+        $view->assign("menus", $menuss[0]);
+        $view->assign("sousmenus", $menuss[1]);
+
+
+
         $error = $user->getError();
-       // $view->assign("error", $error);
+        $view->assign("error", $error);
+      
+
+       
     
 
         //depuis le constructeur de BaseController rajoute la variable $error dans la vue
