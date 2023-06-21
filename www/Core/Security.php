@@ -73,6 +73,7 @@ class Security extends Database
         $timestamp = time();
         $newTimestamp = strtotime('+2 hours', $timestamp);
         $date_now = date('Y-m-d H:i:s', $newTimestamp);
+     
 
 
         if($expirationTimestamp > time()) {

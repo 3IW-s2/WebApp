@@ -55,7 +55,7 @@ services:
     container_name: app_project_nginx
     restart: always
     ports:
-      - 88:80
+      - 80:80
       - 444:443
     volumes:
       - ./www:/var/www
