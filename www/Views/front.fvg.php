@@ -63,7 +63,7 @@
                                 ?>
                                    <li class = "nav-item px-2 py-2">                                    
                                     <?php
-                                    echo "<a class = 'nav-link text-uppercase text-dark'  href='{$menu['url']}'>{$menu['titre']}</a>";
+                                    echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$menu['url']}'>{$menu['titre']}</a>";
                                     ?>
                                     </li>
                                 
