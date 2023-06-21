@@ -9,6 +9,10 @@ body {
     font-family: var(--sm-font);
 }
 
+a{
+    text-decoration: none;
+}
+
 
 /* for login and subscription*/
 
