@@ -107,12 +107,8 @@ class ArticleController
                 $article = new Article();
                 $article->setTitle($_POST['title']);
                 $article->setContent($_POST['content']);
-                var_dump($_POST['slug']);
-               
-                if ($article !== null) {
-                    $article->setUpdateAt($date);
-                    $article->setSlug($_POST['slug']);
-                }
+                $article->setSlug($_POST['slug']);
+                var_dump($article);
             
                var_dump( $ArtcileService->updateArticle($article) );
                die;

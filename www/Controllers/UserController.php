@@ -83,7 +83,7 @@ class UserController
             $users->setEmail($_POST['email']);
             $users->setFirstname($_POST['firstname']);
             $users->setLastname($_POST['lastname']);  
-            $users->setPwd($_POST['password']);
+           /*  $users->setPwd($_POST['password']); */
 
 
             $uppdateService = new UserService();

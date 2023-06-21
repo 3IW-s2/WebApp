@@ -246,13 +246,13 @@ class  UserRepository  extends Database
     public function updateUser ( User $user): void
     {
 
-        $query = "UPDATE {$this->table} SET firstname = :firstname , lastname = :lastname , email = :email , password = :password ,  updated_at = NOW() WHERE id = :id";
+        $query = "UPDATE {$this->table} SET firstname = :firstname , lastname = :lastname , email = :email /* , password = :password */ ,  updated_at = NOW() WHERE id = :id";
         $params = [
             'id' => $user->getId(),
             'firstname' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
             'email' => $user->getEmail(),
-            'password' => $user->getPwd(),
+            //'password' => $user->getPwd(),
         ];
         $statement = $this->db->query($query, $params);
      

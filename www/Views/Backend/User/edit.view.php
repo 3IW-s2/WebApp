@@ -30,10 +30,10 @@
                                                 <label for="email">email</label>
                                                 <input type="text" name="email" id="email" class="form-control"  value="<?= $usr["email"]?>" />
                                             </div>
-                                            <div class="form-group">
+                                           <!--  <div class="form-group">
                                                 <label for="pwd">Password</label>
                                                 <input type="password" name="password" id="password" class="form-control"  />
-                                            </div>
+                                            </div> -->
                                         
                                             <button type="submit" name="submit" class="btn btn-primary">Register</button>
                                 </form>
