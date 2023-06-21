@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Core\Error;
+use App\Core\Menu;
 use App\Models\User;
 use App\Core\View;
 use App\Core\Dump;
@@ -20,26 +21,17 @@ class Auth
 {
    
    
-    public $message = [];
-    protected $menuService ;
-   
+    public $message = [];   
+    protected $menu;
     
 
     public function __construct(){
         $this->handle = [
             Session::class
         ];
-        $this->menuService = new MenuService();
+        $this->menu = new Menu();
        
     }
-
-    public function getAllLink( MenuService $menuService): array
-    {
-        $menus = $menuService->activeLink();
-        $sousmenus = $menuService->findAllParent();
-        return [$menus, $sousmenus];
-    }
-
 
     public function login(): void
     {  
@@ -48,10 +40,6 @@ class Auth
         $view = new View("Auth/login", "front");
         $error = new Error();
         $user = new User($error);
-
-        $menuService = new MenuService();
-        $menus = $menuService->activeLink();
-        $sousmenus = $menuService->findAllParent();
 
 
         if(!empty($_POST)){
@@ -64,7 +52,8 @@ class Auth
             $user->login( $email, $pwd);
             
         }
-        $menuss =$this->getAllLink($menuService);
+        
+        $menuss = $this->menu->getAllLink();
         $view->assign("menus", $menuss[0]);
         $view->assign("sousmenus", $menuss[1]);
         $error = $user->getError();
