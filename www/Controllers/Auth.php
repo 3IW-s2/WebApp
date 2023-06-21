@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Error;
 use App\Models\User;
 use App\Core\View;
+use App\Core\Dump;
 use App\Core\Database;
 use App\Services\UserService;
 use App\Core\Session;
@@ -12,7 +13,7 @@ use PDO;
 
 
 
-class Auth
+class Auth  extends BaseController
 {
    
     public $message = [];
@@ -25,11 +26,12 @@ class Auth
 
     public function login(): void
     {    
-     
+       
 
         $view = new View("Auth/login", "front");
         $error = new Error();
         $user = new User($error);
+
 
         if(!empty($_POST)){
             $email = $_POST["email"];
@@ -43,6 +45,8 @@ class Auth
         }
         $error = $user->getError();
         $view->setVariable("error", $error);
+        $this->assignMenuVariables($view);
+      
     }
 
     public function logout(): void
