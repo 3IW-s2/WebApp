@@ -1,0 +1,49 @@
+<!-- un formulaire d'inscription -->
+
+<!-- un formulaire d'inscription -->
+
+
+<main>
+			<div class="container" style="width: 50%;">
+                 <div class="div-center">
+                    <section id="course" class="course">
+                    
+                        
+                    <div class="row">
+                        
+                        <div class="course-col">
+                        
+                            <div class = "title text-center">
+                            <h2 class = "position-relative d-inline-block"> Modifier un Article</h2>
+                            </div>
+                                                            <!-- un formulaire d'inscription -->
+                                <form id="update-register-form" method="post" action="" >
+                                            <div class="form-group">
+                                                <label for="firstname">Title</label>
+                                                <input type="text" name="title" id="title" class="form-control" value="<?= $articles["title"]?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastname">Content</label>
+                                                <input type="text" name="content" id="content" class="form-control"  value="<?= $articles["content"]?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">slug</label>
+                                                <input type="text" name="slug" id="slug" class="form-control"  value="<?= $articles["slug"]?>" />
+                                            </div>
+                                        
+                                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                </form>
+
+        
+
+                        </div>
+                    
+
+                    
+                    
+                    </div>
+
+                    </section>
+                </div>
+			</div>
+		</main>

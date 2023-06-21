@@ -45,13 +45,13 @@ class ArticleRepository
 
     public function updateArticle(Article $article){
        
-        $query = "UPDATE {$this->table} SET title = :title, content = :content, updated_at = :updated_at WHERE id = :id";
+        $query = "UPDATE {$this->table} SET title = :title, content = :content, slug= :slug, updated_at = :updated_at WHERE id = :id";
         $params = [
             'id' => $article->getId(),
             'title' => $article->getTitle(),
             'content' => $article->getContent(),
-            'updated_at' => $article->getUpdatedAt(),
-            'author' => $article->getAuthor(),
+            'slug' => $article->getSlug(),
+            'updated_at' => $article->getUpdateAt(),
         ];
         $stmt = $this->db->query($query , $params);
     }
@@ -93,6 +93,17 @@ class ArticleRepository
             'status' => 5,
         ];
         $stmt = $this->db->query($query , $params);
+    }
+
+    public function getArticleById( Article $article){
+        $query = "SELECT * FROM {$this->table} WHERE id = :id ";
+        $params = [
+            'id' => $article->getId(),
+        ];
+        $stmt = $this->db->query($query , $params);
+        $article = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $article;
     }
 
 }

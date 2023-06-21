@@ -19,6 +19,7 @@ class Article
     private String $slug;
     private \DateTime $created_at;
     private \DateTime $update_at;
+    private String $updateAt;
     private ?String $image_path;
     
 
@@ -203,7 +204,7 @@ class Article
      */
     public function setupdate_at(\DateTime $update_at): self
     {
-        $this->update_at = $update_at;
+        $this->update_at =  $update_at->format('Y-m-d H:i:s');
         return $this;
     }
     /**
@@ -225,6 +226,28 @@ class Article
         $this->image_path = $image_path;
         return $this;
     }
+
+    /**
+     * Get the value of updateAt
+     * @return String
+     */
+    public function getUpdateAt(): String
+    {
+        return $this->updateAt;
+    }
+
+    /**
+     * Set the value of updateAt
+     * @param String $updateAt
+     * @return  self
+     */
+    public function setUpdateAt(String $updateAt): self
+    {
+        $this->updateAt = $updateAt;
+        return $this;
+    }
+
+
 }
 
     
