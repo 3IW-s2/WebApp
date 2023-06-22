@@ -19,7 +19,7 @@
                         <div class="course-col">
                         
                             <div class = "title text-center">
-                            <h2 class = "position-relative d-inline-block"> /h2>
+                            <h2 class = "position-relative d-inline-block"> ajouter un  menu </h2>
                             </div>
                             <H1> ajouter un Lien dans le menu </H1>
                                 <form id="add-menu-form" method="post" action="">
@@ -49,7 +49,7 @@
                                             <div class="form-group">
                                                 <label for="lastname">Parent</label>
                                                 <select name="parent_id" id="parent_id">
-                                                    <?php foreach($menus as $menu): ?>
+                                                    <?php  foreach($menus as $menu): ?>
                                                         <option value="<?= $menu['menu_id'] ?>"><?= $menu['titre'] ?></option>
                                                     <?php endforeach; ?>
                                                 </select>

@@ -26,7 +26,7 @@ class MenuController
     {
         $view = new View("Backend/Menu/add", "back");
         $MenuService = new MenuService();
-        $menus = $MenuService->findAllParent();
+        $menus = $MenuService->activeLink();
         $view->assign('menus', $menus);
 
         if (isset($_POST['submit'])) {

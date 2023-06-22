@@ -9,12 +9,22 @@ use App\Core\View;
 use App\Core\Database;
 use App\Services\ArticleService;
 use App\Core\Session;
+use App\Core\Menu;
+
 use PDO;
 
 
 
 class ArticleController
 {
+    private $menu;
+    private $article ;
+    public function __construct()
+    {
+        $this->menu = new Menu();
+        $this->article = new ArticleService();
+    }
+
     public function previewArticle(){
         $error = new Error();
         $security = new Security($error);
@@ -24,12 +34,18 @@ class ArticleController
         $article->setSlug($_GET['slug']);
         $ArtcileService = new ArticleService();
         $articles = $ArtcileService->getArticleBySlug($article);
+
+        $view = new View("Frontend/Article/index", "front");
+        $view->assign('articles', $articles);
+        $menuss = $this->menu->getAllLink();
+        $view->assign("menus", $menuss[0]);
+        $view->assign("sousmenus", $menuss[1]);
+
         if ($articles == false){
             $error->setCode(404);
             $error->addError("Article introuvable");
             header('Location: /');
         }
-        var_dump($articles);
     }
 
     public function pendingArticle(){
