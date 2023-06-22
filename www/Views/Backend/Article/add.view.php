@@ -25,7 +25,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="lastname">Content</label>
-                                                <input type="text" name="content" id="content" class="form-control"   />
+                                                <textarea name="content" id="editor"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="email">slug</label>

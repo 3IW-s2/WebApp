@@ -90,6 +90,17 @@ class UserService extends Database
         }
     }
 
+    public function findByEmail(User $user)
+    {
+        if ($this->userRepo->findByEmail($user)) {
+            
+            return  $this->userRepo->findByEmail($user);
+        } else {
+            $this->error->addError("Une erreur s'est produite lors de la recherche de l'utilisateur");
+            return false;
+        }
+    }
+
     
 
 }

@@ -3,6 +3,11 @@ default:
   action: home
   verifConnexion: true
 
+profile:
+  controller: Main
+  action: profile
+  verifConnexion: true
+
 a-propos:
   controller: Main
   action: aboutUs

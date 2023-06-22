@@ -36,7 +36,7 @@ class PageController
         $post->setTitle($_POST['title']);
         $post->setContent($_POST['content']);
         $post->setSlug($_POST['slug']);
-        $post->setStatus('1');
+        $post->setStatus('5');
         $post->setAuthor($_SESSION['user']);
        
         $postService = new PostService();
@@ -75,7 +75,7 @@ class PageController
             $post->setTitle($_POST['title']);
             $post->setContent($_POST['content']);
             $post->setSlug($_POST['slug']);
-            $post->setStatus('1');
+            $post->setStatus('5');
             $post->setAuthor($_SESSION['user']);
             $postService = new PostService();
             $posts = $postService->updatePost($post);

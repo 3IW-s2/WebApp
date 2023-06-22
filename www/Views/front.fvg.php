@@ -34,7 +34,7 @@
             
 
             <div class = "order-lg-2 nav-btns">
-                <button onclick="window.location.href='card.php'" type = "button" class = "btn position-relative">
+                <button onclick="window.location.href='profile'" type = "button" class = "btn position-relative">
                     <i class = "fa fa-user" >      
                     <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"></span>
                 
@@ -57,7 +57,11 @@
             <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
                 <ul class = "navbar-nav mx-auto text-center">
 
-                         <?php 
+                       
+                            <li class = "nav-item px-2 py-2">                                    
+                                 <a class = 'nav-link text-uppercase text-dark'  href='/'>Home</a>
+                            </li>
+                            <?php
                                
                                 foreach($menus as $menu){
                                 ?>

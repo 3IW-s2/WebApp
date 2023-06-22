@@ -21,10 +21,10 @@
                                             <div class="form-group">
                                                 <label for="firstname">Title</label>
                                                 <input type="text" name="title" id="title" class="form-control" value="<?= $articles["title"]?>" />
-                                            </div>
+                                            </div>                      
                                             <div class="form-group">
                                                 <label for="lastname">Content</label>
-                                                <input type="text" name="content" id="content" class="form-control"  value="<?= $articles["content"]?>" />
+                                                <textarea name="content" id="editor" ><?= $articles["content"] ?></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="email">slug</label>
