@@ -34,7 +34,7 @@
             
 
             <div class = "order-lg-2 nav-btns">
-                <button onclick="window.location.href='card.php'" type = "button" class = "btn position-relative">
+                <button onclick="window.location.href='profile'" type = "button" class = "btn position-relative">
                     <i class = "fa fa-user" >      
                     <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"></span>
                 
