@@ -65,29 +65,32 @@
                                 foreach($menus as $menu){
 
                                      
-                               
-                                    foreach($sousmenus as $sousmenu){
-                                        if($sousmenu['parent_id'] == $menu['menu_id']){
-                               
-                                            echo"<ul >";
-                                                echo "<li class = 'nav-item px-2 py-2'>";
-                                                     echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$menu['url']}'>{$menu['titre']}</a>";
-                                                        echo "<li class = 'nav-item px-2 py-2'>";
-                                                            echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$sousmenu['url']}'>{$sousmenu['titre']}</a>";
-                                                        echo "</li>";
-                                                echo "</li>";
-                                            echo"</ul>";    
-                                        }else{
-                                            ?>
-                                            <li class = "nav-item px-2 py-2">                                    
-                                             <?php
-                                             echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$menu['url']}'>{$menu['titre']}</a>";
-                                             ?>
-                                             </li>
-                                         
-                                         <?php
+                               //si sousmenu n'est pas vide un tableau vide
 
+                                    if(!(empty($sousmenus))){
+                                        foreach($sousmenus as $sousmenu){
+                                            if($sousmenu['parent_id'] == $menu['menu_id']){
+                                   
+                                                echo"<ul>";
+                                                    echo "<li class = 'nav-item px-2 py-2'>";
+                                                         echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$menu['url']}'>{$menu['titre']}</a>";
+                                                            echo "<li class = 'nav-item px-2 py-2'>";
+                                                                echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$sousmenu['url']}'>{$sousmenu['titre']}</a>";
+                                                            echo "</li>";
+                                                    echo "</li>";
+                                                echo"</ul>";    
+                                            }else{
+                                          
+                                                echo "<li class = 'nav-item px-2 py-2'>";                                 
+                                                     echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$menu['url']}'>{$menu['titre']}</a>";
+                                                 echo " </li>";
+    
+                                            }
                                         }
+                                    }else {
+                                        echo "<li class = 'nav-item px-2 py-2'>";                                 
+                                        echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$menu['url']}'>{$menu['titre']}</a>";
+                                    echo " </li>";
                                     }
                                 }
                             ?>
