@@ -118,7 +118,7 @@ class MenuRepository
 
         public function activeLink(){
             
-            $query = "SELECT * FROM {$this->table} WHERE status = '1' ";
+            $query = "SELECT * FROM {$this->table} WHERE status = '1' AND parent_id IS NULL ORDER BY menu_id ASC";
      
             $stmt = $this->db->query($query);
             $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
