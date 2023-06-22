@@ -57,7 +57,11 @@
             <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
                 <ul class = "navbar-nav mx-auto text-center">
 
-                         <?php 
+                       
+                            <li class = "nav-item px-2 py-2">                                    
+                                 <a class = 'nav-link text-uppercase text-dark'  href='/'>Home</a>
+                            </li>
+                            <?php
                                
                                 foreach($menus as $menu){
                                 ?>

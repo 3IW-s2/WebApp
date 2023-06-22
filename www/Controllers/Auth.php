@@ -151,6 +151,7 @@ class Auth
     {
         $view = new View("Auth/register", "front");
         $error = new Error();
+        
 
         if(!empty($_POST)){
             $firstname = $_POST["firstname"];
@@ -179,9 +180,11 @@ class Auth
             $errors[] = "Veuillez remplir tous les champs";
         }
 
-        
-        $view->setVariable("error", $error);
-        $view->setVariable("errors", $errors);
+        $menuss = $this->menu->getAllLink();
+        $view->assign("menus", $menuss[0]);
+        $view->assign("sousmenus", $menuss[1]);
+        $view->assign("error", $error);
+        $view->assign("errors", $errors);
 
     }
 
