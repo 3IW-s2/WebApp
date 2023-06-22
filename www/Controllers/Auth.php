@@ -40,12 +40,12 @@ class Auth
         $view = new View("Auth/login", "front");
         $error = new Error();
         $user = new User($error);
-
+     
 
         if(!empty($_POST)){
             $email = $_POST["email"];
             $pwd = $_POST["password"];
-
+       
             
             $user->setEmail($email);
             $user->setPwd($pwd);
@@ -92,6 +92,12 @@ class Auth
               $user->setEmail($email);
               $user->forgotPassword($email);
          }
+
+        $menuss = $this->menu->getAllLink();
+        $view->assign("menus", $menuss[0]);
+        $view->assign("sousmenus", $menuss[1]);
+        $error = $user->getError();
+        $view->assign("error", $error);
    }
 
    public function resetPassword(): void
@@ -106,6 +112,9 @@ class Auth
 
                 if ($tokenIsValid) {
                     $view = new View("Auth/resetpassword", "front");
+                    $menuss = $this->menu->getAllLink();
+                    $view->assign("menus", $menuss[0]);
+                    $view->assign("sousmenus", $menuss[1]);
                     header("Location: /newpassword");
                 } else {
                     $erros [] = 'Jeton invalide';
@@ -113,6 +122,7 @@ class Auth
             } else {
                 $erros [] = 'Accès refusé';
             }
+            
    }
 
     public function newPassword(): void
@@ -132,6 +142,9 @@ class Auth
 
                 header("Location: /");
           }
+        $menuss = $this->menu->getAllLink();
+        $view->assign("menus", $menuss[0]);
+        $view->assign("sousmenus", $menuss[1]);
     }
 
     public function register(): void

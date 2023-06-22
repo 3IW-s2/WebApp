@@ -63,6 +63,19 @@ class  UserRepository  extends Database
         return $user;
     }
 
+    public function getStatusByEmail (string $email)
+    {
+
+        $query = "SELECT status FROM {$this->table} WHERE email = :email";
+        $params = [
+            'email' => $email
+        ];
+        $statement = $this->db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }   
+
 
      public function getUserByEmail (string $email)
     {   
@@ -214,7 +227,7 @@ class  UserRepository  extends Database
     public function deleteUserById(User $user): void
     {
 
-        $query = "DELETE FROM {$this->table} WHERE id = :id";
+        $query = "UPDATE {$this->table} SET status = 10 WHERE id = :id";
         $params = [
             'id' => $user->getId()
         ];

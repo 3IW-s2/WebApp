@@ -240,14 +240,18 @@ class User extends Database
 
 
         try{
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION["user"] = $user['email'];
-                $_SESSION["expire_token"] = $user["expirate_token"];
-                return true;
-            } else {
-                $this->error->addError("identifiants incorrects");
-                return false;
-            }
+                    
+                if($user && password_verify($password, $user['password']) && $user['status'] != 10){
+                    $_SESSION["user"] = $user['email'];
+                    $_SESSION["expire_token"] = $user["expirate_token"];
+                    return true;
+                }else if($user && password_verify($password, $user['password']) && $user['status'] == 10){
+                    $this->error->addError("Votre compte a été désactivé, veuillez contacter l'administrateur du site");
+                    return false;
+                } else {
+                    $this->error->addError("identifiants incorrects");
+                    return false;
+                }
         } catch (\Exception $e) {
             $this->error->addError(" Un problème est survenu lors de la connexion");
             return false;

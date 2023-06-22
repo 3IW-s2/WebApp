@@ -92,6 +92,7 @@ class Security extends Database
     }
 
 
+
     public function checkAdmin(): bool
     {
         if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
