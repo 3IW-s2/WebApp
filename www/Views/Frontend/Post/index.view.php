@@ -2,7 +2,7 @@
 <section id = "blogs" class = "py-5">
         <div class = "container">
             <div class = "title text-center py-5">
-                <h2 class = "position-relative d-inline-block">Post</h2>
+                <h2 class = "position-relative d-inline-block"><?= $posts['title'] ;?></h2>
             </div>
 
             <div class = "collection-list mt-5 row gx-0 gy-3">
@@ -23,6 +23,7 @@
                             </div>
                       </div>
                   </div>
+                
 
 
                 </div>
