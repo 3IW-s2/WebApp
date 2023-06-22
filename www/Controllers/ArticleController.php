@@ -20,11 +20,11 @@ class ArticleController
         $security = new Security($error);
        
 
-        $article = new Article();
-        $article->setSlug($_GET['slug']);
-        $ArtcileService = new ArticleService();
-        $articles = $ArtcileService->getArticleBySlug($article);
-        if ($articles == false){
+        $ArticleService = new ArticleService();
+        $Article = new Article();
+        $Article->setSlug($_GET['slug']);
+        $article = $ArticleService->getArticleBySlug($Article);
+        if ($article == false){
             $error->setCode(404);
             $error->addError("Article introuvable");
             header('Location: /');
