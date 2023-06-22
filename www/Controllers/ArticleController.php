@@ -88,4 +88,39 @@ class ArticleController
             header('Location: /admin/article/index');
         }
     }
+
+    public function editArticle()
+    {
+    if (isset($_GET['id'])) {
+        $view = new View("Backend/Article/edit", "back");
+        $ArtcileService = new ArticleService();
+        $article = new Article();
+        $article->setId($_GET['id']);
+        $articles = $ArtcileService->getArticleById($article);
+        $view->assign('articles', $articles);
+        
+        $date =new \DateTime (date('Y-m-d H:i:s'));
+        $date = $date->format('Y-m-d');
+
+        
+       
+            if (isset($_POST['submit'])) {
+                $article = new Article();
+                $article->setTitle($_POST['title']);
+                $article->setContent($_POST['content']);
+                $article->setSlug($_POST['slug']);
+                $article->setupdate_at($date->format('Y-m-d'));
+                var_dump($article);
+            
+               var_dump( $ArtcileService->updateArticle($article) );
+               die;
+                
+                header('Location: /admin/article/index');
+            }
+
+         }
+    }
+
+
+    
 }

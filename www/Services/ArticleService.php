@@ -70,4 +70,9 @@ class ArticleService
         return $this->articleRepository->pendingArticle($article);
     }
 
+   public function getArticleById( Article $article)
+   {
+         return $this->articleRepository->getArticleById($article);
+   }
+
 }

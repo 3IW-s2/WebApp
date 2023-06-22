@@ -2,48 +2,71 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
 use App\Core\Error;
+use App\Core\Menu;
 use App\Models\User;
 use App\Core\View;
+use App\Core\Dump;
 use App\Core\Database;
 use App\Services\UserService;
+use App\Services\MenuService;
+
 use App\Core\Session;
 use PDO;
 
 
 
-class Auth
+class Auth  
 {
    
-    public $message = [];
+   
+    public $message = [];   
+    protected $menu;
+    
 
     public function __construct(){
         $this->handle = [
             Session::class
         ];
+        $this->menu = new Menu();
+       
     }
 
     public function login(): void
-    {    
-        var_dump($_SESSION);
-     
+    {  
+       
 
         $view = new View("Auth/login", "front");
         $error = new Error();
         $user = new User($error);
+     
 
         if(!empty($_POST)){
             $email = $_POST["email"];
             $pwd = $_POST["password"];
-
+       
             
             $user->setEmail($email);
             $user->setPwd($pwd);
             $user->login( $email, $pwd);
             
         }
+        
+        $menuss = $this->menu->getAllLink();
+        $view->assign("menus", $menuss[0]);
+        $view->assign("sousmenus", $menuss[1]);
         $error = $user->getError();
-        $view->setVariable("error", $error);
+        $view->assign("error", $error);
+      
+
+       
+    
+
+        //depuis le constructeur de BaseController rajoute la variable $error dans la vue
+       
+
+      
     }
 
     public function logout(): void
@@ -69,6 +92,12 @@ class Auth
               $user->setEmail($email);
               $user->forgotPassword($email);
          }
+
+        $menuss = $this->menu->getAllLink();
+        $view->assign("menus", $menuss[0]);
+        $view->assign("sousmenus", $menuss[1]);
+        $error = $user->getError();
+        $view->assign("error", $error);
    }
 
    public function resetPassword(): void
@@ -83,6 +112,9 @@ class Auth
 
                 if ($tokenIsValid) {
                     $view = new View("Auth/resetpassword", "front");
+                    $menuss = $this->menu->getAllLink();
+                    $view->assign("menus", $menuss[0]);
+                    $view->assign("sousmenus", $menuss[1]);
                     header("Location: /newpassword");
                 } else {
                     $erros [] = 'Jeton invalide';
@@ -90,6 +122,7 @@ class Auth
             } else {
                 $erros [] = 'Accès refusé';
             }
+            
    }
 
     public function newPassword(): void
@@ -109,6 +142,9 @@ class Auth
 
                 header("Location: /");
           }
+        $menuss = $this->menu->getAllLink();
+        $view->assign("menus", $menuss[0]);
+        $view->assign("sousmenus", $menuss[1]);
     }
 
     public function register(): void

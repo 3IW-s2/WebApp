@@ -38,6 +38,7 @@
                                     <th scope="col">Lastname</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Role</th>
+                                    <th scope="col">Status</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -50,6 +51,7 @@
                                         <td><?= $user["lastname"] ?></td>
                                         <td><?= $user["email"]?></td>
                                         <td><?= $user["role"] ?></td>
+                                        <td><?= $user["status"] ?></td>
                                        <!--  <td></td> -->
                                         <td>
                                             <a href="user/edit?id=<?= $user['id'] ?>" class="btn btn-primary">Edit</a>
