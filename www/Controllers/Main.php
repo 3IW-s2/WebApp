@@ -6,6 +6,13 @@ use App\Core\View;
 use App\Services\MenuService;
 use App\Services\ArticleService;
 use App\Services\CommentaireService;
+use App\Controllers\BaseController;
+use App\Core\Error;
+use App\Core\Menu;
+use App\Models\User;
+use App\Core\Dump;
+use App\Core\Database;
+use App\Services\UserService;
 
 
 class Main
@@ -37,4 +44,22 @@ class Main
         echo "Page à propos";
     } */
 
+
+    public function profile():void
+    {
+        $menuService = new MenuService();
+        $menus = $menuService->activeLink();
+        $sousmenus = $menuService->findAllParent();
+        $view = new View("Main/profile", "front");
+        $view->assign("menus", $menus);
+        $view->assign("sousmenus", $sousmenus);
+
+        $error = new Error();
+        $user  = new User($error);
+        $user->setEmail($_SESSION["user"]);
+        $userService = new UserService();
+        $user = $userService->findByEmail($user);
+        $view->assign("user", $user);
+
+    }
 }
