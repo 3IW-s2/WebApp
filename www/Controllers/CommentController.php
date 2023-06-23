@@ -146,7 +146,9 @@ class CommentController
                $newComment->setId($id);
                $commentService->updateComment($newComment);
                $userId = $comment['user_id'];
-               $user = $userService->getUserById($userId);
+               $User = new User($error);
+                $User->setId($userId);
+               $user = $userService->getUserById($User);
                $mail = new mail($user['email'], "Votre commentaire a été supprimé", "Votre commentaire a été supprimé car il a été signalé plus de 10 fois");
                $mail->send();
            }

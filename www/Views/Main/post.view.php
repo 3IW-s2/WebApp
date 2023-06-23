@@ -1,8 +1,3 @@
-<?php
-
-use App\Repositories\UserRepository;
-
-?>
 <article>
     <h1><?= $article['title'] ?></h1>
     <p><?= $article['content'] ?></p>
