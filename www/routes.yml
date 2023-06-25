@@ -155,6 +155,7 @@ admin/article/pending:
 article/{slug}:
   controller: ArticleController
   action: previewArticle
+  verifConnexion: true
 
 admin/menu/index:
   controller: MenuController
@@ -186,7 +187,7 @@ admin/menu/publish:
   action: publishMenu
   security: ROLE:ADMIN
 
-admin/comment/index:
+admin /comment/index:
   controller: CommentController
   action: showComments
 

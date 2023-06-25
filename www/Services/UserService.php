@@ -112,6 +112,11 @@ class UserService extends Database
         }
     }
 
+    public function findById(User $user)
+    {
+        return $this->userRepo->findById($user);
+    }
+
     
 
 }

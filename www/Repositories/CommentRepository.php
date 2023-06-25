@@ -37,7 +37,7 @@ class CommentRepository extends Database
         $params = [
             'id' => $comment->getId()
         ];
-        $statement = $db->query($query, $params);
+        $statement = $this->db->query($query, $params);
         $comment = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $comment;

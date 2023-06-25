@@ -185,6 +185,7 @@ class Auth
         $view->assign("sousmenus", $menuss[1]);
         $view->assign("error", $error);
         $view->assign("errors", $errors);
+        header("Location: /login");
 
     }
 
