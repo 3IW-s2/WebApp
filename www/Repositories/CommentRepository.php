@@ -64,7 +64,7 @@ class CommentRepository extends Database
         ];
         $statement = $this->db->query($query_1, $params);
         $articleId = $statement->fetchAll(PDO::FETCH_ASSOC);
-        $query_2 = "SELECT * FROM {$this->table} WHERE article_id = :article_id";
+        $query_2 = "SELECT * FROM {$this->table} WHERE  article_id = :article_id AND status BETWEEN '10' AND '20'";
         $params = [
             'article_id' => $articleId[0]['id']
         ];
@@ -93,6 +93,18 @@ class CommentRepository extends Database
             ];
             $statement = $this->db->query($query, $params);
 
+    }
+
+    public function getSignalById(Comment $comment)
+    {
+        $query = "SELECT status FROM {$this->table} WHERE id = :id";
+        $params = [
+            'id' => $comment->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+        $signal = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $signal;
     }
   
 }

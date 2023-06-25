@@ -48,6 +48,11 @@ class CommentService extends Database
         $this->commentRepository->reportComment($comment);
     }
 
+    public function getSignalById(Comment $comment)
+    {
+        return $this->commentRepository->getSignalById($comment);
+    }
+
 
 
    

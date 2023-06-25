@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Error;
 use App\Core\Security;
+use App\Core\Mail;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
@@ -96,6 +97,10 @@ class ArticleController
               $comment = new Comment(new Error());
               $comment->setId($_POST['id']);
               $this->commentService->reportComment($comment);
+              $email = $_SESSION['user'];
+              $mail = new Mail( $email , 'Commentaire signaler', 'Votre commentaire a été signale');
+              $mail->send();
+              unset($_POST);
               header('Location: ' . $_SERVER['REQUEST_URI']);
               exit();
        }
