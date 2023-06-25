@@ -84,5 +84,15 @@ class CommentRepository extends Database
         ];
         $statement = $this->db->query($query, $params);
     }
+
+    public function reportComment (Comment $comment)
+    {
+         $query = "UPDATE {$this->table} SET status = CAST(status AS INTEGER) + 1 WHERE id = :id";
+            $params = [
+                'id' => $comment->getId()
+            ];
+            $statement = $this->db->query($query, $params);
+
+    }
   
 }

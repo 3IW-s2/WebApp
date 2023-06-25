@@ -92,6 +92,13 @@ class ArticleController
            
 
         }
+       if(isset($_POST['signaler'])){
+              $comment = new Comment(new Error());
+              $comment->setId($_POST['id']);
+              $this->commentService->reportComment($comment);
+              header('Location: ' . $_SERVER['REQUEST_URI']);
+              exit();
+       }
     }
 
     public function pendingArticle(){

@@ -48,6 +48,11 @@
                                         </p>
 
                                         </div>
+
+                                        <form id="signal-comm" method="post" action="">
+                                            <input type="hidden" name="id" value="<?=$comment['id']?>">
+                                            <button type="submit" name="signaler" class=" btn-primary">Signaler</button>
+                                        </form>
                                     </div>
                                     
                                    

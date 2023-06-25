@@ -43,5 +43,12 @@ class CommentService extends Database
         $this->commentRepository->addComment($comment);
     }
 
+    public function reportComment(Comment $comment)
+    {
+        $this->commentRepository->reportComment($comment);
+    }
+
+
+
    
 }
