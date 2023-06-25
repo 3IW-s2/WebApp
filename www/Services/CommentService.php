@@ -38,5 +38,10 @@ class CommentService extends Database
         return $this->commentRepository->getCommentArticleBySlug($article);
     }
 
+    public function addComment (Comment $comment)
+    {
+        $this->commentRepository->addComment($comment);
+    }
+
    
 }

@@ -13,7 +13,7 @@ use Exception;
 class Comment extends Database
 {
     private Int $id = 0;
-    private Text $content;
+    private String $content;
     private Int $status = 0;
     private Int $article_id = 0;
     private Int $user_id = 0;
@@ -23,6 +23,8 @@ class Comment extends Database
     private $baseUrl;
     private $error;
 
+
+
     
     public function __construct( Error $error){
         $this->date_inserted = new \DateTime();
@@ -30,6 +32,13 @@ class Comment extends Database
         $this->error = $error;
         $this->loadConfig();
 
+    }
+
+    private function loadConfig() {
+        $configFile = __DIR__ . '/../config.yml';
+        $config = yaml_parse_file($configFile);
+
+        $this->baseUrl = $config['base_url'];
     }
 
     /**
@@ -52,19 +61,19 @@ class Comment extends Database
 
     /**
      * Get the value of content
-     * @return Text
+     * @return String
      */
-    public function getContent(): Text
+    public function getContent(): String
     {
         return $this->content;
     }
 
     /**
      * Set the value of content
-     * @param Text $content
+     * @param String $content
      * @return  self
      */
-    public function setContent(Text $content): self
+    public function setContent(String $content): self
     {
         $this->content = $content;
         return $this;
@@ -231,5 +240,7 @@ class Comment extends Database
         $this->error = $error;
         return $this;
     }
+
+
 
 }

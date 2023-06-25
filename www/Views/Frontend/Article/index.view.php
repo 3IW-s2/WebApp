@@ -49,17 +49,27 @@
 
                                         </div>
                                     </div>
+                                    
+                                   
+
+                                    </div>
                                     <?php endforeach; ?>
                                     <form id="add-comm" method="post" action="">
                                     <div class="form-group">
+                                       <?php  if(isset($errors)):  ?>
+                                            <div class="alert alert-danger">
+                                                <?php foreach($errors as $error): ?>
+                                                <p><?php echo $error; ?></p>
+                                                <?php endforeach; ?>
+                                            </div>
+                                            <?php endif; ?>
+                                        
                                                 <label for="content">Commentaire</label>
                                                 <input type="textarea" name="content" id="content" class="form-control"  />
                                             </div>
                                           
-                                            <button type="submit" name="submit-submenu" class="btn btn-primary">Commnentaire</button>
-                                </form>
-
-                                    </div>
+                                            <button type="submit" name="submit" class="btn btn-primary">Commnentaire</button>
+                                    </form>
                                 </div>
                                 </div>
                             </div>

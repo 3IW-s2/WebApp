@@ -14,6 +14,7 @@ use App\Core\Session;
 use App\Core\Menu;
 use App\Services\CommentService;
 use App\Services\UserService;
+
 use PDO;
 
 
@@ -61,6 +62,35 @@ class ArticleController
             $error->setCode(404);
             $error->addError("Article introuvable");
             header('Location: /');
+        }
+
+        if (isset($_POST['submit'])){
+            if (empty($_POST['content'])){
+                $error->addError("Veuillez remplir le champ");
+                $view->assign('errors', $error->getErrors());
+                
+            }
+            if ($error->hasErrors()){
+                $view->assign('errors', $error->getErrors());
+               
+            }
+           
+            $comment = new Comment( new Error());
+            $userService = new UserService(new Error());
+            $user = new User(new Error());
+            $user = $user->setEmail($_SESSION['user']);
+            $user = $userService->getUserIdByEmail($user);
+            $comment->setContent($_POST['content']);
+            $comment->setArticleId($articles['id']);
+            $comment->setUserId($user);
+            $comment->setStatus(10);
+            $this->commentService->addComment($comment);
+            unset($_POST);
+            header('Location: ' . $_SERVER['REQUEST_URI']);
+            exit();
+      
+           
+
         }
     }
 

@@ -101,6 +101,17 @@ class UserService extends Database
         }
     }
 
+    public function getUserIdByEmail(User $user)
+    {
+        if ($this->userRepo->getUserIdByEmail($user)) {
+            
+            return  $this->userRepo->getUserIdByEmail($user);
+        } else {
+            $this->error->addError("Une erreur s'est produite lors de la recherche de l'utilisateur");
+            return false;
+        }
+    }
+
     
 
 }

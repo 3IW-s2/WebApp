@@ -24,7 +24,7 @@ class CommentRepository extends Database
 
     public function findAll()
     {
-        $query = "SELECT * FROM {$this->table}";
+        $query = "SELECT * FROM {$this->table} WHERE status = '10' ";
         $statement = $this->db->query($query);
         $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -72,6 +72,18 @@ class CommentRepository extends Database
         $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
         
         return $comments;
+    }
+
+    public function addComment (Comment $comment)
+    {
+        $query = "INSERT INTO {$this->table} (content, created_at, updated_at, article_id, user_id , status) VALUES (:content, NOW(), NOW(), :article_id, :user_id, 10)";
+        $params = [
+            'content' => $comment->getContent(),
+            'article_id' => $comment->getArticleId(),
+            'user_id' => $comment->getUserId()
+        ];
+        $statement = $this->db->query($query, $params);
+        var_dump($statement);die;   
     }
   
 }
