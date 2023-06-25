@@ -185,3 +185,19 @@ admin/menu/publish:
   controller: MenuController
   action: publishMenu
   security: ROLE:ADMIN
+
+admin/comment/index:
+  controller: CommentController
+  action: showComments
+
+admin/comment/edit:
+  controller: CommentController
+  action: updateComment
+
+addcomment:
+  controller: CommentController
+  action: addComment
+
+signalcomment:
+  controller: CommentController
+  action: signalComment

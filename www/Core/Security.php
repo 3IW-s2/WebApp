@@ -123,7 +123,6 @@ class Security extends Database
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             //$error = new Error();
             $this->$error->addError("L'adresse email n'est pas valide");
-            var_dump($error);
             die;
         
 

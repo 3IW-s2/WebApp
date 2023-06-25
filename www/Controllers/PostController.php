@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Services\PostService;
 use App\Repositories\PostRepository;
 use App\Services\ArticleService;
+use App\Services\CommentService;
+use App\Models\Comment;
 use App\Core\Database;
 use App\Core\Error;
 use App\Core\Menu;
@@ -33,10 +35,14 @@ class PostController
             $menuss = $this->menu->getAllLink();
             $view->assign("menus", $menuss[0]);
             $view->assign("sousmenus", $menuss[1]);
-    
             $articles = $this->article->findAll();
             $view->assign('articles', $articles);
            
+            $error = new Error();
+            $commentService = new CommentService($error);
+            $comments = $commentService->getCommentsByArticleId(1);
+          
+            $view->assign('comments', $comments);
         }else{
 
         $postService = new PostService();
