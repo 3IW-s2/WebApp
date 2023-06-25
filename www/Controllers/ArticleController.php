@@ -96,9 +96,14 @@ class ArticleController
        if(isset($_POST['signaler'])){
               $comment = new Comment(new Error());
               $comment->setId($_POST['id']);
+              $infoComment = $this->commentService->getCommentById($comment);   
+              $userId = $infoComment['user_id'];
+              $user = new User(new Error());
+              $user = $user->setId($userId);
+              $user = $this->userService->findById($user);
               $this->commentService->reportComment($comment);
-              $email = $_SESSION['user'];
-              $mail = new Mail( $email , 'Commentaire signaler', 'Votre commentaire a été signale');
+              $email = $user['email'];
+              $mail = new Mail( $email , 'Commentaire signaler', 'Votre commentaire a ete signale');
               $mail->send();
               unset($_POST);
               header('Location: ' . $_SERVER['REQUEST_URI']);

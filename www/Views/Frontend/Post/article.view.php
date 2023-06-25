@@ -8,7 +8,7 @@
             <div class = "collection-list mt-5 row gx-0 gy-3">
 
                   
-                  <div class = "col-md-6 ">
+                  <div class = "col-md-14 ">
                       <div class="mb-2">
                         <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
                             <div class = "card-body px-0">
