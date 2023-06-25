@@ -34,9 +34,9 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Id.</th>
-                                    <th scope="col">parent_id</th>
-                                    <th scope="col">titre</th>
-                                    <th scope="col">url</th>
+                                    <th scope="col">Content</th>
+                                    <th scope="col">id user</th>
+                                    <th scope="col">id article</th>
                                     <th scope="col">status</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>

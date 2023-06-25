@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Models\Post;
+use App\Models\Article;
 use App\Services\PostService;
 use App\Repositories\PostRepository;
 use App\Services\ArticleService;
@@ -40,7 +41,8 @@ class PostController
            
             $error = new Error();
             $commentService = new CommentService($error);
-            $comments = $commentService->getCommentsByArticleId(1);
+            //$article->setId(1);
+            $comments = $commentService->findAll();
           
             $view->assign('comments', $comments);
         }else{

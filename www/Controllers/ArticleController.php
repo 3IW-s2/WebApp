@@ -5,12 +5,15 @@ namespace App\Controllers;
 use App\Core\Error;
 use App\Core\Security;
 use App\Models\Article;
+use App\Models\Comment;
+use App\Models\User;
 use App\Core\View;
 use App\Core\Database;
 use App\Services\ArticleService;
 use App\Core\Session;
 use App\Core\Menu;
-
+use App\Services\CommentService;
+use App\Services\UserService;
 use PDO;
 
 
@@ -19,10 +22,14 @@ class ArticleController
 {
     private $menu;
     private $article ;
+    private $commentService;
+    private $userService;
     public function __construct()
     {
         $this->menu = new Menu();
         $this->article = new ArticleService();
+        $this->commentService =new CommentService(new Error());
+        $this->userService = new UserService(new Error());
     }
 
     public function previewArticle(){
@@ -40,6 +47,15 @@ class ArticleController
         $menuss = $this->menu->getAllLink();
         $view->assign("menus", $menuss[0]);
         $view->assign("sousmenus", $menuss[1]);
+
+        
+        $comments = $this->commentService->getCommentArticleBySlug($article);
+        $user = new User(new Error() );
+        $user = $user->setId($comments[0]['user_id']);
+        $user = $this->userService->getUserById($user);
+        $user = $user['firstname'].' '.$user['lastname'];
+        $view->assign('user', $user);
+        $view->assign('comments', $comments);
 
         if ($articles == false){
             $error->setCode(404);

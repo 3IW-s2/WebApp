@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\Comment;
+use App\Models\Article;
 use App\Repositories\CommentRepository;
 use App\Core\Database;
 use App\Core\Error;
@@ -20,6 +21,21 @@ class CommentService extends Database
     public function findAll()
     {
         return $this->commentRepository->findAll();
+    }
+
+    public function  getCommentById(Comment $comment)
+    {
+        return $this->commentRepository->getCommentById($comment);
+    }
+
+    public function getCommentsByArticleId(Article $article)
+    {
+        return $this->commentRepository->getCommentsByArticleId($article);
+    }
+
+    public function getCommentArticleBySlug(Article $article)
+    {
+        return $this->commentRepository->getCommentArticleBySlug($article);
     }
 
    
