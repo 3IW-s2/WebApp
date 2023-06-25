@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use App\Core\Security;
+use App\Core\Error;
 
 class Router
 {
@@ -47,7 +48,13 @@ class Router
             }
 
             if (!$foundRoute) {
-                die("Cette route n'existe pas dans le fichier de routing");
+
+               // die("Cette route n'existe pas dans le fichier de routing");
+                $error = new Error();
+                $error->setCode(404);
+                $error->addError("Page introuvable");
+                header("Location: /");
+                exit();
             }
         }
 

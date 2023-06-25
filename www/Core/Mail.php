@@ -51,10 +51,10 @@ class Mail{
                 $mail->send();
                         
                 // Si l'e-mail est envoyé avec succès
-                        echo "L'e-mail  a été envoyé avec succès.";
+                        //echo "L'e-mail  a été envoyé avec succès.";
                     } catch (Exception $e) {
                         // En cas d'erreur lors de l'envoi de l'e-mail
-                        echo 'Une erreur est survenue lors de l\'envoi de l\'e-mail : ' . $mail->ErrorInfo;
+                       // echo 'Une erreur est survenue lors de l\'envoi de l\'e-mail : ' . $mail->ErrorInfo;
             }
         }
 
