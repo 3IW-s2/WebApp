@@ -83,7 +83,6 @@ class CommentRepository extends Database
             'user_id' => $comment->getUserId()
         ];
         $statement = $this->db->query($query, $params);
-        var_dump($statement);die;   
     }
   
 }
