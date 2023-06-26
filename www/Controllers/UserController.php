@@ -105,8 +105,6 @@ class UserController
                
              ];
            
-
-
             $uppdateService = new UserService();
             $updateUser = $uppdateService->updateUser($users);
 
