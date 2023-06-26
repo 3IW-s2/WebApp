@@ -79,33 +79,37 @@ class PageController
             $view->assign('posts', $posts);
             $view->assign('history', $history); 
 
-            if(isset($_POST['submit']))
-                {
-                    $post = new Post();
-                    $post->setId($_GET['id']);
-                    $post->setTitle($_POST['title']);
-                    $post->setContent($_POST['content']);
-                    $post->setSlug($_POST['slug']);
-                    $post->setStatus('5');
-                    $post->setAuthor($_SESSION['user']);
+           
+        }
+        if(isset($_POST['submit']))
+        {
+            $post = new Post();
+            $post->setId($_GET['id']);
+            $post->setTitle($_POST['title']);
+            $post->setContent($_POST['content']);
+            $post->setSlug($_POST['slug']);
+            $post->setStatus('5');
+            $post->setAuthor($_SESSION['user']);
 
-                    $data= array(
-                        'title' => $_POST['title'],
-                        'content' => $_POST['content'],
-                        'slug' => $_POST['slug'],
-                        'status' => '5',
-                        'author' => $_SESSION['user']
-                    );
-                    $historyModel->setContent(json_encode($data));
-                    $historyModel->setAction('update');
-                    $historyService->addHistory($historyModel);
+            $data = [
+                'id' => $_GET['id'],    
+                'title' => $_POST['title'],
+                'content' => $_POST['content'],
+                'slug' => $_POST['slug'],
+                'status' => '5',
+                'author' => $_SESSION['user']
+            ];
+           
 
-                    $postService = new PostService();
-                    $posts = $postService->updatePost($post);
-                    
-                    unset($_POST);
-                    header('Location: /admin/page/index');
-                }
+            $postService = new PostService();
+            $posts = $postService->updatePost($post);
+
+            $historyModel->setContent(json_encode($data));
+            $historyModel->setAction('update');
+            $historyService->addHistory($historyModel);
+            
+            unset($_POST);
+            header('Location: /admin/page/index');
         }
         
     }
