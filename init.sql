@@ -14,7 +14,7 @@ CREATE TABLE posts(
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    status VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL
 );
 
 ALTER TABLE posts ADD COLUMN image_path VARCHAR(255)  NULL;
@@ -73,7 +73,7 @@ VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
     updated_at TIMESTAMP NOT NULL,
     user_id INTEGER NOT NULL,
     slug VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL
 ); 
 
 /* CREATE TABLE comments (
@@ -91,10 +91,20 @@ CREATE TABLE menu (
   parent_id INT,
   titre VARCHAR(255),
   url VARCHAR(255)
-  status VARCHAR(255) NOT NULL,
+  status VARCHAR(255) NOT NULL
 );
 
 
 
 ALTER TABLE menu ALTER COLUMN parent_id DROP NOT NULL;
 ALTER TABLE menu ADD COLUMN status VARCHAR(255) NULL ;
+
+CREATE TABLE history (
+    id SERIAL PRIMARY KEY,
+    table_name VARCHAR(255) NOT NULL,
+    entity_type VARCHAR(255) NOT NULL,
+    entity_id INTEGER NOT NULL,
+    action VARCHAR(255) NULL,
+    created_at TIMESTAMP NOT NULL,
+    content TEXT NOT NULL
+);

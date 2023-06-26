@@ -190,6 +190,7 @@ class  UserRepository  extends Database
         return $user;
     }
 
+
     public function verifRegister(string $email)
     {
         $query = "SELECT * FROM {$this->table} WHERE email = :email";
