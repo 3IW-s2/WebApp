@@ -153,6 +153,16 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item">
+            <a href="/admin/users/removed" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Utilisateurs Bloqués 
+              </p>
+            </a>
+          </li>
+
          
        
           <!-- <li class="nav-item">
@@ -185,7 +195,9 @@
             </ul>
           </li> -->
         </ul>
+        
       </nav>
+      
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

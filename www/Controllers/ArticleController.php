@@ -81,7 +81,7 @@ class ArticleController
             $user = new User(new Error());
             $user = $user->setEmail($_SESSION['user']);
             $user = $userService->getUserIdByEmail($user);
-            $comment->setContent($_POST['content']);
+            $comment->setContent(strip_tags($_POST['content']));
             $comment->setArticleId($articles['id']);
             $comment->setUserId($user);
             $comment->setStatus(10);

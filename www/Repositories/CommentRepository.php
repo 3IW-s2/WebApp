@@ -24,7 +24,7 @@ class CommentRepository extends Database
 
     public function findAll()
     {
-        $query = "SELECT * FROM {$this->table} WHERE status = '10' ";
+        $query = "SELECT * FROM {$this->table} ";
         $statement = $this->db->query($query);
         $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
 

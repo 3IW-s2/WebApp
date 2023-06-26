@@ -117,6 +117,21 @@ class UserService extends Database
         return $this->userRepo->findById($user);
     }
 
+    public function getAllUserRemoved()
+    {
+        return $this->userRepo->getAllUserRemoved();
+    }
+
+    public function getAllUserAct()
+    {
+        return $this->userRepo->getAllUserAct();
+    }
+
+    public function getAllUserPending()
+    {
+        return $this->userRepo->getAllUserPending();
+    }
+
     
 
 }
