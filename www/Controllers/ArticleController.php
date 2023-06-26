@@ -44,6 +44,12 @@ class ArticleController
         $ArtcileService = new ArticleService();
         $articles = $ArtcileService->getArticleBySlug($article);
 
+        if($articles == false){
+            $error->setCode(404);
+            $error->addError("Article introuvable");
+            header('Location: /');
+        }
+
         $view = new View("Frontend/Article/index", "front");
         $view->assign('articles', $articles);
         $menuss = $this->menu->getAllLink();
