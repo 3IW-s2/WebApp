@@ -52,6 +52,7 @@ class Auth
             $user->setEmail($email);
             $user->setPwd($pwd);
             $user->login( $email, $pwd);
+          
             
         }
         

@@ -190,10 +190,12 @@ admin/menu/publish:
 admin /comment/index:
   controller: CommentController
   action: showComments
+  security: ROLE:ADMIN
 
 admin/comment/edit:
   controller: CommentController
   action: updateComment
+  security: ROLE:ADMIN
 
 addcomment:
   controller: CommentController
