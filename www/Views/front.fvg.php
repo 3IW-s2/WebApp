@@ -60,6 +60,15 @@
                             <li class = "nav-item px-2 py-2">                                    
                                  <a class = 'nav-link text-uppercase text-dark'  href='/'>Home</a>
                             </li>
+                            <!-- <li class="nav-item px-2 py-2 ">
+                                <a href="javascript:void(0)" class="nav-link text-uppercase text-dark" onclick="myFunction()">Dropdown</a>
+                                <div class="dropdown-content" id="myDropdown">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                                </div>
+                            </li> -->
+                            
                             <?php
                                
                                 foreach($menus as $menu){
@@ -105,4 +114,26 @@
     <?php include $this->view;?>
 
 </body>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var d = 0; d < dropdowns.length; d++) {
+      var openDropdown = dropdowns[d];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 </html>
