@@ -14,7 +14,7 @@ class History
     private Int $entity_id;
     private ?String $action;
     private \DateTime $created_at;
-    private  Text $content;
+    private  String $content;
 
     public function __construct()
     {
@@ -141,11 +141,22 @@ class History
 
     /**
      * Get the value of content
-     * @return Text
+     * @return String
      */
-    public function getContent(): Text
+    public function getContent(): String
     {
         return $this->content;
+    }
+
+    /**
+     * Set the value of content
+     * @param String $content
+     * @return  self
+     */
+    public function setContent(String $content): self
+    {
+        $this->content = $content;
+        return $this;
     }
 
 }
