@@ -287,4 +287,10 @@
   CKEDITOR.replace('editor');
 </script>
 
+<style>
+  .hidden-textarea{
+    display:none;
+  }
+</style>
+
 </html>

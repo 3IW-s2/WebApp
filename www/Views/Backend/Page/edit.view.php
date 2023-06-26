@@ -51,12 +51,14 @@
                                         <li> le slug: <?=$data["slug"] ?></li>    
                                         <form id="update-register-form" method="post" action="">
                                             <input type="hidden" name="title" value="<?= $data["title"] ?>" />
-                                            <input type="hidden" name="content" value="<?= $data["content"] ?>" />
+                                            <textarea id="content" name="content" class="hidden-textarea"><?= $data["content"] ?></textarea>
                                             <input type="hidden" name="slug" value="<?= $data["slug"] ?>" />
                                             <input type="hidden" name="status" value="<?= $data["status"] ?>" />
                                             <input type="hidden" name="author" value="<?= $data["author"] ?>" />
                                             <button type="submit" name="submit" class="btn btn-primary">Restore</button>
+                                        </form>
                                     <?php endforeach; ?>
+                                  
                                 </ul>
                                 </div>
 
