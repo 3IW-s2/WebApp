@@ -16,7 +16,7 @@ Un projet de TIW.c'est un framework MVC qui permet de créer des applications we
 ## Aperçu
 un aperçu de l'application web
 getsion Crud des utilisateurs
-![]()
+![](https://github.com/3IW-s2/WebApp/blob/feature/crud-user/gift/users.gif)
 
 ## Technologies utilisées
 
