@@ -190,6 +190,24 @@ class  UserRepository  extends Database
         return $user;
     }
 
+    public function verifRegister(string $email)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE email = :email";
+        $params = [
+            'email' => $email
+        ]; 
+        $statement = $this->db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $this->error = new Error();
+            $this->error->addError("L'utilisateur existe déjà");
+            return false;
+        }
+
+        return true;
+    }
+
     public function register(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);

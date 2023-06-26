@@ -394,6 +394,11 @@ class User extends Database
             }
 
             $userRepos = new UserRepository();
+            $userVerif = $userRepos->verifRegister($email);
+            if($userVerif){
+                $this->error->addError("L'utilisateur existe déjà");
+                return false; 
+            }
             $userRegister = $userRepos->register($firstname, $lastname, $email, $password, $role);
            
 
@@ -405,6 +410,7 @@ class User extends Database
 
             $mail = new mail ($email, "Bienvenue sur notre site", "Veuillez cliquer sur ce lien pour activer votre compte : " . $url . "");
             $mail->send();
+            $this->error->addError("Un email de confirmation vous a été envoyé");
 
             return true; 
         } catch (\Exception $e) {
