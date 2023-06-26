@@ -3,7 +3,6 @@ header("Content-type: text/xml");
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-// Fonction récursive pour parcourir le fichier routing.yml
 function parcours($array, $url = '')
 {
     foreach ($array as $key => $value) {

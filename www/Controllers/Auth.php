@@ -23,6 +23,7 @@ class Auth
    
     public $message = [];   
     protected $menu;
+    private $error;
     
 
     public function __construct(){
@@ -30,6 +31,7 @@ class Auth
             Session::class
         ];
         $this->menu = new Menu();
+        $this->error = new Error();
        
     }
 
@@ -50,6 +52,7 @@ class Auth
             $user->setEmail($email);
             $user->setPwd($pwd);
             $user->login( $email, $pwd);
+          
             
         }
         
@@ -168,10 +171,13 @@ class Auth
             try{
                 $register = $user->register($firstname, $lastname, $email, $pwd);
                 if($register){
-                    $errors [] = "utilisateur créé veuillez verifier votre boite mail";
+                   // $this->error->addError("utilisateur créé veuillez verifier votre boite mail");
+                    $errors[] = "utilisateur créé veuillez verifier votre boite mail";
+                    //header("Location: /login");
                 }else {
                     $errors[] = "utilisateur déjà existant";
                 }
+
             }catch(Exception $e){
                 $errors[] = "utilisateur déjà existant";
             }
@@ -185,7 +191,7 @@ class Auth
         $view->assign("sousmenus", $menuss[1]);
         $view->assign("error", $error);
         $view->assign("errors", $errors);
-        header("Location: /login");
+        
 
     }
 
