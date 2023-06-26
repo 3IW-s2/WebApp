@@ -26,13 +26,13 @@
                             <div class="form-group">
                                 <label for="history">Historique</label>
                                 <ul>
+                                 
                                     <?php foreach ($history as $entry): 
                                      $data = json_decode($entry["content"], true);
-                                        ?>  
-                                        <li> l'id<?=$data["id"] ?></li>
-                                        <li> l'email<?=$data["email"] ?></li>
-                                        <li> le firstname<?=$data["firstname"] ?></li>
-                                        <li> le lastname<?=$data["lastname"] ?></li>
+                                        ?>          _____
+                                        <li> l'email: <?=$data["email"] ?></li>
+                                        <li> le firstname: <?=$data["firstname"] ?></li>
+                                        <li> le lastname: <?=$data["lastname"] ?></li>
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
