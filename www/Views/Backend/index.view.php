@@ -63,5 +63,8 @@
             </div>
             <!-- /.info-box -->
           </div>
-          <!-- /.col -->
+          <div>
+            <canvas id="myChart"></canvas>
+          </div>
+        
 </div>

@@ -215,7 +215,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard </li>
+              <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -292,5 +292,29 @@
     display:none;
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['utilisateurs', 'Posts', 'comments', 'articles'],
+      datasets: [{
+        label: '# of Votes',
+        data: [<?php echo count($users); ?>, <?php echo count($pages); ?>, <?php echo count($comments); ?>, <?php echo count($articles); ?>],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 
 </html>
