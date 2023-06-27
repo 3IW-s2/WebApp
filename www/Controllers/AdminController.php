@@ -51,12 +51,14 @@ class AdminController
         $usersRemoved = $this->userService->getAllUserRemoved();
         $userAct = $this->userService->getAllUserAct();
         $userPend = $this->userService->getAllUserPending();
+        $userOnline = $this->userService->getAllUserOnline();
 
         $view = new View("Backend/index", "back");
         $view->assign('users', $userAll);
         $view->assign('usersRemoved', $usersRemoved);
         $view->assign('userPend', $userPend);
         $view->assign('userAct', $userAct);
+        $view->assign('userOnline', $userOnline);
         $view->assign('articles', $articleAll);
         $view->assign('comments', $commentAll);
         $view->assign('menus', $menu);

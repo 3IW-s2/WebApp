@@ -302,7 +302,7 @@
     data: {
       labels: ['utilisateurs', 'Posts', 'comments', 'articles'],
       datasets: [{
-        label: '# of Votes',
+        label: 'statistiques',
         data: [<?php echo count($users); ?>, <?php echo count($pages); ?>, <?php echo count($comments); ?>, <?php echo count($articles); ?>],
         borderWidth: 1
       }]

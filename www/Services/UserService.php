@@ -132,6 +132,11 @@ class UserService extends Database
         return $this->userRepo->getAllUserPending();
     }
 
+    public function getAllUserOnline()
+    {
+        return $this->userRepo->getAllUserOnline();
+    }
+
     
 
 }

@@ -399,6 +399,16 @@ class  UserRepository  extends Database
         return $users;
     }
 
+    public function getAllUserOnline()
+    { 
+
+        $query = "SELECT * FROM {$this->table} WHERE  now() + INTERVAL '2 hours' < expirate_token; ";
+        $statement = $this->db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
     
 
 }
