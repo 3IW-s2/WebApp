@@ -190,6 +190,7 @@ class  UserRepository  extends Database
         return $user;
     }
 
+
     public function verifRegister(string $email)
     {
         $query = "SELECT * FROM {$this->table} WHERE email = :email";
@@ -369,6 +370,43 @@ class  UserRepository  extends Database
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $user['id'];
+    }
+
+    public function getAllUserRemoved()
+    {
+        $query = "SELECT * FROM {$this->table} WHERE status = '10' ";
+        $statement = $this->db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
+    public function getAllUserAct()
+    {
+        $query = "SELECT * FROM {$this->table} WHERE status = '1' ";
+        $statement = $this->db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
+    public function getAllUserPending()
+    {
+        $query = "SELECT * FROM {$this->table} WHERE status is NULL AND  active_account_token is NOT NULL ";
+        $statement = $this->db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
+    public function getAllUserOnline()
+    { 
+
+        $query = "SELECT * FROM {$this->table} WHERE  now() + INTERVAL '2 hours' < expirate_token; ";
+        $statement = $this->db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
     }
 
     

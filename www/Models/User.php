@@ -395,11 +395,11 @@ class User extends Database
             }
 
             $userRepos = new UserRepository();
-            $userVerif = $userRepos->verifRegister($email);
+           /*  $userVerif = $userRepos->verifRegister($email);
             if($userVerif){
                 $this->error->addError("L'utilisateur existe déjà");
                 return false; 
-            }
+            }*/
             $userRegister = $userRepos->register($firstname, $lastname, $email, $password, $role);
            
 

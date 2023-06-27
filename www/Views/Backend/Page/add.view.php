@@ -1,11 +1,4 @@
 
-
-   <!-- un formulaire d'inscription -->
-
-
-<!-- un formulaire d'inscription -->
-
-
 <main>
 			<div class="container" style="width: 50%;">
                  <div class="div-center">

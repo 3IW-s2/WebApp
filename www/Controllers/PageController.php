@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Models\Post;
+use App\Models\History;
 use App\Services\PostService;
+use App\Services\HistoryService;
 use App\Core\Database;
 use App\Core\Error;
 
@@ -66,7 +68,18 @@ class PageController
             $post->setId($_GET['id']);
             $postService = new PostService();
             $posts = $postService->getPostById($post);
+
+            $historyModel = new History();
+            $historyModel->setEntityId($_GET['id']);
+            $historyModel->setEntityType('posts');
+            $historyModel->setTableName('posts');
+
+            $historyService = new HistoryService();
+            $history = $historyService->getHistoryForEntity($historyModel);
             $view->assign('posts', $posts);
+            $view->assign('history', $history); 
+
+           
         }
         if(isset($_POST['submit']))
         {
@@ -77,10 +90,28 @@ class PageController
             $post->setSlug($_POST['slug']);
             $post->setStatus('5');
             $post->setAuthor($_SESSION['user']);
+
+            $data = [
+                'id' => $_GET['id'],    
+                'title' => $_POST['title'],
+                'content' => $_POST['content'],
+                'slug' => $_POST['slug'],
+                'status' => '5',
+                'author' => $_SESSION['user']
+            ];
+           
+
             $postService = new PostService();
             $posts = $postService->updatePost($post);
+
+            $historyModel->setContent(json_encode($data));
+            $historyModel->setAction('update');
+            $historyService->addHistory($historyModel);
+            
+            unset($_POST);
             header('Location: /admin/page/index');
         }
+        
     }
 
 

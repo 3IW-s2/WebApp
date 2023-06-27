@@ -3,9 +3,11 @@ namespace App\Controllers;
 
 use App\Core\Error;
 use App\Models\User;
+use App\Models\History;
 use App\Core\View;
 use App\Repositories\UserRepository;
 use App\Services\UserService;
+use App\Services\HistoryService;
 use App\Core\Database;
 use App\Core\Security;
 
@@ -74,8 +76,19 @@ class UserController
          $userService = new UserService();
          $user = $userService->getUserById($user);
 
+         $historyModel = new History();
+         $historyModel->setEntityType('users');
+         $historyModel->setEntityId($id);
+         $historyModel->setTableName('users');
+         
+
+         $historyService = new HistoryService();
+         $history = $historyService->getHistoryForEntity($historyModel);
       
+
+         
          $view->assign('usr', $user);
+         $view->assign('history', $history); 
 
          if(isset($_POST['submit'])){
             $users = new User($error);
@@ -84,12 +97,23 @@ class UserController
             $users->setFirstname($_POST['firstname']);
             $users->setLastname($_POST['lastname']);  
            /*  $users->setPwd($_POST['password']); */
-
-
+           $data =[
+               'id' => $id,
+               'email' => $_POST['email'],
+               'firstname' => $_POST['firstname'],
+               'lastname' => $_POST['lastname']
+               
+             ];
+           
             $uppdateService = new UserService();
             $updateUser = $uppdateService->updateUser($users);
 
-      
+            $historyModel->setAction('update');
+            $historyModel->setContent(json_encode($data));
+
+            $addHistory = $historyService->addHistory($historyModel);
+             
+            unset($_POST);
             header('Location: /admin/showuser');
             
          }

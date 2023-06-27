@@ -23,6 +23,7 @@ contact:
 login:
   controller: Auth
   action: login
+  
 
 error:
   controller: Auth

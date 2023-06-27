@@ -44,6 +44,12 @@ class ArticleController
         $ArtcileService = new ArticleService();
         $articles = $ArtcileService->getArticleBySlug($article);
 
+        if($articles == false){
+            $error->setCode(404);
+            $error->addError("Article introuvable");
+            header('Location: /');
+        }
+
         $view = new View("Frontend/Article/index", "front");
         $view->assign('articles', $articles);
         $menuss = $this->menu->getAllLink();
@@ -52,16 +58,12 @@ class ArticleController
 
         
         $comments = $this->commentService->getCommentArticleBySlug($article);
-
-        foreach ($comments as $comment) {
-            $user = new User(new Error() );
-            $user = $user->setId($comment['user_id']);
-            $user = $this->userService->getUserById($user);
-            $name[$comment['id']] = $user['firstname'].' '.$user['lastname'];
-        }
-
+        $user = new User(new Error() );
+        $user = $user->setId($comments[0]['user_id']);
+        $user = $this->userService->getUserById($user);
+        $user = $user['firstname'].' '.$user['lastname'];
+        $view->assign('user', $user);
         $view->assign('comments', $comments);
-        $view->assign('name', $name);
 
         if ($articles == false){
             $error->setCode(404);
@@ -85,7 +87,7 @@ class ArticleController
             $user = new User(new Error());
             $user = $user->setEmail($_SESSION['user']);
             $user = $userService->getUserIdByEmail($user);
-            $comment->setContent($_POST['content']);
+            $comment->setContent(strip_tags($_POST['content']));
             $comment->setArticleId($articles['id']);
             $comment->setUserId($user);
             $comment->setStatus(10);
