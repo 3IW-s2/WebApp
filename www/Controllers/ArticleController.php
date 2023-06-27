@@ -58,12 +58,16 @@ class ArticleController
 
         
         $comments = $this->commentService->getCommentArticleBySlug($article);
-        $user = new User(new Error() );
-        $user = $user->setId($comments[0]['user_id']);
-        $user = $this->userService->getUserById($user);
-        $user = $user['firstname'].' '.$user['lastname'];
-        $view->assign('user', $user);
+
+        foreach ($comments as $comment) {
+            $user = new User(new Error() );
+            $user = $user->setId($comment['user_id']);
+            $user = $this->userService->getUserById($user);
+            $name[$comment['id']] = $user['firstname'].' '.$user['lastname'];
+        }
+
         $view->assign('comments', $comments);
+        $view->assign('name', $name);
 
         if ($articles == false){
             $error->setCode(404);
