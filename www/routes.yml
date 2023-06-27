@@ -68,6 +68,7 @@ admin/showuser:
   action: showUser
   security: ROLE:ADMIN 
   verifConnexion: true
+  editor: false
 
 admin/user/delete:
   controller: UserController

@@ -68,12 +68,15 @@ class Router
         $verifConnexion = $this->routes[$uri]["verifConnexion"] ?? null;
         $editor = $this->routes[$uri]["editor"]?? null;
 
-        if ($editor === null && $explodedUri[0] === "admin" && security::editor()){
-            header("Location: /admin");
-            die();
-        }
-        if($editor !== null && $editor === true ){
-           //on ne fait rien 
+
+        /* if ($editor === null && $explodedUri[0] === "admin" && Security::editor()){
+            var_dump("tez");die;
+            header("Location: /admin/");
+            exit();
+        } */ //by default editor has all acces
+        if($editor !== null && $editor === false  &&  Security::editor() ){
+            header("Location: /admin/");
+            exit();
         }
          
         if ($security !== null && !Security::checkSecurity($security)) {
