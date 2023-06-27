@@ -66,6 +66,15 @@ class Router
         $action = $this->routes[$uri]["action"];
         $security = $this->routes[$uri]["security"] ?? null;
         $verifConnexion = $this->routes[$uri]["verifConnexion"] ?? null;
+        $editor = $this->routes[$uri]["editor"]?? null;
+
+        if ($editor === null && $explodedUri[0] === "admin" && security::editor()){
+            header("Location: /admin");
+            die();
+        }
+        if($editor !== null && $editor === true ){
+           //on ne fait rien 
+        }
          
         if ($security !== null && !Security::checkSecurity($security)) {
             header("Location: /login");

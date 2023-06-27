@@ -28,21 +28,39 @@
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
-                        <?php  var_dump($error);die;
-                        if(!empty($errors)): ?>
-                            <div class="alert alert-danger">
-                                <?php foreach($errors as $error): ?>
-                                    <p><?php echo $error; ?></p>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php else: ?>
-                            <div class="alert alert-success">
-                                <p>Utilisateur ajouté avec succès</p>
-                            </div>
-                        <?php endif; ?>
+                        <table class="table">
+                            <a href="user/add" class="btn btn-success">Add</a>
 
-                            
-                           
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id.</th>
+                                    <th scope="col">Firstname</th>
+                                    <th scope="col">Lastname</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Status</th>
+                                   <!--  <th scope="col">pasword</th> -->
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($users as $user) : ?>
+                                    <tr>
+                                        <th scope="row"><?= $user["id"] ?></th>
+                                        <td><?= $user["firstname"]?></td>
+                                        <td><?= $user["lastname"] ?></td>
+                                        <td><?= $user["email"]?></td>
+                                        <td><?= $user["role"] ?></td>
+                                        <td><?= $user["status"] ?></td>
+                                       <!--  <td></td> -->
+                                        <td>
+                                            <a href="user/edit?id=<?= $user['id'] ?>" class="btn btn-primary">Edit</a>
+                                            <a href="user/delete?id=<?= $user['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="user/role?id=<?= $user['id'] ?>" class="btn btn-info">Role</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                        </table>
                     </div>
                     <div class="col-md-2"></div>
 

@@ -91,6 +91,15 @@ class Security extends Database
         return false;
     }
 
+    public static function editor()
+    {
+        $userRepo = new UserRepository();
+        $user = $userRepo->getUserByEmail($_SESSION['user']);
+        if($user['role'] === 3) {
+            return true;
+        }
+        return false;
+    }
 
 
     public function checkAdmin(): bool

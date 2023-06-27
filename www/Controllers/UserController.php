@@ -20,17 +20,6 @@ class UserController
          $user->setEmail($_SESSION['user']);
          $userService = new UserService();
          $user = $userService->findByEmail($user);
-         if($user['role'] === 3){
-
-            $error = new Error();
-            $error = $error->addError("Vous n'avez pas les droits pour accéder à cette page");
-            $view = new View("Backend/User/index", "back");
-            $view->assign('error', $error->getErrors());
-            die;
-         }
-
-      
-
          $view = new View("Backend/User/index", "back");
          $error = new Error();
          $userService = new UserService($error);
