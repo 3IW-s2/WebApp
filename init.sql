@@ -84,6 +84,7 @@ ALTER TABLE users ADD COLUMN expirate_token TIMESTAMP  NULL;
     article_id INTEGER NOT NULL,
     status VARCHAR(255) NOT NULL
 ); 
+ALTER TABLE comments ALTER COLUMN author DROP NOT NULL;
 
 
 CREATE TABLE menu (
