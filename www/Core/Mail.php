@@ -20,7 +20,6 @@ class Mail{
     
         public function send(): void
         {
-            //recupère le constructeur to
             $to = $this->to;
             $subject = $this->subject;
             $message = $this->message;
@@ -42,7 +41,29 @@ class Mail{
                 // Content
                 $mail->isHTML(true);                            // Set email format to HTML
                 $mail->Subject = $subject;
-                $mail->Body    = $message;
+                //$mail->Body= $message;
+                //si la taille de $message est supérieur à 57 caractères (le message préfait)
+                try {
+                    if (strlen($message) > 57) {
+                        $url = substr($message, 57);
+                       //generer un qrcode en utilisant google chart
+                        $qrCodeUrl = 'https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=' . urlencode($url) . '&choe=UTF-8';
+                        //met plutot l'image du qrcode  dans le body du mail avec le message
+                        $mail->Body = '<img src="' . $qrCodeUrl . '" alt="QR Code" /> <br>' . $message;
+                        $mail->IsHTML(true);  
+
+                    }else {
+                        $mail->Body = $message;
+                    }
+    
+                } catch(\Exception $e) {
+                    echo $e->getMessage();
+                    die;
+                }
+                
+            
+               
+               
                 //$mail->Subject = 'Bienvenue ! ';
                 //$mail->Body    = 'Bienvenue sur notre site. Nous sommes ravis de vous compter parmi nous ! votre code de confirmation est : 123456';
                 
@@ -51,11 +72,14 @@ class Mail{
                 $mail->send();
                         
                 // Si l'e-mail est envoyé avec succès
-                        echo "L'e-mail  a été envoyé avec succès.";
+                        //echo "L'e-mail  a été envoyé avec succès.";
                     } catch (Exception $e) {
                         // En cas d'erreur lors de l'envoi de l'e-mail
-                        echo 'Une erreur est survenue lors de l\'envoi de l\'e-mail : ' . $mail->ErrorInfo;
+                       // echo 'Une erreur est survenue lors de l\'envoi de l\'e-mail : ' . $mail->ErrorInfo;
             }
         }
+
+     
+        
 
 }

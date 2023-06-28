@@ -61,127 +61,186 @@ admin:
   controller: AdminController
   action: index
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/showuser:
   controller: UserController
   action: showUser
   security: ROLE:ADMIN 
+  verifConnexion: true
+  editor: false
 
 admin/user/delete:
   controller: UserController
   action: deleteUser
   security: ROLE:ADMIN 
+  verifConnexion: true
+  editor: false
+  
+admin/user/archive:
+  controller: UserController
+  action: archiveUser
+  security: ROLE:ADMIN 
+  verifConnexion: true
+  editor: false
 
 admin/user/edit:
   controller: UserController
   action: editUser
   security: ROLE:ADMIN 
+  verifConnexion: true
+  editor: false
 
 admin/user/add:
   controller: UserController
   action: addUser 
   security: ROLE:ADMIN  
   verifConnexion: true
+  editor: false
 
 admin/user/role:
   controller: UserController
   action: editRole
   security: ROLE:ADMIN  
+  verifConnexion: true
+  editor: false
 
 admin/page/index:
   controller: PageController
   action: showPost
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/page/edit:
   controller: PageController
   action: editPost
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/page/delete:
   controller: PageController
   action: deletePost
   security: ROLE:ADMIN  
+  verifConnexion: true
 
 admin/page/add:
   controller: PageController
   action: addPost
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/page/pending:
   controller: PageController
   action: pendingPost
   security: ROLE:ADMIN
+  verifConnexion: true
+
+
 
 admin/page/publish:
   controller: PageController
   action: publishPost
   security: ROLE:ADMIN 
-  
+  verifConnexion: true
+
 post/{slug}:
   controller: PostController
   action: showPost
+  verifConnexion: true
 
 admin/article/index:
   controller: ArticleController
   action: showArticle
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/article/edit:
   controller: ArticleController
   action: editArticle
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/article/delete:
   controller: ArticleController
   action: deleteArticle
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/article/publish:
   controller: ArticleController
   action: publishArticle
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/article/add:
   controller: ArticleController
   action: addArticle
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/article/pending:
   controller: ArticleController
   action: pendingArticle
   security: ROLE:ADMIN
+  verifConnexion: true
 
 article/{slug}:
   controller: ArticleController
   action: previewArticle
+  verifConnexion: true
 
 admin/menu/index:
   controller: MenuController
   action: showMenu
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/menu/edit:
   controller: MenuController
   action: editMenu
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/menu/delete:
   controller: MenuController
   action: deleteMenu
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/menu/add:
   controller: MenuController
   action: addMenu
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/menu/pending:
   controller: MenuController
   action: pendingMenu
   security: ROLE:ADMIN
+  verifConnexion: true
 
 admin/menu/publish:
   controller: MenuController
   action: publishMenu
   security: ROLE:ADMIN
+  verifConnexion: true
+
+admin /comment/index:
+  controller: CommentController
+  action: showComments
+  security: ROLE:ADMIN
+  verifConnexion: true
+
+admin/comment/edit:
+  controller: CommentController
+  action: updateComment
+  security: ROLE:ADMIN
+  verifConnexion: true
+
+addcomment:
+  controller: CommentController
+  action: addComment
+
+signalcomment:
+  controller: CommentController
+  action: signalComment

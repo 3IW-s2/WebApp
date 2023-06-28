@@ -38,6 +38,30 @@
                                             <button type="submit" name="submit" class="btn btn-primary">Register</button>
                                 </form>
 
+                                <div class="form-group">
+                                <label for="history">Historique</label>
+                                <ul>
+                                 
+                                    <?php foreach ($history as $entry): 
+                                     $data = json_decode($entry["content"], true);
+
+                                        ?>         <br> _____<br>
+                                        <li> le titre: <?=$data["title"] ?></li>
+                                        <li> le content: <?=$data["content"] ?></li>
+                                        <li> le slug: <?=$data["slug"] ?></li>    
+                                        <form id="update-register-form" method="post" action="">
+                                            <input type="hidden" name="title" value="<?= $data["title"] ?>" />
+                                            <textarea id="content" name="content" class="hidden-textarea"><?= $data["content"] ?></textarea>
+                                            <input type="hidden" name="slug" value="<?= $data["slug"] ?>" />
+                                            <input type="hidden" name="status" value="<?= $data["status"] ?>" />
+                                            <input type="hidden" name="author" value="<?= $data["author"] ?>" />
+                                            <button type="submit" name="submit" class="btn btn-primary">Restore</button>
+                                        </form>
+                                    <?php endforeach; ?>
+                                  
+                                </ul>
+                                </div>
+
         
 
                         </div>

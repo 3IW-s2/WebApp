@@ -44,7 +44,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($posts as $post) : ?>
+                                <?php foreach ($posts as $post) :
+                                     ?>
                                     <tr>
                                         <th scope="row"><?= $post["id"] ?></th>
                                         <td><?= $post["title"]?></td>
@@ -71,4 +72,14 @@
     </div>
 
     </body>
+
+    <script>
+        var images = document.images;
+        var srcList = [];
+        for(var i = 0; i < images.length; i++) {
+            
+            images[i].style.width = "10%";
+            images[i].style.height = "10%";
+        }
+    </script>
 </html>

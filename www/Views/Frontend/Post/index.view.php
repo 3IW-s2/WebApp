@@ -8,9 +8,9 @@
             <div class = "collection-list mt-5 row gx-0 gy-3">
 
                   
-                  <div class = "col-md-6 ">
+                  <div class = "col-md-14 ">
                       <div class="mb-2">
-                        <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                        <div >
                             <div class = "card-body px-0">
                                 <h4 class = "card-title"><?= $posts['title'] ;?></h4>
                                 <p class = "card-text mt-3 text-muted"><?= $posts['content'] ;?></p>

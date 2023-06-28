@@ -14,7 +14,8 @@
                             </div>
                                                             <!-- un formulaire d'inscription -->
                             <form id="register-form" method="post" action="" class="form1" >
-                                        <?php if($error->hasErrors()): ?>
+                                        <?php 
+                                         if($error->hasErrors()): ?>
                                         <div class="alert alert-danger">
                                             <?php foreach($error->getErrors() as $errors): ?>
                                             <p><?php echo $errors; ?></p>

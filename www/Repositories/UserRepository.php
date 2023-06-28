@@ -21,16 +21,14 @@ class  UserRepository  extends Database
     }
 
 
-    public function findById (int $id): User
+    public function findById (User $user)
     {
-
         $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $params = [
-            'id' => $id
+            'id' => $user->getId()
         ];
         $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
-
         return $user;
     }
 
@@ -190,6 +188,25 @@ class  UserRepository  extends Database
         return $user;
     }
 
+
+    public function verifRegister(string $email)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE email = :email";
+        $params = [
+            'email' => $email
+        ]; 
+        $statement = $this->db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $this->error = new Error();
+            $this->error->addError("L'utilisateur existe déjà");
+            return false;
+        }
+
+        return true;
+    }
+
     public function register(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -234,6 +251,28 @@ class  UserRepository  extends Database
         $statement = $this->db->query($query, $params);
 
     }
+
+    public function HandOverdeleteUserById(User $user): void
+    {
+        $query = "UPDATE {$this->table} SET status = 1 WHERE id = :id";
+        $params = [
+            'id' => $user->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+
+    }
+
+    public function deleteUserByIdHard(User $user): void
+    {
+
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
+        $params = [
+            'id' => $user->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+
+    }
+ 
 
     public function deleteUserByEmail( User $user): void
     {
@@ -338,6 +377,56 @@ class  UserRepository  extends Database
 
         return $user;
 
+    }
+
+
+    public function getUserIdByEmail (User $user)
+    {
+        $query = "SELECT id FROM {$this->table} WHERE email = :email";
+        $params = [
+            'email' => $user->getEmail()
+        ];
+        $statement = $this->db->query($query, $params);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user['id'];
+    }
+
+    public function getAllUserRemoved()
+    {
+        $query = "SELECT * FROM {$this->table} WHERE status = '10' ";
+        $statement = $this->db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
+    public function getAllUserAct()
+    {
+        $query = "SELECT * FROM {$this->table} WHERE status = '1' ";
+        $statement = $this->db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
+    public function getAllUserPending()
+    {
+        $query = "SELECT * FROM {$this->table} WHERE status is NULL AND  active_account_token is NOT NULL ";
+        $statement = $this->db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
+    public function getAllUserOnline()
+    { 
+
+        $query = "SELECT * FROM {$this->table} WHERE  now() + INTERVAL '2 hours' < expirate_token; ";
+        $statement = $this->db->query($query);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
     }
 
     

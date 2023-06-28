@@ -65,6 +65,16 @@ class UserService extends Database
         $this->userRepo->deleteUserById($user);
     }
 
+    public function deleteUserByIdHard( User $user): void
+    {
+        $this->userRepo->deleteUserByIdHard($user);
+    }
+
+    public function HandOverdeleteUserById( User $user): void
+    {
+        $this->userRepo->HandOverdeleteUserById($user);
+    }
+
     public function addUser(User $user): bool
     {
         if ($this->userRepo->addUser($user)) {
@@ -99,6 +109,42 @@ class UserService extends Database
             $this->error->addError("Une erreur s'est produite lors de la recherche de l'utilisateur");
             return false;
         }
+    }
+
+    public function getUserIdByEmail(User $user)
+    {
+        if ($this->userRepo->getUserIdByEmail($user)) {
+            
+            return  $this->userRepo->getUserIdByEmail($user);
+        } else {
+            $this->error->addError("Une erreur s'est produite lors de la recherche de l'utilisateur");
+            return false;
+        }
+    }
+
+    public function findById(User $user)
+    {
+        return $this->userRepo->findById($user);
+    }
+
+    public function getAllUserRemoved()
+    {
+        return $this->userRepo->getAllUserRemoved();
+    }
+
+    public function getAllUserAct()
+    {
+        return $this->userRepo->getAllUserAct();
+    }
+
+    public function getAllUserPending()
+    {
+        return $this->userRepo->getAllUserPending();
+    }
+
+    public function getAllUserOnline()
+    {
+        return $this->userRepo->getAllUserOnline();
     }
 
     

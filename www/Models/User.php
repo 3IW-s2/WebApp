@@ -231,10 +231,14 @@ class User extends Database
         
 
 
-
         if(!$user){
             $this->error->addError("Veuillez activez votre compte pour pouvoir vous connecter");
             return false;
+        }
+        if($user['status'] == "10"){
+            $this->error->addError("Votre compte a été désactivé, veuillez contacter l'administrateur du site");
+            return false;
+
         }
         $expirateToken = $userRepo->expirateToken($email);
 
@@ -244,6 +248,7 @@ class User extends Database
                 if($user && password_verify($password, $user['password']) && $user['status'] != 10){
                     $_SESSION["user"] = $user['email'];
                     $_SESSION["expire_token"] = $user["expirate_token"];
+                   
                     return true;
                 }else if($user && password_verify($password, $user['password']) && $user['status'] == 10){
                     $this->error->addError("Votre compte a été désactivé, veuillez contacter l'administrateur du site");
@@ -394,6 +399,11 @@ class User extends Database
             }
 
             $userRepos = new UserRepository();
+           /*  $userVerif = $userRepos->verifRegister($email);
+            if($userVerif){
+                $this->error->addError("L'utilisateur existe déjà");
+                return false; 
+            }*/
             $userRegister = $userRepos->register($firstname, $lastname, $email, $password, $role);
            
 
@@ -405,6 +415,7 @@ class User extends Database
 
             $mail = new mail ($email, "Bienvenue sur notre site", "Veuillez cliquer sur ce lien pour activer votre compte : " . $url . "");
             $mail->send();
+            $this->error->addError("Un email de confirmation vous a été envoyé");
 
             return true; 
         } catch (\Exception $e) {
