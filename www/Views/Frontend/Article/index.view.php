@@ -1,5 +1,5 @@
 </br>
-<section id = "blogs" class = "py-5">
+<section id = "blogs" class = "">
         <div class = "container">
             <div class = "title text-center py-5">
                 <h2 class = "position-relative d-inline-block"><?= $articles['title'] ;?></h2>
