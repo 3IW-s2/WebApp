@@ -74,6 +74,30 @@ class CommentRepository extends Database
         return $comments;
     }
 
+    public function deleteCommentArticleBySlug (Article $article)
+    {
+        $query_1 = "SELECT id FROM {$this->article_table} WHERE slug = :slug";
+        $params =[
+            'slug' => $article->getSlug()
+        ];
+        $statement = $this->db->query($query_1, $params);
+        $articleId = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $query_2 = "DELETE FROM {$this->table} WHERE  article_id = :article_id";
+        $params = [
+            'article_id' => $articleId[0]['id']
+        ];
+        $statement = $this->db->query($query_2, $params);
+    }
+
+    public function deleteCommentArticleById(Article $article)
+    {
+        $query = "DELETE FROM {$this->table} WHERE article_id = :article_id";
+        $params = [
+            'article_id' => $article->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+    }
+
     public function addComment (Comment $comment)
     {
         $query = "INSERT INTO {$this->table} (content, created_at, updated_at, article_id, user_id , status) VALUES (:content, NOW(), NOW(), :article_id, :user_id, 10)";

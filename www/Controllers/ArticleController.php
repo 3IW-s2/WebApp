@@ -170,6 +170,7 @@ class ArticleController
             $article = new Article();
             $article->setId($_GET['id']);
             $ArtcileService->deleteArticle($article);
+            $this->commentService->deleteCommentArticleById($article);
             header('Location: /admin/article/index');
         }
     }
