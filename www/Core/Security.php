@@ -186,6 +186,7 @@ class Security extends Database
         $email = $_SESSION["user"];
         $user = $userRepo->getUserByEmail($email);
 
+
         if ( $role === 'ADMIN' && ($user['role'] === 1 || $user['role'] === 3) ) {
             return true;
         }

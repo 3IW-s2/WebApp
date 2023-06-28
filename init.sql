@@ -17,6 +17,7 @@ CREATE TABLE posts(
     status VARCHAR(255) NOT NULL
 );
 
+ALTER TABLE users ALTER COLUMN role TYPE INT USING role::integer;
 ALTER TABLE posts ADD COLUMN image_path VARCHAR(255)  NULL;
 /* rajoute une colonne slug */
 
@@ -38,13 +39,14 @@ ALTER TABLE users ADD COLUMN status VARCHAR(255)  NULL;
 
 
 
-
-
 ALTER TABLE users ADD reset_token VARCHAR(255);
+
 /* ALTER TABLE users ALTER COLUMN password SET VALUES '$2y$10$2YKjHrOKhhG8gPeXxn0X2O3ecxmuT1nDbClzkLIFN5qedDYrE6fwa' WHERE email = 'audesandrine6@gmail.com' ;
  */
-ALTER TABLE users ADD active_account BOOLEAN DEFAULT FALSE;
-ALTER TABLE users ADD active_account_token VARCHAR(255);
+/* ALTER TABLE users ADD active_account VARCHAR(255);
+ */
+ ALTER TABLE users ADD active_account_token VARCHAR(255);
+ ALTER TABLE users DROP COLUMN active_account;
 /* ALTER TABLE users ADD role_id INT
  */
 ALTER TABLE users ADD tokenID VARCHAR(255) DEFAULT NULL;
