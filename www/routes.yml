@@ -76,6 +76,13 @@ admin/user/delete:
   security: ROLE:ADMIN 
   verifConnexion: true
   editor: false
+  
+admin/user/archive:
+  controller: UserController
+  action: archiveUser
+  security: ROLE:ADMIN 
+  verifConnexion: true
+  editor: false
 
 admin/user/edit:
   controller: UserController

@@ -254,6 +254,28 @@ class  UserRepository  extends Database
 
     }
 
+    public function HandOverdeleteUserById(User $user): void
+    {
+        $query = "UPDATE {$this->table} SET status = 1 WHERE id = :id";
+        $params = [
+            'id' => $user->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+
+    }
+
+    public function deleteUserByIdHard(User $user): void
+    {
+
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
+        $params = [
+            'id' => $user->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+
+    }
+ 
+
     public function deleteUserByEmail( User $user): void
     {
         $query = "DELETE FROM {$this->table} WHERE email = :email";

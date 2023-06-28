@@ -55,7 +55,8 @@
                                        <!--  <td></td> -->
                                         <td>
                                             <a href="user/edit?id=<?= $user['id'] ?>" class="btn btn-primary">Edit</a>
-                                            <a href="user/delete?id=<?= $user['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="user/delete?id=<?= $user['id'] ?>" class="btn btn-danger">Deleted</a>
+                                            <a href="user/archive?id=<?= $user['id'] ?>" class="btn btn-danger">Archiver</a>
                                             <a href="user/role?id=<?= $user['id'] ?>" class="btn btn-info">Role</a>
                                         </td>
                                     </tr>

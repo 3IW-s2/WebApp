@@ -61,11 +61,40 @@ class UserController
 
          $userService = new UserService();
             if( $userService){
-               $userService->deleteUserById($user);
+               $userService->deleteUserByIdHard($user);
                header('Location: /admin/showuser');
             }/* else{
                echo "Une erreur s'est produite lors de la suppression de l'utilisateur";
             } */
+      }
+     
+   }
+
+    public function archiveUser()
+   {
+      $error = new Error();
+    
+      if(isset($_GET['id'])){
+         $id = $_GET['id'];
+         $user = new User($error);
+         $user->setId($id);
+
+         // $userService->HandOverdeleteUserById($user);
+
+         $userService = new UserService();
+         $userService = $userService->findById($user);
+         if( $userService['status'] === "10"){
+            $user = new User($error);
+            $user->setId($id);
+            $userService = new UserService();
+            $userService->HandOverdeleteUserById($user);
+            header('Location: /admin/showuser');
+         }else{
+            $userService = new UserService();
+            $userService->deleteUserById($user);
+             header('Location: /admin/showuser');
+         }
+      
       }
      
    }
