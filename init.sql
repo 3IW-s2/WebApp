@@ -104,6 +104,3 @@ CREATE TABLE history (
     created_at TIMESTAMP NOT NULL,
     content TEXT NOT NULL
 );
-
-
-//supprimer les utilisateur qui on un un expirate_token inférieur à la date du jour - 14 jours
