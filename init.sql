@@ -42,15 +42,14 @@ ALTER TABLE users ADD COLUMN status VARCHAR(255)  NULL;
 
 ALTER TABLE users ADD reset_token VARCHAR(255);
 /* ALTER TABLE users ALTER COLUMN password SET VALUES '$2y$10$2YKjHrOKhhG8gPeXxn0X2O3ecxmuT1nDbClzkLIFN5qedDYrE6fwa' WHERE email = 'audesandrine6@gmail.com' ;
- */ALTER TABLE users ALTER COLUMN role  SET DEFAULT 'customer';
+ */
 ALTER TABLE users ADD active_account BOOLEAN DEFAULT FALSE;
 ALTER TABLE users ADD active_account_token VARCHAR(255);
 /* ALTER TABLE users ADD role_id INT
  */
 ALTER TABLE users ADD tokenID VARCHAR(255) DEFAULT NULL;
- change le type de la colonne role en int
-ALTER TABLE users ALTER COLUMN role TYPE INT ;
-/* les 3 ceux sont les customers 1 pour admin et 2 pour éditeurs */
+/* ALTER TABLE users ALTER COLUMN role TYPE INT ;
+ *//* les 3 ceux sont les customers 1 pour admin et 2 pour éditeurs */
 
 
 
@@ -58,12 +57,6 @@ ALTER TABLE users ALTER COLUMN role TYPE INT ;
 
 ALTER TABLE users ADD COLUMN expirate_token TIMESTAMP  NULL;
 
-
-/* inject un users */
-INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at)
-VALUES ('toto', 'toto', 'audesandrine6@gmail.com', 'toto', 'admin', NOW(), NOW());
-INSERT INTO users (firstname, lastname, email, password, role, created_at, updated_at)
-VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
 
  CREATE TABLE articles (
     id SERIAL PRIMARY KEY,
@@ -76,28 +69,28 @@ VALUES ('yann', 'toto', 'habieyann@live.fr', 'toto', 'admin', NOW(), NOW());
     status VARCHAR(255) NOT NULL
 ); 
 
-/* CREATE TABLE comments (
+ CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     content TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
     author VARCHAR(255) NOT NULL,
     article_id INTEGER NOT NULL
-); */
+); 
 
 
 CREATE TABLE menu (
   menu_id SERIAL PRIMARY KEY,
   parent_id INT,
   titre VARCHAR(255),
-  url VARCHAR(255)
+  url VARCHAR(255),
   status VARCHAR(255) NOT NULL
 );
 
 
 
-ALTER TABLE menu ALTER COLUMN parent_id DROP NOT NULL;
-ALTER TABLE menu ADD COLUMN status VARCHAR(255) NULL ;
+/* ALTER TABLE menu ALTER COLUMN parent_id DROP NOT NULL;
+ALTER TABLE menu ADD COLUMN status VARCHAR(255) NULL ; */
 
 CREATE TABLE history (
     id SERIAL PRIMARY KEY,

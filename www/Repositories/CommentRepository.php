@@ -14,7 +14,7 @@ class CommentRepository extends Database
 {
     private $error;
     private $db;
-    private $table = 'comments_2';
+    private $table = 'comments';
     private $article_table = 'articles';
     public function __construct()
     {
