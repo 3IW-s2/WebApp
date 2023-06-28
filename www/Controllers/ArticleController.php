@@ -61,7 +61,12 @@ class ArticleController
         $user = new User(new Error() );
         $user = $user->setId($comments[0]['user_id']);
         $user = $this->userService->getUserById($user);
-        $user = $user['firstname'].' '.$user['lastname'];
+        if($user != false){
+            $user = $user['firstname'].' '.$user['lastname'];
+        }else{
+            $user = 'Utilisateur supprimer';
+        }
+        
         $view->assign('user', $user);
         $view->assign('comments', $comments);
 
