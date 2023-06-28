@@ -32,12 +32,13 @@ class ArticleRepository
 
     public function createArticle(Article $article){
        
-        $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at , author , status) VALUES (:title, :content, NOW(), NOW() , :author , :status )";
+        $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at , author , status , slug) VALUES (:title, :content, NOW(), NOW() , :author , :status , :slug )";
         $params = [
             'title' => $article->getTitle(),
             'content' => $article->getContent(),
             'author' => $article->getAuthor(),
             'status' => 5,
+            'slug' => $article->getSlug(),
 
         ];
         $stmt = $this->db->query($query , $params);

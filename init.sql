@@ -63,14 +63,17 @@ ALTER TABLE users ADD COLUMN expirate_token TIMESTAMP  NULL;
  CREATE TABLE articles (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
+    author VARCHAR(255)  NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    user_id INTEGER NOT NULL,
+    user_id INTEGER  NULL,
     slug VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL
 ); 
-
+/* ALTER TABLE articles ADD COLUMN author VARCHAR(255) NOT  NULL;
+ *//* ALTER TABLE articles DROP COLUMN user_id;
+ */
  CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     content TEXT NOT NULL,
