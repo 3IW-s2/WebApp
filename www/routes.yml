@@ -75,24 +75,28 @@ admin/user/delete:
   action: deleteUser
   security: ROLE:ADMIN 
   verifConnexion: true
+  editor: false
 
 admin/user/edit:
   controller: UserController
   action: editUser
   security: ROLE:ADMIN 
   verifConnexion: true
+  editor: false
 
 admin/user/add:
   controller: UserController
   action: addUser 
   security: ROLE:ADMIN  
   verifConnexion: true
+  editor: false
 
 admin/user/role:
   controller: UserController
   action: editRole
   security: ROLE:ADMIN  
   verifConnexion: true
+  editor: false
 
 admin/page/index:
   controller: PageController
