@@ -245,4 +245,6 @@ class Security extends Database
         header("Location: /error");
         return false;
     }
+
+   
 }

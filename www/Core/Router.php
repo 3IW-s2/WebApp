@@ -88,6 +88,7 @@ class Router
             header("Location: /login");
             exit();
         }
+
        
 
         $controllerFilePath = "Controllers/" . $controller . ".php";
