@@ -23,14 +23,12 @@ class  UserRepository  extends Database
 
     public function findById (User $user)
     {
-
         $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $params = [
             'id' => $user->getId()
         ];
         $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
-
         return $user;
     }
 

@@ -113,6 +113,12 @@ class ArticleController
               $user = $user->setId($userId);
               $user = $this->userService->findById($user);
               $this->commentService->reportComment($comment);
+              if($user == false){
+                  $error->addError("Utilisateur introuvable");
+                  $view->assign('errors', $error->getErrors());
+                  header('Location: ' . $_SERVER['REQUEST_URI']);
+                    exit();
+              }
               $email = $user['email'];
               $mail = new Mail( $email , 'Commentaire signaler', 'Votre commentaire a ete signale');
               $mail->send();
