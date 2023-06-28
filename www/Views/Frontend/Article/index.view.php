@@ -25,7 +25,8 @@
                   </div>
 
                   <section style="background-color: #eee;">
-                  <?php foreach  ($comments as $comment) :  ?>
+                  <?php 
+                  foreach  ($comments as $comment) :  ?>
                             <div class="container my-5 py-5">
                                 <div class="row d-flex justify-content-center">
                                 <div class="col-md-12 col-lg-10 col-xl-8">

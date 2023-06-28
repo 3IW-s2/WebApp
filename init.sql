@@ -79,8 +79,10 @@ ALTER TABLE users ADD COLUMN expirate_token TIMESTAMP  NULL;
     content TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
+    user_id INTEGER NOT NULL,
     author VARCHAR(255) NOT NULL,
-    article_id INTEGER NOT NULL
+    article_id INTEGER NOT NULL,
+    status VARCHAR(255) NOT NULL
 ); 
 
 
