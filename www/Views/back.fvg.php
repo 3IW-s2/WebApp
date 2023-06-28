@@ -285,6 +285,7 @@
 </body>
 <script>
   CKEDITOR.replace('editor');
+ 
 </script>
 
 <style>

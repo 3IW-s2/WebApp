@@ -34,11 +34,6 @@ ALTER TABLE users ADD COLUMN status VARCHAR(255)  NULL;
 
 /* SELECT * FROM users WHERE email = 'audesandrine6@gmail' AND  status IS NULL;
  */
-
-
-
-
-
 ALTER TABLE users ADD reset_token VARCHAR(255);
 
 /* ALTER TABLE users ALTER COLUMN password SET VALUES '$2y$10$2YKjHrOKhhG8gPeXxn0X2O3ecxmuT1nDbClzkLIFN5qedDYrE6fwa' WHERE email = 'audesandrine6@gmail.com' ;
@@ -46,8 +41,8 @@ ALTER TABLE users ADD reset_token VARCHAR(255);
 /* ALTER TABLE users ADD active_account VARCHAR(255);
  */
  ALTER TABLE users ADD active_account_token VARCHAR(255);
- ALTER TABLE users DROP COLUMN active_account;
-/* ALTER TABLE users ADD role_id INT
+/*  ALTER TABLE users DROP COLUMN active_account;
+ *//* ALTER TABLE users ADD role_id INT
  */
 ALTER TABLE users ADD tokenID VARCHAR(255) DEFAULT NULL;
 /* ALTER TABLE users ALTER COLUMN role TYPE INT ;
@@ -109,3 +104,6 @@ CREATE TABLE history (
     created_at TIMESTAMP NOT NULL,
     content TEXT NOT NULL
 );
+
+
+//supprimer les utilisateur qui on un un expirate_token inférieur à la date du jour - 14 jours
