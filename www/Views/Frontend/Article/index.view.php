@@ -26,6 +26,8 @@
 
                   <section style="background-color: #eee;">
                   <?php 
+                  if($comments === false){
+                  echo "Aucun commentaire pour cet article";}else{
                   foreach  ($comments as $comment) :  ?>
                             <div class="container my-5 py-5">
                                 <div class="row d-flex justify-content-center">
@@ -59,7 +61,8 @@
                                    
 
                                     </div>
-                                    <?php endforeach; ?>
+                                    <?php endforeach; 
+                                    } ?>
                                     <form id="add-comm" method="post" action="">
                                     <div class="form-group">
                                        <?php  if(isset($errors)):  ?>
