@@ -77,10 +77,10 @@
         });
 
         //recupère ce qu'il y'a dans la div gjs et affiche le resultat dans la console utilise html()
-        console.log(editor.getHtml());
-        content = editor.getHtml();
-        //if isset $_POST['submit'] alors envoyer content comme valeur de la colomn content
-         document.getElementById("content").value = content;
+        editor.on("change:changesCount", () => {
+            content = editor.getHtml();
+            document.getElementById("content").value = content;
+        }); 
 
     </script>
 </body>
