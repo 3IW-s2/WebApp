@@ -91,9 +91,9 @@ class  PostRepository  extends Database
     public function updatePost(Post $post)
     {
 
-        $query = "UPDATE posts SET title = :title, author = :author, content = :content, status = :status, slug = :slug WHERE id = :id";
+        $query = "UPDATE posts SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug WHERE id = :id";
         $params = [
-            'title' => $post->getTitle(),
+            //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
