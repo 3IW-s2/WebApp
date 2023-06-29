@@ -1,3 +1,10 @@
+<?php
+
+$frontRepository = new  App\Repositories\FrontRepository();
+$front = $frontRepository->getFrontManagement();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +20,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
-
-
-
-    
 
     <link rel="stylesheet" href="assets/css/pricing-plan.css">
-    <link rel = "stylesheet" href = "/public/css/main.css">
+    <link rel = "stylesheet" href = "/public/css/main.php">
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=<?= $front['font'] ?>:wght@400;500;700&');
+
+        :root {
+            --font: '<?= $front['font'] ?>', sans-serif;
+            --primary: <?= $front['primary_color'] ?>;
+            --font-weight: <?= $front['font_weight'] ?>;
+        }
+        body {
+            font-family: var(--font);
+            font-weight: var(--font-weight);
+        }
+
+        a{
+            text-decoration: none;
+            color: var(--primary);
+        }
+    </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721551398549890"
      crossorigin="anonymous"></script>
 </head>

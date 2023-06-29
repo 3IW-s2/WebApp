@@ -9,7 +9,7 @@ class Database {
     
         protected function __construct()
         {
-            $this->pdo = new PDO("pgsql:host=46.226.107.16;port=5432;dbname=database_tiw;", "postgres", "postgres");
+            $this->pdo = new PDO("pgsql:host=database_tiw;port=5432;dbname=database_tiw;", "postgres", "postgres");
         }
     
         public static function getInstance(): Database
@@ -23,7 +23,12 @@ class Database {
         public function query(String $query, array $params = []): PDOStatement
         {
             $statement = $this->pdo->prepare($query);
-            $statement->execute($params);
+            try {
+                $statement->execute($params);
+            } catch (Exception $e)
+            {
+                return $e->getMessage();
+            }
             return $statement;
         }
     

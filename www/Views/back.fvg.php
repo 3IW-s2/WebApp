@@ -162,6 +162,14 @@
               </p>
             </a>
           </li>
+            <li class="nav-item">
+                <a href="/admin/front/edit" class="nav-link">
+                    <i class="nav-icon far fa-edit"></i>
+                    <p>
+                        Modification du style du site
+                    </p>
+                </a>
+            </li>
 
          
        
