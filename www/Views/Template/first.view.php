@@ -247,65 +247,10 @@
               <div class="card customer-cards">
                 <div class="card-body">
                   <div class="text-center">
-                    <img src="images/face20.jpg" width="89" height="89" alt="" class="img-customer">
-                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus consectetuer turpis, suspendisse.</p>
-                    <div class="content-divider m-auto"></div>
-                    <h6 class="card-title pt-3">Cody Lambert</h6>
-                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="card customer-cards">
-                <div class="card-body">
-                  <div class="text-center">
-                    <img src="images/face15.jpg" width="89" height="89" alt="" class="img-customer">
-                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus consectetuer turpis, suspendisse.</p>
-                    <div class="content-divider m-auto"></div>
-                    <h6 class="card-title pt-3">Cody Lambert</h6>
-                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="card customer-cards">
-                <div class="card-body">
-                  <div class="text-center">
                     <img src="images/face16.jpg" width="89" height="89" alt="" class="img-customer">
                     <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus consectetuer turpis, suspendisse.</p>
                     <div class="content-divider m-auto"></div>
                     <h6 class="card-title pt-3">Cody Lambert</h6>
-                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="card customer-cards">
-                <div class="card-body">
-                  <div class="text-center">
-                    <img src="images/face1.jpg" width="89" height="89" alt="" class="img-customer">
-                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus consectetuer turpis, suspendisse.</p>
-                    <div class="content-divider m-auto"></div>
-                    <h6 class="card-title pt-3">Tony Martinez</h6>
-                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="card customer-cards">
-                <div class="card-body">
-                  <div class="text-center">
-                    <img src="images/face2.jpg" width="89" height="89" alt="" class="img-customer">
-                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus consectetuer turpis, suspendisse.</p>
-                    <div class="content-divider m-auto"></div>
-                    <h6 class="card-title pt-3">Tony Martinez</h6>
-                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="card customer-cards">
-                <div class="card-body">
-                  <div class="text-center">
-                    <img src="images/face3.jpg" width="89" height="89" alt="" class="img-customer">
-                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus consectetuer turpis, suspendisse.</p>
-                    <div class="content-divider m-auto"></div>
-                    <h6 class="card-title pt-3">Sophia Armstrong</h6>
                     <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
                   </div>
                 </div>
@@ -373,39 +318,6 @@
           </div>
         </div>  
       </section>
-      <footer class="border-top">
-        <p class="text-center text-muted pt-4">Copyright © 2019<a href="https://www.bootstrapdash.com/" class="px-1">Bootstrapdash.</a>All rights reserved.</p>
-      </footer>
-      <!-- Modal for Contact - us Button -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title" id="exampleModalLabel">Contact Us</h4>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for="Name">Name</label>
-                  <input type="text" class="form-control" id="Name" placeholder="Name">
-                </div>
-                <div class="form-group">
-                  <label for="Email">Email</label>
-                  <input type="email" class="form-control" id="Email-1" placeholder="Email">
-                </div>
-                <div class="form-group">
-                  <label for="Message">Message</label>
-                  <textarea class="form-control" id="Message" placeholder="Enter your Message"></textarea>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-success">Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div> 
   </div>
   <script src="vendors/jquery/jquery.min.js"></script>
