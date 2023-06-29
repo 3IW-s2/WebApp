@@ -35,7 +35,7 @@ class PageController
         if(isset($_POST['submit']))
         {
         $post = new Post();
-        $post->setTitle($_POST['title']);
+       // $post->setTitle($_POST['title']);
         $post->setContent($_POST['content']);
         $post->setSlug($_POST['slug']);
         $post->setStatus('5');

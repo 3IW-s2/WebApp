@@ -77,9 +77,9 @@ class  PostRepository  extends Database
     public function AddPost(Post $post)
     {
 
-        $query = "INSERT INTO posts (title, author ,content, status, slug) VALUES (:title, :author , :content, :status, :slug)";
+        $query = "INSERT INTO posts (/* title, */ author ,content, status, slug) VALUES (/* :title, */ :author , :content, :status, :slug)";
         $params = [
-            'title' => $post->getTitle(),
+            //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
