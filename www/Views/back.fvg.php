@@ -292,6 +292,22 @@
 <script src="/public/dist/js/pages/dashboard2.js"></script>
 </body>
 <script>
+    function copyLink(event) {
+        event.preventDefault(); // Empêche le comportement par défaut du lien
+
+        var link = event.target.parentElement.href; // Récupère l'URL du lien parent
+        navigator.clipboard.writeText(link) // Copie l'URL dans le presse-papiers
+            .then(function() {
+                console.log('Lien copié avec succès : ' + link);
+                // Vous pouvez ajouter ici un message de succès ou effectuer d'autres actions
+            })
+            .catch(function(error) {
+                console.error('Erreur lors de la copie du lien : ', error);
+                // Vous pouvez gérer ici les erreurs de copie du lien
+            });
+    }
+</script>
+<script>
   CKEDITOR.replace('editor');
  
 </script>

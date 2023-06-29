@@ -15,6 +15,9 @@
 
         <div class="div">
             <a href="/public/uploads/<?php echo $image ?>"  class="image_paste"><?php echo $image ?></a>
+            <!-- copier l'image -->
+
+
         </div>
         <?php
       }
