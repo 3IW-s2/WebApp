@@ -17,6 +17,7 @@ foreach ($fonts['items'] as $font) {
 }
 
 
+
 ?>
 
 
@@ -31,17 +32,15 @@ foreach ($fonts['items'] as $font) {
                             <h2 class = "position-relative d-inline-block">Modification du style du site</h2>
                         </div>
                         <!-- un formulaire d'inscription -->
-                        <form id="update-register-form" method="post" action="/admin/front/modify?id=<?= $front['id'] ?>" >
+                        <form id="update-register-form" method="post" action="/admin/front/modify?id=<?= $front['id'] ?>" enctype=multipart/form-data>
                             <div class="form-group">
                                 <label for="font">Police</label>
                                 <select name="font" id="font">
                                     <option value="<?= $front['font'] ?>"><?= $front['font'] ?></option>
                                     <?php
-
                                     foreach ($allFonts as $font) {
                                         echo '<option value="'.$font.'">'.$font.'</option>';
                                     }
-
                                     ?>
                                 </select>
                             </div>
@@ -62,22 +61,28 @@ foreach ($fonts['items'] as $font) {
                                 <label for="logo">Logo</label>
                                 <input type="file"
                                        id="logo" name="logo"
-                                       accept="image/png, image/jpeg">
+                                       accept="image/png, image/jpeg, image/jpg">
+
+                                <br><small>Formats accéptés : jpg, jpeg, png</small><br>
+                                <small>Max : 2Mo</small>
                             </div>
 
                             <button type="submit" name="submit" class="btn btn-primary">Modifier</button>
                         </form>
-
-
-
                     </div>
-
-
-
-
                 </div>
-
             </section>
+            <?php if (isset($error)) { ?>
+            <div class="alert alert-danger">
+                <?php foreach($error->getErrors() as $errors): ?>
+                    <p><?= $errors; ?></p>
+                <?php endforeach; ?>
+            </div>
+            <?php } if (isset($success)) { ?>
+            <div class="alert alert-success">
+                <p><?= $success; ?></p>
+            </div>
+            <?php }; ?>
         </div>
     </div>
 </main>

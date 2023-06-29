@@ -40,6 +40,7 @@ class FrontRepository extends Database
             'id' => $front->getId()
         ];
 
+
         $statement = $this->db->query($query, $params);
 
         return true;
