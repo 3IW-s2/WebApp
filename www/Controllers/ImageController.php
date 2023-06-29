@@ -18,6 +18,9 @@ class ImageController
         
         if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_path)) {  
            // echo "File uploaded successfully!";  
+           //afficher toutes les images du dossier uploads avec leur lien
+              $images = scandir("public/uploads/");
+                $view->assign("images", $images);
         } else{  
             echo "Sorry, file not uploaded, please try again!";  
         } 

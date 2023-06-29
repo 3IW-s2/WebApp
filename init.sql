@@ -48,7 +48,7 @@ ALTER TABLE users ADD tokenID VARCHAR(255) DEFAULT NULL;
 /* ALTER TABLE users ALTER COLUMN role TYPE INT ;
  *//* les 3 ceux sont les customers 1 pour admin et 2 pour éditeurs */
 
-
+ALTER TABLE posts ALTER COLUMN title DROP NOT NULL;
 
 
 

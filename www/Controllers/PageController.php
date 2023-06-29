@@ -35,7 +35,7 @@ class PageController
         if(isset($_POST['submit']))
         {
         $post = new Post();
-        $post->setTitle($_POST['title']);
+       // $post->setTitle($_POST['title']);
         $post->setContent($_POST['content']);
         $post->setSlug($_POST['slug']);
         $post->setStatus('5');
@@ -85,7 +85,7 @@ class PageController
         {
             $post = new Post();
             $post->setId($_GET['id']);
-            $post->setTitle($_POST['title']);
+            //rz$post->setTitle($_POST['title']);
             $post->setContent($_POST['content']);
             $post->setSlug($_POST['slug']);
             $post->setStatus('5');
@@ -93,7 +93,7 @@ class PageController
 
             $data = [
                 'id' => $_GET['id'],    
-                'title' => $_POST['title'],
+                //'title' => $_POST['title'],
                 'content' => $_POST['content'],
                 'slug' => $_POST['slug'],
                 'status' => '5',
