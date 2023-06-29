@@ -23,14 +23,12 @@ class  UserRepository  extends Database
 
     public function findById (User $user)
     {
-
         $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $params = [
             'id' => $user->getId()
         ];
         $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
-
         return $user;
     }
 
@@ -253,6 +251,28 @@ class  UserRepository  extends Database
         $statement = $this->db->query($query, $params);
 
     }
+
+    public function HandOverdeleteUserById(User $user): void
+    {
+        $query = "UPDATE {$this->table} SET status = 1 WHERE id = :id";
+        $params = [
+            'id' => $user->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+
+    }
+
+    public function deleteUserByIdHard(User $user): void
+    {
+
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
+        $params = [
+            'id' => $user->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+
+    }
+ 
 
     public function deleteUserByEmail( User $user): void
     {

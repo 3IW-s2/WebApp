@@ -66,6 +66,18 @@ class Router
         $action = $this->routes[$uri]["action"];
         $security = $this->routes[$uri]["security"] ?? null;
         $verifConnexion = $this->routes[$uri]["verifConnexion"] ?? null;
+        $editor = $this->routes[$uri]["editor"]?? null;
+
+
+        /* if ($editor === null && $explodedUri[0] === "admin" && Security::editor()){
+            var_dump("tez");die;
+            header("Location: /admin/");
+            exit();
+        } */ //by default editor has all acces
+        if($editor !== null && $editor === false  &&  Security::editor() ){
+            header("Location: /admin/");
+            exit();
+        }
          
         if ($security !== null && !Security::checkSecurity($security)) {
             header("Location: /login");
@@ -76,6 +88,7 @@ class Router
             header("Location: /login");
             exit();
         }
+
        
 
         $controllerFilePath = "Controllers/" . $controller . ".php";

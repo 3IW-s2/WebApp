@@ -47,7 +47,6 @@
 
                                         ?>         <br> _____<br>
                                         <li> le titre: <?=$data["title"] ?></li>
-                                        <li> le content: <?=$data["content"] ?></li>
                                         <li> le slug: <?=$data["slug"] ?></li>    
                                         <form id="update-register-form" method="post" action="">
                                             <input type="hidden" name="title" value="<?= $data["title"] ?>" />

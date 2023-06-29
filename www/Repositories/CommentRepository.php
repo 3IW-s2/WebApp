@@ -14,7 +14,7 @@ class CommentRepository extends Database
 {
     private $error;
     private $db;
-    private $table = 'comments_2';
+    private $table = 'comments';
     private $article_table = 'articles';
     public function __construct()
     {
@@ -72,6 +72,30 @@ class CommentRepository extends Database
         $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
         
         return $comments;
+    }
+
+    public function deleteCommentArticleBySlug (Article $article)
+    {
+        $query_1 = "SELECT id FROM {$this->article_table} WHERE slug = :slug";
+        $params =[
+            'slug' => $article->getSlug()
+        ];
+        $statement = $this->db->query($query_1, $params);
+        $articleId = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $query_2 = "DELETE FROM {$this->table} WHERE  article_id = :article_id";
+        $params = [
+            'article_id' => $articleId[0]['id']
+        ];
+        $statement = $this->db->query($query_2, $params);
+    }
+
+    public function deleteCommentArticleById(Article $article)
+    {
+        $query = "DELETE FROM {$this->table} WHERE article_id = :article_id";
+        $params = [
+            'article_id' => $article->getId()
+        ];
+        $statement = $this->db->query($query, $params);
     }
 
     public function addComment (Comment $comment)

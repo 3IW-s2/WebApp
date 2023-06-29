@@ -33,6 +33,16 @@ class CommentService extends Database
         return $this->commentRepository->getCommentsByArticleId($article);
     }
 
+    public function deleteCommentArticleBySlug(Article $article)
+    {
+        $this->commentRepository->deleteCommentArticleBySlug($article);
+    }
+
+    public function deleteCommentArticleById(Article $article)
+    {
+        $this->commentRepository->deleteCommentArticleById($article);
+    }
+
     public function getCommentArticleBySlug(Article $article)
     {
         return $this->commentRepository->getCommentArticleBySlug($article);

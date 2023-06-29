@@ -231,10 +231,14 @@ class User extends Database
         
 
 
-
         if(!$user){
             $this->error->addError("Veuillez activez votre compte pour pouvoir vous connecter");
             return false;
+        }
+        if($user['status'] == "10"){
+            $this->error->addError("Votre compte a été désactivé, veuillez contacter l'administrateur du site");
+            return false;
+
         }
         $expirateToken = $userRepo->expirateToken($email);
 

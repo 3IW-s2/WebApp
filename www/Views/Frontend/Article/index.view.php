@@ -1,5 +1,5 @@
 </br>
-<section id = "blogs" class = "py-5">
+<section id = "blogs" class = "">
         <div class = "container">
             <div class = "title text-center py-5">
                 <h2 class = "position-relative d-inline-block"><?= $articles['title'] ;?></h2>
@@ -10,7 +10,7 @@
                   
                   <div class = "col-md-6 ">
                       <div class="mb-2">
-                        <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                        <div >
                             <div class = "card-body px-0">
                                 <h4 class = "card-title"><?= $articles['title'] ;?></h4>
                                 <p class = "card-text mt-3 text-muted"><?= $articles['content'] ;?></p>
@@ -25,7 +25,10 @@
                   </div>
 
                   <section style="background-color: #eee;">
-                  <?php foreach  ($comments as $comment) :  ?>
+                  <?php 
+                  if($comments === false){
+                  echo "Aucun commentaire pour cet article";}else{
+                  foreach  ($comments as $comment) :  ?>
                             <div class="container my-5 py-5">
                                 <div class="row d-flex justify-content-center">
                                 <div class="col-md-12 col-lg-10 col-xl-8">
@@ -58,7 +61,8 @@
                                    
 
                                     </div>
-                                    <?php endforeach; ?>
+                                    <?php endforeach; 
+                                    } ?>
                                     <form id="add-comm" method="post" action="">
                                     <div class="form-group">
                                        <?php  if(isset($errors)):  ?>

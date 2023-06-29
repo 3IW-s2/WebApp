@@ -162,6 +162,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/admin/image/index" class="nav-link">
+              <i class="nav-icon far fa-pic"></i>
+              <p>
+                Dépots images
+              </p>
+            </a>
+          </li>
 
          
        
@@ -285,6 +293,7 @@
 </body>
 <script>
   CKEDITOR.replace('editor');
+ 
 </script>
 
 <style>

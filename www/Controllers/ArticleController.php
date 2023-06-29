@@ -58,12 +58,24 @@ class ArticleController
 
         
         $comments = $this->commentService->getCommentArticleBySlug($article);
+        
+        if(!empty($comments)){
+
+       
         $user = new User(new Error() );
         $user = $user->setId($comments[0]['user_id']);
         $user = $this->userService->getUserById($user);
-        $user = $user['firstname'].' '.$user['lastname'];
+        if($user != false){
+            $user = $user['firstname'].' '.$user['lastname'];
+        }else{
+            $user = 'Utilisateur supprimer';
+        }
+        
         $view->assign('user', $user);
         $view->assign('comments', $comments);
+        }else{
+            $view->assign('comments', false);
+        }
 
         if ($articles == false){
             $error->setCode(404);
@@ -108,6 +120,12 @@ class ArticleController
               $user = $user->setId($userId);
               $user = $this->userService->findById($user);
               $this->commentService->reportComment($comment);
+              if($user == false){
+                  $error->addError("Utilisateur introuvable");
+                  $view->assign('errors', $error->getErrors());
+                  header('Location: ' . $_SERVER['REQUEST_URI']);
+                    exit();
+              }
               $email = $user['email'];
               $mail = new Mail( $email , 'Commentaire signaler', 'Votre commentaire a ete signale');
               $mail->send();
@@ -170,6 +188,7 @@ class ArticleController
             $article = new Article();
             $article->setId($_GET['id']);
             $ArtcileService->deleteArticle($article);
+            $this->commentService->deleteCommentArticleById($article);
             header('Location: /admin/article/index');
         }
     }
@@ -191,14 +210,12 @@ class ArticleController
        
             if (isset($_POST['submit'])) {
                 $article = new Article();
+                $article->setId($_GET['id']);
                 $article->setTitle($_POST['title']);
                 $article->setContent($_POST['content']);
                 $article->setSlug($_POST['slug']);
-                $article->setupdate_at($date->format('Y-m-d'));
-                var_dump($article);
-            
-               var_dump( $ArtcileService->updateArticle($article) );
-               die;
+                //$article->setupdate_at($date->format('Y-m-d'));
+                $ArtcileService->updateArticle($article) ;
                 
                 header('Location: /admin/article/index');
             }

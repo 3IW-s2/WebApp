@@ -14,12 +14,17 @@ use App\Core\Security;
 class UserController 
 {
    public function showUser():void
-   {
-        $view = new View("Backend/User/index", "back");
-        $error = new Error();
-        $userService = new UserService($error);
-        $users = $userService->getAllUser();
-        $view->assign('users', $users);
+   {  
+         $error = new Error();
+         $user = new User($error);
+         $user->setEmail($_SESSION['user']);
+         $userService = new UserService();
+         $user = $userService->findByEmail($user);
+         $view = new View("Backend/User/index", "back");
+         $error = new Error();
+         $userService = new UserService($error);
+         $users = $userService->getAllUser();
+         $view->assign('users', $users);
        
    }
 
@@ -56,11 +61,40 @@ class UserController
 
          $userService = new UserService();
             if( $userService){
-               $userService->deleteUserById($user);
+               $userService->deleteUserByIdHard($user);
                header('Location: /admin/showuser');
             }/* else{
                echo "Une erreur s'est produite lors de la suppression de l'utilisateur";
             } */
+      }
+     
+   }
+
+    public function archiveUser()
+   {
+      $error = new Error();
+    
+      if(isset($_GET['id'])){
+         $id = $_GET['id'];
+         $user = new User($error);
+         $user->setId($id);
+
+         // $userService->HandOverdeleteUserById($user);
+
+         $userService = new UserService();
+         $userService = $userService->findById($user);
+         if( $userService['status'] === "10"){
+            $user = new User($error);
+            $user->setId($id);
+            $userService = new UserService();
+            $userService->HandOverdeleteUserById($user);
+            header('Location: /admin/showuser');
+         }else{
+            $userService = new UserService();
+            $userService->deleteUserById($user);
+             header('Location: /admin/showuser');
+         }
+      
       }
      
    }
