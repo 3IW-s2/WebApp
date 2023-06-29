@@ -2,31 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4985aea0-249f-41a8-851c-691acd6ac7be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/WebApp.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/Controllers/FrontController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/Core/API.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/Models/Front.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/Repositories/FrontRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/Views/Backend/Front/edit.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/public/css/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/nginx/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/config/nginx/app.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controllers/Auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controllers/Auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Database.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Repositories/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Repositories/CommentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Views/Auth/login.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Views/Auth/login.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Views/Frontend/Article/index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Views/Frontend/Article/index.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Views/back.fvg.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Views/back.fvg.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Controllers/FrontController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controllers/FrontController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Views/front.fvg.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Views/front.fvg.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/www/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/public/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

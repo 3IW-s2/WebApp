@@ -29,6 +29,7 @@ class FrontController
 
             $fontRepository = new FrontRepository();
             $front = new Front();
+
             $front->setFont($_POST['font']);
             $front->setFontWeight($_POST['font_weight']);
             $front->setPrimaryColor($_POST['primary_color']);

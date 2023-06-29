@@ -3,6 +3,8 @@
 $frontRepository = new  App\Repositories\FrontRepository();
 $front = $frontRepository->getFrontManagement();
 
+$newFont = str_replace(' ', '+', $front['font']);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +27,7 @@ $front = $frontRepository->getFrontManagement();
     <link rel = "stylesheet" href = "/public/css/main.php">
     <style>
 
-        @import url('https://fonts.googleapis.com/css2?family=<?= $front['font'] ?>:wght@400;500;700&');
+        @import url('https://fonts.googleapis.com/css2?family=<?= $newFont ?>:wght@400;500;700&');
 
         :root {
             --font: '<?= $front['font'] ?>', sans-serif;
