@@ -91,6 +91,15 @@ class Security extends Database
         return false;
     }
 
+    public static function editor()
+    {
+        $userRepo = new UserRepository();
+        $user = $userRepo->getUserByEmail($_SESSION['user']);
+        if($user['role'] === 3) {
+            return true;
+        }
+        return false;
+    }
 
 
     public function checkAdmin(): bool
@@ -177,7 +186,8 @@ class Security extends Database
         $email = $_SESSION["user"];
         $user = $userRepo->getUserByEmail($email);
 
-        if ($role === 'ADMIN' && $user['role'] === 1 ) {
+
+        if ( $role === 'ADMIN' && ($user['role'] === 1 || $user['role'] === 3) ) {
             return true;
         }
         return false;
@@ -235,4 +245,6 @@ class Security extends Database
         header("Location: /error");
         return false;
     }
+
+   
 }

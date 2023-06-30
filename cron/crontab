@@ -1,0 +1,2 @@
+#connecte à la base de données
+* * * * * psql -h 46.226.107.16  -U postgres database_tiw -d postgres -c "DELETE FROM users WHERE expirate_token < NOW() - INTERVAL '14 DAY';"

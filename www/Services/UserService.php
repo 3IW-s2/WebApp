@@ -65,6 +65,16 @@ class UserService extends Database
         $this->userRepo->deleteUserById($user);
     }
 
+    public function deleteUserByIdHard( User $user): void
+    {
+        $this->userRepo->deleteUserByIdHard($user);
+    }
+
+    public function HandOverdeleteUserById( User $user): void
+    {
+        $this->userRepo->HandOverdeleteUserById($user);
+    }
+
     public function addUser(User $user): bool
     {
         if ($this->userRepo->addUser($user)) {

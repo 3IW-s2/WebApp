@@ -61,5 +61,12 @@ class Main
         $user = $userService->findByEmail($user);
         $view->assign("user", $user);
 
+        if (isset($_POST["delete"])) {
+            $userId = new User($error);
+            $userId->setId($_POST["id"]);
+            $userService->deleteUserById($userId);
+            header("Location: /logout");
+        }
+
     }
 }

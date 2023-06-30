@@ -163,6 +163,7 @@ class Auth
             $user->setLastname($lastname);
             $user->setEmail($email);
             $user->setPwd($pwd);
+        
             try{
                 $register = $user->register($firstname, $lastname, $email, $pwd);
                 if($register){
