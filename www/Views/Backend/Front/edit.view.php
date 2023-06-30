@@ -58,6 +58,11 @@ foreach ($fonts['items'] as $font) {
                                        value="<?= $front['primary_color'] ?>">
                             </div>
                             <div class="form-group">
+                                <label for="primary_color">Couleur de la barre de navigation</label>
+                                <input type="color" id="nav_color" name="nav_color"
+                                       value="<?= $front['nav_color'] ?>">
+                            </div>
+                            <div class="form-group">
                                 <label for="logo">Logo</label>
                                 <input type="file"
                                        id="logo" name="logo"
@@ -73,15 +78,15 @@ foreach ($fonts['items'] as $font) {
                 </div>
             </section>
             <br>
-            <?php if (isset($_SESSION['error'])) { ?>
+            <?php if (isset($errors)) { ?>
             <div class="alert alert-danger">
-                <?php foreach($_SESSION['error'] as $errors): ?>
+                <?php foreach($errors as $error): ?>
                     <p><?= $errors; ?></p>
                 <?php endforeach; ?>
             </div>
-            <?php } if (isset($_SESSION['success'])) { ?>
+            <?php } if (isset($success)) { ?>
             <div class="alert alert-success">
-                <p><?= $_SESSION['success']; ?></p>
+                <p><?= $success; ?></p>
             </div>
             <?php }; ?>
         </div>

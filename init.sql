@@ -114,11 +114,12 @@ CREATE TABLE front (
     font VARCHAR(100) NOT NULL,
     font_weight VARCHAR(100) NOT NULL,
     primary_color VARCHAR(100) NOT NULL,
+    nav_color VARCHAR(100) NOT NULL,
     logo VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );
 
-INSERT INTO front (font, font_weight, primary_color, logo, created_at, updated_at) VALUES ('Arial', 'light', '#000000', 'logo.png', NOW(), NOW());
+INSERT INTO front (font, font_weight, primary_color, nav_color, logo, created_at, updated_at) VALUES ('Arial', 'light', '#000000', '#000000' , 'logo.png', NOW(), NOW());
 
 

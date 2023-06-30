@@ -12,6 +12,7 @@ class Front
     private String $font;
     private String $font_weight;
     private String $primary_color;
+    private String $nav_color;
     private String $logo;
     private \DateTime $created_at;
 
@@ -19,6 +20,22 @@ class Front
     public function __construct()
     {
         $this->created_at = new \DateTime();
+    }
+
+    /**
+     * @return String
+     */
+    public function getNavColor(): string
+    {
+        return $this->nav_color;
+    }
+
+    /**
+     * @param String $nav_color
+     */
+    public function setNavColor(string $nav_color): void
+    {
+        $this->nav_color = $nav_color;
     }
 
 

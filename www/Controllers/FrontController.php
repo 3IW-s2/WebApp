@@ -29,7 +29,7 @@ class FrontController
         {
 
             $view = new View("Backend/Front/edit", "back");
-            $error2 = new Error();
+            $error = new Error();
 
             $fontRepository = new FrontRepository();
             $front = new Front();
@@ -38,8 +38,10 @@ class FrontController
             $front->setFont($_POST['font']);
             $front->setFontWeight($_POST['font_weight']);
             $front->setPrimaryColor($_POST['primary_color']);
+            $front->setNavColor($_POST['nav_color']);
             $_FILES['logo']['size'] > 0 ? $front->setLogo($_FILES['logo']['name']) : $front->setLogo($Oldfront['logo']);
             $front->setId($_GET['id']);
+
 
             if(isset($_FILES['logo']) && $_FILES['logo']['size'] > 0)
             {
@@ -59,17 +61,16 @@ class FrontController
                     move_uploaded_file($tmpName, './public/uploads/'.$name);
                 }
                 else{
-                    $error2->addError("Le fichier n'est pas valide");
+                    $error->addError("Le fichier n'est pas valide");
                 }
-
             }
 
             $fontRepository->updateFrontManagement($front);
 
             //check if error or success
-            if($error2->getErrors() != null)
+            if($error->getErrors() != null)
             {
-                $view->assign("error", $error2->getErrors());
+                $view->assign("error", $error->getErrors());
             }
             else
             {

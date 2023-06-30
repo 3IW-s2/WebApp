@@ -31,11 +31,12 @@ class FrontRepository extends Database
     }
 
     public function updateFrontManagement(Front $front){
-        $query = "UPDATE front SET font = :font, font_weight = :font_weight, primary_color = :primary_color, logo = :logo, updated_at = NOW() WHERE id = :id";
+        $query = "UPDATE front SET font = :font, font_weight = :font_weight, primary_color = :primary_color, logo = :logo, nav_color = :nav_color, updated_at = NOW() WHERE id = :id";
         $params = [
             'font' => $front->getFont(),
             'font_weight' => $front->getFontWeight(),
             'primary_color' => $front->getPrimaryColor(),
+            'nav_color' => $front->getNavColor(),
             'logo' => $front->getLogo(),
             'id' => $front->getId()
         ];

@@ -24,7 +24,7 @@ $newFont = str_replace(' ', '+', $front['font']);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="assets/css/pricing-plan.css">
-    <link rel = "stylesheet" href = "/public/css/main.php">
+    <link rel = "stylesheet" href = "/public/css/main.css">
     <style>
 
         @import url('https://fonts.googleapis.com/css2?family=<?= $newFont ?>:wght@400;500;700&');
@@ -32,6 +32,7 @@ $newFont = str_replace(' ', '+', $front['font']);
         :root {
             --font: '<?= $front['font'] ?>', sans-serif;
             --primary: <?= $front['primary_color'] ?>;
+            --nv-color: <?= $front['nav_color'] ?>;
             --font-weight: <?= $front['font_weight'] ?>;
         }
         body {
@@ -43,17 +44,21 @@ $newFont = str_replace(' ', '+', $front['font']);
             text-decoration: none;
             color: var(--primary);
         }
+
+        .navbar{
+            background-color: var(--nv-color);
+        }
+
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721551398549890"
      crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class = "navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
+<nav class = "navbar navbar-expand-lg navbar-light py-4 fixed-top">
         <div class = "container">
             <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "./">
                  <img src = "../public/uploads/<?= $front['logo'] ?>" height="50%" alt="site icon">
             </a>
-            
 
             <div class = "order-lg-2 nav-btns">
                 <button onclick="window.location.href='/profile'" type = "button" class = "btn position-relative">
