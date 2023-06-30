@@ -31,8 +31,35 @@ class PageController
 
     public function AddPost()
     {
+       
         $view = new View("Backend/Page/add", "back");
         if(isset($_POST['submit']))
+        {
+            $post = new Post();
+            $post->setSlug($_POST['slug']);
+            $postService = new PostService();
+            $posts = $postService->getPostBySlug($post);
+           
+            if(!empty($post)){
+               $error = new Error();
+               $error->addError( 'Ce slug existe déjà');
+               $view->assign('error', $error);
+
+
+            }else{
+                $post = new Post();
+                //$post->setTitle($_POST['title']);
+                $post->setContent($_POST['content']);
+                $post->setSlug($_POST['slug']);
+                $post->setStatus('5');
+                $post->setAuthor($_SESSION['user']);
+               
+                $postService = new PostService();
+                $posts = $postService->addPost($post);
+                header('Location: /admin/page/index');
+            }
+        }
+       /*  if(isset($_POST['submit']))
         {
         $post = new Post();
        // $post->setTitle($_POST['title']);
@@ -44,7 +71,7 @@ class PageController
         $postService = new PostService();
         $posts = $postService->addPost($post);
 
-        }
+        } */
     }
 
     public function  deletePost()

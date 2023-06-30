@@ -23,6 +23,14 @@
     <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
 </head>
 <body>
+<?php   
+                            if($error->hasErrors()): ?>
+                            <div class="alert alert-danger">
+                                <?php foreach($error->getErrors() as $errors): ?>
+                                <p><?php echo $errors; ?></p>
+                                <?php endforeach; ?>
+                            </div>
+                            <?php endif; ?>
     <div id="gjs">
         <h1>Hello World Component!</h1>
     </div>
