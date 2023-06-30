@@ -15,10 +15,12 @@ class Front
     private String $logo;
     private \DateTime $created_at;
 
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
     }
+
 
     /**
      * @return String

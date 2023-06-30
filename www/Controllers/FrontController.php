@@ -6,12 +6,12 @@ use App\Models\Front;
 use App\Repositories\FrontRepository;
 use App\Core\Error;
 
+
 class FrontController
 {
-    private $error;
+
     public function __construct()
     {
-        $this->error = new Error();
     }
 
     public function getFront()
@@ -27,6 +27,7 @@ class FrontController
     {
         if(isset($_POST['submit']))
         {
+
             $view = new View("Backend/Front/edit", "back");
             $error2 = new Error();
 
@@ -37,10 +38,10 @@ class FrontController
             $front->setFont($_POST['font']);
             $front->setFontWeight($_POST['font_weight']);
             $front->setPrimaryColor($_POST['primary_color']);
-            $front->setLogo($_FILES['logo']['name'] ?? $Oldfront['logo']);
+            $_FILES['logo']['size'] > 0 ? $front->setLogo($_FILES['logo']['name']) : $front->setLogo($Oldfront['logo']);
             $front->setId($_GET['id']);
 
-            if(isset($_FILES['logo']))
+            if(isset($_FILES['logo']) && $_FILES['logo']['size'] > 0)
             {
 
                 $tmpName = $_FILES['logo']['tmp_name'];
@@ -55,10 +56,10 @@ class FrontController
                 $maxSize = 2000000;
 
                 if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
-                    move_uploaded_file($tmpName, './public/upload/'.$name);
+                    move_uploaded_file($tmpName, './public/uploads/'.$name);
                 }
                 else{
-                    $error2->addError("Une erreur est survenue lors de l'upload de l'image");
+                    $error2->addError("Le fichier n'est pas valide");
                 }
 
             }
@@ -66,10 +67,12 @@ class FrontController
             $fontRepository->updateFrontManagement($front);
 
             //check if error or success
-            if($error2->hasErrors()){
-                $view->assign("errors", $error2->getErrors());
+            if($error2->getErrors() != null)
+            {
+                $view->assign("error", $error2->getErrors());
             }
-            else{
+            else
+            {
                 $view->assign("success", "Front modifié avec succès");
             }
 

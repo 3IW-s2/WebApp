@@ -72,15 +72,16 @@ foreach ($fonts['items'] as $font) {
                     </div>
                 </div>
             </section>
-            <?php if (isset($error)) { ?>
+            <br>
+            <?php if (isset($_SESSION['error'])) { ?>
             <div class="alert alert-danger">
-                <?php foreach($error->getErrors() as $errors): ?>
+                <?php foreach($_SESSION['error'] as $errors): ?>
                     <p><?= $errors; ?></p>
                 <?php endforeach; ?>
             </div>
-            <?php } if (isset($success)) { ?>
+            <?php } if (isset($_SESSION['success'])) { ?>
             <div class="alert alert-success">
-                <p><?= $success; ?></p>
+                <p><?= $_SESSION['success']; ?></p>
             </div>
             <?php }; ?>
         </div>
