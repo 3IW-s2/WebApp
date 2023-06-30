@@ -168,6 +168,7 @@ class Auth
             $user->setLastname($lastname);
             $user->setEmail($email);
             $user->setPwd($pwd);
+        
             try{
                 $register = $user->register($firstname, $lastname, $email, $pwd);
                 if($register){
@@ -220,7 +221,7 @@ class Auth
 
     public function notFound(): void
     {
-        $view = new View("Auth/404", "front");
+        $view = new View("Auth/404", "error");
     }
 
     

@@ -23,6 +23,11 @@ class PostService  extends Database
         return $this->postRepo->getAllPosts();
     }
 
+    public function getAllSlug()
+    {
+        return $this->postRepo->getAllSlug();
+    }
+
     public function getPostBySlug(Post $post)
     {   
         return $this->postRepo->getPostBySlug($post);

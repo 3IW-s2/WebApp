@@ -50,10 +50,10 @@ class Router
             if (!$foundRoute) {
 
                // die("Cette route n'existe pas dans le fichier de routing");
-                $error = new Error();
-                $error->setCode(404);
-                $error->addError("Page introuvable");
-                header("Location: /");
+                //$error = new Error();
+                //$error->setCode(404);
+                //$error->addError("Page introuvable");
+                header("Location: /error");
                 exit();
             }
         }
@@ -80,7 +80,7 @@ class Router
         }
          
         if ($security !== null && !Security::checkSecurity($security)) {
-            header("Location: /login");
+            header("Location: /error");
             exit();
         }
 

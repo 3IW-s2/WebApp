@@ -199,8 +199,6 @@ class  UserRepository  extends Database
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            $this->error = new Error();
-            $this->error->addError("L'utilisateur existe déjà");
             return false;
         }
 

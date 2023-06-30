@@ -244,3 +244,9 @@ addcomment:
 signalcomment:
   controller: CommentController
   action: signalComment
+
+admin/image/index:
+  controller: ImageController
+  action: uploadImage
+  security: ROLE:ADMIN
+  verifConnexion: true

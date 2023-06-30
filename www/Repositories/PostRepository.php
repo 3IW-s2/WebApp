@@ -33,6 +33,16 @@ class  PostRepository  extends Database
         return $posts;
     }
 
+    public function getAllSlug()
+    {    
+
+        $query = "SELECT slug FROM posts";
+        $statement = $this->db->query($query);
+        $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $posts;
+    }
+
     public function getPostBySlug(Post $post)
     {  
 
@@ -77,9 +87,9 @@ class  PostRepository  extends Database
     public function AddPost(Post $post)
     {
 
-        $query = "INSERT INTO posts (title, author ,content, status, slug) VALUES (:title, :author , :content, :status, :slug)";
+        $query = "INSERT INTO posts (/* title, */ author ,content, status, slug) VALUES (/* :title, */ :author , :content, :status, :slug)";
         $params = [
-            'title' => $post->getTitle(),
+            //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
@@ -91,9 +101,9 @@ class  PostRepository  extends Database
     public function updatePost(Post $post)
     {
 
-        $query = "UPDATE posts SET title = :title, author = :author, content = :content, status = :status, slug = :slug WHERE id = :id";
+        $query = "UPDATE posts SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug WHERE id = :id";
         $params = [
-            'title' => $post->getTitle(),
+            //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
