@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Models ;
 
 use App\Core\Error;
@@ -8,7 +8,7 @@ use App\Core\Security;
 use App\Repositories\ArticleRepository;
 use Exception;
 
-class Article 
+class Article
 {
 
     private Int $id = 0;
@@ -20,7 +20,7 @@ class Article
     private \DateTime $created_at;
     private \DateTime $update_at;
     private ?String $image_path;
-    
+
 
     public function __construct()
     {
@@ -28,9 +28,9 @@ class Article
         $this->update_at = new \DateTime();
     }
 
-        /**
-        * @return Int
-        */
+    /**
+     * @return Int
+     */
     public function getId(): int
     {
         return $this->id;
@@ -186,7 +186,6 @@ class Article
         $this->created_at = $created_at;
         return $this;
     }
-    
     /**
      * Get the value of update_at
      * @return \DateTime
@@ -227,5 +226,6 @@ class Article
     }
 }
 
-    
+
+
 

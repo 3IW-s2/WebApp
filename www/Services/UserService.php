@@ -7,34 +7,34 @@ use App\Core\Database;
 use App\Core\Error;
 use App\Core\Security;
 
-class UserService extends Database 
+class UserService extends Database
 {
     private $userRepo;
     private $error;
     protected $checkConnexion;
-    
+
     public function __construct()
     {
         $this->userRepo = new UserRepository();
         $this->error = new Error();
-/*         $this->checkConnexion = new Security();
- */    }
+        /*         $this->checkConnexion = new Security();
+         */    }
 
     public function registerUser(string $firstname, string $lastname, string $email, string $password, ?string $role = null): bool
     {
-    $userCreated = $this->userRepo->register($firstname, $lastname, $email, $password, $role);
+        $userCreated = $this->userRepo->register($firstname, $lastname, $email, $password, $role);
 
-    try {
-        if ($userCreated) {
-            return true;
-        } else {
-            $this->error->addError("Une erreur s'est produite lors de l'enregistrement de l'utilisateur");
+        try {
+            if ($userCreated) {
+                return true;
+            } else {
+                $this->error->addError("Une erreur s'est produite lors de l'enregistrement de l'utilisateur");
+                return false;
+            }
+        } catch (\Exception $e) {
+
             return false;
         }
-    } catch (\Exception $e) {
-
-        return false;
-    }
 
     }
 
@@ -45,21 +45,21 @@ class UserService extends Database
 
     public function getUserById( User $user)
     {
-    
-       return  $this->userRepo->getUserById($user);
-     
+
+        return  $this->userRepo->getUserById($user);
+
     }
 
     public function updateUser ( User $user): bool
     {
-         if ($this->userRepo->updateUser($user)) {
+        if ($this->userRepo->updateUser($user)) {
             return true;
         } else {
             $this->error->addError("Une erreur s'est produite lors de la mise à jour de l'utilisateur");
             return false;
         }
     }
-    
+
     public function deleteUserById( User $user): void
     {
         $this->userRepo->deleteUserById($user);
@@ -75,9 +75,9 @@ class UserService extends Database
         }
     }
 
-    public function getUserByEmail(User $user): void
+    public function getUserByEmail(string $email): void
     {
-         $this->userRepo->getUserByEmail($user);
+        $this->userRepo->getUserByEmail($email);
     }
 
     public function updateRole(User $user): bool
@@ -90,6 +90,6 @@ class UserService extends Database
         }
     }
 
-    
+
 
 }

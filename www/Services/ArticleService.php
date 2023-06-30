@@ -59,9 +59,8 @@ class ArticleService
         $this->articleRepository->publishArticle($article);
     }
 
-    public function getArticleBySlug( Article $article)
-    {   
-     
+    public function getArticleBySlug(Article $article)
+    {
         return $this->articleRepository->getArticleBySlug($article);
     }
 
