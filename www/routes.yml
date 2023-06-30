@@ -247,11 +247,6 @@ signalcomment:
 
 admin/front/edit:
   controller: FrontController
-  action: getFront
-  security: ROLE:ADMIN
-
-admin/front/modify:
-  controller: FrontController
   action: updateFront
   security: ROLE:ADMIN
 

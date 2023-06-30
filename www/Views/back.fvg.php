@@ -174,6 +174,14 @@
                 </p>
               </a>
             </li>
+              <li class="nav-item">
+                  <a href="/admin/front/edit" class="nav-link">
+                      <i class="nav-icon far fa-edit"></i>
+                      <p>
+                          Modification du style du site
+                      </p>
+                  </a>
+              </li>
 
           
         
@@ -214,65 +222,6 @@
       </div>
       <!-- /.sidebar -->
     </aside>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-       
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                CRUD
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/showuser" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p> show users</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/article/index" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>show article</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/menu/index" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>show menu</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/page/index" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>show posts</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a href="/admin/users/removed" class="nav-link">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                Utilisateurs Bloqués 
-              </p>
-            </a>
-          </li>
-            <li class="nav-item">
-                <a href="/admin/front/edit" class="nav-link">
-                    <i class="nav-icon far fa-edit"></i>
-                    <p>
-                        Modification du style du site
-                    </p>
-                </a>
-            </li>
 
          
        

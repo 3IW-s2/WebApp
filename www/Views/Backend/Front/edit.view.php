@@ -32,8 +32,9 @@ foreach ($fonts['items'] as $font) {
                             <h2 class = "position-relative d-inline-block">Modification du style du site</h2>
                         </div>
                         <!-- un formulaire d'inscription -->
-                        <form id="update-register-form" method="post" action="/admin/front/modify?id=<?= $front['id'] ?>" enctype=multipart/form-data>
+                        <form id="update-register-form" method="post" action="" enctype="multipart/form-data">
                             <div class="form-group">
+                                <input type="hidden" name="id" value="<?= $front['id'] ?>">
                                 <label for="font">Police</label>
                                 <select name="font" id="font">
                                     <option value="<?= $front['font'] ?>"><?= $front['font'] ?></option>
@@ -71,7 +72,6 @@ foreach ($fonts['items'] as $font) {
                                 <br><small>Formats accéptés : jpg, jpeg, png</small><br>
                                 <small>Max : 2Mo</small>
                             </div>
-
                             <button type="submit" name="submit" class="btn btn-primary">Modifier</button>
                         </form>
                     </div>
