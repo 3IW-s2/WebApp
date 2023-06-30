@@ -80,7 +80,7 @@ class Router
         }
          
         if ($security !== null && !Security::checkSecurity($security)) {
-            header("Location: /login");
+            header("Location: /error");
             exit();
         }
 
