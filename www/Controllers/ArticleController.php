@@ -47,7 +47,7 @@ class ArticleController
         if($articles == false){
             $error->setCode(404);
             $error->addError("Article introuvable");
-            header('Location: /');
+            header('Location: /error');
         }
 
         $view = new View("Frontend/Article/index", "front");
@@ -80,7 +80,7 @@ class ArticleController
         if ($articles == false){
             $error->setCode(404);
             $error->addError("Article introuvable");
-            header('Location: /');
+            header('Location: /error');
         }
 
         if (isset($_POST['submit'])){

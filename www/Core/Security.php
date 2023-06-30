@@ -231,7 +231,7 @@ class Security extends Database
     public function check404( $arg)
     {
         if (empty($arg)){
-            header("Location: /");
+            header("Location: /error");
             exit();
         }
         return true;
