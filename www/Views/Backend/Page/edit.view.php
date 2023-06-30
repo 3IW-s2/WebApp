@@ -24,6 +24,7 @@
     <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
 </head>
 <body>
+
     <div id="gjs">
        <?= $posts["content"]?>
     </div>
