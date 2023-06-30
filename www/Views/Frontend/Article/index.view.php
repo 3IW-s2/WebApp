@@ -39,7 +39,7 @@
                                             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60"
                                             height="60" /> -->
                                         <div>
-                                            <h6 class="fw-bold text-primary mb-1"> <?=$user ?></h6>
+                                            <h6 class="fw-bold text-primary mb-1"> <?= $name[$comment['id']] ?? "name"; ?></h6>
                                             <p class="text-muted small mb-0">
                                             <?= $comment['created_at'] ;?>
                                             </p>

@@ -225,7 +225,7 @@ admin/menu/publish:
   security: ROLE:ADMIN
   verifConnexion: true
 
-admin /comment/index:
+admin/comment/index:
   controller: CommentController
   action: showComments
   security: ROLE:ADMIN
@@ -245,8 +245,19 @@ signalcomment:
   controller: CommentController
   action: signalComment
 
+admin/front/edit:
+  controller: FrontController
+  action: getFront
+  security: ROLE:ADMIN
+
+admin/front/modify:
+  controller: FrontController
+  action: updateFront
+  security: ROLE:ADMIN
+
 admin/image/index:
   controller: ImageController
   action: uploadImage
   security: ROLE:ADMIN
   verifConnexion: true
+
