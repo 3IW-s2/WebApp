@@ -250,3 +250,4 @@ admin/image/index:
   action: uploadImage
   security: ROLE:ADMIN
   verifConnexion: true
+

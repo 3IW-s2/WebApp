@@ -22,7 +22,16 @@ class Router
         $explodedUri = explode("/", $uri);
         $slug = isset($explodedUri[1]) ? $explodedUri[1] : null;
         
-   
+        //redirection pour l'accès à l'api
+        if ($explodedUri[0] === "api") {
+            $controller = "ApiController";
+            $action = "index";
+            $controllerFilePath = "Controllers/" . $controller . ".php";
+            require_once($controllerFilePath);
+            $controller = new $controller();
+            $controller->$action();
+            exit();
+        } 
 
         if (empty($uri)) {
             $uri = "default";
