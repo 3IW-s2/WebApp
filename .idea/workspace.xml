@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4985aea0-249f-41a8-851c-691acd6ac7be" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Controllers/FrontController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controllers/FrontController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Models/Front.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Models/Front.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Repositories/FrontRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Repositories/FrontRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Views/Backend/Front/edit.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Views/Backend/Front/edit.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Views/back.fvg.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Views/back.fvg.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Views/front.fvg.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Views/front.fvg.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/public/css/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/public/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/www/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/www/vendor/composer" />
+      <path value="$PROJECT_DIR$/www/vendor/phpmailer/phpmailer" />
+      <path value="$PROJECT_DIR$/www/vendor/dasprid/enum" />
+      <path value="$PROJECT_DIR$/www/vendor/bacon/bacon-qr-code" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="2Rmy5gppg7v2gb9UuOxzYtPWer9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4985aea0-249f-41a8-851c-691acd6ac7be" name="Changes" comment="" />
+      <created>1687869376249</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1687869376249</updated>
+      <workItem from="1687869388294" duration="5498000" />
+      <workItem from="1687939238639" duration="13889000" />
+      <workItem from="1687965169382" duration="1007000" />
+      <workItem from="1688040665889" duration="4856000" />
+      <workItem from="1688114704622" duration="12309000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

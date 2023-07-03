@@ -59,24 +59,15 @@ class ArticleController
 
         
         $comments = $this->commentService->getCommentArticleBySlug($article);
-        
-        if(!empty($comments)){
 
-       
-        $user = new User(new Error() );
-        $user = $user->setId($comments[0]['user_id']);
-        $user = $this->userService->getUserById($user);
-        if($user != false){
-            $user = $user['firstname'].' '.$user['lastname'];
-        }else{
-            $user = 'Utilisateur supprimer';
+        foreach ($comments as $comment) {
+            $user = new User(new Error() );
+            $user = $user->setId($comment['user_id']);
+            $user = $this->userService->getUserById($user);
+            $name[$comment['id']] = $user['firstname'].' '.$user['lastname'];
         }
-        
-        $view->assign('user', $user);
         $view->assign('comments', $comments);
-        }else{
-            $view->assign('comments', false);
-        }
+        $view->assign('name', $name);
 
         if ($articles == false){
             $error->setCode(404);
