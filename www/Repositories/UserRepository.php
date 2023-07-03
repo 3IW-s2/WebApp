@@ -20,6 +20,15 @@ class  UserRepository  extends Database
         $this->db = Database::getInstance();
     }
 
+    public function findAll()
+    {
+        $query = "SELECT * FROM {$this->table} ORDER BY created_at DESC";
+        $stmt = $this->db->query($query);
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
 
     public function findById (User $user)
     {

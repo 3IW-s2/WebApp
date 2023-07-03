@@ -251,3 +251,7 @@ admin/image/index:
   security: ROLE:ADMIN
   verifConnexion: true
 
+
+api/user:
+  controller: ApiUserController
+  action: getUser
