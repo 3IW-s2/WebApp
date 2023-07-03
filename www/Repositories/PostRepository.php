@@ -33,6 +33,16 @@ class  PostRepository  extends Database
         return $posts;
     }
 
+    public function getAllSlug()
+    {    
+
+        $query = "SELECT slug FROM posts";
+        $statement = $this->db->query($query);
+        $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $posts;
+    }
+
     public function getPostBySlug(Post $post)
     {  
 

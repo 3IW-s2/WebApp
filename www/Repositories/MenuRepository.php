@@ -77,7 +77,7 @@ class MenuRepository
 
         public function findAllParent()
         {
-            $query = "SELECT * FROM {$this->table} WHERE parent_id IS NOT  NULL  ORDER BY menu_id ASC";
+            $query = "SELECT * FROM {$this->table} WHERE parent_id IS NOT  NULL AND  status = '1'  ORDER BY menu_id ASC";
             $stmt = $this->db->query($query);
             $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
     

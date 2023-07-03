@@ -90,6 +90,8 @@ CREATE TABLE menu (
   status VARCHAR(255) NOT NULL
 );
 
+ALTER TABLE menu ADD COLUMN position INT NULL;
+
 
 
 /* ALTER TABLE menu ALTER COLUMN parent_id DROP NOT NULL;
@@ -104,6 +106,7 @@ CREATE TABLE history (
     created_at TIMESTAMP NOT NULL,
     content TEXT NOT NULL
 );
+
 
 CREATE TABLE front (
     id SERIAL PRIMARY KEY,

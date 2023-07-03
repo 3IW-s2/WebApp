@@ -31,6 +31,7 @@ class PageController
 
     public function AddPost()
     {
+       
         $view = new View("Backend/Page/add", "back");
         if(isset($_POST['submit']))
         {
