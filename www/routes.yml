@@ -256,8 +256,14 @@ api/user:
   controller:  Api\ApiUserController
   action: getUser
   options: [GET, OPTIONS]
+  #apiVerifConnexion: true
 
 api/user/delete:
   controller:  Api\ApiUserController
   action: deleteUser
   options: [DELETE, OPTIONS]
+
+api/user/post:
+  controller:  Api\ApiUserController
+  action: addUser
+  options: [POST, OPTIONS]

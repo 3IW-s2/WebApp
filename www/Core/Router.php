@@ -75,15 +75,11 @@ class Router
         $action = $this->routes[$uri]["action"];
         $security = $this->routes[$uri]["security"] ?? null;
         $verifConnexion = $this->routes[$uri]["verifConnexion"] ?? null;
+        $apiVerifConnexion = $this->routes[$uri]["apiVerifConnexion"] ?? null;
         $editor = $this->routes[$uri]["editor"]?? null;
         $options = $this->routes[$uri]["options"]?? null;
 
 
-        /* if ($editor === null && $explodedUri[0] === "admin" && Security::editor()){
-            var_dump("tez");die;
-            header("Location: /admin/");
-            exit();
-        } */ //by default editor has all acces
         if($editor !== null && $editor === false  &&  Security::editor() ){
             header("Location: /admin/");
             exit();
@@ -98,6 +94,11 @@ class Router
             header("Location: /login");
             exit();
         }
+      
+       /*  if ($apiVerifConnexion !== null && $apiVerifConnexion === true && !Security::checkToken()) {
+            header("Location: /login");
+            exit();
+        } */
 
         if(!empty($options)) {
             header("Access-Control-Allow-Origin: *");

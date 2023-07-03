@@ -348,6 +348,26 @@ class  UserRepository  extends Database
        
     }
 
+    public function addUserByApi(User $user)
+    {
+            
+            $query = "INSERT INTO {$this->table} (firstname, lastname, email, password, role, status,  created_at, updated_at) 
+                    VALUES (:firstname, :lastname, :email, :password, :role, :status,  NOW(), NOW())";
+            $params = [
+                'firstname' => $user->getFirstname(),
+                'lastname' => $user->getLastname(),
+                'email' => $user->getEmail(),
+                'password' => $user->getPwd(),
+                'role' =>  intval($user->getRole()),
+                'status' => $user->getStatus()
+
+            
+            ];
+            $statement = $this->db->query($query, $params);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+        
+    }
+
     public function getExpirateTokenByEmail (string $email)
     {
 

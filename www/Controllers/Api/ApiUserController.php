@@ -11,12 +11,14 @@ class ApiUserController
 {
     private $httpError;
     private $host;
+    private $userRepo;
 
     public function __construct()
     {
         $this->httpError = new httpError();
         $this->loadConfig();
         $this->httpError->httpOriginError($this->host);
+        $this->userRepo = new UserRepository();
     }
 
     private function loadConfig() {
@@ -37,14 +39,47 @@ class ApiUserController
 
     public function deleteUser()
     {   
-        $httpError = new httpError();
-        $this->httpError->httpError("DELETE");
+            $this->httpError->httpError("DELETE");
             http_response_code(207);
             $user = new UserRepository();
             $userModel = new User( new Error());
             $userModel->setId($_GET['id']);
             $user->deleteUserByIdHard($userModel);
+    } 
+
+    public function addUser()
+    {
+        $this->httpError->httpError("POST");
+        $userAll = $this->userRepo->findAll();
+        $userModel = new User( new Error());
+        if(empty($userAll)){
+            //$userModel = new User( new Error());
+            $userModel->setEmail($_POST['email']);
+            $userModel->setFirstname($_POST['firstname']);
+            $userModel->setLastname($_POST['lastname']);
+            $userModel->setRole(intval("1"));
+            $userModel->setStatus("1");
+            $userModel->setPwd($_POST['password']);
+            $this->userRepo->addUserByApi($userModel);
+            exit();
+        }
+        foreach($userAll as $user){
+            $email = $user['email'];
+            if($email === $_POST['email']){
+                http_response_code(409);
+                echo json_encode(['message' => 'User already exist']);
+                exit();
+            }
+        }
+        $userModel->setEmail($_POST['email']);
+        $userModel->setFirstname($_POST['firstname']);
+        $userModel->setLastname($_POST['lastname']);
+        $userModel->setRole(intval("5"));
+        $userModel->setStatus("1");
+        $userModel->setPwd($_POST['password']);
+        $this->userRepo->addUserByApi($userModel);
+        echo(json_encode(['message' => 'User added']));
 
        
-    } 
+    }
 }
