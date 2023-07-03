@@ -16,10 +16,18 @@ class ApiUserController
     }
 
     public function deleteUser()
-    {
-        $user = new UserRepository();
-        $userModel = new User( new Error());
-        $userModel->setId($_GET['id']);
-        $user->deleteUserByIdHard($userModel);
+    {   
+        if($_SERVER['REQUEST_METHOD'] !== 'DELETE'){
+            http_response_code(405);
+            echo json_encode(['message' => 'Method not allowed']);
+            return;
+        }else{
+            http_response_code(207);
+            $user = new UserRepository();
+            $userModel = new User( new Error());
+            $userModel->setId($_GET['id']);
+            $user->deleteUserByIdHard($userModel);
+        }
+       
     } 
 }

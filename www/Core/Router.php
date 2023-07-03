@@ -125,9 +125,7 @@ class Router
                 header("Access-Control-Allow-Methods: DELETE");
                 $_SERVER['REQUEST_METHOD'] = "DELETE";
                
-
             }    
-
 
         }
     
