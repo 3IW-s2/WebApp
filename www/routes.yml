@@ -255,3 +255,9 @@ admin/image/index:
 api/user:
   controller:  Api\ApiUserController
   action: getUser
+  options: [GET, OPTIONS]
+
+api/user/delete:
+  controller:  Api\ApiUserController
+  action: deleteUser
+  options: [DELETE, OPTIONS]

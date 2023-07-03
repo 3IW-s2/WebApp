@@ -2,6 +2,8 @@
 namespace App\Controllers\Api;
 
 use App\Repositories\UserRepository;
+use App\Models\User;
+use App\Core\Error;
 
 
 class ApiUserController
@@ -9,13 +11,15 @@ class ApiUserController
     public function getUser()
     {
         $user = new UserRepository();
-        $users = $user->findAll();
+        $users = $user->findAll();       
         echo json_encode($users);
     }
 
-   /*  public function deleteUser()
+    public function deleteUser()
     {
         $user = new UserRepository();
-        $user->deleteUser($_GET['id']);
-    } */
+        $userModel = new User( new Error());
+        $userModel->setId($_GET['id']);
+        $user->deleteUserByIdHard($userModel);
+    } 
 }
