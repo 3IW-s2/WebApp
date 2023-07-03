@@ -407,6 +407,7 @@ class  UserRepository  extends Database
     }
 
 
+
     public function getUserIdByEmail (User $user)
     {
         $query = "SELECT id FROM {$this->table} WHERE email = :email";

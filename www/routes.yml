@@ -267,3 +267,8 @@ api/user/post:
   controller:  Api\ApiUserController
   action: addUser
   options: [POST, OPTIONS]
+
+api/user/connexion:
+  controller:  Api\ApiUserController
+  action: connexion
+  options: [POST, OPTIONS]
