@@ -1,0 +1,48 @@
+server {
+    listen 80;
+    listen 443 ssl;
+    index index.php index.html ;
+    error_log /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+    root /var/www;
+    ssl_certificate /var/www/fullchain.pem;
+    ssl_certificate_key /var/www/privkey.pem;
+
+    location  ~ \.php$ {
+         try_files $uri =404;
+         fastcgi_split_path_info ^(.+\.php)(/.+)$;
+         fastcgi_pass app:9000;
+         fastcgi_index index.php;
+         include fastcgi_params;
+         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+         fastcgi_param  PATH_INFO $fastcgi_path_info;
+    }
+
+     location / {
+        if ($request_method = 'OPTIONS') {
+        # Vérifier l'origine de la requête OPTIONS
+        if ($http_origin = 'http://gavineaperano.com:88') {
+            add_header 'Access-Control-Allow-Origin' 'http://gavineaperano.com:88';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, PATCH, DELETE, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'Origin, X-Requested-With, Content-Type, Accept';
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Max-Age' 86400;
+            add_header 'Content-Length' 0;
+            return 204;
+        }
+        # Requête OPTIONS invalide (origine non autorisée)
+        return 403;
+    }
+
+    # Vérifier l'origine de la requête
+    if ($http_origin = 'http://gavineaperano.com:88') {
+        add_header 'Access-Control-Allow-Origin' 'http://gavineaperano.com:88' always;
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PATCH, DELETE, OPTIONS' always;
+        add_header 'Access-Control-Allow-Headers' 'Origin, X-Requested-With, Content-Type, Accept' always;
+        add_header 'Access-Control-Allow-Credentials' 'true' always;
+    }
+    # Requête invalide (origine non autorisée)
+    if ($request_method = 'GET' | $request_method = 'POST' | $request_method = 'PATCH' | $request_method = 'DELETE') {
+        return 403;
+    }
+}

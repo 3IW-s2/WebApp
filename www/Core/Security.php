@@ -250,5 +250,10 @@ class Security extends Database
         return false;
     }
 
+    public static function setMethodOptions()
+    {
+        
+    }
+
    
 }

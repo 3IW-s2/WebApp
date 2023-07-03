@@ -225,7 +225,7 @@ admin/menu/publish:
   security: ROLE:ADMIN
   verifConnexion: true
 
-admin /comment/index:
+admin/comment/index:
   controller: CommentController
   action: showComments
   security: ROLE:ADMIN
@@ -250,3 +250,14 @@ admin/image/index:
   action: uploadImage
   security: ROLE:ADMIN
   verifConnexion: true
+
+
+api/user:
+  controller:  Api\ApiUserController
+  action: getUser
+  options: [GET, OPTIONS]
+
+api/user/delete:
+  controller:  Api\ApiUserController
+  action: deleteUser
+  options: [DELETE, OPTIONS]
