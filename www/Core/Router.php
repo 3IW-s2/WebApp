@@ -101,6 +101,7 @@ class Router
        
 
         $controllerFilePath = "Controllers/" . $controller . ".php";
+        $controllerFilePath = str_replace('\\', '/', $controllerFilePath);
         if (!file_exists($controllerFilePath)) {
             die("Le fichier " . $controllerFilePath . " n'existe pas");
         }
