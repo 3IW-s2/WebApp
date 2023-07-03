@@ -97,7 +97,6 @@ class ApiUserController
         $userModel->setEmail($_POST['email']);
         $userModel->setPwd($_POST['password']);
         $user = $this->userRepo->findByEmail($userModel);
-        //var_dump(password_verify($_POST['password'], $user['password']));
         if($user && password_verify($_POST['password'], $user['password'])){
             echo json_encode($user);
             exit();
