@@ -173,13 +173,20 @@ class ArticleController
         $view->assign('articles', $articles);
 
         if (isset($_POST['submit'])) {
-            $article = new Article();
-            $article->setTitle($_POST['title']);
-            $article->setContent($_POST['content']);
-            $article->setAuthor($_SESSION['user']);
-            $article->setSlug($_POST['slug']);
-            $ArtcileService->createArticle($article);
-            header('Location: /admin/article/index');
+            $articleVerif = new Article();
+            $articleVerif->setSlug($_POST['slug']);
+            $articleServiceVerif = new ArticleService();
+            $articlesVerif = $articleServiceVerif->getArticleBySlug($articleVerif);
+            if (empty($articlesVerif)){
+                $article = new Article();
+                $article->setTitle($_POST['title']);
+                $article->setContent($_POST['content']);
+                $article->setAuthor($_SESSION['user']);
+                $article->setSlug($_POST['slug']);
+                $ArtcileService->createArticle($article);
+                header('Location: /admin/article/index');
+            }
+          $view->assign('errors', "Slug deja existant");    
         }
     }
 
