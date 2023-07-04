@@ -47,8 +47,9 @@ class MenuController
             if (isset($_POST['submit-submenu'])) {
                 $menuVerif = new Menu(); 
                 $menuVerif->setTitre($_POST['title']);
+                $menuVerif->setParentId($_POST['parent_id']);
                 $menuServiceVerif = new MenuService();
-                $menusVerif = $menuServiceVerif->findByTitle($menuVerif);
+                $menusVerif = $menuServiceVerif->findBySubMenuTitle($menuVerif);
                 if(empty($menusVerif)){
                     $menu = new Menu();
                     $menu->setTitre($_POST['title']);
