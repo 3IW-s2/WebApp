@@ -42,6 +42,17 @@ class  PostRepository  extends Database
 
         return $posts;
     }
+    public function getPostBySlugBy(Post $post)
+    {  
+            $query = "SELECT * FROM posts WHERE slug = :slug";
+            $params = [
+                'slug' => $post->getSlug()
+            ];
+            $statement = $this->db->query($query, $params);
+            $post = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $post;
+    }
 
     public function getPostBySlugVerif(Post $post)
     {  

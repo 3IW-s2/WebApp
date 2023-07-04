@@ -44,25 +44,25 @@ class PageController
         $view = new View("Backend/Page/add", "back");
         if(isset($_POST['submit']))
         {
-        $post = $this->post->setSlug($_POST['slug']);
-        $postArld = $this->postService->getPostBySlugVerif($post);
-        var_dump($postArld);
-        if(!empty($postArld))
-        {
-            $view->assign('error', 'Slug already exist');
-            //exit();
-        }
-
-        $post = new Post();
-       // $post->setTitle($_POST['title']);
-        $post->setContent($_POST['content']);
-        $post->setSlug($_POST['slug']);
-        $post->setStatus('5');
-        $post->setAuthor($_SESSION['user']);
+         $postverif = new Post();
+         $postverif->setSlug($_POST['slug']);
+         $postServiceVerif = new PostService(); 
+         $postsverif = $postServiceVerif->getPostBySlugBy( $postverif);  
+         if(empty($postsverif)){
        
-       
-        $postService = new PostService();
-        $posts = $postService->addPost($post);
+                $post = new Post();
+            // $post->setTitle($_POST['title']);
+                $post->setContent($_POST['content']);
+                $post->setSlug($_POST['slug']);
+                $post->setStatus('5');
+                $post->setAuthor($_SESSION['user']);
+            
+            
+                $postService = new PostService();
+                $posts = $postService->addPost($post);
+                header('Location: /admin/page/index');
+            }
+            $view->assign('errors', "Slug already exist");     
 
         }
     }
@@ -98,11 +98,18 @@ class PageController
             $history = $historyService->getHistoryForEntity($historyModel);
             $view->assign('posts', $posts);
             $view->assign('history', $history); 
-
-           
+  
         }
+
+
         if(isset($_POST['submit']))
         {
+         $postverif = new Post();
+         $postverif->setSlug($_POST['slug']);
+         $postServiceVerif = new PostService(); 
+         $postsverif = $postServiceVerif->getPostBySlugBy( $postverif);  
+         if(empty($postsverif)){
+
             $post = new Post();
             $post->setId($_GET['id']);
             //rz$post->setTitle($_POST['title']);
@@ -130,7 +137,15 @@ class PageController
             
             unset($_POST);
             header('Location: /admin/page/index');
+       
+               
+            }
+            $view->assign('errors', "Slug already exist");     
+
         }
+        
+            
+        
         
     }
 
