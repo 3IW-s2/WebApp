@@ -24,6 +24,11 @@ class MenuService
         return $this->menuRepository->findAll();
     }
 
+    public function findByTitle( Menu $menu)
+    {
+        return $this->menuRepository->findByTitle( $menu);
+    }
+
     public function createMenu(Menu $menu){
     
         $this->menuRepository->createMenu($menu);
