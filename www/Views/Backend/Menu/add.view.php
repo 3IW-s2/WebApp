@@ -23,6 +23,11 @@
                             </div>
                             <H1> ajouter un Lien dans le menu </H1>
                                 <form id="add-menu-form" method="post" action="">
+                                <?php if(isset($errors)): ?>
+                                    <div class="alert alert-danger">
+                                        <p><?php echo $errors; ?></p>
+                                    </div>
+                                    <?php endif; ?>
                                     <div class="form-group">
                                                 <label for="firstname">Title</label>
                                                 <input type="text" name="title" id="title" class="form-control"  />
@@ -38,6 +43,11 @@
                                 <!-- y'a plusieur valeurs dans $menus recupère les et mets les dans une liste dans mon form pour pouvoir les envoyers  -->
 
                                 <form id="add-sous-menu-form" method="post" action="">
+                                <?php if(isset($error)): ?>
+                                    <div class="alert alert-danger">
+                                        <p><?php echo $error; ?></p>
+                                    </div>
+                                    <?php endif; ?>
                                     <div class="form-group">
                                                 <label for="firstname">Title</label>
                                                 <input type="text" name="title" id="title" class="form-control"  />

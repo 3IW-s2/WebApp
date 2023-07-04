@@ -93,12 +93,7 @@ class Router
         if ($verifConnexion !== null && $verifConnexion === true && !Security::checkToken()) {
             header("Location: /login");
             exit();
-        }
-      
-       /*  if ($apiVerifConnexion !== null && $apiVerifConnexion === true && !Security::checkToken()) {
-            header("Location: /login");
-            exit();
-        } */
+        }  
 
         if(!empty($options)) {
             header("Access-Control-Allow-Origin: *");
@@ -106,6 +101,7 @@ class Router
             header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
             header("Access-Control-Max-Age: 86400");
             header("Content-Type: application/json");
+            
             //var_dump($options[0]);die;
             if($options[0] === "GET"){
                 //envoyer GET dans le status  header
@@ -129,10 +125,21 @@ class Router
             }    
 
         }
+
+       /*  if(is_array($action)){
+            foreach($options as $key => $value){
+                foreach($action as $key2 => $value2){
+                    $action[$key2]($value);
+                   
+                }
+            }
+
+
+            
+        } */
     
 
-       
-
+    
         $controllerFilePath = "Controllers/" . $controller . ".php";
         $controllerFilePath = str_replace('\\', '/', $controllerFilePath);
         if (!file_exists($controllerFilePath)) {

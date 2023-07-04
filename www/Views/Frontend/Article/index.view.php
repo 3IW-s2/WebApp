@@ -2,6 +2,7 @@
 <section id = "blogs" class = "">
         <div class = "container">
             <div class = "title text-center py-5">
+                <br><br>
                 <h2 class = "position-relative d-inline-block"><?= $articles['title'] ;?></h2>
             </div>
 
