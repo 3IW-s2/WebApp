@@ -52,58 +52,48 @@
 
             
 
-            <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
-                <ul class = "navbar-nav mx-auto text-center">
+            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+            <ul class="navbar-nav mx-auto text-center">
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="/">Home</a>
+                </li>
 
-                            <li class = "nav-item px-2 py-2">                                    
-                                 <a class = 'nav-link text-uppercase text-dark'  href='/'>Home</a>
-                            </li>
-                            <!-- <li class="nav-item px-2 py-2 ">
-                                <a href="javascript:void(0)" class="nav-link text-uppercase text-dark" onclick="myFunction()">Dropdown</a>
-                                <div class="dropdown-content" id="myDropdown">
-                                <a href="#">Link 1</a>
-                                <a href="#">Link 2</a>
-                                <a href="#">Link 3</a>
-                                </div>
-                            </li> -->
-                            
-                            <?php
-                               
-                                foreach($menus as $menu){
+                <?php
+                foreach($menus as $menu){
+                    // Vérifier si le menu a des sous-menus
+                    $hasSubmenu = false;
+                    foreach($sousmenus as $sousmenu){
+                        if($sousmenu['parent_id'] == $menu['menu_id']){
+                            $hasSubmenu = true;
+                            break;
+                        }
+                    }
 
-                                     
-                               //si sousmenu n'est pas vide un tableau vide
+                    if($hasSubmenu){
+                        // Menu avec sous-menus (utilisation d'un menu déroulant)
+                        echo "<li class='nav-item px-2 py-2 dropdown'>";
+                        echo "<a href='javascript:void(0)' class='nav-link text-uppercase text-dark dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>{$menu['titre']}</a>";
+                        echo "<ul class='dropdown-menu' aria-labelledby='navbarDropdown'>";
+                        
+                        foreach($sousmenus as $sousmenu){
+                            if($sousmenu['parent_id'] == $menu['menu_id']){
+                                echo "<li><a class='dropdown-item' href='/post{$sousmenu['url']}'>{$sousmenu['titre']}</a></li>";
+                            }
+                        }
+                        
+                        echo "</ul>";
+                        echo "</li>";
+                    } else {
+                        // Menu sans sous-menus
+                        echo "<li class='nav-item px-2 py-2'>";                                 
+                        echo "<a class='nav-link text-uppercase text-dark' href='/post{$menu['url']}'>{$menu['titre']}</a>";
+                        echo "</li>";
+                    }
+                }
+                ?>
+            </ul>
+        </div>
 
-                                    if(!(empty($sousmenus))){
-                                        foreach($sousmenus as $sousmenu){
-                                            if($sousmenu['parent_id'] == $menu['menu_id']){
-                                   
-                                                echo"<ul>";
-                                                    echo "<li class = 'nav-item px-2 py-2'>";
-                                                         echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$menu['url']}'>{$menu['titre']}</a>";
-                                                            echo "<li class = 'nav-item px-2 py-2'>";
-                                                                echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$sousmenu['url']}'>{$sousmenu['titre']}</a>";
-                                                            echo "</li>";
-                                                    echo "</li>";
-                                                echo"</ul>";    
-                                            }else{
-                                          
-                                                echo "<li class = 'nav-item px-2 py-2'>";                                 
-                                                     echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$menu['url']}'>{$menu['titre']}</a>";
-                                                 echo " </li>";
-    
-                                            }
-                                        }
-                                    }else {
-                                        echo "<li class = 'nav-item px-2 py-2'>";                                 
-                                        echo "<a class = 'nav-link text-uppercase text-dark'  href='/post{$menu['url']}'>{$menu['titre']}</a>";
-                                    echo " </li>";
-                                    }
-                                }
-                            ?>
-                    
-                </ul>
-            </div>
         </div>
     </nav>
     
