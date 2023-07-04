@@ -8,7 +8,6 @@ class httpError
         if( $_SERVER['REQUEST_METHOD'] !== $method){
             http_response_code(405);
             echo json_encode(['message' => 'Method not allowed']);
-            header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
             exit();
         }
     }
