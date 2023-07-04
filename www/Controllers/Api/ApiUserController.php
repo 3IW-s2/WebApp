@@ -31,12 +31,19 @@ class ApiUserController
 
     public function getUser()
     {   
+        $method = $_SERVER['REQUEST_METHOD'];
+        var_dump($method);die;
         $this->httpError->httpError("GET");
         if(isset($_GET['email'])){
             $user = new UserRepository();
             $userModel = new User( new Error());
             $userModel->setEmail($_GET['email']);
             $user = $user->findByEmail($userModel);
+            if(empty($user)){
+                http_response_code(404);
+                echo json_encode(['message' => 'User not found']);
+                exit();
+            }
             echo json_encode($user);
             exit();
         }

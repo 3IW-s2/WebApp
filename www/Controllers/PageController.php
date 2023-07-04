@@ -13,6 +13,15 @@ use App\Core\Error;
 
 class PageController  
 {
+    private $post;
+    private $postService;
+
+    public function __construct()
+    {
+        $this->postService = new PostService();
+        $this->post = new Post();
+
+    }
     public function showPost()
     {
         $view = new View("Backend/Page/index", "back");
@@ -35,12 +44,22 @@ class PageController
         $view = new View("Backend/Page/add", "back");
         if(isset($_POST['submit']))
         {
+        $post = $this->post->setSlug($_POST['slug']);
+        $postArld = $this->postService->getPostBySlugVerif($post);
+        var_dump($postArld);
+        if(!empty($postArld))
+        {
+            $view->assign('error', 'Slug already exist');
+            //exit();
+        }
+
         $post = new Post();
        // $post->setTitle($_POST['title']);
         $post->setContent($_POST['content']);
         $post->setSlug($_POST['slug']);
         $post->setStatus('5');
         $post->setAuthor($_SESSION['user']);
+       
        
         $postService = new PostService();
         $posts = $postService->addPost($post);

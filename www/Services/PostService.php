@@ -33,6 +33,11 @@ class PostService  extends Database
         return $this->postRepo->getPostBySlug($post);
     }
 
+    public function getPostBySlugVerif(Post $post)
+    {   
+        return $this->postRepo->getPostBySlugVerif($post);
+    }
+
     public function DetetePostById(Post $post)
     {   
         return $this->postRepo->DetetePostById($post);

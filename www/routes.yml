@@ -258,6 +258,12 @@ api/user:
   options: [GET, OPTIONS]
   #apiVerifConnexion: true
 
+#api/user:
+ # controller:  Api\ApiUserController
+ # action: [getUser, deleteUser , addUser , connexion]
+ # options: [GET, DELETE , POST , POST ]
+  #apiVerifConnexion: true
+
 api/user/delete:
   controller:  Api\ApiUserController
   action: deleteUser
