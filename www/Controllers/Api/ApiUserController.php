@@ -31,8 +31,7 @@ class ApiUserController
 
     public function getUser()
     {   
-        $method = $_SERVER['REQUEST_METHOD'];
-        var_dump($method);die;
+  
         $this->httpError->httpError("GET");
         if(isset($_GET['email'])){
             $user = new UserRepository();
