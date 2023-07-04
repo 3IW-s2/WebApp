@@ -330,6 +330,18 @@ class  UserRepository  extends Database
 
         return $user;
     }
+    public function getUserByIdlAll (User $user)
+    {
+
+        $query = "SELECT * FROM {$this->table} WHERE id = :id";
+        $params = [
+            'id' => $user->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+        $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
 
     public function addUser (User $user)
     {
