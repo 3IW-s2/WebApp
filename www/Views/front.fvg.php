@@ -106,6 +106,8 @@ $newFont = str_replace(' ', '+', $front['font']);
                         
                         foreach($sousmenus as $sousmenu){
                             if($sousmenu['parent_id'] == $menu['menu_id']){
+                                //affiche le menu auquel il appartient et met le en majuscule et son lien aussi
+                                echo"<li><a class='dropdown-item' style='text-transform: uppercase;' href='/post{$menu['url']}'>{$menu['titre']}</a></li>";
                                 echo "<li><a class='dropdown-item' href='/post{$sousmenu['url']}'>{$sousmenu['titre']}</a></li>";
                             }
                         }
