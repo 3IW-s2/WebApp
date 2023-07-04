@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap');
+:root {
+    --lg-font: 'Kaisei Tokumin', serif;
+    --sm-font: 'Poppins', sans-serif;
+    --pink: #e5345b;
+}
+
+body {
+    font-family: var(--sm-font);
+}
+
+a{
+    text-decoration: none;
+}
+
+
 /* for login and subscription*/
 
 .div-center {
@@ -22,7 +38,7 @@
 /* button */
 
 .bg-primary {
-    background-color: var(--primary)!important;
+    background-color: var(--pink)!important;
 }
 
 .btn:not(.nav-btns button) {
@@ -34,16 +50,16 @@
 }
 
 .btn:not(.nav-btns button):hover {
-    background-color: var(--primary);
+    background-color: var(--pink);
     color: #fff;
-    border-color: var(--primary);
+    border-color: var(--pink);
 }
 
 
 /* text color */
 
 .text-primary {
-    color: var(--primary)!important;
+    color: var(--pink)!important;
 }
 
 
@@ -64,7 +80,7 @@
 }
 
 .nav-link:hover {
-    color: var(--primary)!important;
+    color: var(--pink)!important;
 }
 
 .nav-item {
@@ -99,7 +115,7 @@
     content: "";
     width: 4px;
     height: 50px;
-    background-color: var(--primary);
+    background-color: var(--pink);
     left: -20px;
     top: 50%;
     -webkit-transform: translateY(-50%);
@@ -111,9 +127,9 @@
 /* collection */
 
 .active-filter-btn {
-    background-color: var(--primary)!important;
+    background-color: var(--pink)!important;
     color: #fff!important;
-    border-color: var(--primary)!important;
+    border-color: var(--pink)!important;
 }
 
 .filter-button-group .btn:hover {
@@ -204,9 +220,9 @@
 }
 
 #newsletter .btn {
-    background-color: var(--primary);
+    background-color: var(--pink);
     color: #fff;
-    border-color: var(--primary);
+    border-color: var(--pink);
 }
 
 #newsletter .btn:hover {
@@ -229,7 +245,7 @@ footer a {
 }
 
 footer a:hover {
-    color: var(--primary)!important;
+    color: var(--pink)!important;
 }
 
 
