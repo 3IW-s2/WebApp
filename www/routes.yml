@@ -245,12 +245,16 @@ signalcomment:
   controller: CommentController
   action: signalComment
 
+admin/front/edit:
+  controller: FrontController
+  action: updateFront
+  security: ROLE:ADMIN
+
 admin/image/index:
   controller: ImageController
   action: uploadImage
   security: ROLE:ADMIN
   verifConnexion: true
-
 
 api/user:
   controller:  Api\ApiUserController
@@ -278,3 +282,4 @@ api/user/connexion:
   controller:  Api\ApiUserController
   action: connexion
   options: [POST, OPTIONS]
+
