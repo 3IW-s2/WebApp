@@ -20,12 +20,12 @@ class Sitemap
     private function getArticles()
     {
         $articleRepository = new ArticleRepository();
-        return $articleRepository->findAll();
+        return $articleRepository->findAllActive() ?? [];
     }
 
     private function getPosts()
     {
         $postRepository = new PostRepository();
-        return $postRepository->getAllPosts();
+        return $postRepository->getAllPostsActive() ?? [];
     }
 }
