@@ -245,6 +245,11 @@ signalcomment:
   controller: CommentController
   action: signalComment
 
+admin/front/edit:
+  controller: FrontController
+  action: updateFront
+  security: ROLE:ADMIN
+
 admin/image/index:
   controller: ImageController
   action: uploadImage
