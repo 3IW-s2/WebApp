@@ -33,6 +33,15 @@ class  PostRepository  extends Database
         return $posts;
     }
 
+    public function getAllPostsActive()
+    {
+        $query = "SELECT * FROM posts WHERE status = '1' ";
+        $statement = $this->db->query($query);
+        $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $posts;
+    }
+
     public function getAllSlug()
     {    
 

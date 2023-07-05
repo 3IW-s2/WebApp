@@ -78,7 +78,9 @@ class Router
         $apiVerifConnexion = $this->routes[$uri]["apiVerifConnexion"] ?? null;
         $editor = $this->routes[$uri]["editor"]?? null;
         $options = $this->routes[$uri]["options"]?? null;
+        $extension = $this->routes[$uri]["extension"]?? null;
 
+        
 
         if($editor !== null && $editor === false  &&  Security::editor() ){
             header("Location: /admin/");
@@ -126,18 +128,6 @@ class Router
 
         }
 
-       /*  if(is_array($action)){
-            foreach($options as $key => $value){
-                foreach($action as $key2 => $value2){
-                    $action[$key2]($value);
-                   
-                }
-            }
-
-
-            
-        } */
-    
 
     
         $controllerFilePath = "Controllers/" . $controller . ".php";

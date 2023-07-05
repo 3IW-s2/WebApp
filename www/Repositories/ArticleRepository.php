@@ -30,6 +30,15 @@ class ArticleRepository
         return $articles;
     }
 
+    public function findAllActive()
+    {
+        $query = "SELECT * FROM {$this->table} WHERE status = '1' ORDER BY created_at DESC";
+        $stmt = $this->db->query($query);
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $articles;
+    }
+
     public function createArticle(Article $article){
        
         $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at , author , status , slug) VALUES (:title, :content, NOW(), NOW() , :author , :status , :slug )";

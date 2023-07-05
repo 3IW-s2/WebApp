@@ -1,7 +1,5 @@
 fullchain.pem
 privkey.pem
-# ignore les fichiers de logs
+//ignore les fichiers de logs
 *.log
 cheatsheet.md
-www/.env
-.idea/
