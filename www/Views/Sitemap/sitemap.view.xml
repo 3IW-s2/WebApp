@@ -1,0 +1,17 @@
+<?php
+foreach($posts as $page){
+    echo "<url>";
+    echo "<loc>http://www.gavinaperano.com:88/{$page['slug']}</loc>";
+    echo "<lastmod>{$page['date_created']}</lastmod>";
+    echo "<changefreq>monthly</changefreq>";
+    echo "<priority>0.8</priority>";
+    echo "</url>";
+}
+foreach($articles as $article){
+    echo "<url>";
+    echo "<loc>http://www.gavinaperano.com:88/{$article['slug']}</loc>";
+    echo "<lastmod>{$article['created_at']}</lastmod>";
+    echo "<changefreq>monthly</changefreq>";
+    echo "<priority>0.8</priority>";
+    echo "</url>";
+}
