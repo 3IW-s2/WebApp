@@ -57,7 +57,7 @@ $newFont = str_replace(' ', '+', $front['font']);
 <nav class = "navbar navbar-expand-lg navbar-light py-4 fixed-top">
         <div class = "container">
             <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "./">
-                 <img src = "../public/uploads/<?= $front['logo'] ?>" height="50%" alt="site icon">
+                 <img src = "../public/uploads/<?= $front['logo'] ?>" style="height: 40px; width: 40px" alt="site icon">
             </a>
 
             <div class = "order-lg-2 nav-btns">

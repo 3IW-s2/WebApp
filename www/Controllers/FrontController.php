@@ -59,7 +59,7 @@ class FrontController
                 }
             }
 
-            $value = $fontRepository->updateFrontManagement($front);
+            $fontRepository->updateFrontManagement($front);
 
             //check if error or success
             if($error->getErrors() != null)

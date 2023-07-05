@@ -47,7 +47,8 @@ class PageController
          $postverif = new Post();
          $postverif->setSlug($_POST['slug']);
          $postServiceVerif = new PostService(); 
-         $postsverif = $postServiceVerif->getPostBySlugBy( $postverif);  
+         $postsverif = $postServiceVerif->getPostBySlugBy( $postverif);
+
          if(empty($postsverif)){
        
                 $post = new Post();
@@ -56,8 +57,8 @@ class PageController
                 $post->setSlug($_POST['slug']);
                 $post->setStatus('5');
                 $post->setAuthor($_SESSION['user']);
-            
-            
+
+
                 $postService = new PostService();
                 $posts = $postService->addPost($post);
                 header('Location: /admin/page/index');

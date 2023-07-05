@@ -6,20 +6,11 @@ $fonts = $api->callAPI('GET', 'https://www.googleapis.com/webfonts/v1/webfonts?k
 
 $fonts = json_decode($fonts, true);
 
-/*
-echo '<pre>';
-var_dump($fonts['items']);
-echo '</pre>';
-*/
-
 foreach ($fonts['items'] as $font) {
     $allFonts[] = $font['family'];
 }
 
-
-
 ?>
-
 
 <main>
     <div class="container" style="width: 50%;">
