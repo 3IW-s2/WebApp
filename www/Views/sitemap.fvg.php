@@ -4,7 +4,6 @@ $xml->addAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 $xml->addAttribute('xsi:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd');
 $xml->addAttribute('version', '1.0');
 
-// Parcourir les posts
 foreach ($posts as $page) {
     // Créer un nouvel élément "url"
     $url = $xml->addChild('url');
@@ -16,12 +15,9 @@ foreach ($posts as $page) {
     $url->addChild('priority', '0.8');
 }
 
-// Parcourir les articles
 foreach ($articles as $article) {
-    // Créer un nouvel élément "url"
     $url = $xml->addChild('url');
 
-    // Ajouter les éléments enfants avec leurs valeurs
     $url->addChild('loc', "http://www.gavinaperano.com:88/{$article['slug']}");
     $url->addChild('lastmod', $article['created_at']);
     $url->addChild('changefreq', 'monthly');
