@@ -29,6 +29,32 @@ class MenuRepository
     
             return $menus;
         }
+
+        public function findByTitle(Menu $menu)
+        {
+            $query = "SELECT * FROM {$this->table} WHERE titre = :titre";
+            $params = [
+                'titre' => $menu->getTitre(),
+            ];
+            $stmt = $this->db->query($query , $params);
+            $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $menus;
+        }
+
+        public function findBySubMenuTitle (Menu $menu)
+        {
+            $query = " SELECT * FROM {$this->table} WHERE titre = :titre AND parent_id = :parent_id";
+
+            $params = [
+                'titre' => $menu->getTitre(),
+                'parent_id' => $menu->getParentId(),
+            ];
+            $stmt = $this->db->query($query , $params);
+            $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $menus;
+        }
     
         public function createMenu(Menu $menu){
         
@@ -77,7 +103,7 @@ class MenuRepository
 
         public function findAllParent()
         {
-            $query = "SELECT * FROM {$this->table} WHERE parent_id IS NOT  NULL  ORDER BY menu_id ASC";
+            $query = "SELECT * FROM {$this->table} WHERE parent_id IS NOT  NULL AND  status = '1'  ORDER BY menu_id ASC";
             $stmt = $this->db->query($query);
             $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
     

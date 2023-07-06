@@ -2,6 +2,7 @@
 
 namespace App;
 use App\Core\Router;
+use App\Core\Sitemap;
 
 session_start();
 $timestamp = time();
@@ -34,7 +35,9 @@ spl_autoload_register(function ($class) {
 
 $uri = $_SERVER["REQUEST_URI"];
 if ($_SERVER['REQUEST_URI'] === '/sitemap.xml') {
-    include './sitemap.php';
+    $sitemap = new Sitemap();
+    $sitemap->generate();
+    include './Views/Sitemap/sitemap.view.xml';
     exit();
 }
 

@@ -37,12 +37,9 @@ class Auth
 
     public function login(): void
     {  
+       
 
         $view = new View("Auth/login", "front");
-
-        $menuss = $this->menu->getAllLink();
-        $view->assign("menus", $menuss[0]);
-        $view->assign("sousmenus", $menuss[1]);
         $error = new Error();
         $user = new User($error);
      
@@ -55,16 +52,24 @@ class Auth
             $user->setEmail($email);
             $user->setPwd($pwd);
             $user->login( $email, $pwd);
-
-            if(!empty($_SESSION["user"])){
-                header("Location: /");
-            }
-
+          
+            
         }
-
+        
+        $menuss = $this->menu->getAllLink();
+        $view->assign("menus", $menuss[0]);
+        $view->assign("sousmenus", $menuss[1]);
         $error = $user->getError();
         $view->assign("error", $error);
+      
 
+       
+    
+
+        //depuis le constructeur de BaseController rajoute la variable $error dans la vue
+       
+
+      
     }
 
     public function logout(): void
@@ -216,7 +221,7 @@ class Auth
 
     public function notFound(): void
     {
-        $view = new View("Auth/404", "front");
+        $view = new View("Auth/404", "error");
     }
 
     

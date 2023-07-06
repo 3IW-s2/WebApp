@@ -14,21 +14,16 @@ class FrontController
     {
     }
 
-    public function getFront()
+
+    public function updateFront()
     {
         $fontRepository = new FrontRepository();
         $front = $fontRepository->getFrontManagement();
         $view = new View("Backend/Front/edit", "back");
         $view->assign("front", $front);
 
-    }
-
-    public function updateFront()
-    {
         if(isset($_POST['submit']))
         {
-
-            $view = new View("Backend/Front/edit", "back");
             $error = new Error();
 
             $fontRepository = new FrontRepository();
@@ -40,8 +35,7 @@ class FrontController
             $front->setPrimaryColor($_POST['primary_color']);
             $front->setNavColor($_POST['nav_color']);
             $_FILES['logo']['size'] > 0 ? $front->setLogo($_FILES['logo']['name']) : $front->setLogo($Oldfront['logo']);
-            $front->setId($_GET['id']);
-
+            $front->setId($_POST['id']);
 
             if(isset($_FILES['logo']) && $_FILES['logo']['size'] > 0)
             {
@@ -74,10 +68,9 @@ class FrontController
             }
             else
             {
-                $view->assign("success", "Front modifié avec succès");
+                $success = "Front modifié avec succès";
+                $view->assign("success", $success);
             }
-
-            header("Location: /admin/front/edit");
 
         }
 

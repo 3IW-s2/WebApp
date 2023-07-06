@@ -47,7 +47,8 @@ class ArticleController
         if($articles == false){
             $error->setCode(404);
             $error->addError("Article introuvable");
-            header('Location: /');
+            $view = new View("Auth/404" , "error" );
+            exit();
         }
 
         $view = new View("Frontend/Article/index", "front");
@@ -58,20 +59,36 @@ class ArticleController
 
         
         $comments = $this->commentService->getCommentArticleBySlug($article);
-
-        foreach ($comments as $comment) {
-            $user = new User(new Error() );
-            $user = $user->setId($comment['user_id']);
-            $user = $this->userService->getUserById($user);
-            $name[$comment['id']] = $user['firstname'].' '.$user['lastname'];
+        
+        if (!empty($comments)) {
+            foreach ($comments as $key => $comment) {
+                $user = new User(new Error());
+                $user = $user->setId($comment['user_id']);
+                $user_info = $this->userService->getUserByIdlAll($user);
+                
+                foreach ($user_info as $user_key => $value) {
+                    $user_info = $value;
+                }
+                
+                if ($user_info != false) {
+                    $user = $user_info['firstname'].' '.$user_info['lastname'];
+                } else {
+                    $user = 'Utilisateur supprimé';
+                }
+                
+                $comments[$key]['user'] = $user;
+                $view->assign('user', $user);
+                $view->assign('comments', $comments);
+            }
+        } else {
+            $view->assign('comments', false);
         }
-        $view->assign('comments', $comments);
-        $view->assign('name', $name);
 
         if ($articles == false){
             $error->setCode(404);
             $error->addError("Article introuvable");
-            header('Location: /');
+            $view = new View("Auth/404" , "error" );
+            exit();
         }
 
         if (isset($_POST['submit'])){
@@ -162,13 +179,20 @@ class ArticleController
         $view->assign('articles', $articles);
 
         if (isset($_POST['submit'])) {
-            $article = new Article();
-            $article->setTitle($_POST['title']);
-            $article->setContent($_POST['content']);
-            $article->setAuthor($_SESSION['user']);
-            $article->setSlug($_POST['slug']);
-            $ArtcileService->createArticle($article);
-            header('Location: /admin/article/index');
+            $articleVerif = new Article();
+            $articleVerif->setSlug($_POST['slug']);
+            $articleServiceVerif = new ArticleService();
+            $articlesVerif = $articleServiceVerif->getArticleBySlug($articleVerif);
+            if (empty($articlesVerif)){
+                $article = new Article();
+                $article->setTitle($_POST['title']);
+                $article->setContent($_POST['content']);
+                $article->setAuthor($_SESSION['user']);
+                $article->setSlug($_POST['slug']);
+                $ArtcileService->createArticle($article);
+                header('Location: /admin/article/index');
+            }
+          $view->assign('errors', "Slug deja existant");    
         }
     }
 
@@ -200,15 +224,23 @@ class ArticleController
         
        
             if (isset($_POST['submit'])) {
-                $article = new Article();
-                $article->setId($_GET['id']);
-                $article->setTitle($_POST['title']);
-                $article->setContent($_POST['content']);
-                $article->setSlug($_POST['slug']);
-                //$article->setupdate_at($date->format('Y-m-d'));
-                $ArtcileService->updateArticle($article) ;
-                
-                header('Location: /admin/article/index');
+                $articleVerif = new Article();
+                $articleVerif->setSlug($_POST['slug']);
+                $articleServiceVerif = new ArticleService();
+                $articlesVerif = $articleServiceVerif->getArticleBySlug($articleVerif);
+                if ((!empty($articlesVerif) && $articlesVerif['id'] == $_GET['id']) || empty($articlesVerif)){
+                        $article = new Article();
+                        $article->setId($_GET['id']);
+                        $article->setTitle($_POST['title']);
+                        $article->setContent($_POST['content']);
+                        $article->setSlug($_POST['slug']);
+                        //$article->setupdate_at($date->format('Y-m-d'));
+                        $ArtcileService->updateArticle($article) ;
+                        
+                        header('Location: /admin/article/index');
+                }
+                $view->assign('errors', "Slug deja existant");
+
             }
 
          }

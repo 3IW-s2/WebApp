@@ -2,6 +2,7 @@
 namespace App\Core;
 
 use App\Core\Error;
+use App\Core\View;
 use App\Services\UserService;
 use App\Repositories\UserRepository;
 use App\Core\Database;
@@ -231,7 +232,10 @@ class Security extends Database
     public function check404( $arg)
     {
         if (empty($arg)){
-            header("Location: /");
+           // header("Location: /error");
+           $error = new Error();
+           $error->setCode(404);
+           $view = new View("Auth/404" , "error" );
             exit();
         }
         return true;
@@ -244,6 +248,11 @@ class Security extends Database
         }
         header("Location: /error");
         return false;
+    }
+
+    public static function setMethodOptions()
+    {
+        
     }
 
    

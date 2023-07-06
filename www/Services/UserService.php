@@ -50,6 +50,13 @@ class UserService extends Database
      
     }
 
+    public function getUserByIdlAll( User $user)
+    {
+    
+       return  $this->userRepo->getUserByIdlAll($user);
+     
+    }
+
     public function updateUser ( User $user): bool
     {
          if ($this->userRepo->updateUser($user)) {

@@ -18,6 +18,11 @@
                             </div>
                                                             <!-- un formulaire d'inscription -->
                                 <form id="update-register-form" method="post" action="" >
+                                            <?php if(isset($errors)): ?>
+                                                <div class="alert alert-danger">
+                                                    <p><?php echo $errors; ?></p>
+                                                </div>
+                                                <?php endif; ?>
                                             <div class="form-group">
                                                 <label for="firstname">Title</label>
                                                 <input type="text" name="title" id="title" class="form-control" value="<?= $articles["title"]?>" />

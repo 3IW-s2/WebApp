@@ -2,6 +2,7 @@
 <section id = "blogs" class = "">
         <div class = "container">
             <div class = "title text-center py-5">
+                <br><br>
                 <h2 class = "position-relative d-inline-block"><?= $articles['title'] ;?></h2>
             </div>
 
@@ -39,7 +40,7 @@
                                             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60"
                                             height="60" /> -->
                                         <div>
-                                            <h6 class="fw-bold text-primary mb-1"> <?= $name[$comment['id']] ?? "name"; ?></h6>
+                                            <h6 class="fw-bold text-primary mb-1"><?=$comment['user']?></h6>
                                             <p class="text-muted small mb-0">
                                             <?= $comment['created_at'] ;?>
                                             </p>

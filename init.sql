@@ -50,8 +50,6 @@ ALTER TABLE users ADD tokenID VARCHAR(255) DEFAULT NULL;
 
 ALTER TABLE posts ALTER COLUMN title DROP NOT NULL;
 
-
-
 ALTER TABLE users ADD COLUMN expirate_token TIMESTAMP  NULL;
 
 
@@ -90,6 +88,8 @@ CREATE TABLE menu (
   status VARCHAR(255) NOT NULL
 );
 
+ALTER TABLE menu ADD COLUMN position INT NULL;
+
 
 
 /* ALTER TABLE menu ALTER COLUMN parent_id DROP NOT NULL;
@@ -105,6 +105,7 @@ CREATE TABLE history (
     content TEXT NOT NULL
 );
 
+
 CREATE TABLE front (
     id SERIAL PRIMARY KEY,
     font VARCHAR(100) NOT NULL,
@@ -117,5 +118,4 @@ CREATE TABLE front (
 );
 
 INSERT INTO front (font, font_weight, primary_color, nav_color, logo, created_at, updated_at) VALUES ('Arial', 'light', '#000000', '#000000' , 'logo.png', NOW(), NOW());
-
 

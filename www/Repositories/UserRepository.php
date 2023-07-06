@@ -20,6 +20,15 @@ class  UserRepository  extends Database
         $this->db = Database::getInstance();
     }
 
+    public function findAll()
+    {
+        $query = "SELECT * FROM {$this->table} ORDER BY created_at DESC";
+        $stmt = $this->db->query($query);
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
 
     public function findById (User $user)
     {
@@ -321,6 +330,18 @@ class  UserRepository  extends Database
 
         return $user;
     }
+    public function getUserByIdlAll (User $user)
+    {
+
+        $query = "SELECT * FROM {$this->table} WHERE id = :id";
+        $params = [
+            'id' => $user->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+        $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
 
     public function addUser (User $user)
     {
@@ -337,6 +358,26 @@ class  UserRepository  extends Database
         $statement = $this->db->query($query, $params);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
        
+    }
+
+    public function addUserByApi(User $user)
+    {
+            
+            $query = "INSERT INTO {$this->table} (firstname, lastname, email, password, role, status,  created_at, updated_at) 
+                    VALUES (:firstname, :lastname, :email, :password, :role, :status,  NOW(), NOW())";
+            $params = [
+                'firstname' => $user->getFirstname(),
+                'lastname' => $user->getLastname(),
+                'email' => $user->getEmail(),
+                'password' => $user->getPwd(),
+                'role' =>  intval($user->getRole()),
+                'status' => $user->getStatus()
+
+            
+            ];
+            $statement = $this->db->query($query, $params);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+        
     }
 
     public function getExpirateTokenByEmail (string $email)
@@ -376,6 +417,7 @@ class  UserRepository  extends Database
         return $user;
 
     }
+
 
 
     public function getUserIdByEmail (User $user)

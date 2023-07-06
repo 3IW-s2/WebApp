@@ -29,6 +29,12 @@
     <div id="blocks"></div>
     <!-- recuperer ce qu'il y'a dans la div gjs pour l'enregistrer dans la colomn content -->
     <form action="" method="post">
+        <?php if(isset($errors)): ?>
+            <div class="alert alert-danger">
+                 <p><?php echo $errors; ?></p>
+                        </div>
+             <?php endif; ?>
+         <input type="checkbox" name="active">   
          <input type="hidden" name="content" id="content">
          <input type="text" name="slug" id="slug">
          <button type="submit" name="submit" class="btn btn-primary">Register</button>
