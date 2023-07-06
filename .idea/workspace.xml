@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4985aea0-249f-41a8-851c-691acd6ac7be" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/www/Core/API.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Views/front.fvg.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Views/front.fvg.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
