@@ -124,13 +124,14 @@ class  PostRepository  extends Database
     public function AddPost(Post $post)
     {
 
-        $query = "INSERT INTO posts (/* title, */ author ,content, status, slug) VALUES (/* :title, */ :author , :content, :status, :slug)";
+        $query = "INSERT INTO posts (/* title, */ author ,content, status, slug ,image_path) VALUES (/* :title, */ :author , :content, :status, :slug, :image_path)";
         $params = [
             //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
-            'slug' => $post->getSlug()
+            'slug' => $post->getSlug(),
+            'image_path' => $post->getImage_path()
         ];
         $statement = $this->db->query($query, $params);
     }
@@ -138,14 +139,15 @@ class  PostRepository  extends Database
     public function updatePost(Post $post)
     {
 
-        $query = "UPDATE posts SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug WHERE id = :id";
+        $query = "UPDATE posts SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug , image_path = :image_path WHERE id = :id";
         $params = [
             //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
             'slug' => $post->getSlug(),
-            'id' => $post->getId()
+            'id' => $post->getId(),
+            'image_path' => $post->getImage_path()
         ];
         $statement = $this->db->query($query, $params);
     }

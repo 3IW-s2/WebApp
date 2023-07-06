@@ -104,7 +104,9 @@ class MenuController
             $menuServiceVerif = new MenuService();
             $menusVerif = $menuServiceVerif->findByTitle($menuVerif);
             $subMenuVerif = $menuServiceVerif->findBySubMenuTitle($menuVerif);
-            if(empty($menusVerif) && empty($subMenuVerif)){
+            $menusVerifId = $menusVerif[0]['menu_id'] ?? 0;
+            $subMenuVerifId = $subMenuVerif[0]['menu_id'] ?? 0;
+            if( ( (!empty($menusVerif) && !empty($subMenuVerif)) &&($menusVerifId || $subMenuVerifId) == (int)$_GET['id']) || (empty($menusVerif) && empty($subMenuVerif)) ){
 
                 $_POST['url'] = MenuController::urlVerfif($_POST['url']);
                 $menu = new Menu();

@@ -135,8 +135,6 @@ admin/page/pending:
   security: ROLE:ADMIN
   verifConnexion: true
 
-
-
 admin/page/publish:
   controller: PageController
   action: publishPost

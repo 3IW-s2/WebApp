@@ -30,7 +30,6 @@
                     <div class="col-md-8">
                         <table class="table">
                             <a href="add" class="btn btn-success">Add</a>
-
                             <thead>
                                 <tr>
                                     <th scope="col">Id.</th>
