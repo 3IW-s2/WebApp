@@ -32,6 +32,8 @@
     <!-- recuperer ce qu'il y'a dans la div gjs pour l'enregistrer dans la colomn content -->
     <form id="add-page-form" method="post" action="">
     <?php if(isset($errors)): ?> <div class="alert alert-danger">   <p><?php echo $errors; ?></p>      </div> <?php endif; ?>
+                                             <input type="checkbox" name="active" <?php if ($posts["image_path"] == "on") echo "checked"; else echo "checked=''"; ?>>
+
                                             <input type="hidden" name="content" id="content" value=>
                                            
                                             <div class="form-group">

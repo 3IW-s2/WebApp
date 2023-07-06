@@ -56,6 +56,14 @@ class PageController
                 $post->setSlug($_POST['slug']);
                 $post->setStatus('5');
                 $post->setAuthor($_SESSION['user']);
+                if(isset(($_POST['active'] )))
+                {
+                    $post->setImage_path('on');
+                }
+                else
+                {
+                    $post->setImage_path('off');
+                }
             
             
                 $postService = new PostService();
@@ -107,8 +115,8 @@ class PageController
          $postverif = new Post();
          $postverif->setSlug($_POST['slug']);
          $postServiceVerif = new PostService(); 
-         $postsverif = $postServiceVerif->getPostBySlugBy( $postverif);  
-         if(empty($postsverif)){
+         $postsverif = $postServiceVerif->getPostBySlugBy( $postverif); 
+         if((!empty($postsverif) && $postsverif[0]['id'] == $_GET['id']) || empty($postsverif)){
 
             $post = new Post();
             $post->setId($_GET['id']);
@@ -117,6 +125,14 @@ class PageController
             $post->setSlug($_POST['slug']);
             $post->setStatus('5');
             $post->setAuthor($_SESSION['user']);
+            if(isset(($_POST['active'] )))
+            {
+                $post->setImage_path('on');
+            }
+            else
+            {
+                $post->setImage_path('off');
+            }
 
             $data = [
                 'id' => $_GET['id'],    
@@ -171,8 +187,5 @@ class PageController
             header('Location: /admin/page/index');
         }
     }
-
-  
-    
 
 }

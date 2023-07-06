@@ -228,7 +228,7 @@ class ArticleController
                 $articleVerif->setSlug($_POST['slug']);
                 $articleServiceVerif = new ArticleService();
                 $articlesVerif = $articleServiceVerif->getArticleBySlug($articleVerif);
-                if(empty($articlesVerif)){
+                if ((!empty($articlesVerif) && $articlesVerif['id'] == $_GET['id']) || empty($articlesVerif)){
                         $article = new Article();
                         $article->setId($_GET['id']);
                         $article->setTitle($_POST['title']);

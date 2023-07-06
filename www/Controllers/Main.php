@@ -29,7 +29,6 @@ class Main
 
         $pseudo = "Prof";
         $view = new View("Main/home", "front");
-        $view->assign("titleseo", "supernouvellepage");
         $view->assign("menus", $menus);
         $view->assign("sousmenus", $sousmenus);
     }
