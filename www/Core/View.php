@@ -25,10 +25,7 @@ class View {
     {
         $this->view = "Views/".$view.".view.php";
         if(!file_exists($this->view)){
-            $this->view = "Views/".$view.".view.xml";
-              if(!file_exists($this->view)){
-                 die("La vue ".$this->view." n'existe pas");
-                }
+            die("La vue ".$this->view." n'existe pas");
         }
     }
 

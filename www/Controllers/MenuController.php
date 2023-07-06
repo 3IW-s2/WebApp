@@ -14,12 +14,6 @@ use PDO;
 
 class MenuController
 {
-    public static function urlVerfif( String $url)
-    {
-        $url = substr_replace( $url , '/', 0, 0 );
-        return $url;
-    }
-
     public function showMenu()
     {
         $view = new View("Backend/Menu/index", "back");
@@ -34,41 +28,24 @@ class MenuController
         $MenuService = new MenuService();
         $menus = $MenuService->activeLink();
         $view->assign('menus', $menus);
-            if (isset($_POST['submit'])) {
-                $menuVerif = new Menu();
-                $menuVerif->setTitre($_POST['title']);
-                $menuServiceVerif = new MenuService();
-                $menusVerif = $menuServiceVerif->findByTitle($menuVerif);
-                if(empty($menusVerif)){
-                    $_POST['url'] = MenuController::urlVerfif($_POST['url']);
-                    $menu = new Menu();
-                    $menu->setTitre($_POST['title']);
-                    $menu->setUrl($_POST['url']);
-                    $MenuService->createMenu($menu);
-                    header('Location: /admin/menu/index');
-                } 
-                $view->assign('errors', "Ce titre existe déjà");
-           
-            }
-        
-            if (isset($_POST['submit-submenu'])) {
-                $menuVerif = new Menu(); 
-                $menuVerif->setTitre($_POST['title']);
-                $menuVerif->setParentId($_POST['parent_id']);
-                $menuServiceVerif = new MenuService();
-                $menusVerif = $menuServiceVerif->findBySubMenuTitle($menuVerif);
-                if(empty($menusVerif)){
-                    $_POST['url'] = MenuController::urlVerfif($_POST['url']);
-                    $menu = new Menu();
-                    $menu->setTitre($_POST['title']);
-                    $menu->setUrl($_POST['url']);
-                    $menu->setParentId($_POST['parent_id']);
-                    $MenuService->createSubMenu($menu);
-                    header('Location: /admin/menu/index');
-                }
-                $view->assign('error', "Ce sous-titre existe déjà");   
-            }
 
+        if (isset($_POST['submit'])) {
+            $menu = new Menu();
+            $menu->setTitre($_POST['title']);
+            $menu->setUrl($_POST['url']);
+            $MenuService->createMenu($menu);
+            header('Location: /admin/menu/index');
+        }
+     
+
+        if (isset($_POST['submit-submenu'])) {
+            $menu = new Menu();
+            $menu->setTitre($_POST['title']);
+            $menu->setUrl($_POST['url']);
+            $menu->setParentId($_POST['parent_id']);
+            $MenuService->createSubMenu($menu);
+            header('Location: /admin/menu/index');
+        }
     }
 
     public function deleteMenu()
@@ -97,30 +74,16 @@ class MenuController
         }
 
         if (isset($_POST['submit'])) {
-
-            $menuVerif = new Menu();
-            $menuVerif->setTitre($_POST['titre']);
-            $menuVerif->setParentId((int)$_POST['parent_id']);
-            $menuServiceVerif = new MenuService();
-            $menusVerif = $menuServiceVerif->findByTitle($menuVerif);
-            $subMenuVerif = $menuServiceVerif->findBySubMenuTitle($menuVerif);
-            $menusVerifId = $menusVerif[0]['menu_id'] ?? 0;
-            $subMenuVerifId = $subMenuVerif[0]['menu_id'] ?? 0;
-            if( ( (!empty($menusVerif) && !empty($subMenuVerif)) &&($menusVerifId || $subMenuVerifId) == (int)$_GET['id']) || (empty($menusVerif) && empty($subMenuVerif)) ){
-
-                $_POST['url'] = MenuController::urlVerfif($_POST['url']);
-                $menu = new Menu();
-                $menu->setId($_GET['id']);
-                $menu->setTitre($_POST['titre']);
-                $menu->setUrl($_POST['url']);
-                $menu->setParentId((int)$_POST['parent_id']);
-                if((int)$_POST['parent_id'] == 0) {
-                    $menu->setParentId(null);
-                }
-                $MenuService->updateMenu($menu);
-                header('Location: /admin/menu/index');
+            $menu = new Menu();
+            $menu->setId($_GET['id']);
+            $menu->setTitre($_POST['titre']);
+            $menu->setUrl($_POST['url']);
+            $menu->setParentId((int)$_POST['parent_id']);
+            if((int)$_POST['parent_id'] == 0) {
+                $menu->setParentId(null);
             }
-            $view->assign('error', "Ce titre ou sous-menu existe déjà");
+            $MenuService->updateMenu($menu);
+            header('Location: /admin/menu/index');
         }
     }
 

@@ -98,10 +98,9 @@ class CommentRepository extends Database
         $statement = $this->db->query($query, $params);
     }
 
-    public function addComment(Comment $comment)
+    public function addComment (Comment $comment)
     {
-        $query = "INSERT INTO {$this->table} (content, created_at, updated_at, article_id, user_id, status) 
-                  VALUES (:content, NOW() + INTERVAL '2 hour', NOW() + INTERVAL '2 hour', :article_id, :user_id, 10)";
+        $query = "INSERT INTO {$this->table} (content, created_at, updated_at, article_id, user_id , status) VALUES (:content, NOW(), NOW(), :article_id, :user_id, 10)";
         $params = [
             'content' => $comment->getContent(),
             'article_id' => $comment->getArticleId(),
@@ -109,8 +108,6 @@ class CommentRepository extends Database
         ];
         $statement = $this->db->query($query, $params);
     }
-    
-
 
     public function reportComment (Comment $comment)
     {

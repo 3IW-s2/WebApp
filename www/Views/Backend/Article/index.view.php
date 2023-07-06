@@ -44,10 +44,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($articles as $article) : 
-                                    $article["content"] = substr($article["content"], 0, 20);
-
-                                    ?>
+                                <?php foreach ($articles as $article) : ?>
                                     <tr>
                                         <th scope="row"><?= $article["id"] ?></th>
                                         <td><?= $article["title"]?></td>

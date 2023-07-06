@@ -24,11 +24,6 @@
                             <h2 class = "position-relative d-inline-block"> editer le menu</h2>
                             </div>
                             <form id="add-page-form" method="post" action="">
-                            <?php if(isset($error)): ?>
-                                    <div class="alert alert-danger">
-                                        <p><?php echo $error; ?></p>
-                                    </div>
-                                    <?php endif; ?>
                                         <div class="form-group">
                                             <label for="email">parent_id</label>
                                             <input type="text" name="parent_id" id="parent_id" class="form-control"  value="<?= $menu["parent_id"]?>" />
