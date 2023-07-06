@@ -41,6 +41,7 @@
                                             height="60" /> -->
                                         <div>
                                             <h6 class="fw-bold text-primary mb-1"><?=$comment['user']?></h6>
+
                                             <p class="text-muted small mb-0">
                                             <?= $comment['created_at'] ;?>
                                             </p>

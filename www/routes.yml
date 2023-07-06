@@ -253,31 +253,3 @@ admin/image/index:
   action: uploadImage
   security: ROLE:ADMIN
   verifConnexion: true
-
-
-api/user:
-  controller:  Api\ApiUserController
-  action: getUser
-  options: [GET, OPTIONS]
-  #apiVerifConnexion: true
-
-#api/user:
- # controller:  Api\ApiUserController
- # action: [getUser, deleteUser , addUser , connexion]
- # options: [GET, DELETE , POST , POST ]
-  #apiVerifConnexion: true
-
-api/user/delete:
-  controller:  Api\ApiUserController
-  action: deleteUser
-  options: [DELETE, OPTIONS]
-
-api/user/post:
-  controller:  Api\ApiUserController
-  action: addUser
-  options: [POST, OPTIONS]
-
-api/user/connexion:
-  controller:  Api\ApiUserController
-  action: connexion
-  options: [POST, OPTIONS]

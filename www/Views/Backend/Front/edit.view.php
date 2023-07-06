@@ -6,6 +6,7 @@ $fonts = $api->callAPI('GET', 'https://www.googleapis.com/webfonts/v1/webfonts?k
 
 $fonts = json_decode($fonts, true);
 
+
 foreach ($fonts['items'] as $font) {
     $allFonts[] = $font['family'];
 }
