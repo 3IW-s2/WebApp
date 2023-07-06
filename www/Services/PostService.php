@@ -23,24 +23,9 @@ class PostService  extends Database
         return $this->postRepo->getAllPosts();
     }
 
-    public function getPostBySlugBy(Post $post)
-    {  
-            return $this->postRepo->getPostBySlugBy($post);
-    }
-
-    public function getAllSlug()
-    {
-        return $this->postRepo->getAllSlug();
-    }
-
     public function getPostBySlug(Post $post)
     {   
         return $this->postRepo->getPostBySlug($post);
-    }
-
-    public function getPostBySlugVerif(Post $post)
-    {   
-        return $this->postRepo->getPostBySlugVerif($post);
     }
 
     public function DetetePostById(Post $post)

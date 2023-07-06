@@ -29,11 +29,11 @@
                                 <?php
                                     //si l'utilisateur est connecté
                                     if(isset($_SESSION["user"])){
-                                        echo "<a style='text-decoration: none; color:#e5345b;' href='logout'>Se déconnecter|</a>";
+                                        echo "<a style='text-decoration: none;' href='logout'>Se déconnecter|</a>";
                                     }else{
-                                        echo "<a style='text-decoration: none; color:#e5345b;' href='login'>Se connecter|</a>";
-                                        echo "<a style='text-decoration: none; color:#e5345b;' href='register'>S'inscrire|</a>";
-                                        echo "<a style='text-decoration: none; color:#e5345b;' href='forgotpassword'>Mots de passe oublié|</a>";
+                                        echo "<a style='text-decoration: none;' href='login'>Se connecter|</a>";
+                                        echo "<a style='text-decoration: none;' href='register'>S'inscrire|</a>";
+                                        echo "<a style='text-decoration: none;' href='forgotpassword'>Mots de passe oublié|</a>";
                                     }
                                 ?>
                             </div>

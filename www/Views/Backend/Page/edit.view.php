@@ -24,16 +24,12 @@
     <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
 </head>
 <body>
-
     <div id="gjs">
        <?= $posts["content"]?>
     </div>
     <div id="blocks"></div>
     <!-- recuperer ce qu'il y'a dans la div gjs pour l'enregistrer dans la colomn content -->
     <form id="add-page-form" method="post" action="">
-    <?php if(isset($errors)): ?> <div class="alert alert-danger">   <p><?php echo $errors; ?></p>      </div> <?php endif; ?>
-                                             <input type="checkbox" name="active" <?php if ($posts["image_path"] == "on") echo "checked"; else echo "checked=''"; ?>>
-
                                             <input type="hidden" name="content" id="content" value=>
                                            
                                             <div class="form-group">
@@ -52,9 +48,10 @@
                                      $data = json_decode($entry["content"], true);
 
                                         ?>         <br> _____<br>
-                                        <li> le slug: <?=$data["slug"] ?></li>   
-                                        <li> le status: <?=substr($data["content"], 0, 100) ?></li> 
+                                        <li> le titre: <?=$data["title"] ?></li>
+                                        <li> le slug: <?=$data["slug"] ?></li>    
                                         <form id="update-register-form" method="post" action="">
+                                            <input type="hidden" name="title" value="<?= $data["title"] ?>" />
                                             <textarea id="content" name="content" class="hidden-textarea"><?= $data["content"] ?></textarea>
                                             <input type="hidden" name="slug" value="<?= $data["slug"] ?>" />
                                             <input type="hidden" name="status" value="<?= $data["status"] ?>" />

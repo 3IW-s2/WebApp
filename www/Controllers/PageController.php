@@ -13,15 +13,6 @@ use App\Core\Error;
 
 class PageController  
 {
-    private $post;
-    private $postService;
-
-    public function __construct()
-    {
-        $this->postService = new PostService();
-        $this->post = new Post();
-
-    }
     public function showPost()
     {
         $view = new View("Backend/Page/index", "back");
@@ -40,37 +31,18 @@ class PageController
 
     public function AddPost()
     {
-       
         $view = new View("Backend/Page/add", "back");
         if(isset($_POST['submit']))
         {
-         $postverif = new Post();
-         $postverif->setSlug($_POST['slug']);
-         $postServiceVerif = new PostService(); 
-         $postsverif = $postServiceVerif->getPostBySlugBy( $postverif);
-
-         if(empty($postsverif)){
+        $post = new Post();
+       // $post->setTitle($_POST['title']);
+        $post->setContent($_POST['content']);
+        $post->setSlug($_POST['slug']);
+        $post->setStatus('5');
+        $post->setAuthor($_SESSION['user']);
        
-                $post = new Post();
-            // $post->setTitle($_POST['title']);
-                $post->setContent($_POST['content']);
-                $post->setSlug($_POST['slug']);
-                $post->setStatus('5');
-                $post->setAuthor($_SESSION['user']);
-                if(isset(($_POST['active'] )))
-                {
-                    $post->setImage_path('on');
-                }
-                else
-                {
-                    $post->setImage_path('off');
-                }
-
-                $postService = new PostService();
-                $posts = $postService->addPost($post);
-                header('Location: /admin/page/index');
-            }
-            $view->assign('errors', "Slug already exist");     
+        $postService = new PostService();
+        $posts = $postService->addPost($post);
 
         }
     }
@@ -106,18 +78,11 @@ class PageController
             $history = $historyService->getHistoryForEntity($historyModel);
             $view->assign('posts', $posts);
             $view->assign('history', $history); 
-  
+
+           
         }
-
-
         if(isset($_POST['submit']))
         {
-         $postverif = new Post();
-         $postverif->setSlug($_POST['slug']);
-         $postServiceVerif = new PostService(); 
-         $postsverif = $postServiceVerif->getPostBySlugBy( $postverif); 
-         if((!empty($postsverif) && $postsverif[0]['id'] == $_GET['id']) || empty($postsverif)){
-
             $post = new Post();
             $post->setId($_GET['id']);
             //rz$post->setTitle($_POST['title']);
@@ -125,14 +90,6 @@ class PageController
             $post->setSlug($_POST['slug']);
             $post->setStatus('5');
             $post->setAuthor($_SESSION['user']);
-            if(isset(($_POST['active'] )))
-            {
-                $post->setImage_path('on');
-            }
-            else
-            {
-                $post->setImage_path('off');
-            }
 
             $data = [
                 'id' => $_GET['id'],    
@@ -153,15 +110,7 @@ class PageController
             
             unset($_POST);
             header('Location: /admin/page/index');
-       
-               
-            }
-            $view->assign('errors', "Slug already exist");     
-
         }
-        
-            
-        
         
     }
 
@@ -187,5 +136,8 @@ class PageController
             header('Location: /admin/page/index');
         }
     }
+
+  
+    
 
 }

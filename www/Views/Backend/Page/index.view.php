@@ -30,11 +30,13 @@
                     <div class="col-md-8">
                         <table class="table">
                             <a href="add" class="btn btn-success">Add</a>
+
                             <thead>
                                 <tr>
                                     <th scope="col">Id.</th>
+                                    <th scope="col">title</th>
                                     <th scope="col">author</th>
-                                    <th scope="col">content</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">slug</th>
                                    <!--  <th scope="col">pasword</th> -->
@@ -43,10 +45,10 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($posts as $post) :
-                                    $post["content"] = substr($post["content"], 0, 100);
                                      ?>
                                     <tr>
                                         <th scope="row"><?= $post["id"] ?></th>
+                                        <td><?= $post["title"]?></td>
                                         <td><?= $post["author"] ?></td>
                                         <td><?= $post["content"]?></td>
                                         <td><?= $post["status"] ?></td>

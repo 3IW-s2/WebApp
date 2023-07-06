@@ -33,53 +33,6 @@ class  PostRepository  extends Database
         return $posts;
     }
 
-    public function getAllPostsActive()
-    {
-        $query = "SELECT * FROM posts WHERE status = '1' ";
-        $statement = $this->db->query($query);
-        $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        return $posts;
-    }
-
-    public function getAllSlug()
-    {    
-
-        $query = "SELECT slug FROM posts";
-        $statement = $this->db->query($query);
-        $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        return $posts;
-    }
-    public function getPostBySlugBy(Post $post)
-    {  
-            $query = "SELECT * FROM posts WHERE slug = :slug";
-            $params = [
-                'slug' => $post->getSlug()
-            ];
-            $statement = $this->db->query($query, $params);
-            $post = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            return $post;
-    }
-
-    public function getPostBySlugVerif(Post $post)
-    {  
-
-        $query = "SELECT * FROM posts WHERE slug = :slug ";
-        $params = [
-            'slug' => $post->getSlug()
-        ];
-        $statement = $this->db->query($query, $params);
-        $post = $statement->fetch(PDO::FETCH_ASSOC);
-        
-        $error = new Error();
-        $error->addError("Article introuvable");
-        $security = new Security($error);
-        $security->check404($post);
-        return $post;
-    } 
-
     public function getPostBySlug(Post $post)
     {  
 
@@ -124,14 +77,13 @@ class  PostRepository  extends Database
     public function AddPost(Post $post)
     {
 
-        $query = "INSERT INTO posts (/* title, */ author ,content, status, slug ,image_path) VALUES (/* :title, */ :author , :content, :status, :slug, :image_path)";
+        $query = "INSERT INTO posts (/* title, */ author ,content, status, slug) VALUES (/* :title, */ :author , :content, :status, :slug)";
         $params = [
             //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
-            'slug' => $post->getSlug(),
-            'image_path' => $post->getImage_path()
+            'slug' => $post->getSlug()
         ];
         $statement = $this->db->query($query, $params);
     }
@@ -139,15 +91,14 @@ class  PostRepository  extends Database
     public function updatePost(Post $post)
     {
 
-        $query = "UPDATE posts SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug , image_path = :image_path WHERE id = :id";
+        $query = "UPDATE posts SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug WHERE id = :id";
         $params = [
             //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
             'slug' => $post->getSlug(),
-            'id' => $post->getId(),
-            'image_path' => $post->getImage_path()
+            'id' => $post->getId()
         ];
         $statement = $this->db->query($query, $params);
     }

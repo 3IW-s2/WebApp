@@ -19,11 +19,6 @@
                                                             <!-- un formulaire d'inscription -->
                                                             <H1> </H1>
                                 <form id="add-article-form" method="post" action="">
-                                <?php if(isset($errors)): ?>
-                                    <div class="alert alert-danger">
-                                        <p><?php echo $errors; ?></p>
-                                    </div>
-                                    <?php endif; ?>
                                     <div class="form-group">
                                                 <label for="firstname">Title</label>
                                                 <input type="text" name="title" id="title" class="form-control"  />
