@@ -6,10 +6,12 @@ class Database {
     
         private static $instance = null;
         private $pdo;
+        private $configuration;
     
         protected function __construct()
         {
             $this->pdo = new PDO("pgsql:host=database_tiw;port=5432;dbname=database_tiw;", "postgres", "postgres");
+//            $this->pdo = new PDO("pgsql:host=gavinaperano.com;port=5432;dbname=database_tiw;", "postgres", "postgres");
         }
     
         public static function getInstance(): Database

@@ -16,6 +16,7 @@ class Router
 
     public function handleRequest($uri)
     {
+
         $uriExploded = explode("?", $uri);
         $uri = strtolower(trim($uriExploded[0], "/"));
 

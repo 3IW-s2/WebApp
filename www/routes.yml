@@ -1,3 +1,7 @@
+install:
+  controller: Installer
+  action: install
+
 default:
   controller: Main
   action: home

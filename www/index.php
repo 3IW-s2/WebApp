@@ -2,6 +2,7 @@
 
 namespace App;
 use App\Core\Router;
+use App\Repositories\UserRepository;
 
 session_start();
 $timestamp = time();
@@ -45,4 +46,12 @@ if (!file_exists("routes.yml")) {
 $routes = yaml_parse_file("routes.yml");
 
 $router = new Router($routes);
-$router->handleRequest($uri);
+
+$userRepository = new UserRepository();
+$users = $userRepository->findAll();
+if (empty($users)) {
+    $router->handleRequest("install");
+}else{
+    $router->handleRequest($uri);
+}
+

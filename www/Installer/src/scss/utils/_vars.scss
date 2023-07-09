@@ -1,0 +1,14 @@
+$primary-color: #d76b29;
+$light-grey: #F4F4F4;
+$very-light-grey: #FAFAFA;
+
+$red-error: #8C0D0D;
+$green-success: #0D8C21;
+
+:root{
+  --primary-color: #{ $primary-color };
+  --light-grey: #{ $light-grey };
+  --very-light-grey: #{ $very-light-grey };
+  --red-error: #{ $red-error };
+  --green-success: #{ $green-success };
+}
