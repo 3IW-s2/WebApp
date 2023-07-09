@@ -1,17 +1,23 @@
 <?php
 namespace App\Core;
+use App\Core\Configuration\DatabaseConfiguration;
 use PDO;
 use PDOStatement;
 class Database {
     
         private static $instance = null;
         private $pdo;
-        private $configuration;
     
         protected function __construct()
         {
-            $this->pdo = new PDO("pgsql:host=database_tiw;port=5432;dbname=database_tiw;", "postgres", "postgres");
-//            $this->pdo = new PDO("pgsql:host=gavinaperano.com;port=5432;dbname=database_tiw;", "postgres", "postgres");
+            $configuration = DatabaseConfiguration::getDatabaseConfig();
+
+            $dsn = $configuration["DB_DRIVER"].":host=".$configuration["DB_HOST"].";port=".$configuration["DB_PORT"].";dbname=".$configuration["DB_NAME"].";";
+
+            $this->pdo = new PDO($dsn,
+                $configuration["DB_USERNAME"],
+                $configuration["DB_PASSWORD"]
+            );
         }
     
         public static function getInstance(): Database

@@ -8,8 +8,7 @@ class DatabaseConfiguration
     public static function getDatabaseConfig(): array
     {
         $env = [];
-        $valuesWithDependantValues = [];
-        $configuration = file($_SERVER['DOCUMENT_ROOT']."/.env.example");
+        $configuration = file($_SERVER['DOCUMENT_ROOT']."/.env");
         foreach ($configuration as $line) {
             $line = trim($line);
             if ($line === '' || $line[0] === "#") {
@@ -17,6 +16,9 @@ class DatabaseConfiguration
             }
             $keyValue = explode("=", $line);
             $key = trim($keyValue[0]);
+            if (!str_starts_with($key, "DB_")) {
+                continue;
+            }
             $value = trim($keyValue[1]);
 
             if (preg_match('/\${(.*?)}/', $value)) {
