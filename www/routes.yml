@@ -1,24 +1,16 @@
-default:
-  controller: Main
-  action: home
-  verifConnexion: true
+#default:
+#  controller: Main
+#  action: home
+#  verifConnexion: true
 
 profile:
   controller: Main
   action: profile
   verifConnexion: true
 
-a-propos:
-  controller: Main
-  action: aboutUs
-
-about-us:
-  controller: Main
-  action: aboutUs
-
-contact:
-  controller: Main
-  action: contact
+#a-propos:
+#  controller: Main
+#  action: aboutUs
 
 login:
   controller: Auth
