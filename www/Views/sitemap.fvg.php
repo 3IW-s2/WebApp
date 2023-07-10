@@ -9,7 +9,7 @@ foreach ($posts as $page) {
     $url = $xml->addChild('url');
 
     // Ajouter les éléments enfants avec leurs valeurs
-    $url->addChild('loc', "http://www.gavinaperano.com:88/{$page['slug']}");
+    $url->addChild('loc', "http://www.gavinaperano.com:88/post/{$page['slug']}");
     $url->addChild('lastmod', $page['date_created']);
     $url->addChild('changefreq', 'monthly');
     $url->addChild('priority', '0.8');
@@ -18,7 +18,7 @@ foreach ($posts as $page) {
 foreach ($articles as $article) {
     $url = $xml->addChild('url');
 
-    $url->addChild('loc', "http://www.gavinaperano.com:88/{$article['slug']}");
+    $url->addChild('loc', "http://www.gavinaperano.com:88/article/{$article['slug']}");
     $url->addChild('lastmod', $article['created_at']);
     $url->addChild('changefreq', 'monthly');
     $url->addChild('priority', '0.8');

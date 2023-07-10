@@ -15,9 +15,9 @@ use App\Core\Database;
 use App\Services\UserService;
 
 
-class Main
+class Main Extends BaseController
 {
-    public function home(): void
+   /*  public function home(): void
     {
         $timestamp = time();
         $newTimestamp = strtotime('+2 hours', $timestamp);
@@ -31,7 +31,7 @@ class Main
         $view = new View("Main/home", "front");
         $view->assign("menus", $menus);
         $view->assign("sousmenus", $sousmenus);
-    }
+    } */
 
     /* public function contact(): void
     {
@@ -59,6 +59,8 @@ class Main
         $userService = new UserService();
         $user = $userService->findByEmail($user);
         $view->assign("user", $user);
+        $user_admin = $this->assignMenuVariables()['user_admin'];
+        $view->assign("user_admin", $user_admin);
 
         if (isset($_POST["delete"])) {
             $userId = new User($error);

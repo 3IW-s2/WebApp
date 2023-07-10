@@ -70,6 +70,16 @@ $newFont = str_replace(' ', '+', $front['font']);
                 
                     </i>
                 </button>
+                <?php if(isset( $user_admin) && $user_admin == 1):?>
+                
+                    <button onclick="window.location.href='/admin'" type = "button" class = "btn position-relative">
+                        <i class = "fa fa-cog" >      
+                        <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"></span>
+                    
+                        </i>
+                    </button>
+                <?php endif; ?>
+
 
      
             
@@ -86,9 +96,9 @@ $newFont = str_replace(' ', '+', $front['font']);
 
             <div class="collapse navbar-collapse order-lg-1" id="navMenu">
             <ul class="navbar-nav mx-auto text-center">
-                <li class="nav-item px-2 py-2">
+                <!-- <li class="nav-item px-2 py-2">
                     <a class="nav-link text-uppercase text-dark" href="/">Home</a>
-                </li>
+                </li> -->
 
                 <?php
                 foreach($menus as $menu){
