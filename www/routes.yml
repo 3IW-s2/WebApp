@@ -227,9 +227,9 @@ admin/comment/edit:
   security: ROLE:ADMIN
   verifConnexion: true
 
-addcomment:
-  controller: CommentController
-  action: addComment
+#addcomment:
+#  controller: CommentController
+#  action: addComment
 
 signalcomment:
   controller: CommentController
