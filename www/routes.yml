@@ -45,9 +45,9 @@ newpassword:
   controller: Auth
   action: newPassword  
 
-s-inscrire:
-  controller: Auth
-  action: register
+#s-inscrire:
+#  controller: Auth
+#  action: register
 
 admin:
   controller: AdminController

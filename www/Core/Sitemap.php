@@ -35,6 +35,8 @@ class Sitemap
         $static_url = [
             'login',
             'register',
+            'profile',
+            'logout',
         ];
 
         return $static_url;
