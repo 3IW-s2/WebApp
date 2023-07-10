@@ -24,6 +24,15 @@ foreach ($articles as $article) {
     $url->addChild('priority', '0.8');
 }
 
+foreach($static as $page){
+    $url = $xml->addChild('url');
+
+    $url->addChild('loc', "http://www.gavinaperano.com:88/{$page}");
+   // $url->addChild('lastmod', $date);
+    $url->addChild('changefreq', 'monthly');
+    $url->addChild('priority', '0.8');
+}
+
 // En-tête pour définir le type de contenu
 header("Content-type: text/xml");
 

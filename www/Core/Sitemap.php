@@ -15,6 +15,7 @@ class Sitemap
         $view = new View("Sitemap/sitemap", "sitemap");
         $view->assign("articles", $this->getArticles());
         $view->assign("posts", $this->getPosts());
+        $view->assign("static", $this->getStatic());
     }
 
     private function getArticles()
@@ -27,5 +28,16 @@ class Sitemap
     {
         $postRepository = new PostRepository();
         return $postRepository->getAllPostsActive() ?? [];
+    }
+
+    private function getStatic()
+    {
+        $static_url = [
+            'login',
+            'register',
+        ];
+
+        return $static_url;
+
     }
 }
