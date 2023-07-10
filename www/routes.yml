@@ -221,9 +221,9 @@ admin/comment/index:
   security: ROLE:ADMIN
   verifConnexion: true
 
-admin/comment/edit:
+admin/comment/delete:
   controller: CommentController
-  action: updateComment
+  action: DeleteComment
   security: ROLE:ADMIN
   verifConnexion: true
 

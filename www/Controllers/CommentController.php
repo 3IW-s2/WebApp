@@ -22,4 +22,15 @@ class CommentController
         $view = new View("Backend/Comment/index", "back");
         $view->assign('comments', $comments);
     }
+
+    public function DeleteComment()
+    {
+        $comment = new Comment();
+        $comment->setId($_GET['id']);
+        $commentService = new CommentService( $this->error);
+        $commentService->deleteComment($comment);
+        $comments = $commentService->findAll();
+        $view = new View("Backend/Comment/index", "back");
+        $view->assign('comments', $comments);
+    }
 }
