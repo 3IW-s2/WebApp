@@ -1,4 +1,7 @@
 # config.yml
 
-base_url: "http://gavinaperano.com:88"
-origin: "gavinaperano.com:88"
+#base_url: "http://gavinaperano.com:88"
+#origin: "gavinaperano.com:88"
+##mod prod
+base_url: "https://gavinaperano.com"
+orifin: "gaivnaperano.com"
