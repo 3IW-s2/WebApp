@@ -58,9 +58,11 @@ $newFont = str_replace(' ', '+', $front['font']);
 <nav class = "navbar navbar-expand-lg navbar-light py-4 fixed-top">
         <div class = "container">
             <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "./">
-<!--                  <img src = "../public/uploads/ --> <!--" style="height: 40px; width: 40px" alt="TIW">
- -->                 <!--  <img src = "images/Logo_EASYSCOOTER-removebg-preview.png" height="100%" alt = "site icon">
- -->                <span class = "text-uppercase fw-lighter ms-2">TIW</span>
+                <?php if(strlen($front['logo']) > 0) { ?>
+                 <img src = "../public/uploads/<?= $front['logo'] ?>" style="height: 40px; width: 40px" alt="TIW">
+                <?php } else { ?>
+                    <span class = "text-uppercase fw-lighter ms-2">TIW</span>
+                <?php } ?>
             </a>
 
             <div class = "order-lg-2 nav-btns">
