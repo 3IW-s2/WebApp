@@ -67,7 +67,6 @@ $newFont = str_replace(' ', '+', $front['font']);
                 <button onclick="window.location.href='/profile'" type = "button" class = "btn position-relative">
                     <i class = "fa fa-user" >      
                     <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"></span>
-                
                     </i>
                 </button>
                 <?php if(isset( $user_admin) && $user_admin == 1):?>
@@ -79,11 +78,6 @@ $newFont = str_replace(' ', '+', $front['font']);
                         </i>
                     </button>
                 <?php endif; ?>
-
-
-     
-            
-              
             </div>
             
 
