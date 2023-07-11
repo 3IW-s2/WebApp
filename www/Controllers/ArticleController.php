@@ -20,7 +20,7 @@ use PDO;
 
 
 
-class ArticleController
+class ArticleController  Extends BaseController
 {
     private $menu;
     private $article ;
@@ -56,7 +56,8 @@ class ArticleController
         $menuss = $this->menu->getAllLink();
         $view->assign("menus", $menuss[0]);
         $view->assign("sousmenus", $menuss[1]);
-
+        $user_admin = $this->assignMenuVariables()['user_admin'];
+        $view->assign("user_admin", $user_admin);
         
         $comments = $this->commentService->getCommentArticleBySlug($article);
         

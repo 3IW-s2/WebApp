@@ -52,10 +52,7 @@
                                         <td><?= $comment["status"]?></td>
                                        <!--  <td></td> -->
                                         <td>
-                                            <a href="edit?id=<?= $comment['id'] ?>" class="btn btn-primary">Edit</a>
                                             <a href="delete?id=<?= $comment['id'] ?>" class="btn btn-danger">Delete</a>
-                                            <a href="publish?id=<?= $comment['id'] ?>" class="btn btn-success">Publish</a>
-                                            <a href="pending?id=<?= $comment['id'] ?>" class="btn btn-warning">Pending</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

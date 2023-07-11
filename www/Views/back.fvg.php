@@ -26,7 +26,7 @@
 
       <link rel="stylesheet" href="https://unpkg.com/grapesjs@0.21.2/dist/css/grapes.min.css">
       <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
-
+  
 
 
       
@@ -152,6 +152,12 @@
                     <p>show posts</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="/admin/comment/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>show comments</p>
+                  </a>
+                </li>
               </ul>
             </li>
             <li class="nav-item">
@@ -171,7 +177,6 @@
                       </p>
                   </a>
             </li>
-              </li>
 
             <!-- <li class="nav-item">
               <a href="#" class="nav-link">

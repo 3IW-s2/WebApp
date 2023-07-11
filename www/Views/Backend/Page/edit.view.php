@@ -34,7 +34,7 @@
     <?php if(isset($errors)): ?> <div class="alert alert-danger">   <p><?php echo $errors; ?></p>      </div> <?php endif; ?>
                                              <input type="checkbox" name="active" <?php if ($posts["image_path"] == "on") echo "checked"; else echo "checked=''"; ?>>
 
-                                            <input type="hidden" name="content" id="content" value=>
+                                            <input type="hidden" name="content" id="content" >
                                            
                                             <div class="form-group">
                                                 <label for="email">slug</label>
@@ -106,16 +106,13 @@
             },
         });
 
-        //recupère ce qu'il y'a dans la div gjs et affiche le resultat dans la console utilise html()
-        
-        //content = editor.getHtml();
-        //met à la valeur de content tous à chaque modification de la div gjs
-        editor.on("change:changesCount", () => {
+        var content_first = editor.getHtml();
+        document.getElementById("content").value = content_first;
+        editor.on("change:changesCount", ( ) => {
             content = editor.getHtml();
             document.getElementById("content").value = content;
         }); 
         
-        //if isset $_POST['submit'] alors envoyer content comme valeur de la colomn content
         
 
         

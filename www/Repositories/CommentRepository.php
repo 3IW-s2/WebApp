@@ -98,6 +98,15 @@ class CommentRepository extends Database
         $statement = $this->db->query($query, $params);
     }
 
+    public function deleteComment(Comment $comment)
+    {
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
+        $params = [
+            'id' => $comment->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+    }
+
     public function addComment(Comment $comment)
     {
         $query = "INSERT INTO {$this->table} (content, created_at, updated_at, article_id, user_id, status) 

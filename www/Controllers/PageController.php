@@ -11,7 +11,7 @@ use App\Core\Database;
 use App\Core\Error;
 
 
-class PageController  
+class PageController  Extends BaseController
 {
     private $post;
     private $postService;

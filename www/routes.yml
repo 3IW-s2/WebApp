@@ -1,24 +1,16 @@
-default:
-  controller: Main
-  action: home
-  verifConnexion: true
+#default:
+#  controller: Main
+#  action: home
+#  verifConnexion: true
 
 profile:
   controller: Main
   action: profile
   verifConnexion: true
 
-a-propos:
-  controller: Main
-  action: aboutUs
-
-about-us:
-  controller: Main
-  action: aboutUs
-
-contact:
-  controller: Main
-  action: contact
+#a-propos:
+#  controller: Main
+#  action: aboutUs
 
 login:
   controller: Auth
@@ -53,9 +45,9 @@ newpassword:
   controller: Auth
   action: newPassword  
 
-s-inscrire:
-  controller: Auth
-  action: register
+#s-inscrire:
+#  controller: Auth
+#  action: register
 
 admin:
   controller: AdminController
@@ -229,15 +221,15 @@ admin/comment/index:
   security: ROLE:ADMIN
   verifConnexion: true
 
-admin/comment/edit:
+admin/comment/delete:
   controller: CommentController
-  action: updateComment
+  action: DeleteComment
   security: ROLE:ADMIN
   verifConnexion: true
 
-addcomment:
-  controller: CommentController
-  action: addComment
+#addcomment:
+#  controller: CommentController
+#  action: addComment
 
 signalcomment:
   controller: CommentController

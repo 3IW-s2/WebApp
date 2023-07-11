@@ -13,7 +13,7 @@ use App\Core\Database;
 use App\Core\Error;
 use App\Core\Menu;
 
-class PostController 
+class PostController  Extends BaseController
 {
     private $menu;
     private $article ;
@@ -38,6 +38,8 @@ class PostController
             $view->assign("sousmenus", $menuss[1]);
             $articles = $this->article->findAll();
             $view->assign('articles', $articles);
+            $user_admin = $this->assignMenuVariables()['user_admin'];
+            $view->assign("user_admin", $user_admin);
            
             $error = new Error();
             $commentService = new CommentService($error);
@@ -55,6 +57,8 @@ class PostController
         $menuss = $this->menu->getAllLink();
         $view->assign("menus", $menuss[0]);
         $view->assign("sousmenus", $menuss[1]);
+        $user_admin = $this->assignMenuVariables()['user_admin'];
+        $view->assign("user_admin", $user_admin);
 
         $articles = $this->article->findAll();
         $view->assign('articles', $articles);

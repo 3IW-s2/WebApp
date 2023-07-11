@@ -1,10 +1,6 @@
 <?php
 
 $frontRepository = new  App\Repositories\FrontRepository();
-$userRepository = new  App\Repositories\UserRepository();
-
-$user = $userRepository->getUserByEmail($_SESSION['user']);
-
 $front = $frontRepository->getFrontManagement();
 
 $newFont = str_replace(' ', '+', $front['font']);
@@ -26,6 +22,7 @@ $newFont = str_replace(' ', '+', $front['font']);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
 
     <link rel="stylesheet" href="assets/css/pricing-plan.css">
     <link rel = "stylesheet" href = "/public/css/main.css">
@@ -61,7 +58,9 @@ $newFont = str_replace(' ', '+', $front['font']);
 <nav class = "navbar navbar-expand-lg navbar-light py-4 fixed-top">
         <div class = "container">
             <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "./">
-                 <img src = "../public/uploads/<?= $front['logo'] ?>" style="height: 40px; width: 40px" alt="site icon">
+<!--                  <img src = "../public/uploads/ --> <!--" style="height: 40px; width: 40px" alt="TIW">
+ -->                 <!--  <img src = "images/Logo_EASYSCOOTER-removebg-preview.png" height="100%" alt = "site icon">
+ -->                <span class = "text-uppercase fw-lighter ms-2">TIW</span>
             </a>
 
             <div class = "order-lg-2 nav-btns">
@@ -70,11 +69,15 @@ $newFont = str_replace(' ', '+', $front['font']);
                     <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"></span>
                     </i>
                 </button>
-                <?php
-                if($user["role"] == 1){
-                ?>
-                <a href="/admin">Aller sur le dashboard</a>
-                <?php } ?>
+                <?php if(isset( $user_admin) && $user_admin == 1):?>
+                
+                    <button onclick="window.location.href='/admin'" type = "button" class = "btn position-relative">
+                        <i class = "fa fa-cog" >      
+                        <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"></span>
+                    
+                        </i>
+                    </button>
+                <?php endif; ?>
             </div>
             
 
@@ -87,9 +90,9 @@ $newFont = str_replace(' ', '+', $front['font']);
 
             <div class="collapse navbar-collapse order-lg-1" id="navMenu">
             <ul class="navbar-nav mx-auto text-center">
-                <li class="nav-item px-2 py-2">
+                <!-- <li class="nav-item px-2 py-2">
                     <a class="nav-link text-uppercase text-dark" href="/">Home</a>
-                </li>
+                </li> -->
 
                 <?php
                 foreach($menus as $menu){
