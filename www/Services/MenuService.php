@@ -79,4 +79,9 @@ class MenuService
        return  $this->menuRepository->activeLink();
     }
 
+    public function findAllSubMenu( Menu $menu)
+    {
+        return $this->menuRepository->findAllSubMenu( $menu);
+    }
+
 }

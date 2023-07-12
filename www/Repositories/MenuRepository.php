@@ -103,6 +103,7 @@ class MenuRepository
             $stmt = $this->db->query($query , $params);
         }
 
+
         public function findAllParent()
         {
             $query = "SELECT * FROM {$this->table} WHERE parent_id IS NOT  NULL AND  status = '1'  ORDER BY menu_id ASC";
@@ -151,6 +152,18 @@ class MenuRepository
             $stmt = $this->db->query($query);
             $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            return $menus;
+        }
+
+        public function findAllSubMenu( Menu $menu)
+        {
+            $query = "DELETE FROM {$this->table} WHERE parent_id = :parent_id";
+            $params = [
+                'parent_id' => $menu->getId(),
+            ];
+            $stmt = $this->db->query($query, $params);
+            $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
             return $menus;
         }
     

@@ -78,6 +78,7 @@ class MenuController
             $menu = new Menu();
             $menu->setId($_GET['id']);
             $MenuService->deleteMenu($menu);
+            $MenuService->findAllSubMenu($menu);
             header('Location: /admin/menu/index');
         }
     }

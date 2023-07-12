@@ -128,6 +128,7 @@ class ArticleRepository
         return $article;
     }
 
+    //pour la pagination
     public function getPreferences(){
         $query = "SELECT number_article FROM {$this->admin_preferences} WHERE id = 1 ";
         $stmt = $this->db->query($query);
