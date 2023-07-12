@@ -24,6 +24,11 @@ class ArticleService
         return $this->articleRepository->findAll();
     }
 
+    public function findAllActive()
+    {
+        return $this->articleRepository->findAllActive();
+    }
+
     public function findAllByCategorie($id)
     {
         return $this->articleRepository->findAllByCategorie($id);

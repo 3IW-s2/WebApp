@@ -32,14 +32,24 @@ class ArticleRepository
         return $articles;
     }
 
-    public function findAllActive()
+     public function findAllActive()
     {
         $query = "SELECT * FROM {$this->table} WHERE status = '1' ORDER BY created_at DESC";
         $stmt = $this->db->query($query);
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $articles;
-    }
+    } 
+
+   /*  public function findAllActive($page = 1, $perPage = 3)
+    {
+        $offset = ($page - 1) * $perPage;
+        $query = "SELECT * FROM {$this->table} WHERE status = '1' ORDER BY created_at DESC LIMIT $perPage OFFSET $offset";
+        $stmt = $this->db->query($query);
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $articles;
+    } */
 
     public function createArticle(Article $article){
        

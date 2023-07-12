@@ -36,7 +36,7 @@ class PostController  Extends BaseController
             $menuss = $this->menu->getAllLink();
             $view->assign("menus", $menuss[0]);
             $view->assign("sousmenus", $menuss[1]);
-            $articles = $this->article->findAll();
+            $articles = $this->article->findAllActive();
             $view->assign('articles', $articles);
             $user_admin = $this->assignMenuVariables()['user_admin'];
             $view->assign("user_admin", $user_admin);
@@ -60,7 +60,7 @@ class PostController  Extends BaseController
         $user_admin = $this->assignMenuVariables()['user_admin'];
         $view->assign("user_admin", $user_admin);
 
-        $articles = $this->article->findAll();
+        $articles = $this->article->findAllActive();
         $view->assign('articles', $articles);
     }
     }
