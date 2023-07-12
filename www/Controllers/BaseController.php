@@ -25,9 +25,12 @@ class BaseController
     $userService = new UserService();
     $user = $userService->findByEmail($user);
     $user_admin =  $user['role'];
+    $numberArticle = 3;
+
 
     return [
-        'user_admin' => $user_admin
+        'user_admin' => $user_admin,
+        'numberArticle' => $numberArticle,
     ];
     
 }

@@ -27,6 +27,8 @@ class PostController  Extends BaseController
     {   $post = new Post();
         $post->setSlug($_GET['slug']);
 
+      
+
         if($_GET['slug'] == 'article'){
             $postService = new PostService();
             //var_dump($postService);
@@ -39,7 +41,12 @@ class PostController  Extends BaseController
             $articles = $this->article->findAllActive();
             $view->assign('articles', $articles);
             $user_admin = $this->assignMenuVariables()['user_admin'];
+            $numberArticle = $this->assignMenuVariables()['numberArticle'];
+            if(isset($_POST['numberArticle'])){
+                $numberArticle = $_POST['numberArticle'];
+            }
             $view->assign("user_admin", $user_admin);
+            $view->assign("numberArticle", $numberArticle);
            
             $error = new Error();
             $commentService = new CommentService($error);
@@ -59,6 +66,11 @@ class PostController  Extends BaseController
         $view->assign("sousmenus", $menuss[1]);
         $user_admin = $this->assignMenuVariables()['user_admin'];
         $view->assign("user_admin", $user_admin);
+        $numberArticle = $this->assignMenuVariables()['numberArticle'];
+        if(isset($_POST['numberArticle'])){
+            $numberArticle = $_POST['numberArticle'];
+        }
+        $view->assign("numberArticle", $numberArticle);
 
         $articles = $this->article->findAllActive();
         $view->assign('articles', $articles);
