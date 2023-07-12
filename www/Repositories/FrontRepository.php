@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Core\Configuration\DatabaseConfiguration;
 use App\Models\Font;
 use App\Core\Database;
 use App\Models\Comment;
@@ -17,13 +18,14 @@ class FrontRepository extends Database
 
     public function __construct()
     {
+        $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_".'front';
         $this->db = Database::getInstance();
         $this->error = new Error();
     }
 
     public function getFrontManagement()
     {
-        $query = "SELECT * FROM front";
+        $query = "SELECT * FROM {$this->table}";
         $statement = $this->db->query($query);
         $front = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -31,7 +33,7 @@ class FrontRepository extends Database
     }
 
     public function updateFrontManagement(Front $front){
-        $query = "UPDATE front SET font = :font, font_weight = :font_weight, primary_color = :primary_color, logo = :logo, nav_color = :nav_color, updated_at = NOW() WHERE id = :id";
+        $query = "UPDATE {$this->table} SET font = :font, font_weight = :font_weight, primary_color = :primary_color, logo = :logo, nav_color = :nav_color, updated_at = NOW() WHERE id = :id";
         $params = [
             'font' => $front->getFont(),
             'font_weight' => $front->getFontWeight(),

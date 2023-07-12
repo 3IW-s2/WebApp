@@ -1,113 +1,112 @@
 <?php 
 namespace App\Controllers\Api;
 
-use App\Repositories\UserRepository;
-use App\Models\User;
+
+use App\Core\Configuration\Configuration;
 use App\Core\Error;
-use App\Core\httpError;
+use App\Models\User;
+use App\Repositories\UserRepository;
 
+class ApiUserController extends Api{
 
-class ApiUserController
-{
-    private $httpError;
-    private $host;
-    private $userRepo;
+    private User $user;
+    private UserRepository $repository;
 
     public function __construct()
     {
-        $this->httpError = new httpError();
-        $this->loadConfig();
-        $this->httpError->httpOriginError($this->host);
-        $this->userRepo = new UserRepository();
+        parent::__construct();
+        $this->user = new User(new Error());
+        // Default values (role 5 = user, status 0 = inactive)
+        $this->user->setRole(5);
+        $this->user->setStatus(0);
+
+        $this->repository = new UserRepository();
     }
 
-    private function loadConfig() {
-        $configFile = __DIR__ . '/../../config.yml';
-        $config = yaml_parse_file($configFile);
-
-        $this->host = $config['origin'];
-    }
-
-
-    public function getUser()
-    {   
-  
-        $this->httpError->httpError("GET");
-        if(isset($_GET['email'])){
-            $user = new UserRepository();
-            $userModel = new User( new Error());
-            $userModel->setEmail($_GET['email']);
-            $user = $user->findByEmail($userModel);
-            if(empty($user)){
-                http_response_code(404);
-                echo json_encode(['message' => 'User not found']);
-                exit();
-            }
-            echo json_encode($user);
-            exit();
+    /**
+     * Method used in installer to create the first user (as admin)
+     * @return void
+     */
+    private function initialize(): void {
+        if(!isset($_POST["appName"])){
+            $this->jsonResponse(["message" => "Le nom de l'application est obligatoire", "success" => false], 400);
         }
-        $user = new UserRepository();
-        $users = $user->findAll();       
-        echo json_encode($users);
+        Configuration::setConfig("APP_NAME", "\"".$_POST["appName"]."\"");
+
+        $this->user->setRole(1);
+        $this->user->setStatus(1);
+    }
+    public function get(){
+        $this->jsonResponse(['message' => 'GET Method not implemented'], 405);
     }
 
-    public function deleteUser()
-    {   
-            $this->httpError->httpError("DELETE");
-            http_response_code(207);
-            $user = new UserRepository();
-            $userModel = new User( new Error());
-            $userModel->setId($_GET['id']);
-            $user->deleteUserByIdHard($userModel);
-    } 
-
-    public function addUser()
+    public function post()
     {
-        $this->httpError->httpError("POST");
-        $userAll = $this->userRepo->findAll();
-        $userModel = new User( new Error());
-        if(empty($userAll)){
-            $userModel->setEmail($_POST['email']);
-            $userModel->setFirstname($_POST['firstname']);
-            $userModel->setLastname($_POST['lastname']);
-            $userModel->setRole(intval("1"));
-            $userModel->setStatus("1");
-            $userModel->setPwd($_POST['password']);
-            $this->userRepo->addUserByApi($userModel);
-            exit();
-        }
-        foreach($userAll as $user){
-            $email = $user['email'];
-            if($email === $_POST['email']){
-                http_response_code(409);
-                echo json_encode(['message' => 'User already exist']);
-                exit();
-            }
-        }
-        $userModel->setEmail($_POST['email']);
-        $userModel->setFirstname($_POST['firstname']);
-        $userModel->setLastname($_POST['lastname']);
-        $userModel->setRole(intval("5"));
-        $userModel->setStatus("1");
-        $userModel->setPwd($_POST['password']);
-        $this->userRepo->addUserByApi($userModel);
-        echo(json_encode(['message' => 'User added']));
+        $users = $this->repository->findAll();
 
-       
+        /*
+         * If there is no user in the database
+         * Initialize the first user as admin (installer)
+         */
+        if (empty($users)) {
+            $this->initialize();
+        }
+
+        if(count($_POST) !== (5 + (int)empty($users))){
+            $this->jsonResponse(["message" => "Tous les champs sont obligatoires", "success" => false], 400);
+        }
+
+        if(empty($_POST["email"]) ||
+            empty($_POST["firstname"]) ||
+            empty($_POST["lastname"]) ||
+            empty($_POST["password"]) ||
+            empty($_POST["passwordConfirmation"])) {
+            $this->jsonResponse(["message" => "Certains champs sont manquants", "success" => false], 400);
+        }
+
+        extract($_POST);
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $this->jsonResponse(["message" => "L'email n'est pas valide"], 400);
+        }
+
+        if(strlen($password) < 8){
+            $this->jsonResponse(["message" => "Le mot de passe doit contenir au moins 8 caractères", "success" => false], 400);
+        }
+
+        if (!preg_match("#[0-9]+#", $password)) {
+            $this->jsonResponse(["message" => "Le mot de passe doit contenir au moins 1 chiffre", "success" => false], 400);
+        }
+
+        if($password !== $passwordConfirmation) {
+            $this->jsonResponse(["message" => "Les mots de passe ne correspondent pas", "success" => false], 400);
+        }
+
+        $this->user->setEmail($email);
+        $this->user->setFirstname($firstname);
+        $this->user->setLastname($lastname);
+        $this->user->setPwd($password);
+
+        if($this->repository->findByEmail($this->user)){
+            $this->jsonResponse(["message" => "L'utilisateur existe déjà", "success" => false], 400);
+        }
+
+        try{
+            $this->repository->addUserByApi($this->user);
+        } catch (\Exception $e){
+            $this->jsonResponse(["message" => "Une erreur est survenue lors de la création de l'utilisateur", "success" => false], 500);
+        }
+        Configuration::setConfig("INSTALLER_MODE", "false");
+        $this->jsonResponse(["message" => "Utilisateur créé avec succès", "success" => true], 201);
     }
 
-    public function connexion()
+    public function put()
     {
-        $this->httpError->httpError("POST");
-        $userModel = new User( new Error());
-        $userModel->setEmail($_POST['email']);
-        $userModel->setPwd($_POST['password']);
-        $user = $this->userRepo->findByEmail($userModel);
-        if($user && password_verify($_POST['password'], $user['password'])){
-            echo json_encode($user);
-            exit();
-        }
-        http_response_code(401);
-        echo json_encode(['message' => 'User not found']);
+        $this->jsonResponse(['message' => 'PUT Method not implemented'], 405);
+    }
+
+    public function delete()
+    {
+        $this->jsonResponse(['message' => 'DELETE Method not implemented'], 405);
     }
 }

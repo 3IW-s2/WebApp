@@ -59,6 +59,7 @@ class FrontController
                 }
             }
 
+
             $fontRepository->updateFrontManagement($front);
 
             //check if error or success

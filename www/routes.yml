@@ -2,6 +2,14 @@
 #  controller: Main
 #  action: home
 #  verifConnexion: true
+install:
+  controller: Installer
+  action: install
+
+#default:
+#  controller: Main
+#  action: home
+#  verifConnexion: true
 
 profile:
   controller: Main
@@ -246,30 +254,12 @@ admin/image/index:
   security: ROLE:ADMIN
   verifConnexion: true
 
-
 api/user:
   controller:  Api\ApiUserController
-  action: getUser
-  options: [GET, OPTIONS]
-  #apiVerifConnexion: true
+  action: dispatch
+  methods: [GET, POST, PUT, DELETE, OPTIONS]
 
-#api/user:
- # controller:  Api\ApiUserController
- # action: [getUser, deleteUser , addUser , connexion]
- # options: [GET, DELETE , POST , POST ]
-  #apiVerifConnexion: true
-
-api/user/delete:
-  controller:  Api\ApiUserController
-  action: deleteUser
-  options: [DELETE, OPTIONS]
-
-api/user/post:
-  controller:  Api\ApiUserController
-  action: addUser
-  options: [POST, OPTIONS]
-
-api/user/connexion:
-  controller:  Api\ApiUserController
-  action: connexion
-  options: [POST, OPTIONS]
+api/database:
+  controller:  Api\ApiDatabaseController
+  action: dispatch
+  methods: [GET, POST, OPTIONS]

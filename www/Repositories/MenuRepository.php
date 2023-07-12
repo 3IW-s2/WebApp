@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Core\Configuration\DatabaseConfiguration;
 use App\Services\ArticleService;
 use App\Core\Database;
 use App\Models\Menu;
@@ -14,10 +15,11 @@ class MenuRepository
 {
     
         private $db;
-        private $table = "menu";
+        private $table;
     
         public function __construct()
         {
+            $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_".'menu';
             $this->db = Database::getInstance();
         }
     

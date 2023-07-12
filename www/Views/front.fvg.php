@@ -5,13 +5,15 @@ $front = $frontRepository->getFrontManagement();
 
 $newFont = str_replace(' ', '+', $front['font']);
 
+$appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>TIW</title>
+    <title><?= $appConfig["APP_NAME"] ?? "Default app name" ?></title>
     <meta name="description" content="TIW">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
@@ -67,7 +69,6 @@ $newFont = str_replace(' ', '+', $front['font']);
                 <button onclick="window.location.href='/profile'" type = "button" class = "btn position-relative">
                     <i class = "fa fa-user" >      
                     <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"></span>
-                
                     </i>
                 </button>
                 <?php if(isset( $user_admin) && $user_admin == 1):?>
@@ -79,11 +80,6 @@ $newFont = str_replace(' ', '+', $front['font']);
                         </i>
                     </button>
                 <?php endif; ?>
-
-
-     
-            
-              
             </div>
             
 
