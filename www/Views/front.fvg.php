@@ -147,8 +147,8 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
 setInterval(function() {
   var token = <?= json_encode(strtotime($_SESSION['expire_token'])) ?>;
   var now = Math.floor(Date.now() / 1000); // Obtient le timestamp actuel en secondes
-  console.log(token);
-  console.log(now);
+  //console.log(token);
+  //console.log(now);
   if (token < now) {
     window.location.href = "/logout";
   }
