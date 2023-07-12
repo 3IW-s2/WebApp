@@ -15,14 +15,14 @@
 
             <?php
             $currentPage = $_GET['page'] ?? 1; // Récupère la page courante depuis l'URL, ou utilise la page 1 par défaut
-            $articlesPerPage = $numberArticle; // Nombre d'articles à afficher par page
+            $articlesPerPage = $admin_preferences; // Nombre d'articles à afficher par page
             $startIndex = ($currentPage - 1) * $articlesPerPage;
             $articlesToShow = array_slice($articles, $startIndex, $articlesPerPage);
             ?>
             <?php if(isset( $user_admin) && $user_admin == 1):?>
                 <form action="" method="post">
                     <label for="numberArticle">Nombre d'article par page</label>
-                    <input type="number" name="numberArticle" id="numberArticle" value="<?= $numberArticle ?>">
+                    <input type="number" name="numberArticle" id="numberArticle" value="<?= $admin_preferences ?>">
                     <input type="submit" value="number" name="number">
                 </form>
              <?php endif; ?>    

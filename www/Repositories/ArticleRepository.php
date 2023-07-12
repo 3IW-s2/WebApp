@@ -20,6 +20,7 @@ class ArticleRepository
     public function __construct()
     {
         $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_"."articles";
+        $this->admin_preferences = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_"."admin_preferences";
         $this->db = Database::getInstance();
     }
 
@@ -125,6 +126,22 @@ class ArticleRepository
         $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $article;
+    }
+
+    public function getPreferences(){
+        $query = "SELECT number_article FROM {$this->admin_preferences} WHERE id = 1 ";
+        $stmt = $this->db->query($query);
+        $preferences = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $preferences;
+    }
+
+    public function updatePreferences($number_article){
+        $query = "UPDATE {$this->admin_preferences} SET number_article = :number_article WHERE id = 1";
+        $params = [
+            'number_article' => $number_article,
+        ];
+        $stmt = $this->db->query($query , $params);
     }
 
 }

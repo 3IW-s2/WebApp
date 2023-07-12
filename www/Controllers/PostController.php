@@ -41,13 +41,16 @@ class PostController  Extends BaseController
             $articles = $this->article->findAllActive();
             $view->assign('articles', $articles);
             $user_admin = $this->assignMenuVariables()['user_admin'];
-            $numberArticle = $this->assignMenuVariables()['numberArticle'];
+            $ArticleService = new ArticleService();
+            $admin_preferences = $ArticleService->getPreferences();
+            
             if(isset($_POST['numberArticle'])){
-                $_SESSION['numberArticle'] = $_POST['numberArticle'];
+                $ArticleServiceNew = new ArticleService();
+                $ArticleServiceNew->updatePreferences($_POST['numberArticle']);
+                $admin_preferences = $ArticleServiceNew->getPreferences();
             }
             $view->assign("user_admin", $user_admin);
-            $numberArticle = $_SESSION['numberArticle'] ?? 3;
-            $view->assign("numberArticle", $numberArticle);
+            $view->assign("admin_preferences", $admin_preferences['number_article']);
            
             $error = new Error();
             $commentService = new CommentService($error);
@@ -67,12 +70,15 @@ class PostController  Extends BaseController
         $view->assign("sousmenus", $menuss[1]);
         $user_admin = $this->assignMenuVariables()['user_admin'];
         $view->assign("user_admin", $user_admin);
-        $numberArticle = $this->assignMenuVariables()['numberArticle'];
+        $ArticleService = new ArticleService();
+        $admin_preferences = $ArticleService->getPreferences();
         if(isset($_POST['numberArticle'])){
-            $_SESSION['numberArticle'] = $_POST['numberArticle'];
+            $ArticleServiceNew = new ArticleService();
+            $ArticleServiceNew->updatePreferences($_POST['numberArticle']);
+            $admin_preferences = $ArticleServiceNew->getPreferences();
         }
-        $numberArticle = $_SESSION['numberArticle'] ?? 3;
-        $view->assign("numberArticle", $numberArticle);
+        $view->assign("admin_preferences", $admin_preferences['number_article']);
+
 
         $articles = $this->article->findAllActive();
         $view->assign('articles', $articles);

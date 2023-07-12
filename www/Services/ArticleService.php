@@ -80,4 +80,14 @@ class ArticleService
          return $this->articleRepository->getArticleById($article);
    }
 
+   public function getPreferences()
+    {
+         return $this->articleRepository->getPreferences();
+    }
+   
+    public function updatePreferences( $number_article)
+    {
+        $this->articleRepository->updatePreferences($number_article);
+    }
+
 }

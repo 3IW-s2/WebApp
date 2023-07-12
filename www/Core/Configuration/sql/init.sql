@@ -9,6 +9,14 @@ CREATE TABLE {DB_PREFIX}users (
     updated_at TIMESTAMP NOT NULL
 );
 
+CREATE TABLE {DB_PREFIX}admin_preferences (
+    id SERIAL PRIMARY KEY,
+    number_article INT NOT NULL DEFAULT 3,
+);
+
+INSERT INTO {DB_PREFIX}admin_preferences (number_article)
+VALUES (3);
+
 CREATE TABLE {DB_PREFIX}posts(
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -118,3 +126,4 @@ CREATE TABLE {DB_PREFIX}front (
 
 
 INSERT INTO {DB_PREFIX}front (font, font_weight, primary_color, nav_color, logo, created_at, updated_at) VALUES ('Arial', 'light', '#000000', '#000000' , 'logo.png', NOW(), NOW());
+
