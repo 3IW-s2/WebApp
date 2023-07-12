@@ -46,9 +46,12 @@ class Router
         if (empty($this->routes[$uri])) {
             // Vérification du slug
             $foundRoute = false;
-
+            //ici il parcours et verifie si il y a un slug dans les routes du type /{slug} donc ça peut etre
+            // /article/{slug} ou /category/{slug} ou /user/{slug} ou /comment/{slug}
+            //si il y a un slug il le remplace par (.+) qui est une expression régulière qui veut dire n'importe quel caractère
+            //et si il trouve une route qui correspond à l'uri il la stocke dans $uri et dans $_GET['slug'] le slug
             foreach ($this->routes as $route => $params) {
-                if (strpos($route, '{slug}') !== false) {
+                if(strpos($route, '/{slug}') !== false){
                     $pattern = str_replace('{slug}', '(.+)', $route);
                     if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
                         $uri = $route;
@@ -58,6 +61,22 @@ class Router
                     }
                 }
             }
+            
+            // Si aucune route spécifique pour les articles n'a été trouvée, vérifier les routes génériques
+            if (!$foundRoute && empty($this->routes[$uri])) {
+                foreach ($this->routes as $route => $params) {
+                    if (strpos($route, '{slug}') !== false) {
+                        $pattern = str_replace('{slug}', '(.+)', $route);
+                        if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
+                            $uri = $route;
+                            $_GET['slug'] = $matches[1]; 
+                            $foundRoute = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            
 
             if (!$foundRoute) {
 
