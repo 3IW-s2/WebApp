@@ -55,6 +55,7 @@
                         ?>
                     
                     <?php endif ?>
+                    <br><br><br><br><br>
                     <?php  if($posts['image_path'] == "on") : ?>
                         <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">

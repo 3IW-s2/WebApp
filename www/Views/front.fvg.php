@@ -15,6 +15,7 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
     <meta charset="UTF-8">
     <title><?= $appConfig["APP_NAME"] ?? "Default app name" ?></title>
     <meta name="description" content="TIW">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <!-- bootstrap css -->
@@ -142,5 +143,16 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
     <?php include $this->view;?>
 
 </body>
+<script>
+setInterval(function() {
+  var token = <?= json_encode(strtotime($_SESSION['expire_token'])) ?>;
+  var now = Math.floor(Date.now() / 1000); // Obtient le timestamp actuel en secondes
+  console.log(token);
+  console.log(now);
+  if (token < now) {
+    window.location.href = "/logout";
+  }
+}, 300000); // Exécute toutes les 5 minutes (300 000 millisecondes)
 
+</script>
 </html>

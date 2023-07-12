@@ -57,6 +57,7 @@
     </div>
 </section>
 
+<br><br><br><br><br>
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
         <li class="page-item <?= ($currentPage == 1) ? 'disabled' : '' ?>">

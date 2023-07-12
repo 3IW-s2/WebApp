@@ -75,9 +75,15 @@ class Security extends Database
         $newTimestamp = strtotime('+2 hours', $timestamp);
         $date_now = date('Y-m-d H:i:s', $newTimestamp);
      
+       /*  var_dump($token);
+        var_dump($date_now);
+        var_dump(time() + (70 * 120));
+        var_dump( date('Y-m-d H:i:s' ,time() + (60 * 120)));
+        var_dump( date('Y-m-d H:i:s' ,$expirationTimestamp));
 
+        var_dump($expirationTimestamp);die; */
 
-        if($expirationTimestamp > time()) {
+        if($expirationTimestamp > (time() + (60 * 120))) {
 
             if($_SESSION["token_update_time"] === $date_now) {
             
