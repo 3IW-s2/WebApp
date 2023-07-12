@@ -9,14 +9,12 @@ export default class InstallerForm extends Component{
         this.description = props.description ?? "Description";
         this.inputs = props.inputs ?? [];
 
+        this.actionDescription = props.actionDescription ?? "";
+
         // backLink isn't required
         this.backLink = props.backLink ?? null;
 
-        this.nextLink = {
-            class: props.nextLink?.class ?? "",
-            title: props.nextLink?.title ?? "Suivant",
-            link: props.nextLink?.link ?? null,
-        }
+        this.nextLink = props.nextLink ?? null;
     }
 
     render() {
@@ -46,7 +44,24 @@ export default class InstallerForm extends Component{
                                         class: "flex-column form-container--content"
                                     }
                                 },
-                            ]
+                            ],
+                            attributes: {
+                                class: "flex-column"
+                            }
+                        },
+                        {
+                            type: "p",
+                            children: [this.actionDescription],
+                            attributes: {
+                                id: "action-description"
+                            }
+                        },
+                        {
+                            type: "p",
+                            children: [],
+                            attributes: {
+                                id: "error-message"
+                            }
                         },
                         {
                             type: "div",
@@ -67,22 +82,26 @@ export default class InstallerForm extends Component{
                                         }
                                     }
                                 }).render() : "",
-                                new Link({
-                                    class: this.nextLink.class,
-                                    title: this.nextLink.title,
-                                    link: this.nextLink.link,
-                                    click: {
-                                        handler: (event) => {
-                                            this.inputs.forEach(input => {
-                                                const inputDom = document.querySelector(`[data-identifier='${input.identifier}']`).querySelector("input");
-                                                localStorage.setItem(inputDom.name, inputDom.value);
-                                            });
+                                // check if this;nextLink is a component or not
+                                this.nextLink instanceof Component
+                                    ? this.nextLink.render()
+                                    : new Link({
+                                        class: this.nextLink.class,
+                                        title: this.nextLink.title,
+                                        link: this.nextLink.link,
+                                        click: {
+                                            handler: (event) => {
+                                                event.preventDefault();
 
-                                            event.preventDefault();
-                                            history.pushState({}, undefined, this.nextLink.link);
+                                                this.inputs.forEach(input => {
+                                                    const inputDom = document.querySelector(`[data-identifier='${input.identifier}']`).querySelector("input");
+                                                    localStorage.setItem(inputDom.name, inputDom.value);
+                                                });
+
+                                                history.pushState({}, undefined, this.nextLink.link);
+                                            }
                                         }
-                                    }
-                                }).render(),
+                                    }).render(),
                             ],
                             attributes: {
                                 class: "installer-button-container"
@@ -101,4 +120,5 @@ export default class InstallerForm extends Component{
             }
         }
     }
+
 }

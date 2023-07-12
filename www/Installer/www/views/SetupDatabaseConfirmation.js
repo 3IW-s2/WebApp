@@ -4,7 +4,7 @@ export default class setupDatabaseConfirmation extends InstallerForm{
 
     constructor() {
         super({
-            title: "Installation de la base de données confirmée",
+            title: "Configuration de la base de données confirmée",
             description: "Cliquer sur le bouton ci-dessous pour continuer l'installation.",
             backLink: {
                 class: "installer-button",

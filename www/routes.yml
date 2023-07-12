@@ -265,4 +265,9 @@ api/user:
   action: dispatch
   methods: [GET, POST, PUT, DELETE, OPTIONS]
 
+api/database:
+  controller:  Api\ApiDatabaseController
+  action: dispatch
+  methods: [GET, POST, OPTIONS]
+
 

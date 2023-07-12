@@ -2,6 +2,7 @@
 namespace App\Controllers\Api;
 
 
+use App\Core\Configuration\Configuration;
 use App\Core\Error;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -27,6 +28,11 @@ class ApiUserController extends Api{
      * @return void
      */
     private function initialize(): void {
+        if(!isset($_POST["appName"])){
+            $this->jsonResponse(["message" => "Le nom de l'application est obligatoire", "success" => false], 400);
+        }
+        Configuration::setConfig("APP_NAME", "\"".$_POST["appName"]."\"");
+
         $this->user->setRole(1);
         $this->user->setStatus(1);
     }
@@ -46,16 +52,16 @@ class ApiUserController extends Api{
             $this->initialize();
         }
 
-        if(count($_POST) !== 5){
-            $this->jsonResponse(["message" => "Tous les champs sont obligatoires"], 400);
+        if(count($_POST) !== (5 + (int)empty($users))){
+            $this->jsonResponse(["message" => "Tous les champs sont obligatoires", "success" => false], 400);
         }
 
         if(empty($_POST["email"]) ||
             empty($_POST["firstname"]) ||
             empty($_POST["lastname"]) ||
             empty($_POST["password"]) ||
-            empty($_POST["password_confirm"])) {
-            $this->jsonResponse(["message" => "Certains champs sont manquants"], 400);
+            empty($_POST["passwordConfirmation"])) {
+            $this->jsonResponse(["message" => "Certains champs sont manquants", "success" => false], 400);
         }
 
         extract($_POST);
@@ -65,15 +71,15 @@ class ApiUserController extends Api{
         }
 
         if(strlen($password) < 8){
-            $this->jsonResponse(["message" => "Le mot de passe doit contenir au moins 8 caractères"], 400);
+            $this->jsonResponse(["message" => "Le mot de passe doit contenir au moins 8 caractères", "success" => false], 400);
         }
 
         if (!preg_match("#[0-9]+#", $password)) {
-            $this->jsonResponse(["message" => "Le mot de passe doit contenir au moins 1 chiffre"], 400);
+            $this->jsonResponse(["message" => "Le mot de passe doit contenir au moins 1 chiffre", "success" => false], 400);
         }
 
-        if($password !== $password_confirm) {
-            $this->jsonResponse(["message" => "Les mots de passe ne correspondent pas"], 400);
+        if($password !== $passwordConfirmation) {
+            $this->jsonResponse(["message" => "Les mots de passe ne correspondent pas", "success" => false], 400);
         }
 
         $this->user->setEmail($email);
@@ -82,15 +88,16 @@ class ApiUserController extends Api{
         $this->user->setPwd($password);
 
         if($this->repository->findByEmail($this->user)){
-            $this->jsonResponse(["message" => "L'utilisateur existe déjà"], 400);
+            $this->jsonResponse(["message" => "L'utilisateur existe déjà", "success" => false], 400);
         }
 
         try{
             $this->repository->addUserByApi($this->user);
         } catch (\Exception $e){
-            $this->jsonResponse(["message" => "Une erreur est survenue lors de la création de l'utilisateur",], 500);
+            $this->jsonResponse(["message" => "Une erreur est survenue lors de la création de l'utilisateur", "success" => false], 500);
         }
-        $this->jsonResponse(["message" => "Utilisateur créé avec succès"], 201);
+        Configuration::setConfig("INSTALLER_MODE", "false");
+        $this->jsonResponse(["message" => "Utilisateur créé avec succès", "success" => true], 201);
     }
 
     public function put()

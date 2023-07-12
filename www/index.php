@@ -1,8 +1,9 @@
 <?php
 
 namespace App;
+use App\Controllers\Installer;
 use App\Core\Router;
-use App\Repositories\UserRepository;
+use App\Core\View;
 
 session_start();
 $timestamp = time();
@@ -45,13 +46,27 @@ if (!file_exists("routes.yml")) {
 
 $routes = yaml_parse_file("routes.yml");
 
-$router = new Router($routes);
+$needInstall = Installer::checkNeedInstall();
 
-$userRepository = new UserRepository();
-$users = $userRepository->findAll();
-if (empty($users)) {
-    $router->handleRequest("install");
-}else{
-    $router->handleRequest($uri);
+if($needInstall["database"] && !$needInstall["installer_mode"]){
+    new View("Auth/500" , "error");
+    die();
 }
+
+$router = new Router($routes, $needInstall["installer_mode"]);
+
+$installerRoutes = [
+    "/api/database",
+    "/api/user"
+];
+
+if(($needInstall["database"] || $needInstall["users"]) && $needInstall["installer_mode"]){
+    if(!in_array($uri, $installerRoutes, true)){
+        $uri = "install";
+    }
+    $isInstalling = true;
+}
+
+$router->handleRequest($uri);
+
 

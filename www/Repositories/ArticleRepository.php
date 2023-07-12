@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Core\Configuration\DatabaseConfiguration;
 use App\Services\ArticleService;
 use App\Core\Database;
 use App\Models\Article;
@@ -14,10 +15,11 @@ class ArticleRepository
 {
 
     private $db;
-    private $table = "articles";
+    private $table;
 
     public function __construct()
     {
+        $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_"."articles";
         $this->db = Database::getInstance();
     }
 

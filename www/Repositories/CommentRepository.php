@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Core\Configuration\DatabaseConfiguration;
 use App\Services\CommentService;
 use App\Models\Article;
 use App\Core\Database;
@@ -14,11 +15,14 @@ class CommentRepository extends Database
 {
     private $error;
     private $db;
-    private $table = 'comments';
-    private $article_table = 'articles';
+    private $table;
+    private $article_table;
     public function __construct()
     {
+        $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_"."comments";
+        $this->article_table = $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_"."articles";
         $this->db = Database::getInstance();
+
         $this->error = new Error();
     }
 

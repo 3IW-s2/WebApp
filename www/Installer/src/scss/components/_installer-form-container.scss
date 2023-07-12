@@ -1,9 +1,10 @@
 .form-container{
   justify-content:space-between;
-  height: 580px;
+  height: 650px;
 
   &--content{
-    height: 80%;
+    height: 360px;
+    min-height: 360px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
