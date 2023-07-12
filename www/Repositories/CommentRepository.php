@@ -20,7 +20,7 @@ class CommentRepository extends Database
     public function __construct()
     {
         $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_"."comments";
-        $this->article_table = $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_"."articles";
+        $this->article_table  = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_"."articles";
         $this->db = Database::getInstance();
 
         $this->error = new Error();
@@ -68,6 +68,7 @@ class CommentRepository extends Database
         ];
         $statement = $this->db->query($query_1, $params);
         $articleId = $statement->fetchAll(PDO::FETCH_ASSOC);
+
         $query_2 = "SELECT * FROM {$this->table} WHERE  article_id = :article_id AND status BETWEEN '10' AND '20'";
         $params = [
             'article_id' => $articleId[0]['id']
