@@ -43,9 +43,10 @@ class PostController  Extends BaseController
             $user_admin = $this->assignMenuVariables()['user_admin'];
             $numberArticle = $this->assignMenuVariables()['numberArticle'];
             if(isset($_POST['numberArticle'])){
-                $numberArticle = $_POST['numberArticle'];
+                $_SESSION['numberArticle'] = $_POST['numberArticle'];
             }
             $view->assign("user_admin", $user_admin);
+            $numberArticle = $_SESSION['numberArticle'] ?? 3;
             $view->assign("numberArticle", $numberArticle);
            
             $error = new Error();
@@ -68,8 +69,9 @@ class PostController  Extends BaseController
         $view->assign("user_admin", $user_admin);
         $numberArticle = $this->assignMenuVariables()['numberArticle'];
         if(isset($_POST['numberArticle'])){
-            $numberArticle = $_POST['numberArticle'];
+            $_SESSION['numberArticle'] = $_POST['numberArticle'];
         }
+        $numberArticle = $_SESSION['numberArticle'] ?? 3;
         $view->assign("numberArticle", $numberArticle);
 
         $articles = $this->article->findAllActive();
