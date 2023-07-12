@@ -65,6 +65,8 @@ class Router
                 //$error = new Error();
                 //$error->setCode(404);
                 //$error->addError("Page introuvable");
+                $error = new Error();
+                $error->setCode(404);
                 $view = new View("Auth/404" , "error" );
                 exit();
             }
@@ -81,8 +83,7 @@ class Router
         $editor = $this->routes[$uri]["editor"]?? null;
         $methods = $this->routes[$uri]["methods"]?? null;
 
-        
-
+      
 
         if(!$this->isInstalling){
             if($editor !== null && $editor === false  &&  Security::editor() ){
@@ -91,8 +92,11 @@ class Router
             }
 
             if ($security !== null && !Security::checkSecurity($security)) {
-                header("Location: /error");
-                exit();
+                 //header("Location: /error");
+                  $error = new Error();
+                  $error->setCode(404);
+                  $view = new View("Auth/404" , "error" );
+                  exit();
             }
 
             if ($verifConnexion !== null && $verifConnexion === true && !Security::checkToken()) {

@@ -28,7 +28,9 @@
                                     <div class="alert alert-danger">
                                         <p><?php echo $error; ?></p>
                                     </div>
-                                    <?php endif; ?>
+                                    <?php endif; 
+                                    $menu["url"]= substr($menu["url"], 1);
+                                    ?>
                                         <div class="form-group">
                                             <label for="email">parent_id</label>
                                             <input type="text" name="parent_id" id="parent_id" class="form-control"  value="<?= $menu["parent_id"]?>" />

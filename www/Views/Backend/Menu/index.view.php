@@ -43,19 +43,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($menus as $menu) : ?>
+                                <?php foreach ($menus as $menu) :
+                                        $menu["status"] = ($menu["status"] == 1) ? "published" : "pending";
+                                        //n'affiche pas le premier charactère de la chaine $menu['url']
+                                        $menu["url"] = substr($menu["url"], 1);
+                                     ?>
                                     <tr>
                                         <th scope="row"><?= $menu["menu_id"] ?></th>
                                         <td><?= $menu["parent_id"]?></td>
                                         <td><?= $menu["titre"] ?></td>
+                                        
                                         <td><?= $menu["url"]?></td>
                                         <td><?= $menu["status"]?></td>
                                        <!--  <td></td> -->
                                         <td>
                                             <a href="edit?id=<?= $menu['menu_id'] ?>" class="btn btn-primary">Edit</a>
                                             <a href="delete?id=<?= $menu['menu_id'] ?>" class="btn btn-danger">Delete</a>
-                                            <a href="publish?id=<?= $menu['menu_id'] ?>" class="btn btn-success">Publish</a>
-                                            <a href="pending?id=<?= $menu['menu_id'] ?>" class="btn btn-warning">Pending</a>
+                                            <?php if ($menu["status"] == "published") : ?>
+                                                <a href="pending?id=<?= $menu['menu_id'] ?>" class="btn btn-warning">Pending</a>
+                                            <?php else : ?>
+                                                <a href="publish?id=<?= $menu['menu_id'] ?>" class="btn btn-success">Publish</a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

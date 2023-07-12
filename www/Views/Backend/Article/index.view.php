@@ -46,6 +46,7 @@
                             <tbody>
                                 <?php foreach ($articles as $article) : 
                                     $article["content"] = substr($article["content"], 0, 20);
+                                    $article["status"] = ($article["status"] == 1) ? "Published" : "Pending";
 
                                     ?>
                                     <tr>
@@ -59,8 +60,12 @@
                                         <td>
                                             <a href="edit?id=<?= $article['id'] ?>" class="btn btn-primary">Edit</a>
                                             <a href="delete?id=<?= $article['id'] ?>" class="btn btn-danger">Delete</a>
-                                            <a href="publish?id=<?= $article['id'] ?>" class="btn btn-success">Publish</a>
-                                            <a href="pending?id=<?= $article['id'] ?>" class="btn btn-warning">Pending</a>
+                                           
+                                            <?php if($article["status"] == "Published") : ?>
+                                                <a href="pending?id=<?= $article['id'] ?>" class="btn btn-warning">Pending</a>
+                                            <?php else : ?>
+                                                <a href="publish?id=<?= $article['id'] ?>" class="btn btn-success">Publish</a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

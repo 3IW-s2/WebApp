@@ -25,7 +25,7 @@ class CommentController
 
     public function DeleteComment()
     {
-        $comment = new Comment();
+        $comment = new Comment( $this->error);
         $comment->setId($_GET['id']);
         $commentService = new CommentService( $this->error);
         $commentService->deleteComment($comment);
