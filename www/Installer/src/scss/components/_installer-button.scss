@@ -1,0 +1,15 @@
+.installer-button{
+  background: #2d2d2d;
+  padding: 8px;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+}
+
+.installer-button-container{
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}

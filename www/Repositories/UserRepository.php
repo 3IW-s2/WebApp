@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Core\Configuration\DatabaseConfiguration;
 use App\Services\UserService;
 use App\Core\Database;
 use App\Models\User;
@@ -9,14 +10,16 @@ use App\Core\Mail;
 use App\Core\Error;
 use PDO;
 use Exception;
+use PDOException;
 
 class  UserRepository  extends Database 
 {
     private $db;
-    private $table = 'users';
+    private $table;
 
     public function __construct()
     {
+        $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_"."users";
         $this->db = Database::getInstance();
     }
 
@@ -294,7 +297,7 @@ class  UserRepository  extends Database
 
     public function allUser (): array
     {
-        $query = "SELECT * FROM users";
+        $query = "SELECT * FROM {$this->table}";
         $statement = $this->db->query($query);
 
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -360,23 +363,31 @@ class  UserRepository  extends Database
        
     }
 
+    /**
+     * @throws Exception
+     */
     public function addUserByApi(User $user)
     {
             
-            $query = "INSERT INTO {$this->table} (firstname, lastname, email, password, role, status,  created_at, updated_at) 
-                    VALUES (:firstname, :lastname, :email, :password, :role, :status,  NOW(), NOW())";
-            $params = [
-                'firstname' => $user->getFirstname(),
-                'lastname' => $user->getLastname(),
-                'email' => $user->getEmail(),
-                'password' => $user->getPwd(),
-                'role' =>  intval($user->getRole()),
-                'status' => $user->getStatus()
+        $query = "INSERT INTO {$this->table} (firstname, lastname, email, password, role, status,  created_at, updated_at) 
+                VALUES (:firstname, :lastname, :email, :password, :role, :status,  NOW(), NOW())";
+        $params = [
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+            'email' => $user->getEmail(),
+            'password' => $user->getPwd(),
+            'role' => $user->getRole(),
+            'status' => $user->getStatus() === 0
+                ? null
+                : $user->getStatus()
+        ];
 
-            
-            ];
+        try {
             $statement = $this->db->query($query, $params);
             $user = $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new \RuntimeException($e->getMessage());
+        }
         
     }
 

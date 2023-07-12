@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 
+use App\Core\Configuration\DatabaseConfiguration;
 use App\Services\PostService;
 use App\Core\Database;
 use App\Models\Post;
@@ -15,10 +16,11 @@ class  PostRepository  extends Database
 {
 
     private $db;
-    private $table = 'posts';
+    private $table;
 
     public function __construct()
     {
+        $this->table = DatabaseConfiguration::getDatabaseConfig()["DB_PREFIX"]."_".'posts';
         $this->db = Database::getInstance();
     }
 
@@ -26,7 +28,7 @@ class  PostRepository  extends Database
     public function getAllPosts(): array
     {    
 
-        $query = "SELECT * FROM posts";
+        $query = "SELECT * FROM {$this->table}";
         $statement = $this->db->query($query);
         $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -45,7 +47,7 @@ class  PostRepository  extends Database
     public function getAllSlug()
     {    
 
-        $query = "SELECT slug FROM posts";
+        $query = "SELECT slug FROM {$this->table}";
         $statement = $this->db->query($query);
         $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -53,7 +55,7 @@ class  PostRepository  extends Database
     }
     public function getPostBySlugBy(Post $post)
     {  
-            $query = "SELECT * FROM posts WHERE slug = :slug";
+            $query = "SELECT * FROM {$this->table} WHERE slug = :slug";
             $params = [
                 'slug' => $post->getSlug()
             ];
@@ -66,7 +68,7 @@ class  PostRepository  extends Database
     public function getPostBySlugVerif(Post $post)
     {  
 
-        $query = "SELECT * FROM posts WHERE slug = :slug ";
+        $query = "SELECT * FROM {$this->table} WHERE slug = :slug ";
         $params = [
             'slug' => $post->getSlug()
         ];
@@ -83,7 +85,7 @@ class  PostRepository  extends Database
     public function getPostBySlug(Post $post)
     {  
 
-        $query = "SELECT * FROM posts WHERE slug = :slug AND status = '1'";
+        $query = "SELECT * FROM {$this->table} WHERE slug = :slug AND status = '1'";
         $params = [
             'slug' => $post->getSlug()
         ];
@@ -100,7 +102,7 @@ class  PostRepository  extends Database
     public function getPostById(Post $post)
     {
 
-        $query = "SELECT * FROM posts WHERE id = :id";
+        $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $params = [
             'id' => $post->getId()
         ];
@@ -113,7 +115,7 @@ class  PostRepository  extends Database
 
     public function DetetePostById(Post $post)
     {
-        $query = "DELETE FROM posts WHERE id = :id";
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
         $params = [
             'id' => $post->getId()
         ];
@@ -124,7 +126,8 @@ class  PostRepository  extends Database
     public function AddPost(Post $post)
     {
 
-        $query = "INSERT INTO posts (/* title, */ author ,content, status, slug ,image_path) VALUES (/* :title, */ :author , :content, :status, :slug, :image_path)";
+
+        $query = "INSERT INTO {$this->table} (/* title, */ author ,content, status, slug,image_path) VALUES (/* :title, */ :author , :content, :status, :slug, :image_path)";
         $params = [
             //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
@@ -139,7 +142,7 @@ class  PostRepository  extends Database
     public function updatePost(Post $post)
     {
 
-        $query = "UPDATE posts SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug , image_path = :image_path WHERE id = :id";
+        $query = "UPDATE {$this->table} SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug ,image_path = :image_path WHERE id = :id";
         $params = [
             //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
@@ -156,7 +159,7 @@ class  PostRepository  extends Database
     public function pendingPost(Post $post)
     {
 
-        $query = "UPDATE posts SET status = '5' WHERE id = :id";
+        $query = "UPDATE {$this->table} SET status = '5' WHERE id = :id";
         $params = [
             'id' => $post->getId()
         ];
@@ -166,7 +169,7 @@ class  PostRepository  extends Database
     public function publishPost(Post $post)
     {
 
-        $query = "UPDATE posts SET status = '1' WHERE id = :id";
+        $query = "UPDATE {$this->table} SET status = '1' WHERE id = :id";
         $params = [
             'id' => $post->getId()
         ];
