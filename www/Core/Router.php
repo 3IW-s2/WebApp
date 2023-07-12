@@ -62,6 +62,8 @@ class Router
                 //$error = new Error();
                 //$error->setCode(404);
                 //$error->addError("Page introuvable");
+                $error = new Error();
+                $error->setCode(404);
                 $view = new View("Auth/404" , "error" );
                 exit();
             }
@@ -88,7 +90,10 @@ class Router
         }
          
         if ($security !== null && !Security::checkSecurity($security)) {
-            header("Location: /error");
+            //header("Location: /error");
+            $error = new Error();
+            $error->setCode(404);
+            $view = new View("Auth/404" , "error" );
             exit();
         }
 
