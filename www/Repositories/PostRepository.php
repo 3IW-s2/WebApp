@@ -37,7 +37,7 @@ class  PostRepository  extends Database
 
     public function getAllPostsActive()
     {
-        $query = "SELECT * FROM posts WHERE status = '1' ";
+        $query = "SELECT * FROM {$this->table} WHERE status = '1' ";
         $statement = $this->db->query($query);
         $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
