@@ -116,8 +116,8 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
                         foreach($sousmenus as $sousmenu){
                             if($sousmenu['parent_id'] == $menu['menu_id']){
                                 //affiche le menu auquel il appartient et met le en majuscule et son lien aussi
-                                echo"<li><a class='dropdown-item' style='text-transform: uppercase;' href='/post{$menu['url']}'>{$menu['titre']}</a></li>";
-                                echo "<li><a class='dropdown-item' href='/post{$sousmenu['url']}'>{$sousmenu['titre']}</a></li>";
+                                echo"<li><a class='dropdown-item' style='text-transform: uppercase;' href='{$menu['url']}'>{$menu['titre']}</a></li>";
+                                echo "<li><a class='dropdown-item' href='{$sousmenu['url']}'>{$sousmenu['titre']}</a></li>";
                             }
                         }
                         
@@ -126,7 +126,7 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
                     } else {
                         // Menu sans sous-menus
                         echo "<li class='nav-item px-2 py-2'>";                                 
-                        echo "<a class='nav-link text-uppercase text-dark' href='/post{$menu['url']}'>{$menu['titre']}</a>";
+                        echo "<a class='nav-link text-uppercase text-dark' href='{$menu['url']}'>{$menu['titre']}</a>";
                         echo "</li>";
                     }
                 }

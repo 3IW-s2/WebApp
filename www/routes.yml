@@ -141,7 +141,7 @@ admin/page/publish:
   security: ROLE:ADMIN 
   verifConnexion: true
 
-post/{slug}:
+'{slug}':
   controller: PostController
   action: showPost
   verifConnexion: true

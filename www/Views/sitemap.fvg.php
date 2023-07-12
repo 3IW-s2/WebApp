@@ -9,7 +9,7 @@ foreach ($posts as $page) {
     $url = $xml->addChild('url');
 
     // Ajouter les éléments enfants avec leurs valeurs
-    $url->addChild('loc', "httsp://www.gavinaperano.com/post/{$page['slug']}");
+    $url->addChild('loc', "httsp://www.gavinaperano.com/{$page['slug']}");
     $url->addChild('lastmod', $page['date_created']);
     $url->addChild('changefreq', 'monthly');
     $url->addChild('priority', '0.8');
