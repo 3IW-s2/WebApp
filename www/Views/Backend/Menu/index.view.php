@@ -58,6 +58,7 @@
                                        <!--  <td></td> -->
                                         <td>
                                             <a href="edit?id=<?= $menu['menu_id'] ?>" class="btn btn-primary">Edit</a>
+
                                             <a href="delete?id=<?= $menu['menu_id'] ?>" class="btn btn-danger">Delete</a>
                                             <?php if ($menu["status"] == "published") : ?>
                                                 <a href="pending?id=<?= $menu['menu_id'] ?>" class="btn btn-warning">Pending</a>

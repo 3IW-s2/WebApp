@@ -84,4 +84,9 @@ class MenuService
         return $this->menuRepository->findAllSubMenu( $menu);
     }
 
+    public function getAllSubMenu( Menu $menu)
+    {
+        return $this->menuRepository->getAllSubMenu($menu);
+    }
+
 }

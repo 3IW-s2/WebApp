@@ -143,16 +143,5 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
     <?php include $this->view;?>
 
 </body>
-<script>
-setInterval(function() {
-  var token = <?= json_encode(strtotime($_SESSION['expire_token'])) ?>;
-  var now = Math.floor(Date.now() / 1000); // Obtient le timestamp actuel en secondes
-  //console.log(token);
-  //console.log(now);
-  if (token < now) {
-    window.location.href = "/logout";
-  }
-}, 300000); // Exécute toutes les 5 minutes (300 000 millisecondes)
 
-</script>
 </html>

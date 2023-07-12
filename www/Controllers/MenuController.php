@@ -107,21 +107,45 @@ class MenuController
             $subMenuVerif = $menuServiceVerif->findBySubMenuTitle($menuVerif);
             $menusVerifId = $menusVerif[0]['menu_id'] ?? 0;
             $subMenuVerifId = $subMenuVerif[0]['menu_id'] ?? 0;
-            if( ( (!empty($menusVerif) && !empty($subMenuVerif)) &&($menusVerifId || $subMenuVerifId) == (int)$_GET['id']) || (empty($menusVerif) && empty($subMenuVerif)) ){
+            //var_dump((int)$_POST['parent_id']);die;
+            /* var_dump($menusVerifId);
+            var_dump((int)$_GET['id']);
+            var_dump($menusVerifId  === (int)$_GET['id']);die; */
+            if((int)$_POST['parent_id'] == 0){
 
-                $_POST['url'] = MenuController::urlVerfif($_POST['url']);
-                $menu = new Menu();
-                $menu->setId($_GET['id']);
-                $menu->setTitre($_POST['titre']);
-                $menu->setUrl($_POST['url']);
-                $menu->setParentId((int)$_POST['parent_id']);
-                if((int)$_POST['parent_id'] == 0) {
-                    $menu->setParentId(null);
+                
+                if( (!empty($menusVerif) &&($menusVerifId  == (int)$_GET['id'])) || (empty($menusVerif)) ){
+
+                    $_POST['url'] = MenuController::urlVerfif($_POST['url']);
+                    $menu = new Menu();
+                    $menu->setId($_GET['id']);
+                    $menu->setTitre($_POST['titre']);
+                    $menu->setUrl($_POST['url']);
+                    $menu->setParentId((int)$_POST['parent_id']);
+                    if((int)$_POST['parent_id'] == 0) {
+                        $menu->setParentId(null);
+                    }
+                    $MenuService->updateMenu($menu);
+                    header('Location: /admin/menu/index');
                 }
-                $MenuService->updateMenu($menu);
-                header('Location: /admin/menu/index');
-            }
-            $view->assign('error', "Ce titre ou sous-menu existe déjà");
+            $view->assign('error', "Ce titre  existe déjà");
+            }else{
+                if( (!empty($subMenuVerif) &&($subMenuVerifId  == (int)$_GET['id'])) || (empty($subMenuVerif)) ){
+                    $_POST['url'] = MenuController::urlVerfif($_POST['url']);
+                    $menu = new Menu();
+                    $menu->setId($_GET['id']);
+                    $menu->setTitre($_POST['titre']);
+                    $menu->setUrl($_POST['url']);
+                    $menu->setParentId((int)$_POST['parent_id']);
+                    if((int)$_POST['parent_id'] == 0) {
+                        $menu->setParentId(null);
+                    }
+                    $MenuService->updateMenu($menu);
+                    header('Location: /admin/menu/index');
+                }
+
+                $view->assign('error', "Ce sous-titre existe déjà");
+            } 
         }
     }
 
@@ -146,5 +170,7 @@ class MenuController
             header('Location: /admin/menu/index');
         }
     }
+
+    
 
 }

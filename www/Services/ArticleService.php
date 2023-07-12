@@ -90,4 +90,6 @@ class ArticleService
         $this->articleRepository->updatePreferences($number_article);
     }
 
+   
+
 }
