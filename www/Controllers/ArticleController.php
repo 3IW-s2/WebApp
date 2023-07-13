@@ -160,6 +160,10 @@ class ArticleController  Extends BaseController
         $ArtcileService = new ArticleService();
         $articles = $ArtcileService->findAll();
         $view->assign('articles', $articles);
+
+        $articleTyeService = new ArticleTypeService();
+        $articleTypes = $articleTyeService->findAll();
+        $view->assign('articleTypes', $articleTypes);
     }
 
     public function publishArticle ()

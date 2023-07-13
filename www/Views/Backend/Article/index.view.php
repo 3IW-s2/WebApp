@@ -49,6 +49,11 @@
                                     $article["content"] = substr($article["content"], 0, 20);
                                     $article["status"] = ($article["status"] == 1) ? "Published" : "Pending";
 
+                                       foreach($articleTypes as $type) :
+                                            if($type["id"] == $article["category_id"]) :
+                                                $article["category_id"] = $type["name"];
+                                            endif;
+                                        endforeach;
                                     ?>
                                     <tr>
                                         <th scope="row"><?= $article["id"] ?></th>

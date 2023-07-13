@@ -51,6 +51,12 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($posts as $post) :
+
+                                        foreach($articleTypes as $type) :
+                                            if($type["id"] == $post["category_id"]) :
+                                                $post["category_id"] = $type["name"];
+                                            endif;
+                                        endforeach;
                                     ?>
                                     <div class="modal fade" id="exampleModal<?= $post["id"] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
