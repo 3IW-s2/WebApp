@@ -389,5 +389,32 @@
     });
   </script>
 
+  <script>
+    const ctx2 = document.getElementById('myChart2');
+
+    const data = {
+      labels: ['utilisateurs', 'Posts', 'comments', 'articles'],
+      datasets: [{
+        label: 'statistiques',
+        data: [<?php echo count($users); ?>, <?php echo count($pages); ?>, <?php echo count($comments); ?>, <?php echo count($articles); ?>],
+
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(75, 192, 192)',
+          'rgb(255, 205, 86)',
+          'rgb(201, 203, 207)',
+          'rgb(54, 162, 235)'
+        ]
+      }]
+    };
+    new Chart(ctx2, {
+      type: 'polarArea',
+      data: data,
+      options: {}
+    });
+
+
+  </script>
+
 
   </html>
