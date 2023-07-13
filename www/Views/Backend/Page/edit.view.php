@@ -40,7 +40,15 @@
                                                 <label for="email">slug</label>
                                                 <input type="text" name="slug" id="slug" class="form-control"  value="<?= $posts["slug"]?>" />
                                             </div>
-                                        
+                                            <div class="form-group">
+                                                <label for="articleType">articleType</label>
+                                                <select name="articleType" id="articleType" class="form-control">
+                                                    <option value="">Sélectionnez un type d'article</option> <!-- Option vide par défaut -->
+                                                    <?php foreach($types as $articleType): ?>
+                                                        <option value="<?= $articleType['id'] ?>" <?php if($articleType['id'] == $posts['category_id']) echo 'selected' ?>><?= $articleType['name'] ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
                                             <button type="submit" name="submit" class="btn btn-primary">Register</button>
                                 </form>
 
@@ -80,6 +88,7 @@
                                             <input type="hidden" name="slug" value="<?= $data["slug"] ?>" />
                                             <input type="hidden" name="status" value="<?= $data["status"] ?>" />
                                             <input type="hidden" name="author" value="<?= $data["author"] ?>" />
+                                            <input type="hidden" name="articleType" value="<?= $data["articleType"] ?>" />
                                             <button type="submit" name="submit" class="btn btn-primary">Restore</button>
                                         </form>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal<?= $entry["id"] ?>">

@@ -8,6 +8,7 @@ use App\Services\PostService;
 use App\Repositories\PostRepository;
 use App\Services\ArticleService;
 use App\Services\CommentService;
+use App\Services\ArticleTypeService;
 use App\Models\Comment;
 use App\Core\Database;
 use App\Core\Error;

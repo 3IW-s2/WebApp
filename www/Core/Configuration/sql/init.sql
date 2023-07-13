@@ -31,8 +31,10 @@ CREATE TABLE {DB_PREFIX}posts(
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    status VARCHAR(255) NOT NULL
+    status VARCHAR(255) NOT NULL,
+    category_id INTEGER  NULL,
 );
+
 
 ALTER TABLE {DB_PREFIX}users ALTER COLUMN role TYPE INT USING role::integer;
 ALTER TABLE {DB_PREFIX}posts ADD COLUMN image_path VARCHAR(255)  NULL;

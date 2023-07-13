@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\History;
 use App\Services\PostService;
 use App\Services\HistoryService;
+use App\Services\ArticleTypeService;
 use App\Core\Database;
 use App\Core\Error;
 
@@ -42,6 +43,9 @@ class PageController  Extends BaseController
     {
        
         $view = new View("Backend/Page/add", "back");
+        $alltypes = new ArticleTypeService();
+        $types = $alltypes->findAll();
+        $view->assign('types', $types);
         if(isset($_POST['submit']))
         {
          $postverif = new Post();
@@ -49,7 +53,7 @@ class PageController  Extends BaseController
          $postServiceVerif = new PostService(); 
          $postsverif = $postServiceVerif->getPostBySlugBy( $postverif);
 
-         if(empty($postsverif) && !empty($_POST['slug']) && !empty($_POST['content'])){
+         if(empty($postsverif) && !empty($_POST['slug']) && !empty($_POST['content']) && !empty($_POST['articleType'])){
        
                 $post = new Post();
             // $post->setTitle($_POST['title']);
@@ -65,6 +69,7 @@ class PageController  Extends BaseController
                 {
                     $post->setImage_path('off');
                 }
+                $post->setCategoryId($_POST['articleType']);
 
                 $postService = new PostService();
                 $posts = $postService->addPost($post);
@@ -81,6 +86,10 @@ class PageController  Extends BaseController
             if(empty($_POST['content']))
             {
                 $view->assign('errors', "Veuillez remplir le content");
+            }
+            if(empty($_POST['articleType']))
+            {
+                $view->assign('errors', "Veuillez remplir le type");
             }
 
         }
@@ -101,6 +110,9 @@ class PageController  Extends BaseController
     public function editPost()
     {
         $view = new View("Backend/Page/edit", "back");
+        $alltypes = new ArticleTypeService();
+        $types = $alltypes->findAll();
+        $view->assign('types', $types);
         if(isset($_GET['id']))
         {
             $post = new Post();
@@ -123,12 +135,13 @@ class PageController  Extends BaseController
 
         if(isset($_POST['submit']))
         {
+        /*     var_dump($_POST);
+die;   */
          $postverif = new Post();
          $postverif->setSlug($_POST['slug']);
          $postServiceVerif = new PostService(); 
          $postsverif = $postServiceVerif->getPostBySlugBy( $postverif); 
-         if((!empty($postsverif) && $postsverif[0]['id'] == $_GET['id']) && !empty($_POST['slug']) && !empty($_POST['content']) || empty($postsverif) && !empty($_POST['slug']) && !empty($_POST['content'])){
-
+         if((!empty($postsverif) && $postsverif[0]['id'] == $_GET['id']) /* && !empty($_POST['slug']) && !empty($_POST['content']) && !empty($_POST['articleType']) */ || empty($postsverif)/*  && !empty($_POST['slug']) && !empty($_POST['content']) && !empty($_POST['articleType']) */){
             $post = new Post();
             $post->setId($_GET['id']);
             //rz$post->setTitle($_POST['title']);
@@ -144,6 +157,7 @@ class PageController  Extends BaseController
             {
                 $post->setImage_path('off');
             }
+            $post->setCategoryId((int)$_POST['articleType']);
 
             $data = [
                 'id' => $_GET['id'],    
@@ -151,7 +165,8 @@ class PageController  Extends BaseController
                 'content' => $_POST['content'],
                 'slug' => $_POST['slug'],
                 'status' => '5',
-                'author' => $_SESSION['user']
+                'author' => $_SESSION['user'],
+                'articleType' => (int)$_POST['articleType']
             ];
            
 
