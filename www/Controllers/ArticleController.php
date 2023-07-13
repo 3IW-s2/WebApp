@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Core\View;
 use App\Core\Database;
 use App\Services\ArticleService;
+use App\Services\ArticleTypeService;
 use App\Core\Session;
 use App\Core\Menu;
 use App\Services\CommentService;
@@ -177,24 +178,48 @@ class ArticleController  Extends BaseController
         $view = new View("Backend/Article/add", "back");
         $ArtcileService = new ArticleService();
         $articles = $ArtcileService->findAll();
+        $articleTyeService = new ArticleTypeService();
+        $articleTypes = $articleTyeService->findAll();
         $view->assign('articles', $articles);
+        $view->assign('articleTypes', $articleTypes);
+        
 
         if (isset($_POST['submit'])) {
             $articleVerif = new Article();
             $articleVerif->setSlug($_POST['slug']);
             $articleServiceVerif = new ArticleService();
-            $articlesVerif = $articleServiceVerif->getArticleBySlug($articleVerif);
-            if (empty($articlesVerif)){
+            $articlesVerif = $articleServiceVerif->getArticleBySlug_($articleVerif);
+            if (empty($articlesVerif) && !empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['slug']) && !empty($_POST['articleType'])){
                 $article = new Article();
                 $article->setTitle($_POST['title']);
                 $article->setContent($_POST['content']);
                 $article->setAuthor($_SESSION['user']);
                 $article->setSlug($_POST['slug']);
+                $article->setCategoryId((int)$_POST['articleType']);
                 $ArtcileService->createArticle($article);
                 header('Location: /admin/article/index');
             }
-          $view->assign('errors', "Slug deja existant");    
+            if(empty($_POST['title']) || empty($_POST['content']) || empty($_POST['slug'])){
+                $view->assign('errors', "Veuillez remplir tous les champs");
+            }
+            if(empty($_POST['title'])){
+                $view->assign('errors', "Veuillez remplir le titre");
+            }
+            if(empty($_POST['content'])){
+                $view->assign('errors', "Veuillez remplir le contenu");
+            }
+            if(empty($_POST['slug'])){
+                $view->assign('errors', "Veuillez remplir le slug");
+            }
+            if(empty($_POST['articleType'])){
+                $view->assign('errors', "Veuillez choisir un type d'article");
+            }
+            if(!empty($articlesVerif)){
+                $view->assign('errors', "Slug deja existant");   
+            }
+          
         }
+        
     }
 
     public function deleteArticle()
@@ -217,30 +242,50 @@ class ArticleController  Extends BaseController
         $article = new Article();
         $article->setId($_GET['id']);
         $articles = $ArtcileService->getArticleById($article);
+        $articleTyeService = new ArticleTypeService();
+        $articleTypes = $articleTyeService->findAll();
+        $view->assign('articleTypes', $articleTypes);
         $view->assign('articles', $articles);
         
         $date =new \DateTime (date('Y-m-d H:i:s'));
         $date = $date->format('Y-m-d');
 
-        
        
             if (isset($_POST['submit'])) {
                 $articleVerif = new Article();
                 $articleVerif->setSlug($_POST['slug']);
                 $articleServiceVerif = new ArticleService();
-                $articlesVerif = $articleServiceVerif->getArticleBySlug($articleVerif);
+                $articlesVerif = $articleServiceVerif->getArticleBySlug_($articleVerif);
                 if ((!empty($articlesVerif) && $articlesVerif['id'] == $_GET['id']) || empty($articlesVerif)){
                         $article = new Article();
                         $article->setId($_GET['id']);
                         $article->setTitle($_POST['title']);
                         $article->setContent($_POST['content']);
                         $article->setSlug($_POST['slug']);
+                        $article->setCategoryId((int)$_POST['articleType']);
                         //$article->setupdate_at($date->format('Y-m-d'));
                         $ArtcileService->updateArticle($article) ;
                         
                         header('Location: /admin/article/index');
                 }
-                $view->assign('errors', "Slug deja existant");
+                if(empty($_POST['title']) || empty($_POST['content']) || empty($_POST['slug'])){
+                    $view->assign('errors', "Veuillez remplir tous les champs");
+                }
+                if(empty($_POST['title'])){
+                    $view->assign('errors', "Veuillez remplir le titre");
+                }
+                if(empty($_POST['content'])){
+                    $view->assign('errors', "Veuillez remplir le contenu");
+                }
+                if(empty($_POST['slug'])){
+                    $view->assign('errors', "Veuillez remplir le slug");
+                }
+                if(empty($_POST['articleType'])){
+                    $view->assign('errors', "Veuillez choisir un type d'article");
+                }
+                if(!empty($articlesVerif)){
+                    $view->assign('errors', "Slug deja existant");   
+                }
 
             }
 

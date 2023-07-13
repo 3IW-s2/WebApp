@@ -54,13 +54,14 @@ class ArticleRepository
 
     public function createArticle(Article $article){
        
-        $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at , author , status , slug) VALUES (:title, :content, NOW(), NOW() , :author , :status , :slug )";
+        $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at , author , status , slug , category_id) VALUES (:title, :content, NOW(), NOW() , :author , :status , :slug , :category_id)";
         $params = [
             'title' => $article->getTitle(),
             'content' => $article->getContent(),
             'author' => $article->getAuthor(),
             'status' => 5,
             'slug' => $article->getSlug(),
+            'category_id' => $article->getCategoryId(),
 
         ];
         $stmt = $this->db->query($query , $params);
@@ -68,12 +69,13 @@ class ArticleRepository
 
     public function updateArticle(Article $article){
        
-        $query = "UPDATE {$this->table} SET title = :title, content = :content, slug= :slug WHERE id = :id";
+        $query = "UPDATE {$this->table} SET title = :title, content = :content, slug= :slug , category_id= :category_id WHERE id = :id";
         $params = [
             'id' => $article->getId(),
             'title' => $article->getTitle(),
             'content' => $article->getContent(),
             'slug' => $article->getSlug(),
+            'category_id' => $article->getCategoryId(),
         ];
         $stmt = $this->db->query($query , $params);
     }
@@ -99,6 +101,17 @@ class ArticleRepository
 
     public function getArticleBySlug(Article $article){
         $query = "SELECT * FROM {$this->table} WHERE slug = :slug AND status = '1' ";
+        $params = [
+            'slug' => $article->getSlug(),
+        ];
+        $stmt = $this->db->query($query , $params);
+        $article = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $article;
+    }
+
+    public function getArticleBySlug_(Article $article){
+        $query = "SELECT * FROM {$this->table} WHERE slug = :slug ";
         $params = [
             'slug' => $article->getSlug(),
         ];
