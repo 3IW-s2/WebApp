@@ -29,6 +29,12 @@ class ArticleService
         return $this->articleRepository->findAllActive();
     }
 
+    public function findAllActiveByCategoryId(Article $article)
+    {
+        return $this->articleRepository->findAllActiveByCategoryId($article);
+    }
+
+
     public function findAllByCategorie($id)
     {
         return $this->articleRepository->findAllByCategorie($id);
@@ -68,6 +74,11 @@ class ArticleService
     {   
      
         return $this->articleRepository->getArticleBySlug($article);
+    }
+    public function getArticleBySlug_ ( Article $article)
+    {   
+     
+        return $this->articleRepository->getArticleBySlug_($article);
     }
 
     public function pendingArticle(Article $article)

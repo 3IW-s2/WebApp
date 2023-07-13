@@ -21,6 +21,7 @@ class Article
     private \DateTime $update_at;
     private String $updateAt;
     private ?String $image_path;
+    private ?Int $category_id;
     
 
     public function __construct()
@@ -244,6 +245,26 @@ class Article
     public function setUpdateAt(String $updateAt): self
     {
         $this->updateAt = $updateAt;
+        return $this;
+    }
+
+    /**
+     * Get the value of category_id
+     * @return Int
+     */
+    public function getCategoryId(): ?Int
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * Set the value of category_id
+     * @param Int $category_id
+     * @return  self
+     */
+    public function setCategoryId(?Int $category_id): self
+    {
+        $this->category_id = $category_id;
         return $this;
     }
 

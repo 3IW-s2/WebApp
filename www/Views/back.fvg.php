@@ -177,6 +177,15 @@
                       </p>
                   </a>
             </li>
+            <li class="nav-item">
+              <li class="nav-item">
+                  <a href="/admin/articletype/index" class="nav-link">
+                      <i class="nav-icon far fa-edit"></i>
+                      <p>
+                         type d'article
+                      </p>
+                  </a>
+            </li>
 
             <!-- <li class="nav-item">
               <a href="#" class="nav-link">

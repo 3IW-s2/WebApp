@@ -19,6 +19,7 @@ class Post
     private String $slug;
     private \DateTime $date_created;
     private String $image_path;
+    private ?Int $category_id;
     
 
     public function __construct()
@@ -203,6 +204,26 @@ class Post
     public function setImage_path(String $image_path): self
     {
         $this->image_path = $image_path;
+        return $this;
+    }
+
+    /**
+     * Get the value of category_id
+     * @return Int|null
+     */
+    public function getCategoryId(): ?Int
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * Set the value of category_id
+     * @param Int|null $category_id
+     * @return  self
+     */
+    public function setCategoryId(?Int $category_id): self
+    {
+        $this->category_id = $category_id;
         return $this;
     }
 

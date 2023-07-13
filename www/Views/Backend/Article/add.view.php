@@ -36,6 +36,18 @@
                                                 <label for="email">slug</label>
                                                 <input type="text" name="slug" id="slug" class="form-control"  />
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="articleType">articleType</label>
+                                                <select name="articleType" id="articleType" class="form-control">
+                                                    <option value="">Sélectionnez un type d'article</option> <!-- Option vide par défaut -->
+                                                    <?php foreach($articleTypes as $articleType): ?>
+                                                        <option value="<?= $articleType['id'] ?>"><?= $articleType['name'] ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+
+                                            
                                         
                                             <button type="submit" name="submit" class="btn btn-primary">Register</button>
                                 </form>

@@ -127,14 +127,15 @@ class  PostRepository  extends Database
     {
 
 
-        $query = "INSERT INTO {$this->table} (/* title, */ author ,content, status, slug,image_path) VALUES (/* :title, */ :author , :content, :status, :slug, :image_path)";
+        $query = "INSERT INTO {$this->table} (/* title, */ author ,content, status, slug,image_path , category_id) VALUES (/* :title, */ :author , :content, :status, :slug, :image_path, :category_id)";
         $params = [
             //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
             'content' => $post->getContent(),
             'status' => $post->getStatus(),
             'slug' => $post->getSlug(),
-            'image_path' => $post->getImage_path()
+            'image_path' => $post->getImage_path(),
+            'category_id' => $post->getCategoryId()
         ];
         $statement = $this->db->query($query, $params);
     }
@@ -142,7 +143,7 @@ class  PostRepository  extends Database
     public function updatePost(Post $post)
     {
 
-        $query = "UPDATE {$this->table} SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug ,image_path = :image_path WHERE id = :id";
+        $query = "UPDATE {$this->table} SET /* title = :title, */ author = :author, content = :content, status = :status, slug = :slug ,image_path = :image_path , category_id = :category_id WHERE id = :id";
         $params = [
             //'title' => $post->getTitle(),
             'author' => $post->getAuthor(),
@@ -150,7 +151,9 @@ class  PostRepository  extends Database
             'status' => $post->getStatus(),
             'slug' => $post->getSlug(),
             'id' => $post->getId(),
-            'image_path' => $post->getImage_path()
+            'image_path' => $post->getImage_path(),
+            'category_id' => $post->getCategoryId()
+
         ];
         $statement = $this->db->query($query, $params);
     }
@@ -174,6 +177,18 @@ class  PostRepository  extends Database
             'id' => $post->getId()
         ];
         $statement = $this->db->query($query, $params);
+    }
+
+    public function getpostCategoryIdBySlug (Post $post)
+    {
+        $query = "SELECT category_id FROM {$this->table} WHERE slug = :slug";
+        $params = [
+            'slug' => $post->getSlug()
+        ];
+        $statement = $this->db->query($query, $params);
+        $post = $statement->fetch(PDO::FETCH_ASSOC);
+        
+        return $post;
     }
    
 }
