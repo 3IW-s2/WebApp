@@ -91,5 +91,17 @@ class ArticleTypeRepository
         $stmt = $this->db->query($query, $params);
     }
 
+    public function getNameById(ArticleType $articleType)
+    {
+        $query = "SELECT name FROM {$this->type_article_table} WHERE id = :id";
+        $params = [
+            'id' => $articleType->getId(),
+        ];
+        $stmt = $this->db->query($query, $params);
+        $articleType = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $articleType;
+    }
+
 
 }

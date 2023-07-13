@@ -37,6 +37,7 @@
                                     <th scope="col">title</th>
                                     <th scope="col">author</th>
                                     <th scope="col">Content</th>
+                                    <th scope="col">Category_id</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Slug</th>
                                    <!--  <th scope="col">pasword</th> -->
@@ -54,6 +55,7 @@
                                         <td><?= $article["title"]?></td>
                                         <td><?= $article["author"] ?></td>
                                         <td><?= $article["content"]?></td>
+                                        <td><?= $article["category_id"]?></td>
                                         <td><?= $article["status"] ?></td>
                                         <td><?= $article["slug"]?></td>
                                        <!--  <td></td> -->

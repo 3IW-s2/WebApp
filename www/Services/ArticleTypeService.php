@@ -48,4 +48,9 @@ class ArticleTypeService
     {
         $this->articleTypeRepository->editArticleType($articleType);
     }
+
+    public function getNameById(ArticleType $articleType)
+    {
+        return $this->articleTypeRepository->getNameById($articleType);
+    }
 }
