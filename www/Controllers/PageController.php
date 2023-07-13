@@ -141,7 +141,7 @@ die;   */
          $postverif->setSlug($_POST['slug']);
          $postServiceVerif = new PostService(); 
          $postsverif = $postServiceVerif->getPostBySlugBy( $postverif); 
-         if((!empty($postsverif) && $postsverif[0]['id'] == $_GET['id']) /* && !empty($_POST['slug']) && !empty($_POST['content']) && !empty($_POST['articleType']) */ || empty($postsverif)/*  && !empty($_POST['slug']) && !empty($_POST['content']) && !empty($_POST['articleType']) */){
+         if((!empty($postsverif) && $postsverif[0]['id'] == $_GET['id'])  && !empty($_POST['slug']) && !empty($_POST['content']) && !empty($_POST['articleType'])  || empty($postsverif) && !empty($_POST['slug']) && !empty($_POST['content']) && !empty($_POST['articleType']) ){
             $post = new Post();
             $post->setId($_GET['id']);
             //rz$post->setTitle($_POST['title']);
@@ -189,6 +189,10 @@ die;   */
             if(!empty($postsverif))
             {
                 $view->assign('errors', "Slug already exist");     
+            }
+            if(empty($_POST['content']))
+            {
+                $view->assign('errors', "Veuillez remplir le content");
             }
              
 
