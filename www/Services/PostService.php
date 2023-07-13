@@ -72,4 +72,9 @@ class PostService  extends Database
     {
         return $this->postRepo->publishPost($post);
     }
+
+    public function getpostCategoryIdBySlug(Post $post)
+    {
+        return $this->postRepo->getpostCategoryIdBySlug($post);
+    }
 }

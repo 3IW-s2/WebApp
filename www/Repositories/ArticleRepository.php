@@ -42,6 +42,18 @@ class ArticleRepository
         return $articles;
     } 
 
+    public function findAllActiveByCategoryId(Article $article)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE status = '1' AND category_id = :category_id ORDER BY created_at DESC";
+        $params = [
+            'category_id' => $article->getCategoryId(),
+        ];
+        $stmt = $this->db->query($query , $params);
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $articles;
+    }
+
    /*  public function findAllActive($page = 1, $perPage = 3)
     {
         $offset = ($page - 1) * $perPage;

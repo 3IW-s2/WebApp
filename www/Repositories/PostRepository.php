@@ -178,5 +178,17 @@ class  PostRepository  extends Database
         ];
         $statement = $this->db->query($query, $params);
     }
+
+    public function getpostCategoryIdBySlug (Post $post)
+    {
+        $query = "SELECT category_id FROM {$this->table} WHERE slug = :slug";
+        $params = [
+            'slug' => $post->getSlug()
+        ];
+        $statement = $this->db->query($query, $params);
+        $post = $statement->fetch(PDO::FETCH_ASSOC);
+        
+        return $post;
+    }
    
 }

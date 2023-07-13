@@ -80,8 +80,13 @@ class PostController  Extends BaseController
         }
         $view->assign("admin_preferences", $admin_preferences['number_article']);
 
-
-        $articles = $this->article->findAllActive();
+        $newPost = new Post();
+        $newPost->setSlug($_GET['slug']);
+        $newPostService = new PostService();
+        $postCategory = $newPostService->getpostCategoryIdBySlug($newPost);
+        $newArticle = new Article();
+        $newArticle->setCategoryId($postCategory['category_id']);
+        $articles = $this->article->findAllActiveByCategoryId($newArticle);
         $view->assign('articles', $articles);
     }
     }
