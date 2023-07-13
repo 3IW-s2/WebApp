@@ -49,7 +49,7 @@ class PageController  Extends BaseController
          $postServiceVerif = new PostService(); 
          $postsverif = $postServiceVerif->getPostBySlugBy( $postverif);
 
-         if(empty($postsverif)){
+         if(empty($postsverif) && !empty($_POST['slug']) && !empty($_POST['content'])){
        
                 $post = new Post();
             // $post->setTitle($_POST['title']);
@@ -70,7 +70,18 @@ class PageController  Extends BaseController
                 $posts = $postService->addPost($post);
                 header('Location: /admin/page/index');
             }
-            $view->assign('errors', "Slug already exist");     
+            if(empty($_POST['slug']))
+            {
+                $view->assign('errors', "Veuillez remplir le slug");
+            }
+            if(!empty($postsverif))
+            {
+                $view->assign('errors', "Slug already exist");     
+            }
+            if(empty($_POST['content']))
+            {
+                $view->assign('errors', "Veuillez remplir le content");
+            }
 
         }
     }
@@ -116,7 +127,7 @@ class PageController  Extends BaseController
          $postverif->setSlug($_POST['slug']);
          $postServiceVerif = new PostService(); 
          $postsverif = $postServiceVerif->getPostBySlugBy( $postverif); 
-         if((!empty($postsverif) && $postsverif[0]['id'] == $_GET['id']) || empty($postsverif)){
+         if((!empty($postsverif) && $postsverif[0]['id'] == $_GET['id']) && !empty($_POST['slug']) && !empty($_POST['content']) || empty($postsverif) && !empty($_POST['slug']) && !empty($_POST['content'])){
 
             $post = new Post();
             $post->setId($_GET['id']);
@@ -156,7 +167,15 @@ class PageController  Extends BaseController
        
                
             }
-            $view->assign('errors', "Slug already exist");     
+            if(empty($_POST['slug']))
+            {
+                $view->assign('errors', "Veuillez remplir le slug");
+            }
+            if(!empty($postsverif))
+            {
+                $view->assign('errors', "Slug already exist");     
+            }
+             
 
         }
         

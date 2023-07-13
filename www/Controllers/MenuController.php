@@ -39,7 +39,7 @@ class MenuController
                 $menuVerif->setTitre($_POST['title']);
                 $menuServiceVerif = new MenuService();
                 $menusVerif = $menuServiceVerif->findByTitle($menuVerif);
-                if(empty($menusVerif)){
+                if(empty($menusVerif) && !empty($_POST['title']) && !empty($_POST['url'])){
                     $_POST['url'] = MenuController::urlVerfif($_POST['url']);
                     $menu = new Menu();
                     $menu->setTitre($_POST['title']);
@@ -47,7 +47,18 @@ class MenuController
                     $MenuService->createMenu($menu);
                     header('Location: /admin/menu/index');
                 } 
-                $view->assign('errors', "Ce titre existe déjà");
+                if(!empty($menusVerif)){
+                    $view->assign('errors', "Ce slug existe déjà");
+                }
+                if(empty($_POST['title']) || empty($_POST['url'])){
+                    $view->assign('errors', "Veuillez remplir tous les champs");
+                }
+                if(empty($_POST['url'])){
+                    $view->assign('errors', "Veuillez remplirl'url");
+                }
+                if(empty($_POST['title'])){
+                    $view->assign('errors', "Veuillez remplir le titre");
+                }
            
             }
         
@@ -57,7 +68,7 @@ class MenuController
                 $menuVerif->setParentId($_POST['parent_id']);
                 $menuServiceVerif = new MenuService();
                 $menusVerif = $menuServiceVerif->findBySubMenuTitle($menuVerif);
-                if(empty($menusVerif)){
+                if(empty($menusVerif) &&  !empty($_POST['title']) && !empty($_POST['url'])){
                     $_POST['url'] = MenuController::urlVerfif($_POST['url']);
                     $menu = new Menu();
                     $menu->setTitre($_POST['title']);
@@ -66,7 +77,18 @@ class MenuController
                     $MenuService->createSubMenu($menu);
                     header('Location: /admin/menu/index');
                 }
-                $view->assign('error', "Ce sous-titre existe déjà");   
+                if(!empty($menusVerif)){
+                    $view->assign('errors', "Ce slug existe déjà");
+                }
+                if(empty($_POST['title']) || empty($_POST['url'])){
+                    $view->assign('errors', "Veuillez remplir tous les champs");
+                }
+                if(empty($_POST['url'])){
+                    $view->assign('errors', "Veuillez remplirl'url");
+                }
+                if(empty($_POST['title'])){
+                    $view->assign('errors', "Veuillez remplir le titre");
+                }
             }
 
     }
@@ -128,7 +150,17 @@ class MenuController
                     $MenuService->updateMenu($menu);
                     header('Location: /admin/menu/index');
                 }
-            $view->assign('error', "Ce titre  existe déjà");
+                if(!empty($menusVerif)){
+                    $view->assign('error', "Ce titre  existe déjà");
+                }
+                if(empty($_POST['titre'])){
+                    $view->assign('error', "Le titre ne peut pas être vide");
+                }
+                if(empty($_POST['url'])){
+                    $view->assign('error', "L'url ne peut pas être vide");
+                }
+
+            
             }else{
                 if( (!empty($subMenuVerif) &&($subMenuVerifId  == (int)$_GET['id'])) || (empty($subMenuVerif)) ){
                     $_POST['url'] = MenuController::urlVerfif($_POST['url']);
@@ -143,8 +175,17 @@ class MenuController
                     $MenuService->updateMenu($menu);
                     header('Location: /admin/menu/index');
                 }
+                if(!empty($subMenuVerif)){
+                    $view->assign('error', "Ce sous-titre existe déjà");
+                }
+                if(empty($_POST['titre'])){
+                    $view->assign('error', "Le titre ne peut pas être vide");
+                }
+                if(empty($_POST['url'])){
+                    $view->assign('error', "L'url ne peut pas être vide");
+                }
 
-                $view->assign('error', "Ce sous-titre existe déjà");
+
             } 
         }
     }
