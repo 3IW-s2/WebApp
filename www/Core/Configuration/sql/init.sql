@@ -14,6 +14,15 @@ CREATE TABLE {DB_PREFIX}admin_preferences (
     number_article INT NOT NULL DEFAULT 3,
 );
 
+CREATE TABLE {DB_PREFIX}article_types (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+);
+
+INSERT INTO {DB_PREFIX}article_types (name) VALUES ('sports');
+INSERT INTO {DB_PREFIX}article_types (name) VALUES ('acteur');
+INSERT INTO {DB_PREFIX}article_types (name) VALUES ('politique');
+
 INSERT INTO {DB_PREFIX}admin_preferences (number_article)
 VALUES (3);
 
@@ -69,9 +78,12 @@ ALTER TABLE {DB_PREFIX}users ADD COLUMN expirate_token TIMESTAMP  NULL;
     updated_at TIMESTAMP NOT NULL,
     user_id INTEGER  NULL,
     slug VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL
+    status VARCHAR(255) NOT NULL,
+    category_id INTEGER  NULL,
 ); 
-/* ALTER TABLE articles ADD COLUMN author VARCHAR(255) NOT  NULL;
+/* ALTER TABLE {DB_PREFIX}articles ADD COLUMN category_id INTEGER  NULL;
+ */
+ /* ALTER TABLE articles ADD COLUMN author VARCHAR(255) NOT  NULL;
  *//* ALTER TABLE articles DROP COLUMN user_id;
  */
  CREATE TABLE {DB_PREFIX}comments (

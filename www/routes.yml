@@ -146,6 +146,30 @@ admin/page/publish:
   action: showPost
   verifConnexion: true
 
+admin/articletype/index:
+  controller: ArticleTypeController
+  action: showArticleType
+  security: ROLE:ADMIN
+  verifConnexion: true
+
+admin/articletype/edit:
+  controller: ArticleTypeController
+  action: editArticleType
+  security: ROLE:ADMIN
+  verifConnexion: true
+
+admin/articletype/delete:
+  controller: ArticleTypeController
+  action: deleteArticleType
+  security: ROLE:ADMIN
+  verifConnexion: true
+
+admin/articletype/add:
+  controller: ArticleTypeController
+  action: addArticleType
+  security: ROLE:ADMIN
+  verifConnexion: true
+
 admin/article/index:
   controller: ArticleController
   action: showArticle

@@ -5,3 +5,5 @@ privkey.pem
 cheatsheet.md
 www/.env
 .idea/
+www/Installer/src/scss/style.css
+www/Installer/src/scss/style.css.map

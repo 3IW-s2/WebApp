@@ -119,6 +119,7 @@ class Router
             }
 
             if ($verifConnexion !== null && $verifConnexion === true && !Security::checkToken()) {
+                session_destroy();
                 header("Location: /login");
                 exit();
             }
