@@ -247,7 +247,7 @@ class User extends Database
                     
                 if($user && password_verify($password, $user['password']) && $user['status'] != 10){
                     $_SESSION["user"] = $user['email'];
-                    $_SESSION["expire_token"] = $user["expirate_token"];
+                    $_SESSION["expire_token"] = date('Y-m-d H:i:s', time() + (70 * 120));
                    
                     return true;
                 }else if($user && password_verify($password, $user['password']) && $user['status'] == 10){
