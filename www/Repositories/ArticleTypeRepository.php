@@ -48,5 +48,48 @@ class ArticleTypeRepository
 
     }
 
+    public function addArticleType(ArticleType $articleType)
+    {
+        $query = "INSERT INTO {$this->type_article_table} (name) VALUES (:name)";
+        $params = [
+            'name' => $articleType->getName(),
+        ];
+        $stmt = $this->db->query($query, $params);
+    }
+
+    public function findByName (ArticleType $articleType)
+    {
+        $query = "SELECT * FROM {$this->type_article_table} WHERE name = :name";
+        $params = [
+            'name' => $articleType->getName(),
+        ];
+        $stmt = $this->db->query($query, $params);
+        $articleType = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $articleType;
+    }
+
+    public function findByID(ArticleType $articleType)
+    {
+        $query = "SELECT * FROM {$this->type_article_table} WHERE id = :id";
+        $params = [
+            'id' => $articleType->getId(),
+        ];
+        $stmt = $this->db->query($query, $params);
+        $articleType = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $articleType;
+    }
+
+    public function editArticleType(ArticleType $articleType)
+    {
+        $query = "UPDATE {$this->type_article_table} SET name = :name WHERE id = :id";
+        $params = [
+            'name' => $articleType->getName(),
+            'id' => $articleType->getId(),
+        ];
+        $stmt = $this->db->query($query, $params);
+    }
+
 
 }

@@ -28,4 +28,24 @@ class ArticleTypeService
     {
         $this->articleTypeRepository->deleteArticleType($article_type , $article);
     }
+
+    public function addArticleType(ArticleType $articleType)
+    {
+        $this->articleTypeRepository->addArticleType($articleType);
+    }
+
+    public function findByName(ArticleType $articleType)
+    {
+        return $this->articleTypeRepository->findByName($articleType);
+    }
+
+    public function findByID(ArticleType $articleType)
+    {
+        return $this->articleTypeRepository->findByID($articleType);
+    }
+
+    public function editArticleType(ArticleType $articleType)
+    {
+        $this->articleTypeRepository->editArticleType($articleType);
+    }
 }
