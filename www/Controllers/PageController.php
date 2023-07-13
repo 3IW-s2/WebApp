@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Models\Post;
 use App\Models\History;
+use App\Models\ArticleTypes;
 use App\Services\PostService;
 use App\Services\HistoryService;
 use App\Services\ArticleTypeService;

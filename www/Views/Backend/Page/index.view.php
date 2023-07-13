@@ -43,6 +43,7 @@
                                     <th scope="col">content</th>
                                     <th scope="col">Modal</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">category</th>
                                     <th scope="col">slug</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>
@@ -84,6 +85,7 @@
                                         </button>
                                         </td>
                                         <td><?= $post["status"] ?></td>
+                                        <td><?= $post["category_id"] ?></td>
                                         <td><?= $post["slug"]?></td>
                                        <!--  <td></td> -->
                                         <td>
