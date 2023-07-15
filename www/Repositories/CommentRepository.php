@@ -147,5 +147,24 @@ class CommentRepository extends Database
 
         return $signal;
     }
+
+    public function restoreComment (Comment $comment)
+    {
+        $query = "UPDATE {$this->table} SET status = 10 WHERE id = :id";
+        $params = [
+            'id' => $comment->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+    }
+
+    public function removeComment (Comment $comment)
+    {
+        $query = "UPDATE {$this->table} SET status = 21 WHERE id = :id";
+        $params = [
+            'id' => $comment->getId()
+        ];
+        $statement = $this->db->query($query, $params);
+    }
+
   
 }

@@ -33,4 +33,30 @@ class CommentController
         $view = new View("Backend/Comment/index", "back");
         $view->assign('comments', $comments);
     }
+    
+    public function RestoreComment()
+    {
+        $comment = new Comment( $this->error);
+        $comment->setId($_GET['id']);
+        $commentService = new CommentService( $this->error);
+        $commentService->restoreComment($comment);
+        $comments = $commentService->findAll();
+        $view = new View("Backend/Comment/index", "back");
+        $view->assign('comments', $comments);
+    }
+
+    public function  RemoveComment()
+    {
+        $comment = new Comment( $this->error);
+        $comment->setId($_GET['id']);
+        $commentService = new CommentService( $this->error);
+        $commentService->removeComment($comment);
+        $comments = $commentService->findAll();
+        $view = new View("Backend/Comment/index", "back");
+        $view->assign('comments', $comments);
+    }
+
+    
+
+
 }

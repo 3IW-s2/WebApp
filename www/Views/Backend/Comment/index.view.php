@@ -50,6 +50,12 @@
                                        <!--  <td></td> -->
                                         <td>
                                             <a href="delete?id=<?= $comment['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <?php if ($comment['status'] > 20) : ?>
+                                                <a href="restore?id=<?= $comment['id'] ?>" class="btn btn-success">restore</a>
+                                            <?php else: ?>
+                                                <a href="remove?id=<?= $comment['id'] ?>" class="btn btn-warning">remove</a>
+                                            <?php endif; ?>
+
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

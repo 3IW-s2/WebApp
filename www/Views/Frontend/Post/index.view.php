@@ -16,7 +16,7 @@
             <?php 
                   if($posts['image_path'] == "on") : ?>
                     <?php
-                        $currentPage = $_GET['page'] ?? 1; // Récupère la page courante depuis l'URL, ou utilise la page 1 par défaut
+                        $currentPage = $_GET['page'] ?? 1; // Récupère la page courante depuis l'URL, ou on utilise la page 1 par défaut
                         $articlesPerPage = $admin_preferences; // Nombre d'articles à afficher par page
                         $startIndex = ($currentPage - 1) * $articlesPerPage;
                         $articlesToShow = array_slice($articles, $startIndex, $articlesPerPage);
