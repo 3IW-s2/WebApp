@@ -44,7 +44,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($users as $user) : ?>
+                                <?php foreach ($users as $user) : 
+                                    if ($user['status'] === "10") {
+                                        $user['status'] = "Archived";
+                                    } else {
+                                        $user['status'] = "Active";
+                                    }
+
+                                    if ($user['role'] === 1) {
+                                        $user['role'] = "Admin";
+                                    } elseif ($user['role'] === 3) {
+                                        $user['role'] = "editor";
+                                    }else{
+                                        $user['role'] = "user";
+                                    }
+                                    ?>
+                                    
                                     <tr>
                                         <th scope="row"><?= $user["id"] ?></th>
                                         <td><?= $user["firstname"]?></td>

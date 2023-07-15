@@ -26,6 +26,9 @@ class MenuController
         $MenuService = new MenuService();
         $menus = $MenuService->findAll();
         $view->assign('menus', $menus);
+        $newMenuService = new MenuService();
+        $subMenu = $newMenuService->findAll();
+        $view->assign('subMenu', $subMenu);
     }
 
     public function addMenu()

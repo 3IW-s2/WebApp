@@ -47,6 +47,11 @@
                                         $menu["status"] = ($menu["status"] == 1) ? "published" : "pending";
                                         //n'affiche pas le premier charactère de la chaine $menu['url']
                                         $menu["url"] = substr($menu["url"], 1);
+                                        foreach($subMenu as $sub) :
+                                            if($sub["menu_id"] == $menu["parent_id"]) :
+                                                $menu["parent_id"] = $sub["titre"];
+                                            endif;
+                                        endforeach;
                                      ?>
                                     <tr>
                                         <th scope="row"><?= $menu["menu_id"] ?></th>
