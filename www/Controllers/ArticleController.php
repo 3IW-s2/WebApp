@@ -94,7 +94,7 @@ class ArticleController  Extends BaseController
         }
 
         if (isset($_POST['submit'])){
-            if (empty($_POST['content'])){
+            if(empty($_POST['content'])){
                 $error->addError("Veuillez remplir le champ");
                 $view->assign('errors', $error->getErrors());
                 
@@ -103,7 +103,7 @@ class ArticleController  Extends BaseController
                 $view->assign('errors', $error->getErrors());
                
             }
-           
+            if(!empty($_POST['content'])){
             $comment = new Comment( new Error());
             $userService = new UserService(new Error());
             $user = new User(new Error());
@@ -117,9 +117,8 @@ class ArticleController  Extends BaseController
             unset($_POST);
             header('Location: ' . $_SERVER['REQUEST_URI']);
             exit();
+            }
       
-           
-
         }
        if(isset($_POST['signaler'])){
               $comment = new Comment(new Error());

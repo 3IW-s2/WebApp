@@ -21,21 +21,21 @@
                 if($comments === false) {
                     echo "Aucun commentaire pour cet article";
                 } else {
-                    foreach ($comments as $comment) : ?>
-                        <div class="container my-5 py-5">
+                     foreach ($comments as $comment) : ?>
+                        <div class="container comment-container my-3">
                             <div class="row justify-content-center">
                                 <div class="col-md-12 col-lg-10 col-xl-8">
-                                    <div class="card">
+                                    <div class="card comment-card">
                                         <div class="card-body">
-                                            <div class="d-flex flex-start align-items-center">
+                                            <div class="d-flex flex-start align-items-center comment-header">
                                                 <div>
                                                     <h6 class="fw-bold text-primary mb-1"><?=$comment['user']?></h6>
                                                     <p class="text-muted small mb-0"><?=$comment['created_at']?></p>
                                                 </div>
                                             </div>
-
-                                            <p class="mt-3 mb-4 pb-2"><?=$comment['content']?></p>
-
+                    
+                                            <p class="mt-2 mb-3"><?=$comment['content']?></p>
+                    
                                             <form id="signal-comm" method="post" action="">
                                                 <input type="hidden" name="id" value="<?=$comment['id']?>">
                                                 <button type="submit" name="signaler" class="btn btn-primary">Signaler</button>
@@ -45,7 +45,8 @@
                                 </div>
                             </div>
                         </div>
-                <?php endforeach; 
+                    <?php endforeach; 
+                    
                 } ?>
 
                 <form id="add-comm" method="post" action="">
