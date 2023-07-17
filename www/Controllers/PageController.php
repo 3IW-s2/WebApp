@@ -30,6 +30,10 @@ class PageController  Extends BaseController
         $postService = new PostService();
         $posts = $postService->getAllsposts();
         $view->assign('posts', $posts);
+
+        $articleTyeService = new ArticleTypeService();
+        $articleTypes = $articleTyeService->findAll();
+        $view->assign('articleTypes', $articleTypes);
     }
 
     public function DetetePostById()

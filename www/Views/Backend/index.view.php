@@ -75,9 +75,21 @@
             </div>
             <!-- /.info-box -->
           </div>
-        <div style="width:90%">
-             <canvas id="myChart"></canvas>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                  <div style="width:90%">
+                    <canvas id="myChart2"></canvas>
+                  </div>
+
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
           </div>
+        <div style="width:90%; height:50%">
+             <canvas id="myChart"></canvas>
+        </div>
+
+      
            
         
 </div>

@@ -37,7 +37,7 @@ class Router
         }  */
 
         if (empty($uri)) {
-            $uri = "login";
+            $uri = "profile";
         }
     
        /*  if (empty($this->routes[$uri])) {

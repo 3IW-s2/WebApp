@@ -113,6 +113,15 @@ class MenuRepository
             return $menus;
         }
 
+        public function findAllParent_()
+        {
+            $query = "SELECT * FROM {$this->table} WHERE parent_id IS NOT  NULL ";
+            $stmt = $this->db->query($query);
+            $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $menus;
+        }
+
         public function findOneById(Menu $menu)
         {
             $query = "SELECT * FROM {$this->table} WHERE menu_id = :menu_id";

@@ -259,6 +259,17 @@ admin/comment/delete:
   security: ROLE:ADMIN
   verifConnexion: true
 
+admin/comment/restore:
+  controller: CommentController
+  action: RestoreComment
+  security: ROLE:ADMIN
+  verifConnexion: true
+
+admin/comment/remove:
+  controller: CommentController
+  action: RemoveComment
+  security: ROLE:ADMIN
+  verifConnexion: true
 #addcomment:
 #  controller: CommentController
 #  action: addComment

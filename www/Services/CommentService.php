@@ -68,7 +68,15 @@ class CommentService extends Database
         return $this->commentRepository->getSignalById($comment);
     }
 
+    public function restoreComment(Comment $comment)
+    {
+        $this->commentRepository->restoreComment($comment);
+    }
 
+    public function RemoveComment(Comment $comment)
+    {
+        $this->commentRepository->RemoveComment($comment);
+    }
 
    
 }
