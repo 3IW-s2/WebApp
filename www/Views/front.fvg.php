@@ -26,7 +26,6 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
-
     <link rel="stylesheet" href="assets/css/pricing-plan.css">
     <link rel = "stylesheet" href = "/public/css/main.css">
     <style>
@@ -56,6 +55,10 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721551398549890"
      crossorigin="anonymous"></script>
+
+     <link rel="stylesheet" href="//unpkg.com/grapesjs/dist/css/grapes.min.css">
+    <script src="//unpkg.com/grapesjs"></script>
+
 </head>
 <body>
 <nav class = "navbar navbar-expand-lg navbar-light py-4 fixed-top">
@@ -140,7 +143,13 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
     
 
     <!-- inclure la vue -->
-    <?php include $this->view;?>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <?php include $this->view; ?>
+        </div>
+    </div>
+</div>
 
 </body>
 
