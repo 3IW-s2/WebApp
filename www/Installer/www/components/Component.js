@@ -1,19 +1,19 @@
 import generateStructure from "../core/DomRenderer.js";
 import StructureGenerator from "../core/DomRenderer.js";
+
 export default class Component {
     constructor(props) {
+        // Initialise les propriétés et l'état du composant
         this.props = props;
-
         this.state = {};
         this.oldState = null;
 
+        // Génère un identifiant unique pour le composant
         this.identifier = this.generateId();
         this.defaultAttributes = {
             "data-identifier": this.identifier,
         }
     }
-
-
 
     shouldUpdate() {
         if (!this.oldState) {
@@ -37,22 +37,25 @@ export default class Component {
             }
         }
 
-        return false; // Aucun changements --> Pas de MàJ
+        return false; // Aucun changement --> Pas de MàJ
     }
 
     update() {
         if (!this.shouldUpdate()) return;
 
+        // Vérifie si un élément input a le focus avant la mise à jour
         const focusedInput = document.activeElement.tagName.toLowerCase() === "input"
             ? document.activeElement
             : null;
 
-
+        // Génère la nouvelle structure DOM à partir du rendu du composant
         const newDomNode = new StructureGenerator(this.render()).generate();
         const oldNode = document.querySelector(`[data-identifier="${this.identifier}"]`);
 
+        // Remplace l'ancien nœud par le nouveau dans le DOM
         oldNode.replaceWith(newDomNode);
 
+        // Restaure le focus sur l'élément input après la mise à jour
         if (focusedInput) {
             const restoredInput = document.querySelector(`[data-identifier="${this.identifier}"] input`);
             if (restoredInput) {
@@ -65,13 +68,13 @@ export default class Component {
             }
         }
     }
+
     setState(newState) {
         this.oldState = this.state; // On sauvegarde l'ancien état dans oldState
         this.state = Object.assign({}, this.state, newState);
 
-        // ancien / nouveau
         if (this.shouldUpdate()) {
-            this.update();
+            this.update(); // Met à jour le composant si l'état a changé
         }
     }
 
@@ -80,10 +83,11 @@ export default class Component {
     }
 
     generateId() {
+        // Génère un identifiant unique pour le composant
         const identifiers = Array.from(document.querySelectorAll("[data-identifier]")).map((element) => element.dataset.identifier);
         const identifier = Math.random().toString(36).slice(2, 11);
         if (identifiers.includes(identifier)) {
-            return generateId();
+            return generateId(); // Rappel récursif si l'identifiant est déjà utilisé
         }
         return identifier;
     }
