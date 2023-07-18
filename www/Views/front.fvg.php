@@ -12,11 +12,6 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
 <!DOCTYPE html>
 <html>
 <head>
-        <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
-        <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
-        <script src="https://unpkg.com/grapesjs-blocks-basic"></script>
-        <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
-        <script src="http://brokenlande.de/grapesjs/"></script>
 
     <meta charset="UTF-8">
     <title><?= $appConfig["APP_NAME"] ?? "Default app name" ?></title>
@@ -97,10 +92,6 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
 
             <div class="collapse navbar-collapse order-lg-1" id="navMenu">
             <ul class="navbar-nav mx-auto text-center">
-                <!-- <li class="nav-item px-2 py-2">
-                    <a class="nav-link text-uppercase text-dark" href="/">Home</a>
-                </li> -->
-
                 <?php
                 foreach($menus as $menu){
                     // Vérifier si le menu a des sous-menus
