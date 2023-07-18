@@ -12,8 +12,20 @@ use PDO;
 
 
 
-class MenuController extends BaseController
+class MenuController
 {
+    public static function urlVerfif( String $url)
+    {   
+        $url = str_replace(
+            array('à', 'â', 'ä', 'á', 'ã', 'å', 'À', 'Â', 'Ä', 'Á', 'Ã', 'Å', 'é', 'è', 'ê', 'ë', 'É', 'È', 'Ê', 'Ë', 'í', 'ì', 'î', 'ï', 'Í', 'Ì', 'Î', 'Ï', 'ð', 'ò', 'ô', 'ö', 'õ', 'ð', 'Ò', 'Ô', 'Ö', 'Õ', 'Ú', 'Ù', 'Û', 'Ü', 'ú', 'ù', 'û', 'ü', 'ý', 'ÿ', 'Ý', 'ç', 'Ç', 'Ñ', 'ñ'),
+            array('a', 'a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A', 'A', 'A', 'e', 'e', 'e', 'e', 'E', 'E', 'E', 'E', 'i', 'i', 'i', 'i', 'I', 'I', 'I', 'I', 'o', 'o', 'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'u', 'u', 'u', 'u', 'y', 'y', 'Y', 'c', 'C', 'N', 'n'),
+            $url
+        );
+        $url = preg_replace('/[^A-Za-z0-9-]+/', '-', $url);
+        $url = preg_replace('/-+/', '-', $url);
+        $url = substr_replace( $url , '/', 0, 0 );
+        return $url;
+    }
 
     public function showMenu()
     {
@@ -32,13 +44,13 @@ class MenuController extends BaseController
         $MenuService = new MenuService();
         $menus = $MenuService->activeLink();
         $view->assign('menus', $menus);
-            if (isset($_POST['submit'])) {  
-                $_POST['url'] = $this->NormalizerSlug($_POST['url']);
+            if (isset($_POST['submit'])) {
                 $menuVerif = new Menu();
                 $menuVerif->setTitre($_POST['title']);
                 $menuServiceVerif = new MenuService();
                 $menusVerif = $menuServiceVerif->findByTitle($menuVerif);
                 if(empty($menusVerif) && !empty($_POST['title']) && !empty($_POST['url'])){
+                    $_POST['url'] = MenuController::urlVerfif($_POST['url']);
                     $menu = new Menu();
                     $menu->setTitre($_POST['title']);
                     $menu->setUrl($_POST['url']);
@@ -61,13 +73,13 @@ class MenuController extends BaseController
             }
         
             if (isset($_POST['submit-submenu'])) {
-                $_POST['url'] = $this->NormalizerSlug($_POST['url']);
                 $menuVerif = new Menu(); 
                 $menuVerif->setTitre($_POST['title']);
                 $menuVerif->setParentId($_POST['parent_id']);
                 $menuServiceVerif = new MenuService();
                 $menusVerif = $menuServiceVerif->findBySubMenuTitle($menuVerif);
                 if(empty($menusVerif) &&  !empty($_POST['title']) && !empty($_POST['url'])){
+                    $_POST['url'] = MenuController::urlVerfif($_POST['url']);
                     $menu = new Menu();
                     $menu->setTitre($_POST['title']);
                     $menu->setUrl($_POST['url']);
@@ -118,7 +130,7 @@ class MenuController extends BaseController
         }
 
         if (isset($_POST['submit'])) {
-            $_POST['url'] = $this->NormalizerSlug($_POST['url']);
+
             $menuVerif = new Menu();
             $menuVerif->setTitre($_POST['titre']);
             $menuVerif->setParentId((int)$_POST['parent_id']);
@@ -135,6 +147,8 @@ class MenuController extends BaseController
 
                 
                 if( (!empty($menusVerif) &&($menusVerifId  == (int)$_GET['id'])) || (empty($menusVerif)) ){
+
+                    $_POST['url'] = MenuController::urlVerfif($_POST['url']);
                     $menu = new Menu();
                     $menu->setId($_GET['id']);
                     $menu->setTitre($_POST['titre']);
@@ -159,6 +173,7 @@ class MenuController extends BaseController
             
             }else{
                 if( (!empty($subMenuVerif) &&($subMenuVerifId  == (int)$_GET['id'])) || (empty($subMenuVerif)) ){
+                    $_POST['url'] = MenuController::urlVerfif($_POST['url']);
                     $menu = new Menu();
                     $menu->setId($_GET['id']);
                     $menu->setTitre($_POST['titre']);
