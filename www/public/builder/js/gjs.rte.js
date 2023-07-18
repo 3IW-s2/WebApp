@@ -1,3 +1,0 @@
-function RTE(editor) {
-  
-}
