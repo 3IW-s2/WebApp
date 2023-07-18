@@ -15,6 +15,7 @@ class Front
     private String $nav_color;
     private String $logo;
     private \DateTime $created_at;
+    private ?String  $template;
 
 
     public function __construct()
@@ -136,6 +137,24 @@ class Front
         $this->id = $id;
         return $this;
     }
+
+    /** * 
+     * @return String
+     */
+    public function getTemplate(): ?string
+    {
+        return $this->template;
+    }
+
+    /**
+     * @param String $template
+     */
+
+    public function setTemplate(?string $template): void
+    {
+        $this->template = $template;
+    }
+
 
 
 

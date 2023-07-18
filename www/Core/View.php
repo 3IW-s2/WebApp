@@ -1,6 +1,8 @@
 <?php
 namespace App\Core;
 
+use App\Repositories\FrontRepository;
+
 class View {
 
     private String $view;
@@ -48,8 +50,31 @@ class View {
     public function setTemplate(string $template): void
     {
         $this->template = "Views/".$template.".fvg.php";
-        if(!file_exists($this->template)){
-            die("Le template ".$this->template." n'existe pas");
+        $frontRepository = new FrontRepository();
+        $front = $frontRepository->getFrontManagement();
+        if($template === "front"){
+            if((int)$front['template'] === 0){
+                if(!file_exists($this->template)){
+                    die("Le template ".$this->template." n'existe pas");
+                }
+            }else{
+                if( ((int)$front['template']) === 1){
+                    $this->template = "Views/Template/".$template.".fvg.php";
+                        if(!file_exists($this->template)){
+                            die("Le template ".$this->template." n'existe pas");
+                        }     
+                }else{
+                    $this->template = "Views/Template/".$template."-".(int)$front['template'].".fvg.php";
+                        if(!file_exists($this->template)){
+                            die("Le template ".$this->template." n'existe pas");
+                        }
+
+                 } 
+            }
+        }else{
+            if(!file_exists($this->template)){
+                die("Le template ".$this->template." n'existe pas");
+            }
         }
     }
 

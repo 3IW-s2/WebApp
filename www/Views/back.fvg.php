@@ -186,6 +186,15 @@
                       </p>
                   </a>
             </li>
+            <li class="nav-item">
+              <li class="nav-item">
+                  <a href="/admin/template" class="nav-link">
+                      <i class="nav-icon far fa-edit"></i>
+                      <p>
+                        chznger la vue front
+                      </p>
+                  </a>
+            </li>
 
             <!-- <li class="nav-item">
               <a href="#" class="nav-link">

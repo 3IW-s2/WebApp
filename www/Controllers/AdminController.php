@@ -17,6 +17,8 @@ use App\Services\CommentService;
 use App\Services\UserService;
 use App\Services\PostService;
 use App\Repositories\Pluggins\IpRepository;
+use App\Repositories\FrontRepository;
+use App\Models\Front;
 
 
 
@@ -72,7 +74,18 @@ class AdminController
         $view->assign('ip', $ip);
         
    
+    }
+    public function template(){
+        $view = new View("Backend/template", "back");
 
+        if(isset($_POST['submit'])){
+            $front = new Front();
+            $front->setTemplate($_POST['template']);
+            $front->setId(1);
+            $frontRepo = new FrontRepository();
+            $frontRepo->changeTemplate($front);
+
+        }
     }
 
 }
