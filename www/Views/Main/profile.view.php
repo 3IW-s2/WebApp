@@ -31,11 +31,14 @@
               
               <br><br> <br><br>
               <a href="/logout" > <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              deconnecter
+              Se déconnecter
             </button></a>
               <form action="" method="post">
                 <input type="hidden" name="id" value="<?= $user['id'] ?>">
-                <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
+                  <?php if($user['role'] != 1){
+                  ?>
+                <button type="submit" name="delete" class="btn btn-danger">Supprimer mon compte</button>
+               <?php } ?>
               </form>
              
               </div>    
