@@ -16,13 +16,13 @@
                                   
                                     ?>
                                     <div>
-                                       Firstname: <?= $user['firstname'] ?>
+                                       Prénom: <?= $user['firstname'] ?>
                                     </div>
                                     <div>
-                                        Lastname  : <?= $user['lastname'] ?>
+                                        Nom  : <?= $user['lastname'] ?>
                                     </div> 
                                     <div>
-                                        email : <?= $user['email'] ?>
+                                        Email : <?= $user['email'] ?>
                                      </div>
                                 
                                     <?php
