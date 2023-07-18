@@ -54,9 +54,10 @@ class Main Extends BaseController
         $newIpRepository = $newIpRepository->getAllIp();
         $exist = false;
         if(!empty($newIpRepository)){
+           
             foreach($newIpRepository as $ip){
                 if($newIp->getIp() == $ip){
-                    $exist = true;
+                    $exist == true;
                    // break;
                 }
             }
