@@ -139,5 +139,5 @@ CREATE TABLE {DB_PREFIX}front (
 );
 
 
-INSERT INTO {DB_PREFIX}front (font, font_weight, primary_color, nav_color, logo, created_at, updated_at) VALUES ('Arial', 'light', '#000000', '#000000' , 'logo.png', NOW(), NOW());
+INSERT INTO {DB_PREFIX}front (font, font_weight, primary_color, nav_color, logo, created_at, updated_at) VALUES ('Arial', 'light', '#000000', '#a8d9ff' , 'logo.png', NOW(), NOW());
 
