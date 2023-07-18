@@ -116,13 +116,13 @@
 
     </body>
 
-    <!-- <script>
+     <script>
         var images = document.images;
         var srcList = [];
         for(var i = 0; i < images.length; i++) {
             
-            images[i].style.width = "10%";
-            images[i].style.height = "10%";
+            images[i].style.width = "50%";
+            images[i].style.height = "50%";
         }
-    </script> -->
+    </script> 
 </html>

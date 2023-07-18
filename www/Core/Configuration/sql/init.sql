@@ -141,3 +141,8 @@ CREATE TABLE {DB_PREFIX}front (
 
 INSERT INTO {DB_PREFIX}front (font, font_weight, primary_color, nav_color, logo, created_at, updated_at) VALUES ('Arial', 'light', '#000000', '#000000' , 'logo.png', NOW(), NOW());
 
+CREATE TABLE {DB_PREFIX}ip(
+    id SERIAL PRIMARY KEY,
+    ip VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL
+);
