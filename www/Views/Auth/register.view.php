@@ -16,11 +16,19 @@
                             <form id="register-form" method="post" action="" class="form1" >
                                         <?php 
                                          if($error->hasErrors()): ?>
-                                        <div class="alert alert-danger">
-                                            <?php foreach($error->getErrors() as $errors): ?>
-                                            <p><?php echo $errors; ?></p>
+<!--                                         <div class="alert alert-danger">
+ -->                                            <?php foreach($error->getErrors() as $errors): ?>
+                                                <?php if( $errors == "Un email de confirmation vous a été envoyé"): ?>
+                                                    <div class="alert alert-success">
+                                                    <p><?php echo $errors; ?></p>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <div class="alert alert-danger">
+                                                    <p><?php echo $errors; ?></p>
+                                                    </div>
+                                                <?php endif; ?>
                                             <?php endforeach; ?>
-                                        </div>
+                                     <!--    </div> -->
                                         <?php endif; ?>
                                         <div class="form-group">
                                             <label for="firstname">Firstname</label>

@@ -200,6 +200,7 @@ class ArticleController  Extends BaseController
                 $article->setAuthor($_SESSION['user']);
                 $article->setSlug($_POST['slug']);
                 $article->setCategoryId((int)$_POST['articleType']);
+                if(isset($_POST['active_comment'])){ $article->setActiveComment('on'); }else{ $article->setActiveComment('off'); }
                 $ArtcileService->createArticle($article);
                 header('Location: /admin/article/index');
             }
@@ -268,6 +269,7 @@ class ArticleController  Extends BaseController
                         $article->setTitle($_POST['title']);
                         $article->setContent($_POST['content']);
                         $article->setSlug($_POST['slug']);
+                        if(isset($_POST['active_comment'])){ $article->setActiveComment('on'); }else{ $article->setActiveComment('off'); }
                         $article->setCategoryId((int)$_POST['articleType']);
                         //$article->setupdate_at($date->format('Y-m-d'));
                         $ArtcileService->updateArticle($article) ;

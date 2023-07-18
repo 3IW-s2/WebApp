@@ -36,6 +36,10 @@
                                                 <label for="email">Slug</label>
                                                 <input type="text" name="slug" id="slug" class="form-control"  />
                                             </div>
+                                            <div class="form-group">
+                                                 <label for="active_comment"> active comment</label>
+                                            </div>
+                                            <input type="checkbox" name="active_comment" id="active_comment"  />
 
                                             <div class="form-group">
                                                 <label for="articleType">Type d'article</label>

@@ -81,7 +81,9 @@ ALTER TABLE {DB_PREFIX}users ADD COLUMN expirate_token TIMESTAMP  NULL;
     user_id INTEGER  NULL,
     slug VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
-    category_id INTEGER  NULL
+    category_id INTEGER  NULL,
+    active_comment VARCHAR(255)  NULL
+
 ); 
 /* ALTER TABLE {DB_PREFIX}articles ADD COLUMN category_id INTEGER  NULL;
  */
