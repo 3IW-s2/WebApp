@@ -18,7 +18,6 @@
             height: 150px;
             width: 100px;
         }
-
         
     </style>
     <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
@@ -147,10 +146,10 @@
             },
         });
 
-        var content_first = editor.getHtml();
+        var content_first = editor.getHtml() + "<style>" + editor.getCss() + "</style>";
         document.getElementById("content").value = content_first;
         editor.on("change:changesCount", ( ) => {
-            content = editor.getHtml();
+            content = editor.getHtml() + "<style>" + editor.getCss() + "</style>";
             document.getElementById("content").value = content;
         }); 
         

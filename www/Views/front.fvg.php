@@ -12,6 +12,12 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
 <!DOCTYPE html>
 <html>
 <head>
+        <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
+        <script src="https://unpkg.com/grapesjs-blocks-basic"></script>
+        <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+        <script src="http://brokenlande.de/grapesjs/"></script>
+
     <meta charset="UTF-8">
     <title><?= $appConfig["APP_NAME"] ?? "Default app name" ?></title>
     <meta name="description" content="TIW">
@@ -26,7 +32,6 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
-    <link rel="stylesheet" href="assets/css/pricing-plan.css">
     <link rel = "stylesheet" href = "/public/css/main.css">
     <style>
 
@@ -52,12 +57,8 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
             background-color: var(--nv-color);
         }
 
-    </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721551398549890"
-     crossorigin="anonymous"></script>
 
-     <link rel="stylesheet" href="//unpkg.com/grapesjs/dist/css/grapes.min.css">
-    <script src="//unpkg.com/grapesjs"></script>
+    </style>
 
 </head>
 <body>
@@ -116,11 +117,12 @@ $appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
                         echo "<li class='nav-item px-2 py-2 dropdown'>";
                         echo "<a href='javascript:void(0)' class='nav-link text-uppercase text-dark dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>{$menu['titre']}</a>";
                         echo "<ul class='dropdown-menu' aria-labelledby='navbarDropdown'>";
-                        
+                        echo"<li><a class='dropdown-item' style='text-transform: uppercase;' href='{$menu['url']}'>{$menu['titre']}</a></li>";
+
                         foreach($sousmenus as $sousmenu){
+
                             if($sousmenu['parent_id'] == $menu['menu_id']){
                                 //affiche le menu auquel il appartient et met le en majuscule et son lien aussi
-                                echo"<li><a class='dropdown-item' style='text-transform: uppercase;' href='{$menu['url']}'>{$menu['titre']}</a></li>";
                                 echo "<li><a class='dropdown-item' href='{$sousmenu['url']}'>{$sousmenu['titre']}</a></li>";
                             }
                         }

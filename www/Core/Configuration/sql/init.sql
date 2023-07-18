@@ -11,12 +11,12 @@ CREATE TABLE {DB_PREFIX}users (
 
 CREATE TABLE {DB_PREFIX}admin_preferences (
     id SERIAL PRIMARY KEY,
-    number_article INT NOT NULL DEFAULT 3,
+    number_article INT NOT NULL DEFAULT 3
 );
 
 CREATE TABLE {DB_PREFIX}article_types (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL
 );
 
 INSERT INTO {DB_PREFIX}article_types (name) VALUES ('sports');
@@ -32,7 +32,7 @@ CREATE TABLE {DB_PREFIX}posts(
     author VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     status VARCHAR(255) NOT NULL,
-    category_id INTEGER  NULL,
+    category_id INTEGER  NULL
 );
 
 
@@ -81,7 +81,7 @@ ALTER TABLE {DB_PREFIX}users ADD COLUMN expirate_token TIMESTAMP  NULL;
     user_id INTEGER  NULL,
     slug VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
-    category_id INTEGER  NULL,
+    category_id INTEGER  NULL
 ); 
 /* ALTER TABLE {DB_PREFIX}articles ADD COLUMN category_id INTEGER  NULL;
  */

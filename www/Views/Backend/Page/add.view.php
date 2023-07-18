@@ -23,6 +23,7 @@
             height: 150px;
             width: 100px;
         }
+        
 
         
     </style>
@@ -110,9 +111,11 @@
 
         //recupère ce qu'il y'a dans la div gjs et affiche le resultat dans la console utilise html()
         editor.on("change:changesCount", () => {
-            content = editor.getHtml();
+            content = editor.getHtml() + "<style>" + editor.getCss() + "</style>";
             document.getElementById("content").value = content;
         }); 
+
+        //ajoute au pan
 
     </script>
 </body>
