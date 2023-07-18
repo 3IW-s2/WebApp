@@ -84,7 +84,7 @@
 
 
 <script>
-    var images = document.getElementsByTagName('img');
+   /*  var images = document.getElementsByTagName('img');
     for (var i = 0; i < images.length; i++) {
         images[i].style.width = '374px';
         images[i].style.height = '504px';
@@ -96,5 +96,5 @@
         images[i].style.marginLeft = 'auto';
         images[i].style.marginRight = 'auto';
         images[i].style.display = 'block';
-    }
+    } */
 </script>
