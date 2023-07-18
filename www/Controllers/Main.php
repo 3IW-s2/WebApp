@@ -13,6 +13,8 @@ use App\Models\User;
 use App\Core\Dump;
 use App\Core\Database;
 use App\Services\UserService;
+use App\Pluggins\Ip;
+use App\Repositories\Pluggins\IpRepository;
 
 
 class Main Extends BaseController
@@ -46,6 +48,28 @@ class Main Extends BaseController
 
     public function profile():void
     {
+        /* tout pour les stats */
+        $newIpRepository = new IpRepository();
+        $newIp = new Ip();
+        $newIpRepository = $newIpRepository->getAllIp();
+        $exist = false;
+        if(!empty($newIpRepository)){
+            foreach($newIpRepository as $ip){
+                if($newIp->getIp() == $ip){
+                    $exist = true;
+                   // break;
+                }
+            }
+            if($exist = false){
+                $ipRepo = new IpRepository();
+                $ipRepo->AddNewIp($newIp->getIp());
+            }
+            
+        }else{
+            $ipRepo = new IpRepository();
+            $ipRepo->AddNewIp($newIp->getIp());
+        }
+
         $menuService = new MenuService();
         $menus = $menuService->activeLink();
         $sousmenus = $menuService->findAllParent();

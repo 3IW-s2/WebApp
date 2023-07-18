@@ -16,6 +16,8 @@ use App\Core\Menu;
 use App\Services\CommentService;
 use App\Services\UserService;
 use App\Services\PostService;
+use App\Repositories\Pluggins\IpRepository;
+
 
 
 
@@ -27,6 +29,7 @@ class AdminController
     private $error;
     private $menu;
     private $page ;
+    private $ip;
 
     public function __construct()
     {
@@ -36,6 +39,7 @@ class AdminController
         $this->error = new Error();
         $this->menu = new Menu();
         $this->page = new PostService();
+        $this->ipRepo = new IpRepository();
         
     }
 
@@ -53,6 +57,8 @@ class AdminController
         $userPend = $this->userService->getAllUserPending();
         $userOnline = $this->userService->getAllUserOnline();
 
+        $ip = $this->ipRepo->getAllIp();
+
         $view = new View("Backend/index", "back");
         $view->assign('users', $userAll);
         $view->assign('usersRemoved', $usersRemoved);
@@ -63,6 +69,7 @@ class AdminController
         $view->assign('comments', $commentAll);
         $view->assign('menus', $menu);
         $view->assign('pages', $page);
+        $view->assign('ip', $ip);
         
    
 

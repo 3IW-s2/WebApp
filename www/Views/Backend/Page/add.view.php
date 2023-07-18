@@ -36,6 +36,7 @@
 
 </head>
 <body>
+<a id="is12e">https://gavinaperano.com<br/><br/></a>
 
     <div id="gjs">
 <!--         <h1>Hello World Component!</h1>
@@ -45,12 +46,13 @@
       </div>
     <!-- recuperer ce qu'il y'a dans la div gjs pour l'enregistrer dans la colomn content -->
     <form action="" method="post">
+    
         <?php if(isset($errors)): ?>
             <div class="alert alert-danger">
                  <p><?php echo $errors; ?></p>
                         </div>
              <?php endif; ?>
-         <input type="checkbox" name="active">   
+         <input type="checkbox" name="active" >   
          <input type="hidden" name="content" id="content">
          <input type="text" name="slug" id="slug">
          <div>

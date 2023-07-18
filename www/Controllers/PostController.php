@@ -13,6 +13,7 @@ use App\Models\Comment;
 use App\Core\Database;
 use App\Core\Error;
 use App\Core\Menu;
+use App\Pluggins\Ip;
 
 class PostController  Extends BaseController
 {
@@ -60,7 +61,9 @@ class PostController  Extends BaseController
           
             $view->assign('comments', $comments);
         }else{
-
+       /*  $ip = new Ip();
+        $ip->getIp();
+        var_dump($ip);die; */
         $postService = new PostService();
         //var_dump($postService);
         $posts = $postService->getPostBySlug($post);
