@@ -48,6 +48,18 @@ class FrontRepository extends Database
         return true;
     }
 
+    public function changeTemplate(Front $front){
+        $query = "UPDATE {$this->table} SET template = :template WHERE id = :id";
+        $params = [
+            'template' => $front->getTemplate(),
+            'id' => $front->getId()
+        ];
+
+        $statement = $this->db->query($query, $params);
+
+        return true;
+    }
+
 
 
 

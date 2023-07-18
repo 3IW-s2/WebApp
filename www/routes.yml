@@ -63,6 +63,12 @@ admin:
   security: ROLE:ADMIN
   verifConnexion: true
 
+admin/template:
+  controller: AdminController
+  action: template
+  security: ROLE:ADMIN
+  verifConnexion: true  
+
 admin/showuser:
   controller: UserController
   action: showUser
