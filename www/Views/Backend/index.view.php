@@ -5,14 +5,14 @@
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">tous les utilisateurs</span>
+                <span class="info-box-text">Utilisateurs</span>
                 <span class="info-box-number">
                   <?php 
                     echo count($users);
                    ?>
-                  <small><?=  count($usersRemoved);?>Bloqué</small>
-                  <small><?= count($userAct);?>actif</small>
-                  <small><?=count($userPend);?>en attente</small>
+                  <small><?=  count($usersRemoved);?> Bloqué</small>
+                  <small><?= count($userAct);?> Actif</small>
+                  <small><?=count($userPend);?> En attente</small>
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -26,7 +26,7 @@
               <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">tous les articles</span>
+                <span class="info-box-text">Articles</span>
                 <span class="info-box-number"><?php echo count($articles); ?></span>
               </div>
               <!-- /.info-box-content -->
@@ -43,7 +43,7 @@
               <span class="info-box-icon bg-success elevation-1"><i class="fa fa-comments"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">tous les commentaires</span>
+                <span class="info-box-text">Commentaires</span>
                 <span class="info-box-number"><?php echo count($comments); ?></span>
               </div>
               <!-- /.info-box-content -->
@@ -56,7 +56,7 @@
               <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-file"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text"> tous Les pages</span>
+                <span class="info-box-text">Pages</span>
                 <span class="info-box-number"><?php echo count($pages) ?></span>
               </div>
               <!-- /.info-box-content -->
@@ -68,7 +68,7 @@
               <span class="info-box-icon bg-success elevation-1"><i class="fa fa-user"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text"> tous Les utilisateurs en ligne</span>
+                <span class="info-box-text">Utilisateurs en ligne</span>
                 <span class="info-box-number"><?php echo count($userOnline) ?></span>
               </div>
               <!-- /.info-box-content -->

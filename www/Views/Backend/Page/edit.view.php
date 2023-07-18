@@ -47,7 +47,7 @@
                                                 <input type="text" name="slug" id="slug" class="form-control"  value="<?= $posts["slug"]?>" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="articleType">articleType</label>
+                                                <label for="articleType">Type d'article</label>
                                                 <select name="articleType" id="articleType" class="form-control">
                                                     <option value="">Sélectionnez un type d'article</option> <!-- Option vide par défaut -->
                                                     <?php foreach($types as $articleType): ?>
@@ -55,7 +55,7 @@
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-                                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                                 </form>
 
                                 <div class="form-group">
@@ -78,7 +78,7 @@
                                         <?= $data["content"] ?>
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                           <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                         </div>
                                       </div>
@@ -87,18 +87,18 @@
                                  
                                         <?php
                                         ?>         <br> _____<br>
-                                        <li> le slug: <?=$data["slug"] ?></li>   
-                                        <li> le status: <?=substr($data["content"], 0, 100) ?></li> 
+                                        <li> Slug: <?=$data["slug"] ?></li>
+                                        <li> Statut: <?=substr($data["content"], 0, 100) ?></li>
                                         <form id="update-register-form" method="post" action="">
                                             <textarea id="content" name="content" class="hidden-textarea"><?= $data["content"] ?></textarea>
                                             <input type="hidden" name="slug" value="<?= $data["slug"] ?>" />
                                             <input type="hidden" name="status" value="<?= $data["status"] ?>" />
                                             <input type="hidden" name="author" value="<?= $data["author"] ?>" />
                                             <input type="hidden" name="articleType" value="<?= $data["articleType"] ?>" />
-                                            <button type="submit" name="submit" class="btn btn-primary">Restore</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Restorer</button>
                                         </form>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal<?= $entry["id"] ?>">
-                                           tout voir
+                                           Tout afficher
                                      </button>
                                     <?php endforeach; ?>
                                   

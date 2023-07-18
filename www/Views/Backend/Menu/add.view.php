@@ -19,9 +19,9 @@
                         <div class="course-col">
                         
                             <div class = "title text-center">
-                            <h2 class = "position-relative d-inline-block"> ajouter un  menu </h2>
+                            <h2 class = "position-relative d-inline-block">Ajout d'un menu</h2>
                             </div>
-                            <H1> ajouter un Lien dans le menu </H1>
+                            <H1>Ajout d'un lien dans le menu</H1>
                                 <form id="add-menu-form" method="post" action="">
                                 <?php if(isset($errors)): ?>
                                     <div class="alert alert-danger">
@@ -29,17 +29,17 @@
                                     </div>
                                     <?php endif; ?>
                                     <div class="form-group">
-                                                <label for="firstname">Title</label>
+                                                <label for="firstname">Titre</label>
                                                 <input type="text" name="title" id="title" class="form-control"  />
                                             </div>
                                             <div class="form-group">
                                                 <label for="lastname">Url</label>
                                                 <input type="text" name="url" id="url" class="form-control"   />
                                             </div>
-                                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                                 </form>
 
-                                <H1> ajouter un sous menu </H1>
+                                <H1>Ajout d'un sous menu</H1>
                                 <!-- y'a plusieur valeurs dans $menus recupère les et mets les dans une liste dans mon form pour pouvoir les envoyers  -->
 
                                 <form id="add-sous-menu-form" method="post" action="">
@@ -49,7 +49,7 @@
                                     </div>
                                     <?php endif; ?>
                                     <div class="form-group">
-                                                <label for="firstname">Title</label>
+                                                <label for="firstname">Titre</label>
                                                 <input type="text" name="title" id="title" class="form-control"  />
                                             </div>
                                             <div class="form-group">
@@ -64,7 +64,7 @@
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-                                            <button type="submit" name="submit-submenu" class="btn btn-primary">Register</button>
+                                            <button type="submit" name="submit-submenu" class="btn btn-primary">Valider</button>
                                 </form>
 
         

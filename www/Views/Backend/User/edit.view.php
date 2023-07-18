@@ -10,18 +10,18 @@
                         <!-- un formulaire d'inscription -->
                         <form id="update-register-form" method="post" action="">
                             <div class="form-group">
-                                <label for="firstname">Firstname</label>
+                                <label for="firstname">Nom</label>
                                 <input type="text" name="firstname" id="firstname" class="form-control" value="<?= $usr["firstname"]?>" />
                             </div>
                             <div class="form-group">
-                                <label for="lastname">Lastname</label>
+                                <label for="lastname">Prénom</label>
                                 <input type="text" name="lastname" id="lastname" class="form-control"  value="<?= $usr["lastname"]?>" />
                             </div>
                             <div class="form-group">
-                                <label for="email">email</label>
+                                <label for="email">Email</label>
                                 <input type="text" name="email" id="email" class="form-control"  value="<?= $usr["email"]?>" />
                             </div>
-                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                         </form>
                         
                         <!-- Affichage de l'historique -->
@@ -31,15 +31,15 @@
                                 <?php foreach ($history as $entry): 
                                     $data = json_decode($entry["content"], true);
                                 ?>
-                                    <li>l'email: <?=$data["email"] ?></li>
-                                    <li>le firstname: <?=$data["firstname"] ?></li>
-                                    <li>le lastname: <?=$data["lastname"] ?></li>
+                                    <li>Mail: <?=$data["email"] ?></li>
+                                    <li>Prénom: <?=$data["firstname"] ?></li>
+                                    <li>Nom: <?=$data["lastname"] ?></li>
                                     <form id="history-form" method="post" action="">
                                         <input type="hidden" name="id" value="<?= $data["id"] ?>" />
                                         <input type="hidden" name="email" value="<?= $data["email"] ?>" />
                                         <input type="hidden" name="firstname" value="<?= $data["firstname"] ?>" />
                                         <input type="hidden" name="lastname" value="<?= $data["lastname"] ?>" />
-                                        <button type="submit" name="submit" class="btn btn-primary">Restore</button>
+                                        <button type="submit" name="submit" class="btn btn-primary">Restorer</button>
                                     </form>
                                     <br>_____<br>
                                 <?php endforeach; ?>

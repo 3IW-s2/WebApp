@@ -29,14 +29,14 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <table class="table">
-                            <a href="add" class="btn btn-success">Add</a>
+                            <a href="add" class="btn btn-success">Ajouter</a>
 
                             <thead>
                                 <tr>
                                     <th scope="col">Id.</th>
-                                    <th scope="col">title</th>
-                                    <th scope="col">author</th>
-                                    <th scope="col">Content</th>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Contenu</th>
                                     <th scope="col">Category_id</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Slug</th>
@@ -65,13 +65,13 @@
                                         <td><?= $article["slug"]?></td>
                                        <!--  <td></td> -->
                                         <td>
-                                            <a href="edit?id=<?= $article['id'] ?>" class="btn btn-primary">Edit</a>
-                                            <a href="delete?id=<?= $article['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="edit?id=<?= $article['id'] ?>" class="btn btn-primary">Modifier</a>
+                                            <a href="delete?id=<?= $article['id'] ?>" class="btn btn-danger">Supprimer</a>
                                            
                                             <?php if($article["status"] == "Published") : ?>
-                                                <a href="pending?id=<?= $article['id'] ?>" class="btn btn-warning">Pending</a>
+                                                <a href="pending?id=<?= $article['id'] ?>" class="btn btn-warning">En attente</a>
                                             <?php else : ?>
-                                                <a href="publish?id=<?= $article['id'] ?>" class="btn btn-success">Publish</a>
+                                                <a href="publish?id=<?= $article['id'] ?>" class="btn btn-success">Publier</a>
                                             <?php endif; ?>
                                         </td>
                                     </tr>

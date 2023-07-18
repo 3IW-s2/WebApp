@@ -14,7 +14,7 @@
                         <div class="course-col">
                         
                             <div class = "title text-center">
-                            <h2 class = "position-relative d-inline-block"> Modifier un Article</h2>
+                            <h2 class = "position-relative d-inline-block">Modification de l'article</h2>
                             </div>
                                                             <!-- un formulaire d'inscription -->
                                 <form id="update-register-form" method="post" action="" >
@@ -24,12 +24,12 @@
                                                 </div>
                                                 <?php endif; ?>
                                             <div class="form-group">
-                                                <label for="firstname">name</label>
+                                                <label for="firstname">Nom</label>
                                                 <input type="text" name="name" id="name" class="form-control" value="<?= $articleType["name"]?>" />
                                             </div>                      
                                           
                                         
-                                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                                 </form>
 
         

@@ -20,8 +20,8 @@
                         <?php if(isset( $user_admin) && $user_admin == 1):?>
                             <form action="" method="post">
                                 <label for="numberArticle">Nombre d'article par page</label>
-                                <input type="number" name="numberArticle" id="numberArticle" value="<?= $admin_preferences ?>">
-                                <input type="submit" value="number" name="number">
+                                <input type="number" name="numberArticle" id="numberArticle" min="1" value="<?= $admin_preferences ?>">
+                                <input type="submit" value="Valider" name="number">
                             </form>
                         <?php endif; ?>    
                         <?php
@@ -38,10 +38,10 @@
                                             <p class="card-text mt-3 text-muted"><?= $article['content'] ?></p>
                                             <p class="card-text">
                                                 <small class="text-muted">
-                                                    <span class="fw-bold">Author: </span><?= $article['author'] ?>
+                                                    <span class="fw-bold">Auteur : </span><?= $article['author'] ?>
                                                 </small>
                                             </p>
-                                            <a href="<?= $url ?>" class="btn btn-primary">Read More</a>
+                                            <a href="<?= $url ?>" class="btn btn-primary">Voir l'article</a>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                         <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
                             <li class="page-item <?= ($currentPage == 1) ? 'disabled' : '' ?>">
-                                <a class="page-link" href="?page=<?= $currentPage - 1 ?>">Previous</a>
+                                <a class="page-link" href="?page=<?= $currentPage - 1 ?>">Précédent</a>
                             </li>
                             <?php
                             $totalPages = ceil(count($articles) / $articlesPerPage);
@@ -69,7 +69,7 @@
                             }
                             ?>
                             <li class="page-item <?= ($currentPage == $totalPages) ? 'disabled' : '' ?>">
-                                <a class="page-link" href="?page=<?= $currentPage + 1 ?>">Next</a>
+                                <a class="page-link" href="?page=<?= $currentPage + 1 ?>">Suivant</a>
                             </li>
                         </ul>
                     </nav>

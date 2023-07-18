@@ -35,15 +35,15 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <table class="table">
-                            <a href="add" class="btn btn-success">Add</a>
+                            <a href="add" class="btn btn-success">Ajouter</a>
                             <thead>
                                 <tr>
                                     <th scope="col">Id.</th>
-                                    <th scope="col">author</th>
-                                    <th scope="col">content</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Contenu</th>
                                     <th scope="col">Modal</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">category</th>
+                                    <th scope="col">Staut</th>
+                                    <th scope="col">Catégorie</th>
                                     <th scope="col">slug</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>
@@ -62,7 +62,7 @@
                                     <div class="modal-dialog" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
-                                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                          <h5 class="modal-title" id="exampleModalLabel">Titre de la modal</h5>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
@@ -71,7 +71,7 @@
                                         <?= $post["content"] ?>
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                           <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                         </div>
                                       </div>
@@ -87,7 +87,7 @@
                                         <td><?= $post_content ?></td>
                                         <td>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<?= $post["id"] ?>">
-                                           tout voir
+                                           Tout afficher
                                         </button>
                                         </td>
                                         <td><?= $post["status"] ?></td>
@@ -95,12 +95,12 @@
                                         <td><?= $post["slug"]?></td>
                                        <!--  <td></td> -->
                                         <td>
-                                            <a href="edit?id=<?= $post['id'] ?>" class="btn btn-primary">Edit</a>
-                                            <a href="delete?id=<?= $post['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="edit?id=<?= $post['id'] ?>" class="btn btn-primary">Modifier</a>
+                                            <a href="delete?id=<?= $post['id'] ?>" class="btn btn-danger">Supprimer</a>
                                             <?php if($post['status'] == 'published') : ?>
-                                                <a href="pending?id=<?= $post['id'] ?>" class="btn btn-warning">Pending</a>
+                                                <a href="pending?id=<?= $post['id'] ?>" class="btn btn-warning">En attente</a>
                                             <?php else : ?>
-                                                <a href="publish?id=<?= $post['id'] ?>" class="btn btn-success">Publish</a>
+                                                <a href="publish?id=<?= $post['id'] ?>" class="btn btn-success">Publier</a>
                                             <?php endif; ?>
                                         </td>
                                     </tr>

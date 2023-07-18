@@ -131,31 +131,31 @@
                 <li class="nav-item">
                   <a href="/admin/showuser" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p> show users</p>
+                    <p>Gestion des utilisateurs</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="/admin/article/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>show article</p>
+                    <p>Gestion des articles</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="/admin/menu/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>show menu</p>
+                    <p>Gestion du menu</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="/admin/page/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>show posts</p>
+                    <p>Gestion des pages</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="/admin/comment/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>show comments</p>
+                    <p>Gestion des commentaires</p>
                   </a>
                 </li>
               </ul>
@@ -182,7 +182,7 @@
                   <a href="/admin/articletype/index" class="nav-link">
                       <i class="nav-icon far fa-edit"></i>
                       <p>
-                         type d'article
+                         Types d'articles
                       </p>
                   </a>
             </li>

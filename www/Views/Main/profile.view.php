@@ -1,7 +1,12 @@
 
     <div class="container">
         
-    </br></br></br></br></br></br></br></br>
+    </br></br>
+
+        <div class="title text-center py-5">
+            <br><br>
+            <h2 class="position-relative d-inline-block">Mon profil</h2>
+        </div>
 
 
      <div class="row">
@@ -11,13 +16,13 @@
                                   
                                     ?>
                                     <div>
-                                       Firstname: <?= $user['firstname'] ?>
+                                       Prénom: <?= $user['firstname'] ?>
                                     </div>
                                     <div>
-                                        Lastname  : <?= $user['lastname'] ?>
+                                        Nom  : <?= $user['lastname'] ?>
                                     </div> 
                                     <div>
-                                        email : <?= $user['email'] ?>
+                                        Email : <?= $user['email'] ?>
                                      </div>
                                 
                                     <?php
@@ -31,11 +36,14 @@
               
               <br><br> <br><br>
               <a href="/logout" > <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              deconnecter
+              Se déconnecter
             </button></a>
               <form action="" method="post">
                 <input type="hidden" name="id" value="<?= $user['id'] ?>">
-                <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
+                  <?php if($user['role'] != 1){
+                  ?>
+                <button type="submit" name="delete" class="btn btn-danger">Supprimer mon compte</button>
+               <?php } ?>
               </form>
              
               </div>    
