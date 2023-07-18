@@ -18,23 +18,23 @@
                              <form id="register-form" method="post" action="" >
             
                                             <div class="form-group">
-                                                <label for="firstname">Firstname</label>
+                                                <label for="firstname">Prénom</label>
                                                 <input type="text" name="firstname" id="firstname" class="form-control" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="lastname">Lastname</label>
+                                                <label for="lastname">Nom</label>
                                                 <input type="text" name="lastname" id="lastname" class="form-control" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="email">email</label>
+                                                <label for="email">Email</label>
                                                 <input type="text" name="email" id="email" class="form-control" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="pwd">Password</label>
+                                                <label for="pwd">Mot de passe</label>
                                                 <input type="password" name="password" id="password" class="form-control" />
                                             </div>
                                         
-                                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                                 </form>
 
         

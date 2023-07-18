@@ -29,12 +29,12 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <table class="table">
-                            <a href="add" class="btn btn-success">Add</a>
+                            <a href="add" class="btn btn-success">Ajouter</a>
 
                             <thead>
                                 <tr>
-                                    <th scope="col">Id.</th>
-                                    <th scope="col">name</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Nom</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -49,8 +49,8 @@
                          
                                        <!--  <td></td> -->
                                         <td>
-                                            <a href="edit?id=<?= $article['id'] ?>" class="btn btn-primary">Edit</a>
-                                            <a href="delete?id=<?= $article['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="edit?id=<?= $article['id'] ?>" class="btn btn-primary">Modifier</a>
+                                            <a href="delete?id=<?= $article['id'] ?>" class="btn btn-danger">Supprimer</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

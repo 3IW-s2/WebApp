@@ -1,7 +1,12 @@
 
     <div class="container">
         
-    </br></br></br></br></br></br></br></br>
+    </br></br>
+
+        <div class="title text-center py-5">
+            <br><br>
+            <h2 class="position-relative d-inline-block">Mon profil</h2>
+        </div>
 
 
      <div class="row">

@@ -14,7 +14,7 @@
                         <div class="course-col">
                         
                             <div class = "title text-center">
-                            <h2 class = "position-relative d-inline-block">  ajouter un article</h2>
+                            <h2 class = "position-relative d-inline-block">Ajout d'un type d'article</h2>
                             </div>
                                                             <!-- un formulaire d'inscription -->
                                                             <H1> </H1>
@@ -25,11 +25,11 @@
                                     </div>
                                     <?php endif; ?>
                                     <div class="form-group">
-                                                <label for="name">name</label>
+                                                <label for="name">Nom</label>
                                                 <input type="text" name="name" id="name" class="form-control"  />
                                             </div>
                                             
-                                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                                 </form>
 
         

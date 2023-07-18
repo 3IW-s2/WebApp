@@ -24,7 +24,7 @@
                         <?php if(isset( $user_admin) && $user_admin == 1):?>
                             <form action="" method="post">
                                 <label for="numberArticle">Nombre d'article par page</label>
-                                <input type="number" name="numberArticle" id="numberArticle" value="<?= $admin_preferences ?>">
+                                <input type="number" name="numberArticle" id="numberArticle" min="1" value="<?= $admin_preferences ?>">
                                 <input type="submit" value="Valider" name="number">
                             </form>
                         <?php endif; ?>    
