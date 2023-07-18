@@ -22,6 +22,7 @@ class Article
     private String $updateAt;
     private ?String $image_path;
     private ?Int $category_id;
+    private ?String  $active_comment;
     
 
     public function __construct()
@@ -265,6 +266,26 @@ class Article
     public function setCategoryId(?Int $category_id): self
     {
         $this->category_id = $category_id;
+        return $this;
+    }
+
+    /**
+     * Get the value of active_comment
+     * @return String
+     */
+    public function getActiveComment(): ?String
+    {
+        return $this->active_comment;
+    }
+
+    /**
+     * Set the value of active_comment
+     * @param String $active_comment
+     * @return  self
+     */
+    public function setActiveComment(?String $active_comment): self
+    {
+        $this->active_comment = $active_comment;
         return $this;
     }
 

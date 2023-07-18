@@ -66,7 +66,7 @@ class ArticleRepository
 
     public function createArticle(Article $article){
        
-        $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at , author , status , slug , category_id) VALUES (:title, :content, NOW(), NOW() , :author , :status , :slug , :category_id)";
+        $query = "INSERT INTO {$this->table} (title, content, created_at, updated_at , author , status , slug , category_id, active_comment) VALUES (:title, :content, NOW(), NOW() , :author , :status , :slug , :category_id, :active_comment)";
         $params = [
             'title' => $article->getTitle(),
             'content' => $article->getContent(),
@@ -74,6 +74,7 @@ class ArticleRepository
             'status' => 5,
             'slug' => $article->getSlug(),
             'category_id' => $article->getCategoryId(),
+            'active_comment' => $article->getActiveComment(),
 
         ];
         $stmt = $this->db->query($query , $params);
@@ -81,13 +82,14 @@ class ArticleRepository
 
     public function updateArticle(Article $article){
        
-        $query = "UPDATE {$this->table} SET title = :title, content = :content, slug= :slug , category_id= :category_id WHERE id = :id";
+        $query = "UPDATE {$this->table} SET title = :title, content = :content, slug= :slug , category_id= :category_id, active_comment= :active_comment WHERE id = :id";
         $params = [
             'id' => $article->getId(),
             'title' => $article->getTitle(),
             'content' => $article->getContent(),
             'slug' => $article->getSlug(),
             'category_id' => $article->getCategoryId(),
+            'active_comment' => $article->getActiveComment(),
         ];
         $stmt = $this->db->query($query , $params);
     }

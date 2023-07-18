@@ -61,7 +61,7 @@ class Main Extends BaseController
                    // break;
                 }
             }
-            if($exist = false){
+            if($exist == false){
                 $ipRepo = new IpRepository();
                 $ipRepo->AddNewIp($newIp->getIp());
             }
