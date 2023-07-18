@@ -53,13 +53,13 @@ class PageController  Extends BaseController
         $view->assign('types', $types);
         if(isset($_POST['submit']))
         {
+         $_POST['slug'] = $this->NormalizerSlug($_POST['slug']);
          $postverif = new Post();
          $postverif->setSlug($_POST['slug']);
          $postServiceVerif = new PostService(); 
          $postsverif = $postServiceVerif->getPostBySlugBy( $postverif);
 
          if(empty($postsverif) && !empty($_POST['slug']) && !empty($_POST['content']) && !empty($_POST['articleType'])){
-       
                 $post = new Post();
             // $post->setTitle($_POST['title']);
                 $post->setContent($_POST['content']);
@@ -142,6 +142,8 @@ class PageController  Extends BaseController
         {
         /*     var_dump($_POST);
 die;   */
+        $_POST['slug'] = $this->NormalizerSlug($_POST['slug']);
+
          $postverif = new Post();
          $postverif->setSlug($_POST['slug']);
          $postServiceVerif = new PostService(); 

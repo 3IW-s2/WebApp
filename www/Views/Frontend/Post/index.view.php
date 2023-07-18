@@ -6,11 +6,7 @@
         <div class="collection-list mt-5 row gx-0 gy-3">
 
             <div class="col-md-12">
-                <div class="mb-2">
-                    <div class="card-body px-0">
-                        <p class="card-text mt-3 text-muted"><?= $posts['content'] ;?></p>
-                    </div>
-                </div>
+                <?= $posts['content'] ;?>
             </div>
 
             <?php 
@@ -88,7 +84,7 @@
 
 
 <script>
-    var images = document.getElementsByTagName('img');
+   /*  var images = document.getElementsByTagName('img');
     for (var i = 0; i < images.length; i++) {
         images[i].style.width = '374px';
         images[i].style.height = '504px';
@@ -100,5 +96,5 @@
         images[i].style.marginLeft = 'auto';
         images[i].style.marginRight = 'auto';
         images[i].style.display = 'block';
-    }
+    } */
 </script>

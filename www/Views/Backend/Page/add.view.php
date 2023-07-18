@@ -18,15 +18,31 @@
             height: auto;
             min-height: auto;
         }
+        
+        .gjs-block.gjs-one-bg.gjs-four-color-h {
+            height: 40px;
+            width: 80px;
+        }
+        
+
+        
     </style>
     <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
     <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
+    <script src="https://unpkg.com/grapesjs-blocks-basic"></script>
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    <script src="js/gjs.init.js"></script>
+
+
 </head>
 <body>
+
     <div id="gjs">
-        <h1>Hello World Component!</h1>
-    </div>
-    <div id="blocks"></div>
+<!--         <h1>Hello World Component!</h1>
+ -->    </div>
+     <div id="tab-content" class="tab-content">
+        <div id="blocks"></div>
+      </div>
     <!-- recuperer ce qu'il y'a dans la div gjs pour l'enregistrer dans la colomn content -->
     <form action="" method="post">
         <?php if(isset($errors)): ?>
@@ -56,9 +72,10 @@
             fromElement: true,
             //width: "auto",
             storageManager: false,
-            plugins: ["gjs-preset-webpage"],
+            plugins: ["gjs-preset-webpage" , "gjs-blocks-basic"],
             pluginsOpts: {
                 "gjs-preset-webpage": {},
+                "gjs-blocks-basic": {},
             },
             blockManager: {
                 appendTo: "#blocks",
@@ -69,12 +86,7 @@
                         attributes: { class: "gjs-block-section" },
                         content:
                             '<section><h1>This is a simple title</h1><div>This is just a Lorem text: Lorem ipsum dolor sit amet</div></section>',
-                    },
-                    {
-                        id: "text",
-                        label: "Text",
-                        content: '<div data-gjs-type="text">Insert your text here</div>',
-                    },
+                    },                   
                     {
                         id: "image",
                         label: "Image",
@@ -86,16 +98,19 @@
                         // This triggers `active` event on dropped components and the `image`
                         // reacts by opening the AssetManager
                         activate: true,
-                    },
+                    }
+
                 ],
             },
         });
 
         //recupère ce qu'il y'a dans la div gjs et affiche le resultat dans la console utilise html()
         editor.on("change:changesCount", () => {
-            content = editor.getHtml();
+            content = editor.getHtml() + "<style>" + editor.getCss() + "</style>";
             document.getElementById("content").value = content;
         }); 
+
+        //ajoute au pan
 
     </script>
 </body>

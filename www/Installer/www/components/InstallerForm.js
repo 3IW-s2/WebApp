@@ -36,7 +36,7 @@ export default class InstallerForm extends Component {
                                 {
                                     type: "h1",
                                     children: [this.title],
-                                },
+                                },  
                                 {
                                     type: "p",
                                     children: [this.description],

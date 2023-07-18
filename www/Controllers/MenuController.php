@@ -15,7 +15,14 @@ use PDO;
 class MenuController
 {
     public static function urlVerfif( String $url)
-    {
+    {   
+        $url = str_replace(
+            array('à', 'â', 'ä', 'á', 'ã', 'å', 'À', 'Â', 'Ä', 'Á', 'Ã', 'Å', 'é', 'è', 'ê', 'ë', 'É', 'È', 'Ê', 'Ë', 'í', 'ì', 'î', 'ï', 'Í', 'Ì', 'Î', 'Ï', 'ð', 'ò', 'ô', 'ö', 'õ', 'ð', 'Ò', 'Ô', 'Ö', 'Õ', 'Ú', 'Ù', 'Û', 'Ü', 'ú', 'ù', 'û', 'ü', 'ý', 'ÿ', 'Ý', 'ç', 'Ç', 'Ñ', 'ñ'),
+            array('a', 'a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A', 'A', 'A', 'e', 'e', 'e', 'e', 'E', 'E', 'E', 'E', 'i', 'i', 'i', 'i', 'I', 'I', 'I', 'I', 'o', 'o', 'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'u', 'u', 'u', 'u', 'y', 'y', 'Y', 'c', 'C', 'N', 'n'),
+            $url
+        );
+        $url = preg_replace('/[^A-Za-z0-9-]+/', '-', $url);
+        $url = preg_replace('/-+/', '-', $url);
         $url = substr_replace( $url , '/', 0, 0 );
         return $url;
     }

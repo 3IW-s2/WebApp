@@ -14,21 +14,27 @@
             height: 100%;
         }
 
-        .gjs-block {
-            width: auto;
-            height: auto;
-            min-height: auto;
+        .gjs-block.gjs-one-bg.gjs-four-color-h {
+            height: 150px;
+            width: 100px;
         }
+        
     </style>
     <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
     <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
+    <script src="https://unpkg.com/grapesjs-blocks-basic"></script>
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    <script src="js/gjs.init.js"></script>
+
 </head>
 <body>
 
     <div id="gjs">
        <?= $posts["content"]?>
     </div>
-    <div id="blocks"></div>
+    <div id="tab-content" class="tab-content">
+        <div id="blocks"></div>
+      </div>
     <!-- recuperer ce qu'il y'a dans la div gjs pour l'enregistrer dans la colomn content -->
     <form id="add-page-form" method="post" action="">
     <?php if(isset($errors)): ?> <div class="alert alert-danger">   <p><?php echo $errors; ?></p>      </div> <?php endif; ?>
@@ -104,9 +110,10 @@
             fromElement: true,
             //width: "auto",
             storageManager: false,
-            plugins: ["gjs-preset-webpage"],
+            plugins: ["gjs-preset-webpage" , "gjs-blocks-basic"],
             pluginsOpts: {
                 "gjs-preset-webpage": {},
+                "gjs-blocks-basic": {},
             },
             blockManager: {
                 appendTo: "#blocks",
@@ -139,10 +146,10 @@
             },
         });
 
-        var content_first = editor.getHtml();
+        var content_first = editor.getHtml() + "<style>" + editor.getCss() + "</style>";
         document.getElementById("content").value = content_first;
         editor.on("change:changesCount", ( ) => {
-            content = editor.getHtml();
+            content = editor.getHtml() + "<style>" + editor.getCss() + "</style>";
             document.getElementById("content").value = content;
         }); 
         
