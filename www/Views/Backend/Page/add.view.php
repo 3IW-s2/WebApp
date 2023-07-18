@@ -20,8 +20,8 @@
         }
         
         .gjs-block.gjs-one-bg.gjs-four-color-h {
-            height: 150px;
-            width: 100px;
+            height: 40px;
+            width: 80px;
         }
         
 
@@ -86,12 +86,7 @@
                         attributes: { class: "gjs-block-section" },
                         content:
                             '<section><h1>This is a simple title</h1><div>This is just a Lorem text: Lorem ipsum dolor sit amet</div></section>',
-                    },
-                    {
-                        id: "text",
-                        label: "Text",
-                        content: '<div data-gjs-type="text">Insert your text here</div>',
-                    },
+                    },                   
                     {
                         id: "image",
                         label: "Image",

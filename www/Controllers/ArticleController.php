@@ -188,6 +188,7 @@ class ArticleController  Extends BaseController
         
 
         if (isset($_POST['submit'])) {
+            $_POST['slug'] = $this->NormalizerSlug($_POST['slug']);
             $articleVerif = new Article();
             $articleVerif->setSlug($_POST['slug']);
             $articleServiceVerif = new ArticleService();
@@ -255,6 +256,8 @@ class ArticleController  Extends BaseController
 
        
             if (isset($_POST['submit'])) {
+                $_POST['slug'] = $this->NormalizerSlug($_POST['slug']);
+
                 $articleVerif = new Article();
                 $articleVerif->setSlug($_POST['slug']);
                 $articleServiceVerif = new ArticleService();
