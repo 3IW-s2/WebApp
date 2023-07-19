@@ -54,18 +54,16 @@ class Main Extends BaseController
         $newIpRepository = $newIpRepository->getAllIp();
         $exist = false;
         if(!empty($newIpRepository)){
-           
             foreach($newIpRepository as $ip){
-                if($newIp->getIp() == $ip){
-                    $exist == true;
+                if (strcmp($newIp->getIp(), $ip['ip']) === 0) {
+                    $exist = true;
                    // break;
                 }
             }
-            if($exist == false){
+            if(!$exist){
                 $ipRepo = new IpRepository();
                 $ipRepo->AddNewIp($newIp->getIp());
-            }
-            
+            }  
         }else{
             $ipRepo = new IpRepository();
             $ipRepo->AddNewIp($newIp->getIp());

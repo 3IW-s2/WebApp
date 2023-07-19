@@ -1,19 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $appConfig["APP_NAME"] ?? "Default app name" ?></title>
     <meta name="description" content="TIW">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/public/bootstrap-5.0.2-dist/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/main.css">
-    
     <style>
         :root {
             --primary: <?= $front['primary_color'] ?>;
@@ -21,75 +15,61 @@
             --font: '<?= $newFont ?>', sans-serif;
             --font-weight: <?= $front['font_weight'] ?>;
         }
-        
+
         body {
             font-family: var(--font);
             font-weight: var(--font-weight);
         }
-        
+
         a {
             text-decoration: none;
             color: var(--primary);
         }
-        
+
         .navbar {
             background-color: var(--nv-color);
         }
-        
+
         .bg-primary {
             background-color: var(--primary) !important;
         }
-        
-        .btn:not(.nav-btns button) {
-            background-color: #fff;
-            color: rgb(85, 85, 85);
-            padding: 10px 28px;
-            border-radius: 25px;
-            border: 1px solid rgb(85, 85, 85);
-        }
-        
-        .btn:not(.nav-btns button):hover {
-            background-color: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-        
+
         .text-primary {
             color: var(--primary) !important;
         }
-        
+
         .navbar-brand img {
             width: 30px;
         }
-        
+
         .navbar-brand span {
             letter-spacing: 2px;
             font-family: var(--lg-font);
         }
-        
+
         .nav-link:hover {
             color: var(--primary) !important;
         }
-        
+
         .nav-item {
             border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
         }
-        
+
         #header {
             background: url(../images/ducati-urban-e-mobility-trottinette-electrique-pro-i-evo-urbaanews.jpeg) top;
             background-repeat: contain;
             background-size: auto;
         }
-        
+
         .carousel-inner h1 {
             font-size: 60px;
             font-family: var(--lg-font);
         }
-        
+
         .carousel-item .btn {
             border-color: #fff !important;
         }
-        
+
         .title h2::before {
             position: absolute;
             content: "";
@@ -102,17 +82,17 @@
             -ms-transform: translateY(-50%);
             transform: translateY(-50%);
         }
-        
+
         .active-filter-btn {
             background-color: var(--primary) !important;
             color: #fff !important;
             border-color: var(--primary) !important;
         }
-        
+
         .filter-button-group .btn:hover {
             color: #fff !important;
         }
-        
+
         .collection-img span {
             top: 20px;
             right: 20px;
@@ -120,96 +100,96 @@
             height: 46px;
             border-radius: 50%;
         }
-        
+
         .special-img span {
             top: 20px;
             right: 20px;
         }
-        
+
         .special-list .btn {
             padding: 8px 20px !important;
         }
-        
+
         .special-img img {
             -webkit-transition: all 0.3s ease;
             -o-transition: all 0.3s ease;
             transition: all 0.3s ease;
         }
-        
+
         .special-img:hover img {
             -webkit-transform: scale(1.2);
             -ms-transform: scale(1.2);
             transform: scale(1.2);
         }
-        
+
         #offers {
             background: url(../images/offer_img.jpg) center/cover no-repeat;
         }
-        
+
         #offers .row {
             min-height: 60vh;
         }
-        
+
         .offers-content span {
             font-size: 28px;
         }
-        
+
         .offers-content h2 {
             font-size: 60px;
             font-family: var(--lg-font);
         }
-        
+
         .offers-content .btn {
             border-color: transparent !important;
         }
-        
+
         #about {
             background-color: rgba(179, 179, 179, 0.05);
         }
-        
+
         #newsletter {
             background-color: rgba(179, 179, 179, 0.05);
         }
-        
+
         #newsletter p {
             max-width: 600px;
         }
-        
+
         #newsletter .input-group {
             max-width: 500px;
         }
-        
+
         #newsletter .form-control {
             border-top-left-radius: 25px;
             border-bottom-left-radius: 25px;
         }
-        
+
         #newsletter .btn {
             background-color: var(--primary);
             color: #fff;
             border-color: var(--primary);
         }
-        
+
         #newsletter .btn:hover {
             background-color: #000;
             border-color: #000;
         }
-        
+
         footer .brand {
             font-family: var(--lg-font);
             letter-spacing: 2px;
         }
-        
+
         footer a {
             -webkit-transition: color 0.3s ease;
             -o-transition: color 0.3s ease;
             transition: color 0.3s ease;
         }
-        
+
         footer a:hover {
             color: var(--primary) !important;
         }
-        
+
         @media (min-width: 992px) {
             .nav-item {
                 border-bottom: none;
@@ -279,7 +259,6 @@
     </div>
 </div>
 
-<!-- Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
