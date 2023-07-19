@@ -43,7 +43,6 @@
                                              <div class="form-group">
                                                 <label for="articleType">articleType</label>
                                                 <select name="articleType" id="articleType" class="form-control">
-                                                    <option value="">Sélectionnez un type d'article</option> <!-- Option vide par défaut -->
                                                     <?php foreach($articleTypes as $articleType): ?>
                                                         <option value="<?= $articleType['id'] ?>" <?php if($articleType['id'] == $articles['category_id']) echo 'selected' ?>><?= $articleType['name'] ?></option>
                                                     <?php endforeach; ?>
