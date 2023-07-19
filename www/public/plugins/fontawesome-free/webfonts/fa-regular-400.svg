@@ -20,7 +20,7 @@ Copyright (c) Font Awesome
     underline-thickness="25"
     underline-position="-50"
     unicode-range="U+0020-F5C8"
-  />
+>
     <missing-glyph />
     <glyph glyph-name="heart" unicode="&#xf004;" 
 d="M458.4 383.7c75.2998 -63.4004 64.0996 -166.601 10.5996 -221.3l-175.4 -178.7c-10 -10.2002 -23.2998 -15.7998 -37.5996 -15.7998c-14.2002 0 -27.5996 5.69922 -37.5996 15.8994l-175.4 178.7c-53.5996 54.7002 -64.5996 157.9 10.5996 221.2

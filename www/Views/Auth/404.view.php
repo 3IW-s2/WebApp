@@ -34,7 +34,7 @@
 				<h1><span>4</span><span>0</span><span>4</span></h1>
 			</div>
 			<h2>Nous sommes désolés mais la page que vous recherchée n'existe pas</h2>
-			<a href="/">Retour sur la page Home</a>
+			<a href="/">Retourner sur le site</a>
 		</div>
 		
 	</div>

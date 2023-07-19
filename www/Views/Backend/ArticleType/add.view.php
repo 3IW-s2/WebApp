@@ -26,7 +26,7 @@
                                     <?php endif; ?>
                                     <div class="form-group">
                                                 <label for="name">Nom</label>
-                                                <input type="text" name="name" id="name" class="form-control"  />
+                                                <input type="text" name="name" id="name" class="form-control">
                                             </div>
                                             
                                             <button type="submit" name="submit" class="btn btn-primary">Valider</button>

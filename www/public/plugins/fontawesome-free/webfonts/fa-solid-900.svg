@@ -20,7 +20,7 @@ Copyright (c) Font Awesome
     underline-thickness="25"
     underline-position="-50"
     unicode-range="U+0020-F8FF"
-  />
+>
     <missing-glyph />
     <glyph glyph-name="faucet" unicode="&#xe005;" 
 d="M352 192c88.3066 0 160 -71.6934 160 -160c0 -17.6611 -14.3389 -32 -32 -32h-64c-17.6611 0 -32 14.3389 -32 32s-14.3389 32 -32 32h-12.79c-20.5898 -37.7305 -64.21 -64 -115.21 -64s-94.6201 26.2695 -115.21 64h-92.79c-8.83105 0 -16 7.16895 -16 16v96

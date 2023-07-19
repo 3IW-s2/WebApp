@@ -20,6 +20,7 @@
                         
                             <div class = "title text-center">
                             <h2 class = "position-relative d-inline-block">Ajout d'un menu</h2>
+                             <i><p>Il est possible d'ajouter un sous-menu lorsqu'un menu est créer et publier</p></i>
                             </div>
                             <H1>Ajout d'un lien dans le menu</H1>
                                 <form id="add-menu-form" method="post" action="">
@@ -30,14 +31,17 @@
                                     <?php endif; ?>
                                     <div class="form-group">
                                                 <label for="firstname">Titre</label>
-                                                <input type="text" name="title" id="title" class="form-control"  />
+                                                <input type="text" name="title" id="title" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label for="lastname">Url</label>
-                                                <input type="text" name="url" id="url" class="form-control"   />
+                                                <input type="text" name="url" id="url" class="form-control">
                                             </div>
                                             <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                                 </form>
+
+                            <?php
+                            if(!empty($menus)){ ?>
 
                                 <H1>Ajout d'un sous menu</H1>
                                 <!-- y'a plusieur valeurs dans $menus recupère les et mets les dans une liste dans mon form pour pouvoir les envoyers  -->
@@ -50,11 +54,11 @@
                                     <?php endif; ?>
                                     <div class="form-group">
                                                 <label for="firstname">Titre</label>
-                                                <input type="text" name="title" id="title" class="form-control"  />
+                                                <input type="text" name="title" id="title" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label for="lastname">Url</label>
-                                                <input type="text" name="url" id="url" class="form-control"   />
+                                                <input type="text" name="url" id="url" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label for="lastname">Parent</label>
@@ -66,6 +70,8 @@
                                             </div>
                                             <button type="submit" name="submit-submenu" class="btn btn-primary">Valider</button>
                                 </form>
+
+                            <?php } ?>
 
         
 
