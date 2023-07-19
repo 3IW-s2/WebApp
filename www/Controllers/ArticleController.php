@@ -16,6 +16,9 @@ use App\Core\Session;
 use App\Core\Menu;
 use App\Services\CommentService;
 use App\Services\UserService;
+use App\Services\HistoryService;
+use App\Models\History;
+
 
 use PDO;
 
@@ -255,6 +258,17 @@ class ArticleController  Extends BaseController
         $date =new \DateTime (date('Y-m-d H:i:s'));
         $date = $date->format('Y-m-d');
 
+
+        $historyModel = new History();
+        $historyModel->setEntityId($_GET['id']);
+        $historyModel->setEntityType('articles');
+        $historyModel->setTableName('articles');
+
+        $historyService = new HistoryService();
+        $history = $historyService->getHistoryForEntity($historyModel);
+        $view->assign('history', $history);
+
+
        
             if (isset($_POST['submit'])) {
                 $_POST['slug'] = $this->NormalizerSlug($_POST['slug']);
@@ -273,6 +287,18 @@ class ArticleController  Extends BaseController
                         $article->setCategoryId((int)$_POST['articleType']);
                         //$article->setupdate_at($date->format('Y-m-d'));
                         $ArtcileService->updateArticle($article) ;
+
+                        $data = array(
+                            'title' => $_POST['title'],
+                            'content' => $_POST['content'],
+                            'slug' => $_POST['slug'],
+                            'articleType' => (int)$_POST['articleType'],
+                            'update_at' => $date
+                        );
+
+                        $historyModel->setContent(json_encode($data));
+                        $historyModel->setAction('update');
+                        $historyService->addHistory($historyModel);
                         
                         header('Location: /admin/article/index');
                 }
