@@ -191,7 +191,7 @@
                   <a href="/admin/template" class="nav-link">
                       <i class="nav-icon far fa-edit"></i>
                       <p>
-                        chznger la vue front
+                        Thèmes
                       </p>
                   </a>
             </li>

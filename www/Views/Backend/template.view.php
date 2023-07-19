@@ -1,13 +1,13 @@
 <body>
-    <h1>Template</h1>
-    <p>il y'a 2 template de préfait(1 & 2 ) pour en rajouter un  autre il faudra se mettre au html  ;)</p>
+    <h1>Thèmes</h1>
+    <p>Choisir un thème entre 1 et 2 </p>
     
 
     <form action="" method="post">
 
-         <input type="number" name="template" id="template">
+         <input type="number" min="1" max="2" name="template" id="template">
    
-         <button type="submit" name="submit" class="btn btn-primary">Register</button>
+         <button type="submit" name="submit" class="btn btn-primary">Valider</button>
 
     </form>
 

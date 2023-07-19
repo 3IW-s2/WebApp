@@ -16,15 +16,6 @@
                         $articlesPerPage = $admin_preferences; // Nombre d'articles à afficher par page
                         $startIndex = ($currentPage - 1) * $articlesPerPage;
                         $articlesToShow = array_slice($articles, $startIndex, $articlesPerPage);
-                        ?>
-                        <?php if(isset( $user_admin) && $user_admin == 1):?>
-                            <form action="" method="post">
-                                <label for="numberArticle">Nombre d'article par page</label>
-                                <input type="number" name="numberArticle" id="numberArticle" min="1" value="<?= $admin_preferences ?>">
-                                <input type="submit" value="Valider" name="number">
-                            </form>
-                        <?php endif; ?>    
-                        <?php
 
                         foreach ($articlesToShow as $article) {
                             $article["content"] = substr($article["content"], 0, 20) . "...";
@@ -49,8 +40,16 @@
                             <?php
                         }
                         ?>
-                    
-                    <?php endif ?>
+
+                      <?php if(isset( $user_admin) && $user_admin == 1):?>
+                          <form action="" method="post">
+                              <label for="numberArticle">Nombre d'article par page</label>
+                              <input type="number" name="numberArticle" id="numberArticle" min="1" value="<?= $admin_preferences ?>">
+                              <input type="submit" value="Valider" name="number">
+                          </form>
+                      <?php endif; ?>
+
+                  <?php endif ?>
                     <br><br><br><br><br>
                     <?php  if($posts['image_path'] == "on") : ?>
                         <nav aria-label="Page navigation">
