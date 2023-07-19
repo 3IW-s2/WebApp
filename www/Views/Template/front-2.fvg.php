@@ -1,3 +1,13 @@
+<?php
+
+$frontRepository = new  App\Repositories\FrontRepository();
+$front = $frontRepository->getFrontManagement();
+
+$newFont = str_replace(' ', '+', $front['font']);
+
+$appConfig = App\Core\Configuration\AppConfiguration::getAppConfig();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
