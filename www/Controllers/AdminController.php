@@ -77,6 +77,13 @@ class AdminController
     }
     public function template(){
         $view = new View("Backend/template", "back");
+        $dossier = 'Views/Template/';
+
+        $contenuDossier = scandir($dossier);
+        
+        $nombreFichiers = count(array_diff($contenuDossier, array('.', '..')));
+        $view->assign('nombreFichiers', $nombreFichiers);
+
 
         if(isset($_POST['submit'])){
             $front = new Front();
