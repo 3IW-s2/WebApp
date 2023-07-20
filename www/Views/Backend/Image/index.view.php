@@ -1,7 +1,7 @@
 
 
 <form  method="post" enctype="multipart/form-data">  
-    Select File:  
+    Séléctionner une image à télécharger:
     <input type="file" name="fileToUpload" accept="image/png, image/gif, image/jpeg"/>  
     <input type="submit" value="Upload Image" name="submit" />  
 </form>  

@@ -14,7 +14,7 @@
                         <div class="course-col">
                         
                             <div class = "title text-center">
-                            <h2 class = "position-relative d-inline-block">  ajouter un article</h2>
+                            <h2 class = "position-relative d-inline-block">Ajout d'un article</h2>
                             </div>
                                                             <!-- un formulaire d'inscription -->
                                                             <H1> </H1>
@@ -25,24 +25,24 @@
                                     </div>
                                     <?php endif; ?>
                                     <div class="form-group">
-                                                <label for="firstname">Title</label>
-                                                <input type="text" name="title" id="title" class="form-control"  />
+                                                <label for="firstname">Titre</label>
+                                                <input type="text" name="title" id="title" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label for="lastname">Content</label>
+                                                <label for="lastname">Contenu</label>
                                                 <textarea name="content" id="editor"></textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email">slug</label>
-                                                <input type="text" name="slug" id="slug" class="form-control"  />
+                                                <label for="email">Slug</label>
+                                                <input type="text" name="slug" id="slug" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                  <label for="active_comment"> active comment</label>
                                             </div>
-                                            <input type="checkbox" name="active_comment" id="active_comment"  />
+                                            <input type="checkbox" name="active_comment" id="active_comment">
 
                                             <div class="form-group">
-                                                <label for="articleType">articleType</label>
+                                                <label for="articleType">Type d'article</label>
                                                 <select name="articleType" id="articleType" class="form-control">
                                                     <option value="">Sélectionnez un type d'article</option> <!-- Option vide par défaut -->
                                                     <?php foreach($articleTypes as $articleType): ?>
@@ -53,7 +53,7 @@
 
                                             
                                         
-                                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                                 </form>
 
         

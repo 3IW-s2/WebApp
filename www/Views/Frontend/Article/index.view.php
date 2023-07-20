@@ -1,5 +1,6 @@
 <section id="blogs" class="">
     <div class="container">
+        <br>
         <div class="title text-center py-5">
             <br><br>
             <h2 class="position-relative d-inline-block"><?= $articles['title'] ;?></h2>
@@ -10,7 +11,6 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <div class="card-body px-0">
-                        <h4 class="card-title text-center"><?= $articles['title'] ;?></h4>
                         <p class="card-text mt-3 text-muted text-center"><?= $articles['content'] ;?></p>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                                     <input type="textarea" name="content" id="content" class="form-control" />
                                 </div>
 
-                                <button type="submit" name="submit" class="btn btn-primary">Commentaire</button>
+                                <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                             </div>
                         </div>
                     </div>

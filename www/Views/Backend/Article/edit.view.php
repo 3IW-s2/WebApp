@@ -14,7 +14,7 @@
                         <div class="course-col">
                         
                             <div class = "title text-center">
-                            <h2 class = "position-relative d-inline-block"> Modifier un Article</h2>
+                            <h2 class = "position-relative d-inline-block">Modification d'un article</h2>
                             </div>
                                                             <!-- un formulaire d'inscription -->
                                 <form id="update-register-form" method="post" action="" >
@@ -24,15 +24,15 @@
                                                 </div>
                                                 <?php endif; ?>
                                             <div class="form-group">
-                                                <label for="firstname">Title</label>
+                                                <label for="firstname">Titre</label>
                                                 <input type="text" name="title" id="title" class="form-control" value="<?= $articles["title"]?>" />
                                             </div>                      
                                             <div class="form-group">
-                                                <label for="lastname">Content</label>
+                                                <label for="lastname">Contenu</label>
                                                 <textarea name="content" id="editor" ><?= $articles["content"] ?></textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email">slug</label>
+                                                <label for="email">Slug</label>
                                                 <input type="text" name="slug" id="slug" class="form-control"  value="<?= $articles["slug"]?>" />
                                             </div>
                                             <div class="form-group">
@@ -41,14 +41,14 @@
                                             <input type="checkbox" name="active_comment" id="active_comment" <?php if ($articles["active_comment"] === "on") echo "checked"; ?>>
 
                                              <div class="form-group">
-                                                <label for="articleType">articleType</label>
+                                                <label for="articleType">Type d'article</label>
                                                 <select name="articleType" id="articleType" class="form-control">
                                                     <?php foreach($articleTypes as $articleType): ?>
                                                         <option value="<?= $articleType['id'] ?>" <?php if($articleType['id'] == $articles['category_id']) echo 'selected' ?>><?= $articleType['name'] ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-                                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Valider</button>
                                 </form>
 
                                 <div class="form-group">

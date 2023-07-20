@@ -30,11 +30,11 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Id.</th>
-                                    <th scope="col">Content</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Contenu</th>
                                     <th scope="col">id user</th>
                                     <th scope="col">id article</th>
-                                    <th scope="col">status</th>
+                                    <th scope="col">Statut</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -49,11 +49,11 @@
                                         <td><?= $comment["status"]?></td>
                                        <!--  <td></td> -->
                                         <td>
-                                            <a href="delete?id=<?= $comment['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="delete?id=<?= $comment['id'] ?>" class="btn btn-danger">Supprimer</a>
                                             <?php if ($comment['status'] > 20) : ?>
-                                                <a href="restore?id=<?= $comment['id'] ?>" class="btn btn-success">restore</a>
+                                                <a href="restore?id=<?= $comment['id'] ?>" class="btn btn-success">Récupérer</a>
                                             <?php else: ?>
-                                                <a href="remove?id=<?= $comment['id'] ?>" class="btn btn-warning">remove</a>
+                                                <a href="remove?id=<?= $comment['id'] ?>" class="btn btn-warning">Enlever</a>
                                             <?php endif; ?>
 
                                         </td>

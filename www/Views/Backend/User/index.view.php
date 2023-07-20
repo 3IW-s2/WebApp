@@ -29,16 +29,16 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <table class="table">
-                            <a href="user/add" class="btn btn-success">Add</a>
+                            <a href="user/add" class="btn btn-success">Ajouter</a>
 
                             <thead>
                                 <tr>
-                                    <th scope="col">Id.</th>
-                                    <th scope="col">Firstname</th>
-                                    <th scope="col">Lastname</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Prénom</th>
+                                    <th scope="col">Nom</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Role</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Statut</th>
                                    <!--  <th scope="col">pasword</th> -->
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -69,9 +69,9 @@
                                         <td><?= $user["status"] ?></td>
                                        <!--  <td></td> -->
                                         <td>
-                                            <a href="user/edit?id=<?= $user['id'] ?>" class="btn btn-primary">Edit</a>
-                                            <a href="user/delete?id=<?= $user['id'] ?>" class="btn btn-danger">Deleted</a>
-                                            <a href="user/archive?id=<?= $user['id'] ?>" <?php if ($user['status'] === "10") { ?> class="btn btn-warning" <?php } else { ?> class="btn btn-danger" <?php } ?>>Archiver</a>
+                                            <a href="user/edit?id=<?= $user['id'] ?>" class="btn btn-primary">Modifier</a>
+                                            <a href="user/delete?id=<?= $user['id'] ?>" class="btn btn-danger">Supprimer</a>
+                                            <a href="user/archive?id=<?= $user['id'] ?>" <?php if ($user['status'] === "10") { ?> class="btn btn-warning" <?php } else { ?> class="btn btn-danger" <?php } ?>>Désactiver</a>
                                             <a href="user/role?id=<?= $user['id'] ?>" class="btn btn-info">Role</a>
                                         </td>
                                     </tr>
