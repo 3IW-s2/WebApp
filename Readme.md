@@ -1,7 +1,7 @@
 
 # TIW
 
-Un projet de TIW.c'est un framework MVC qui permet de créer des applications web en PHP.from scratch.
+Un projet de TIW.c'est un framework MVC qui permet de créer des applications web en PHP
 
 ## Table des matières
 
