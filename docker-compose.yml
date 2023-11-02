@@ -10,8 +10,8 @@ services:
       POSTGRES_DB: database_tiw
     ports:
       - "5432:5432"
-    #volumes:
-    # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    volumes:
+      - ./database:/var/lib/postgresql/data
       
 
   adminer:
@@ -41,9 +41,9 @@ services:
     volumes:
       - ./www:/var/www
     environment:
-      - DB_HOST=46.226.107.16
-      - DB_PORT=5432
-      - DB_DATABASE=database_tiw
+      - DB_HOST=46.226.105.92
+      - DB_PORT=5442
+      - DB_DATABASE=database_tiw_2023
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
 

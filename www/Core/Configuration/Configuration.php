@@ -7,7 +7,7 @@ class Configuration
     public static function getConfig($configStartWith = "*"): array
     {
         $env = [];
-        $configuration = file($_SERVER['DOCUMENT_ROOT'] . "/.env");
+        $configuration = file($_SERVER['DOCUMENT_ROOT'] . "/env/.env");
         foreach ($configuration as $line) {
             $line = trim($line);
             if ($line === '' || $line[0] === "#") {
